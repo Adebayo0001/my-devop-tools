@@ -1,12 +1,12 @@
 # ==============================================================================
 # INSTALL.PS1 - Universal One-Line Installer & Sync for DevOps Skills Suite
-# Run remotely: irm https://raw.githubusercontent.com/<USER>/<REPO>/main/install.ps1 | iex
+# Run remotely: irm https://raw.githubusercontent.com/Adebayo0001/my-devop-tools/main/install.ps1 | iex
 # Or run locally: powershell -ExecutionPolicy Bypass -File .\install.ps1
 # ==============================================================================
 
 [CmdletBinding()]
 param(
-    [string]$RepoUrl = "https://github.com/adebayokareem/my-devop-tools.git",
+    [string]$RepoUrl = "https://github.com/Adebayo0001/my-devop-tools.git",
     [string]$InstallDir = (Join-Path $HOME "My-DevOp-Tools")
 )
 

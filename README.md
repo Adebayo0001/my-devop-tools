@@ -216,12 +216,12 @@ Other engineers on your team or in your community can install the entire suite i
 
 #### Windows (PowerShell):
 ```powershell
-irm https://raw.githubusercontent.com/adebayokareem/my-devop-tools/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/Adebayo0001/my-devop-tools/main/install.ps1 | iex
 ```
 
 #### macOS / Linux (Terminal):
 ```bash
-curl -fsSL https://raw.githubusercontent.com/adebayokareem/my-devop-tools/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/Adebayo0001/my-devop-tools/main/install.sh | bash
 ```
 
 ### How Updates Flow to Other Builders

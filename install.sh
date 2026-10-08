@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # INSTALL.SH - Universal One-Line Installer & Sync for DevOps Skills Suite (Mac/Linux)
-# Run remotely: curl -fsSL https://raw.githubusercontent.com/<USER>/<REPO>/main/install.sh | bash
+# Run remotely: curl -fsSL https://raw.githubusercontent.com/Adebayo0001/my-devop-tools/main/install.sh | bash
 # ==============================================================================
 
 set -e
 
-REPO_URL="${1:-https://github.com/adebayokareem/my-devop-tools.git}"
+REPO_URL="${1:-https://github.com/Adebayo0001/my-devop-tools.git}"
 INSTALL_DIR="${2:-$HOME/My-DevOp-Tools}"
 
 echo "=========================================================="
