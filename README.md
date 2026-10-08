@@ -205,3 +205,37 @@ This automatically synchronizes the entire suite to:
 * **Claude Code CLI**: `~/.claude\skills`
 * **Cursor**: `~/.cursor\rules`
 * **Windsurf**: `~/.codeium\windsurf\skills`
+
+---
+
+## 7. Distributing to Other Builders & Automated Sync (Strategy 1)
+
+### For Other Builders (1-Line Remote Install)
+
+Other engineers on your team or in your community can install the entire suite into their AI IDEs with a single terminal command:
+
+#### Windows (PowerShell):
+```powershell
+irm https://raw.githubusercontent.com/adebayokareem/my-devop-tools/main/install.ps1 | iex
+```
+
+#### macOS / Linux (Terminal):
+```bash
+curl -fsSL https://raw.githubusercontent.com/adebayokareem/my-devop-tools/main/install.sh | bash
+```
+
+### How Updates Flow to Other Builders
+1. **You push improvements**: Whenever you refine a skill or prompt in `My DevOp Tools`:
+   ```bash
+   git add .
+   git commit -m "feat: upgrade kickoff framework"
+   git push origin main
+   ```
+2. **Builders receive updates**:
+   - Running the 1-liner installer again will pull changes and re-sync.
+   - Alternatively, builders can run their local sync script:
+     ```powershell
+     powershell -ExecutionPolicy Bypass -File "$HOME\My-DevOp-Tools\sync-skills.ps1"
+     ```
+   - Because `sync-skills.ps1` runs `git pull --ff-only` on execution, it checks GitHub for new changes and copies them into Antigravity, Claude Code, Cursor, and Windsurf in under 2 seconds.
+
