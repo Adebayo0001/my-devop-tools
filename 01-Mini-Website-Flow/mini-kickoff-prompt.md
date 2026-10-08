@@ -20,35 +20,41 @@ Work through this in three strict stages. Wait for my response at each stage bef
 
 ---
 
-### STAGE 1 — BRAND & CONVERSION STRATEGY (Ask one by one)
+### STAGE 1 — BRAND, FINANCIAL SCOPE & CONVERSION STRATEGY (Ask one by one)
 Ask me the following questions one at a time. Wait for my answer before asking the next:
 1. **The Core Offer**: What is the single product, service, or event being presented, and what is its undeniable unique value proposition?
-2. **User UX Research & Visitor Mental Model**: Who is arriving on this page? What is their exact skepticism, cognitive hesitation, or pain point? What is the Jobs-To-Be-Done (JTBD) they are hiring this site for, and what is the single action we want them to take (CTA)?
-3. **The Sitemap**: What are the 2–3 specific pages or core sections required (e.g., Hero, Problem/Proof, Core Offering, Visual Gallery/Case Studies, Pricing/Offer, FAQ, Contact/Footer)?
-4. **Tone & Industry Context**: What industry is this in, and what tone must it convey (e.g., authoritative luxury, architectural minimalism, bold editorial, warm craft)?
-5. **Assets & Social Proof**: Do we have existing real copy, statistics, testimonials, or imagery, or must we architect human-grade copy and media prompts from scratch?
+2. **Financial & Operational Scope**: Is this a bootstrapped lean launch (cutting monthly software burn to $0) or a client/venture project ready to invest in premium infrastructure from Day 1?
+3. **User UX Research & Visitor Mental Model**: Who is arriving on this page? What is their exact skepticism, cognitive hesitation, or pain point? What is the Jobs-To-Be-Done (JTBD) they are hiring this site for, and what is the single action we want them to take (CTA)?
+4. **The Sitemap**: What are the 2–3 specific pages or core sections required (e.g., Hero, Problem/Proof, Core Offering, Visual Gallery/Case Studies, Pricing/Offer, FAQ, Contact/Footer)?
+5. **Tone & Industry Context**: What industry is this in, and what tone must it convey (e.g., authoritative luxury, architectural minimalism, bold editorial, warm craft)?
+6. **Assets & Existing Brand**: Do we have existing brand guidelines, logo files, hex codes, or testimonials, or are we architecting the visual identity and copy from scratch?
 
 ---
 
-### STAGE 2 — DESIGN THINKING, ATOMIC DESIGN & TREE-OF-THOUGHTS (ToT) LAYOUT EXPLORATION
-Before picking a layout, analyze the brief through a Design Thinking lens (Empathize, Define, Ideate):
+### STAGE 2 — VISUAL DIRECTION, ATOMIC DESIGN & GOOGLE STITCH PROTOCOL (MANDATORY STOP GATE)
+Apply human-centered Design Thinking to guarantee the user interface looks like a bespoke, $1,000,000 site.
+Do NOT skip this stage, do NOT assume my visual preferences, and do NOT impose fonts or colors.
+The entire process must be followed sequentially as if manual copy-and-paste prompts were used:
 
-1. **Tree-of-Thoughts Layout Analysis**:
-   Explore 3 distinct layout concepts for this site and evaluate each:
-   - **Concept A (Editorial / Asymmetric)**: Bold typographic scale, generous negative space, split visual rhythm.
-   - **Concept B (Product-Led / Visual Showcase)**: Focused interactive hero, floating cards, deep contrast.
-   - **Concept C (Structured Narrative)**: Linear story progression, horizontal accent breaks, high-density proof points.
-   State which concept best serves the user conversion goal and why.
+1. **The Interactive Visual Intake Stop Gate**:
+   - If I have existing branding (logo, colors, typography): Inquire and lock them directly.
+   - If starting from scratch: Ask for my color preferences (primary brand accent, background tone: deep dark mode, crisp light, or hybrid, and emotional temperature) and typography preferences.
+   - Propose 3 distinct, curated visual directions with NON-GENERIC typography (e.g. Syne + Plus Jakarta Sans, Outfit + Plus Jakarta Sans, Instrument Serif + Inter, Clash Display + Satoshi, Geist + Geist Mono). Strictly ban generic pairings like Inter + Roboto.
+   - Wait for my confirmation and approval before finalizing.
 
 2. **The Anti-AI-Slop & Design System Invariants (Non-Negotiable)**:
-   - **shadcn/ui + Radix UI Atomic Foundation**: All interactive UI must be built on **shadcn/ui** and headless **Radix UI** primitives. No component may be guessed or built from unstyled divs. Decompose into **Atoms** (`Button`, `Input`, `Badge`), **Molecules** (`NewsletterForm`, `SearchChip`), and **Organisms** (`PricingCard`, `Navbar`).
+   - **shadcn/ui + Radix UI Atomic Foundation**: All interactive UI must be built on **shadcn/ui** and headless **Radix UI** primitives. Decompose into **Atoms** (`Button`, `Input`, `Badge`), **Molecules** (`NewsletterForm`, `SearchChip`), and **Organisms** (`PricingCard`, `Navbar`).
    - **Global CSS Single-Knob Cascade (Figma Webhook Parity)**: All theme colors and radiuses must be configured as CSS variables in `globals.css` (`--primary`, `--background`, `--card`, `--radius`). Changing `--primary` must cascade instantaneously across every Atom, Molecule, and Organism app-wide without manual code rewrites.
-   - **THE ANTI-PILL / ANTI-BADGE LAW**: STRICTLY FORBIDDEN to add lazy rounded badge pills with tiny uppercase text and icons above headings (e.g., `[✨ OUR SERVICES]`, `[🚀 WHY CHOOSE US]`). Headings must rely on pure typographic hierarchy (`h1`, `h2`, `h3`) with intentional scale, font weights, and letter-spacing.
-   - **ZERO LOREM IPSUM & ZERO BUZZWORDS**: Ban filler copy and hollow AI words (*"seamless"*, *"cutting-edge"*, *"transformative"*, *"world-class"*). Every headline and body sentence must read as if drafted by a human senior copywriter.
+   - **THE ANTI-PILL / ANTI-BADGE LAW**: STRICTLY FORBIDDEN to add lazy rounded badge pills with tiny uppercase text and icons above headings (e.g., `[✨ OUR SERVICES]`, `[🚀 WHY CHOOSE US]`). Headings must rely on pure typographic hierarchy (`h1`, `h2`, `h3`).
+   - **ZERO LOREM IPSUM & ZERO BUZZWORDS**: Ban filler copy and hollow AI words (*"seamless"*, *"cutting-edge"*, *"transformative"*). Every headline and body sentence must read as if drafted by a human senior copywriter.
    - **VARIED SECTION RHYTHM**: Do not repeat the same 3-column card grid section after section. Every section must have a distinct, purposeful layout tailored to its content.
 
-3. **Google Stitch / Visual Generator Constraints (If Generating Visual Comps)**:
-   If generating Stitch/Figma prompts, specify exact tokens, layout boundaries, and copy strings so the generator does not hallucinate generic template cards.
+3. **Google Stitch Mockup Protocol**:
+   - **Mandatory Pre-Prompt Project Visual Overview**: Before writing the first screen prompt, output a brief overview summarizing the product mission, chosen colors, and layout mood to visually ground the generator.
+   - **Screen 1 Deterministic Stitch Prompt**:
+     * Write the prompt for the FIRST core screen only using the 5-part formula (viewport lock, spatial zones, named elements, locked palette, strict negative constraints).
+     * **NO FONT NAMES IN THE PROMPT**: Describe typographic style and rendering character (e.g. "clean geometric sans-serif headings, high-legibility interface typography, crisp tabular metrics"). Never specify exact font family names in the prompt, letting Google Stitch render typography naturally without distortion.
+     * Give me this prompt, allow me to run it in Stitch, and wait for my confirmation before generating subsequent prompts.
 
 Wait for my approval on the selected design concept and token direction before proceeding to Stage 3.
 

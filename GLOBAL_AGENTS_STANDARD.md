@@ -41,6 +41,45 @@ These rules apply unconditionally across every tier, project, and file:
   - **Design System Tokens**: Eliminates color, typography, spacing, and component guessing.
 * By the time code is scaffolded, the agent is executing an approved, fully specified plan.
 
+### The Interactive Visual Intake Law (Zero Unilateral Aesthetic Imposition)
+* **BANNED**: Bypassing Phase 3 visual discovery, rushing to context generation, or imposing un-discussed fonts, colors, and aesthetics upon the builder.
+* **MANDATORY STOP GATE**: After receiving the project brief and UX research, the agent MUST explicitly pause and conduct the **Visual & Brand Intake Conversation**:
+  1. **Existing Brand Assets**: Ask whether the builder has existing brand guidelines, logo files, or hex codes to provide/upload, or if they are starting from scratch.
+  2. **Palette & Atmosphere**: Inquire about color preferences (primary brand accent, background tone: deep dark mode, crisp light, or hybrid, and emotional temperature).
+  3. **Typography**: Ask for typography preferences before finalizing font tokens.
+* **FRESH START FALLBACK**: ONLY if the builder explicitly indicates they have no existing brand assets should the agent suggest visual directions.
+* **ANTI-GENERIC TYPOGRAPHY FLOOR**: Strictly ban generic, default font pairings (e.g. `Inter + Roboto`, `Arial`, default system fonts). Propose high-character, elite, domain-specific typography (e.g., `Syne + Plus Jakarta Sans`, `Outfit + Plus Jakarta Sans`, `Instrument Serif + Inter`, `Clash Display + Satoshi`, `Geist + Geist Mono`, `Cabinet Grotesk + General Sans`).
+* **ZERO SHORTCUTS GUARANTEE**: The builder must confirm and approve the visual direction before `design.md` or `ui-tokens.md` are locked. The entire pipeline must be executed sequentially as if manual copy-and-paste prompts were used.
+
+### Modern Stack Freshness, RAG Docs Verification & Auto-Update Invariant
+* **LATEST STABLE VERSIONS ONLY**: Every framework, library, runtime, and AI model suggested must strictly be the latest stable release (e.g., Next.js 15 App Router, React 19, Tailwind CSS v4 / v3.4, current Claude 3.7 / Gemini 2.5 / OpenAI o3-mini models). Specifying outdated major versions or deprecated APIs is an architectural defect.
+* **RAG & OFFICIAL DOCS VERIFICATION GATE**: Before locking dependencies or scaffolding architecture patterns, the agent MUST retrieve and verify current upstream documentation using RAG and MCP tools (e.g., `context7`, official docs servers, or web search). Never hallucinate deprecated syntax, old router conventions, or obsolete lifecycle hooks.
+* **EVERGREEN / AUTO-UPDATE ARCHITECTURE**: Every production build plan must architect an auto-updating dependency pipeline:
+  - Automated dependency update configurations (Dependabot / Renovate).
+  - Strict semantic lockfile integrity (`package-lock.json`, `pnpm-lock.yaml`).
+  - Automated CI vulnerability scans (`npm audit`) and deprecation gate checks.
+
+### Financial Scope Calibration & Tool Consolidation Invariant (Anti-Tool Sprawl)
+* **MANDATORY FINANCIAL SCOPE INQUIRY**: When presenting tech stacks, the agent must ask the builder to clarify the project's financial and operational scope:
+  - **A: Bootstrapped MVP / Lean Startup**: Target near-$0/month recurring SaaS burn. Prioritize generous free tiers, serverless edge runtimes, and consolidated BaaS. NEVER offer toy or substandard tools—the stack must remain enterprise-clean and production-grade.
+  - **B: Funded Startup / Enterprise Client**: Built for clients ready to invest in premium infrastructure from Day 1. Select high-availability, enterprise-grade tooling (dedicated database clusters, enterprise auth, Datadog/Sentry APM) that provides maximum value for money.
+* **THE TOOL CONSOLIDATION INVARIANT**: Strictly ban "tool sprawl" (introducing 7–10 disjointed SaaS vendors when 1 or 2 battle-tested platforms handle multiple responsibilities).
+  - Consolidate Auth, Database, File Storage, and Realtime into unified platforms (e.g., Supabase or Convex) instead of splintering into separate vendors (Auth0 + Neon + AWS S3 + Pusher).
+  - Consolidate API and backend logic into full-stack modern frameworks (e.g., Next.js App Router Server Actions / Route Handlers) before introducing dedicated backend servers, unless physical isolation is required.
+* **TWO-STAGE EVOLUTION ROADMAP**: Every architecture must define two clear stages:
+  - **Stage 1 (Launch / MVP)**: Highly consolidated, cost-effective, production-grade foundation.
+  - **Stage 2 (Scale Migration)**: A mapped out path for decoupling compute, adding read replicas, caching tiers (Redis), and dedicated workers when traffic explodes.
+* **PLAIN ENGLISH & SILICON VALLEY REALITY**: Explain tech stack options and trade-offs in plain English, citing how top Silicon Valley engineering teams run these tools in real-world production. Always provide clear choices and recommend the single best stack capable of handling the product's highest complexity.
+
+### Deterministic Google Stitch Protocol
+* **MANDATORY PRE-PROMPT BRIEF OVERVIEW**: Before generating the first page prompt, the agent MUST generate a concise **Project Visual Overview** summarizing the core mission, chosen color palette, aesthetic mood, and layout principles. This visually grounds the generator before screen prompting begins.
+* **NO FONT NAMES IN STITCH PROMPTS**: Strictly forbid specifying exact font family names (e.g., "use Syne and Plus Jakarta Sans") inside Google Stitch prompts. Specifying font names confuses diffusion models and causes warped text. Instead, describe typographic style and rendering character (e.g., "clean geometric sans-serif headings, high-legibility interface typography, crisp tabular metrics").
+* **CONCISE, ANTI-HALLUCINATION FRAMING**:
+  - Keep prompts high-signal and layout-focused. Avoid bloated narrative text that triggers prompt fighting.
+  - Lock the viewport (`Flat 2D desktop application screenshot, 16:9 widescreen, 1920x1080 resolution, direct front-facing view`).
+  - Structure into explicit spatial zones with named functional elements.
+  - Apply strict negative constraints (`STRICT NEGATIVE CONSTRAINTS: NO analytics charts, NO line graphs, NO bar charts, NO floating decorative bubbles, NO colorful gradients, NO mobile frames, clean minimalist professional interface only`).
+
 ### Universal Domain Adaptation Law
 The same architectural rigor applies universally across all target media and platforms:
 1. **Websites & Landing Pages**: Information architecture, section position/purpose/rationale, 5-second value proposition test, 375px mobile viewport audit, verbatim human copy, and zero badging pills.

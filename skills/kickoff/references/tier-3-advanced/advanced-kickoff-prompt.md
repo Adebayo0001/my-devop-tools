@@ -20,62 +20,69 @@ Work through this in four strict stages. Do not skip ahead or bundle stages.
 
 ---
 
-### STAGE 1 — ARCHITECTURAL & PRODUCT DISCOVERY (Ask one by one)
+#### STAGE 1 — ARCHITECTURAL, FINANCIAL & PRODUCT DISCOVERY (Ask one by one)
 Ask me the following questions one at a time. Wait for my answer before asking the next:
 1. **The Product Mandate & User UX Research**: What is being built, what core commercial problem does it solve, and who is the paying user? What is their technical fluency, persona mental model, core skepticism, and Jobs-To-Be-Done (JTBD)?
-2. **Scale & Concurrency Expectations**: Is this a private alpha, a venture-backed MVP, or an enterprise application with strict SLA and concurrent user requirements?
-3. **Data Model & Invariants**: What are the 3–5 core business entities, their ownership boundaries, and the strict rules that must never break (e.g., "funds can never be deducted without a ledger entry", "tenants can never see cross-tenant rows")?
-4. **Auth & Permission Boundaries**: Who logs in, how do they authenticate, and what role-based access control (RBAC) or ownership rules apply? (Remember: "Logged in" != "Allowed to touch this specific record").
-5. **Observability & Error Tracking Standards**: Do we have existing accounts or configurations for **Sentry** (crash tracking), **LogRocket** (session replay), or **Datadog** (APM and real-user monitoring)? What PII scrubbing constraints apply?
-6. **Hard Constraints & Compliance**: Latency budgets, offline/low-bandwidth resilience, regulatory compliance (GDPR, HIPAA, SOC2), external API integrations, or hosting cost ceilings.
-7. **Builder Experience & Mentorship**: What is my current familiarity with this stack? (Treat me like a rising engineer: explain architectural trade-offs, how the backend interacts with the frontend, and *why* specific patterns are mandated).
-8. **Visual Identity & Industry Context**: What industry is this in, what aesthetic personality conveys immediate trust and authority, and do we have existing brand comps or are we creating the design system from scratch?
+2. **Financial & Operational Scope**: Is this a Bootstrapped MVP / Lean Startup (targeting near-$0/month recurring SaaS burn using generous free tiers and consolidated BaaS, without compromising production quality) or a Funded Startup / Enterprise Client (ready to invest in premium infrastructure from Day 1 for maximum high-availability and reliability)?
+3. **Scale & Concurrency Expectations**: Is this a private alpha, a venture-backed MVP, or an enterprise application with strict SLA and concurrent user requirements?
+4. **Data Model & Invariants**: What are the 3–5 core business entities, their ownership boundaries, and the strict rules that must never break (e.g., "funds can never be deducted without a ledger entry", "tenants can never see cross-tenant rows")?
+5. **Auth & Permission Boundaries**: Who logs in, how do they authenticate, and what role-based access control (RBAC) or ownership rules apply? (Remember: "Logged in" != "Allowed to touch this specific record").
+6. **Observability & Error Tracking Standards**: Do we have existing accounts or configurations for **Sentry** (crash tracking), **LogRocket** (session replay), or **Datadog** (APM and real-user monitoring)? What PII scrubbing constraints apply?
+7. **Hard Constraints & Compliance**: Latency budgets, offline/low-bandwidth resilience, regulatory compliance (GDPR, HIPAA, SOC2), external API integrations, or hosting cost ceilings.
+8. **Builder Experience & Mentorship**: What is my current familiarity with this stack? (Treat me like a rising engineer: explain architectural trade-offs, how the backend interacts with the frontend, and *why* specific patterns are mandated).
+9. **Visual Brand Assets & Preferences**: Do we have existing brand guidelines, logo files, or hex codes to provide/upload, or are we creating the design system from scratch?
 
 ---
 
-### STAGE 2 — TECH STACK SELECTION & LIVE VERIFICATION
+### STAGE 2 — TECH STACK SELECTION, TOOL CONSOLIDATION & LIVE RAG VERIFICATION
 Based on Stage 1 answers, propose a modern, future-proof stack. Before locking it:
-1. **Selection Criteria in Order**:
-   - Fit to actual scale and data invariants.
+1. **LATEST STABLE VERSIONS ONLY**:
+   - Every framework, runtime, library, and AI model suggested must strictly be the latest stable release (e.g., Next.js 15 App Router, React 19, Tailwind CSS v4 / v3.4, current Claude 3.7 / Gemini 2.5 / OpenAI o3-mini models). Specifying outdated major versions or deprecated APIs is an architectural defect.
+2. **RAG & OFFICIAL DOCS VERIFICATION GATE**:
+   - Retrieve and verify current documentation via RAG and MCP tools (e.g., context7 or official docs) before locking dependencies. Never guess from training memory.
+3. **THE TOOL CONSOLIDATION INVARIANT (ANTI-TOOL SPRAWL)**:
+   - Strictly ban introducing 7–10 separate SaaS vendors when 1 or 2 battle-tested platforms handle multiple responsibilities:
+     * Consolidate Auth, Database, File Storage, and Realtime into unified platforms (e.g., Supabase or Convex) instead of splintering (Auth0 + Neon + AWS S3 + Pusher).
+     * Consolidate API and backend logic into modern full-stack frameworks (e.g., Next.js App Router Server Actions / Route Handlers) before introducing dedicated backend servers.
+4. **THE TWO-STAGE EVOLUTION ROADMAP**:
+   - Stage 1 (Launch / MVP): Highly consolidated, cost-effective, production-grade foundation aligned with my financial scope.
+   - Stage 2 (Scale Migration): Clear path for decoupling compute, adding read replicas, caching tiers (Redis), and dedicated workers when traffic explodes.
+5. **Architectural Foundations**:
    - UI Component Foundation: Mandate **shadcn/ui** built on headless **Radix UI** primitives using established colors.
-   - Observability Foundation: Mandate **Sentry** (exception tracking), **LogRocket** (session replay), and **Datadog** (APM/RUM).
-   - Currency and quality of official documentation (can the agent verify code against live docs, or is it guessing from stale training memory?).
-   - Ecosystem support for our required integrations (auth, payments, background queues, AI tool-calling).
-   - Long-term maintainability and upgrade path (frameworks with clean migration paths).
-2. **Mandatory Live Search**:
-   - Actually search for current stable versions and official documentation for shortlisted options. Never assume version numbers or deprecated APIs from training data.
-3. **Alternatives & Rationale**:
-   - Present 2–3 alternatives considered and explain with technical precision why the chosen stack won.
-4. **Stack Educational Briefing**:
-   - Briefly walk me through how the selected frontend, server runtime, database, observability pipeline, and auth layer connect end-to-end so I understand the system topology.
+   - Observability Foundation: Mandate **Sentry** (exception tracking), **LogRocket** (session replay), and **Datadog** (APM/RUM) with strict PII scrubbing.
+   - Evergreen Auto-Update: Include automated dependency updates (Dependabot/Renovate), strict lockfile pinning, and CI audit checks.
+6. **Plain English & Silicon Valley Reality**:
+   - Explain options and trade-offs in plain English alongside how top Silicon Valley engineering teams run them in real production. Provide clear choices and recommend the single best stack capable of handling the product's highest complexity.
 
 Wait for my explicit confirmation before locking the stack.
 
 ---
 
-### STAGE 3 — DESIGN THINKING, ATOMIC DESIGN & TREE-OF-THOUGHTS (ToT) CREATIVE DIRECTION
-Apply human-centered Design Thinking to guarantee the user interface looks like a bespoke, $1,000,000 application:
+### STAGE 3 — VISUAL DIRECTION, INTERACTIVE INTAKE & GOOGLE STITCH PROTOCOL (MANDATORY STOP GATE)
+Apply human-centered Design Thinking to guarantee the user interface looks like a bespoke, $1,000,000 application.
+Do NOT skip this stage, do NOT assume my visual preferences, and do NOT impose fonts or colors.
+The entire process must be followed sequentially as if manual copy-and-paste prompts were used:
 
-1. **Tree-of-Thoughts (ToT) Layout Analysis**:
-   Explore 3 distinct layout structures for the core experience and evaluate each:
-   - **Concept A (High-Density Operator Console)**: Data-dense, keyboard-first, collapsible inspection drawers.
-   - **Concept B (Editorial Guided Workflow)**: Focused step progression, generous whitespace, progressive disclosure.
-   - **Concept C (Modular Asymmetric Dashboard)**: Bento cards with clear hierarchy, contextual micro-actions, adaptive split views.
-   Select the concept that best minimizes cognitive load and drives the user's core task.
+1. **The Interactive Visual Intake Stop Gate**:
+   - If I have existing branding (logo, colors, typography): Inquire and lock them directly.
+   - If starting from scratch: Ask for my color preferences (primary brand accent, background tone: deep dark mode, crisp light, or hybrid, and emotional temperature) and typography preferences.
+   - Propose 3 distinct, curated visual directions with NON-GENERIC typography (e.g. Syne + Plus Jakarta Sans, Outfit + Plus Jakarta Sans, Instrument Serif + Inter, Clash Display + Satoshi, Geist + Geist Mono). Strictly ban generic pairings like Inter + Roboto.
+   - Wait for my confirmation and approval before finalizing.
 
 2. **The Atomic Principle & Anti-AI-Slop Invariants (Non-Negotiable)**:
-   - **The Atomic Design Invariant**: All components must be classified and built strictly according to atomic hierarchy:
-     - **Atoms**: Indivisible primitives (`Button`, `Input`, `Label`, `Badge`, `Avatar`, `Separator`, `Icon`) built on Radix + shadcn.
-     - **Molecules**: Purpose-built combinations (`SearchBar`, `FormField`, `UserAvatarBadge`).
-     - **Organisms**: Complex distinct layouts (`ProductCard`, `HeaderNav`, `DataTableSection`).
+   - **The Atomic Design Invariant**: All components must be classified and built strictly according to atomic hierarchy: Atoms (Radix + shadcn), Molecules, Organisms.
    - **Global CSS Single-Knob Cascading (Figma Webhook Parity)**: All theme colors, typography scales, and radiuses MUST be configured as CSS variables in `globals.css` (`--primary`, `--background`, `--card`, `--radius`). Changing `--primary` must cascade instantaneously across every Atom, Molecule, and Organism app-wide without manual overrides.
    - **Sprint Design System Immutability**: Any subsequent sprint build or unplanned feature must strictly assemble existing Atoms and Molecules without prompting.
    - **THE ANTI-PILL / ANTI-BADGE LAW**: STRICTLY FORBIDDEN to use lazy rounded pill badges with icons or tiny uppercase text above section titles (e.g., `[✨ ENTERPRISE SECURITY]`). Titles must use commanding, human-designed typography hierarchy (`h1`, `h2`, `h3`).
    - **HUMAN CONTENT STRATEGY**: Ban hollow AI buzzwords (*"seamless"*, *"cutting-edge"*, *"transformative"*). Write precise, informative, domain-specific copy.
    - **DIFFERENT LAYOUTS FOR DIFFERENT PURPOSES**: Never duplicate the same 3-card template across pages. Contrast data tables with visual analytics, split forms, and breathing room.
 
-3. **Google Stitch / Visual Generator Constraints (If Generating Visual Comps)**:
-   If producing Stitch or image generator prompts, provide exact constraints: specific hex tokens, typography roles, layout density, and exact copy. Explicitly forbid Stitch from generating generic hero cards or floating badge pills.
+3. **Google Stitch Mockup Protocol**:
+   - **Mandatory Pre-Prompt Project Visual Overview**: Before writing the first screen prompt, output a brief overview summarizing the product mission, chosen colors, and layout mood to visually ground the generator.
+   - **Screen 1 Deterministic Stitch Prompt**:
+     * Write the prompt for the FIRST core screen only using the 5-part formula (viewport lock, spatial zones, named elements, locked palette, strict negative constraints).
+     * **NO FONT NAMES IN THE PROMPT**: Describe typographic style and rendering character (e.g. "clean geometric sans-serif headings, high-legibility interface typography, crisp tabular metrics"). Never specify exact font family names in the prompt, letting Google Stitch render typography naturally without distortion.
+     * Give me this prompt, allow me to run it in Stitch, and wait for my confirmation before generating subsequent prompts.
 
 Wait for my confirmation before proceeding to Stage 4.
 
@@ -102,6 +109,5 @@ Every file must be instructive, complete, and contain zero placeholder stubs (`/
     - Inclusion of all 5 screen states.
     - **Deterministic 3-Step Verification Runbook** (automated or manual test steps with pass/fail criteria, including telemetry and cascade verification).
     - Definition of Done (screenshot check, quality-floor check, genericness check, atomic registry compliance).
-11. `context/progress-tracker.md` — Living phase status table, Decisions Made During Build log, and Notes section.
 11. `context/progress-tracker.md` — Living phase status table, Decisions Made During Build log, and Notes section.
 ```

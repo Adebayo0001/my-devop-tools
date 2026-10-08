@@ -20,6 +20,8 @@ To ensure this workflow remains effective across all AI model generations (GPT-4
 2. **Anchor the Blueprint**: An unwritten plan drifts when context window compaction occurs. The blueprint must be anchored in the chat and reflected in `context/progress-tracker.md` before coding starts.
 3. **Atomic Composition & Sprint Immutability**: New feature UI must strictly compose existing **Atoms** and **Molecules** from `context/ui-registry.md` into **Organisms**. Never invent redundant, un-imprinted card or button variants.
 4. **Single-Knob Global CSS Cascading**: All styling must bind to HSL/OKLCH CSS variables in `globals.css` (e.g. `--primary`) mapped through `tailwind.config.ts`. Modifying a single variable in `globals.css` must cascade app-wide automatically (Figma Tokens API / webhook updater parity).
+5. **Latest Stable Versions & Live RAG Verification**: Never guess package APIs from model training cutoffs. Verify current library signatures against official live documentation via RAG and MCP tools (e.g. `context7`) before locking contracts.
+6. **Tool Consolidation & Anti-Tool Sprawl**: Strictly forbid adding redundant external dependencies or SaaS vendors when existing foundational platforms in the architecture (e.g., Supabase or full-stack framework APIs) already handle the capability.
 
 ---
 

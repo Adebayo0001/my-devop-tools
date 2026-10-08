@@ -15,52 +15,64 @@ separate build agent afterward.
 Work through this in four stages. Do not skip ahead to a later stage until
 the current one is done.
 
-STAGE 1 — DISCOVERY & USER UX RESEARCH
+STAGE 1 — DISCOVERY & FINANCIAL SCOPE INTAKE
 Ask me the following questions one at a time, waiting for my answer before
 asking the next one. Don't bundle them:
 - What is being built, in one sentence
 - Who is the user, what is their technical fluency, and what is their mental model
+- Financial & Operational Scope: Is this a Bootstrapped MVP / Lean Startup
+  (targeting near-$0/mo recurring SaaS burn using generous free tiers and consolidated
+  BaaS, without compromising production quality) or a Funded Startup / Enterprise Client
+  (ready to invest in premium infrastructure from Day 1 for maximum high-availability and reliability)?
 - User UX Research: what are the user's primary friction points, skepticism, and the core Jobs-To-Be-Done (JTBD) they are hiring this product to solve
 - What are the 3–6 core user flows / pages
-- Scale expectations — side project, funded startup, enterprise
 - Hard constraints — compliance, latency, offline support, budget ceiling,
   existing infrastructure it must integrate with
-- Any known team/personal stack preferences or existing skills to bias
-  toward
+- Any known team/personal stack preferences or existing skills to bias toward
 - Timeline pressure
-- Do I already have a visual design or reference material, or does design
-  need to be brainstormed as part of this
+- Visual assets: Do I have an existing brand identity, logo, or color scheme to provide/upload,
+  or are we starting completely from scratch?
 
-STAGE 2 — TECH STACK DECISION & OBSERVABILITY BASELINE
+STAGE 2 — TECH STACK DECISION, TOOL CONSOLIDATION & OBSERVABILITY
 Based on my answers, propose a stack. Before you lock it:
-- State your selection criteria in order: fit to actual scale, currency and
-  quality of official documentation, ecosystem fit with what I need to
-  integrate, hosting/cost fit, my stated familiarity, maturity over hype
+- Selection criteria: fit to actual scale, financial scope, ecosystem fit, and maturity.
+- LATEST STABLE VERSIONS ONLY: Every framework, library, and AI model must strictly be the
+  latest stable release (e.g. Next.js 15 App Router, React 19, Tailwind CSS v4 / v3.4, current
+  Claude 3.7 / Gemini 2.5 / OpenAI o3-mini models). Specifying outdated versions or deprecated APIs is an architectural defect.
+- RAG & DOCS RESEARCH GATE: Retrieve and verify current documentation via RAG and MCP tools
+  (e.g., context7 or official docs) before locking dependencies. Never guess from training memory.
+- TOOL CONSOLIDATION INVARIANT (ANTI-TOOL SPRAWL): Strictly ban introducing 7-10 separate SaaS
+  tools when 1 battle-tested platform achieves multiple purposes:
+  * Consolidate DB + Auth + File Storage + Realtime into unified platforms (e.g. Supabase or Convex)
+    instead of splintering into separate vendors (Auth0 + Neon + AWS S3 + Pusher).
+  * Consolidate API and backend logic into modern full-stack frameworks (e.g., Next.js App Router
+    Server Actions / Route Handlers) before introducing dedicated backend servers.
+- TWO-STAGE EVOLUTION ROADMAP: Provide:
+  * Stage 1 (Launch / MVP): Highly consolidated, cost-effective, production-grade foundation.
+  * Stage 2 (Scale Migration): Clear path for decoupling compute, adding read replicas, caching tiers (Redis), and dedicated workers when traffic explodes.
 - UI Component Standard: Confirm usage of **shadcn/ui** powered by **Radix UI** primitives as the un-guessed design system base.
 - Observability Standard: Specify **Error Tracking** (Sentry exception tracking and/or LogRocket session replay) and **Performance Monitoring** (Datadog APM/RUM for system health and Core Web Vitals) with PII scrubbing.
-- Actually search for current versions and current best-practice guidance
-  for your shortlisted options — don't rely on training data, it may be
-  stale
-- Give me 2–3 alternatives you considered and why the one you're proposing
-  won
-- Wait for my confirmation before locking it
+- Evergreen Auto-Update: Include automated dependency updates (Dependabot/Renovate) and lockfile integrity.
+- Plain English & Silicon Valley Reality: Explain options in plain English alongside how traditional
+  Silicon Valley engineering teams run them in real production. Provide clear choices, trade-offs, and a recommended default capable of handling the most complex demands of the product.
+- Wait for my confirmation before locking it.
 
-STAGE 3 — VISUAL DIRECTION & ATOMIC DESIGN SYSTEM
-If I said I have reference material but no finished design: ask me to
-describe what I like about each reference in terms of layout rhythm, type
-personality, color temperature, and overall mood — not specific elements.
-Then write me a Google Stitch generation prompt using only those abstracted
-qualities plus the actual subject of this product. Never name the source
-product/app the reference came from in that prompt.
+STAGE 3 — VISUAL DIRECTION & GOOGLE STITCH PROTOCOL (MANDATORY STOP GATE)
+Do NOT skip this stage, do NOT assume my visual preferences, and do NOT impose fonts or colors.
+The entire process must be followed sequentially as if manual copy-and-paste prompts were used:
 
-If I said I already have a finished design: skip this stage.
+1. Visual Intake Stop Gate:
+   - If I have existing branding (logo, colors, fonts): Ask me to provide/upload them, and lock them directly.
+   - If I am starting from scratch: Ask for my color preferences (primary brand accent, background feel: deep dark mode, crisp light, or hybrid, and emotional mood) and typography preferences.
+   - Propose 3 distinct, curated visual directions with NON-GENERIC typography (e.g. Syne + Plus Jakarta Sans, Outfit + Plus Jakarta Sans, Instrument Serif + Inter, Clash Display + Satoshi, Geist + Geist Mono). Strictly ban generic pairings like Inter + Roboto.
+   - Wait for my confirmation and approval before finalizing.
 
-If I said design needs to be brainstormed with no reference at all: run a
-short design brainstorm — ground it in the actual subject matter:
-- Establish a palette (4–6 named colors) and typography pairing.
-- Bind all colors and radii to CSS variables in `globals.css` (`--primary`, `--background`, `--card`, `--radius`) ensuring single-knob cascade (Figma webhook parity).
-- Define the Atomic Principle: **Atoms** (`Button`, `Input`, `Badge`), **Molecules** (`SearchBar`, `FormField`), and **Organisms** (`ProductCard`, `HeaderNav`).
-- Check against the question "would this look the same for any other brand in this space" before finalizing.
+2. Google Stitch Mockup Protocol:
+   - Mandatory Pre-Prompt Project Visual Overview: Before writing the first screen prompt, output a brief overview summarizing the product mission, chosen colors, and layout mood.
+   - Screen 1 Deterministic Stitch Prompt:
+     * Write the prompt for the FIRST core screen only using the 5-part formula (viewport lock, spatial zones, named elements, locked palette, strict negative constraints).
+     * NO FONT NAMES IN THE PROMPT: Describe typographic style and rendering character (e.g. "clean geometric sans-serif headings, high-legibility interface typography, crisp tabular metrics"). Never specify exact font family names in the prompt, letting Google Stitch render typography naturally without distortion.
+     * Give me this prompt, allow me to run it in Stitch, and wait for my confirmation before generating subsequent prompts.
 
 STAGE 4 — FILE GENERATION
 Generate the following files in this exact order, each depending on what

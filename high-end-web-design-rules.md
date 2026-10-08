@@ -157,19 +157,28 @@ Tell the AI to work in explicit passes, not one-shot generation:
 
 When generating UI mockups with Google Stitch or AI design generators, models naturally drift toward generic, cluttered SaaS dashboards (hallucinating unwanted analytics charts, crypto graphs, and random floating bubbles). To force AI tools to produce human-grade, minimalist, production-ready interfaces:
 
-### The 5-Part Deterministic Prompt Formula
+### Step 10.1: Mandatory Pre-Prompt Project Visual Overview
+Before generating the prompt for the first screen, output a concise **Project Visual Overview** summarizing:
+- Product core mission and user persona.
+- Locked color tokens (Surface, Cards, Primary CTA, Accent, Text).
+- Visual atmosphere, layout density, and emotional mood.
+This grounds the generator and eliminates random styling drift.
 
-Every Stitch prompt must contain these 5 structural blocks:
+### Step 10.2: The Calibrated Deterministic Prompt Formula (Screen 1 Only)
+
+Every Stitch prompt must contain these 6 structural blocks:
 
 1. **Viewport & Framing Lock**:
    - Specify: `Flat 2D desktop application screenshot, 16:9 widescreen, 1920x1080 resolution, Windows 11 studio software, direct front-facing view, NO 3D perspective tilt, NO laptop mockup frame, NO claymockups.`
 2. **Strict Layout Zones (Zone Architecture)**:
    - Divide the canvas into explicit proportions: e.g. `Zone 1: Left 280px navigation rail. Zone 2: Center 60% widescreen preview stage. Zone 3: Right 360px inspector sidebar.`
 3. **Explicit Element Inventory**:
-   - Explicitly enumerate the exact buttons, labels, and widgets. If an element is not listed, the model must not add it.
+   - Explicitly enumerate the exact buttons, labels, and widgets. If an element is not listed, the model must not add it. Keep it concise; avoid over-describing or fighting the prompt.
 4. **Locked Palette & Token Enforcement**:
    - List the exact hex values from `design.md` (e.g. `#08090B` background, `#13171F` surfaces, `#D92534` primary CTA, `#F59E0B` tags, `#F8FAFC` text).
-5. **Mandatory Negative Constraints (Negative Prompt)**:
+5. **No Font Names (Typography Style Descriptors Only)**:
+   - Strictly forbid specifying font family names (e.g. "use Syne and Plus Jakarta Sans"). Instead, describe rendering character: `clean geometric sans-serif headings, high-legibility interface typography, crisp tabular metrics`. Let Google Stitch choose and render typography naturally without diffusion distortion.
+6. **Mandatory Negative Constraints (Negative Prompt)**:
    - `STRICT NEGATIVE CONSTRAINTS: NO analytics charts, NO bar charts, NO line graphs, NO floating decorative bubbles, NO colorful gradients, NO mobile app frames, NO cluttered widgets, NO crypto tickers, clean minimalist professional software only.`
 
 ---

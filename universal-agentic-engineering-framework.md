@@ -59,69 +59,103 @@ To kick off any project, the user provides 3 raw inputs:
 2. **Visual Inspiration**: 2 to 5 screenshots of existing apps or designs they admire.
 3. **Core Environmental Constraints**: Is it web, mobile, or offline desktop? Who is the operator (volunteer, expert, consumer)?
 
-### 1.2 The 7 Discovery Inquiries (The AI Kickoff Prompt)
-Before writing any file or code, the AI must interview the human across these **7 Pillars**:
+### 1.2 The 8 Discovery Inquiries (The AI Kickoff Prompt)
+Before writing any file or code, the AI must interview the human across these **8 Pillars**:
 
 | Pillar | What Must Be Answered | Example from LifeStream |
 | :--- | :--- | :--- |
 | **1. The Core Problem & Persona** | Who uses this daily, in what environment, under what stress? | Church media volunteers during live, noisy services. |
 | **2. Screen Inventory** | What are the exact 5 core screens of the product? | 1. Operator Console, 2. Projection Output, 3. Scripture Explorer, 4. Template Editor, 5. Hardware Routing. |
-| **3. Non-Negotiable Constraints** | What must NEVER happen? (Hard invariants). | 100% offline-first. Never stretch camera video aspect ratio. |
-| **4. Safety Gates & Verification** | How do we prevent mistakes or false AI triggers? | AI stages verses in preview; operator must press Spacebar to air. |
-| **5. Data & Persistence Model** | Where does data live? Cloud, SQLite, JSON, local files? | Local embedded SQLite with WAL mode & FTS5 full-text indexing. |
-| **6. Visual Brand Identity** | What is the color palette, typography, and mood? | Obsidian Black, Imperial Crimson, Sacred Gold; Outfit & Inter. |
-| **7. Scope Boundaries** | What is strictly OUT OF SCOPE for Phase 1? | No cloud sync, no mobile apps, no multi-church networking. |
+| **3. Financial & Operational Scope** | Bootstrapped MVP (near-$0/mo burn with consolidated tools) or Funded Enterprise (high-availability, premium value)? | Bootstrapped launch transitioning to multi-site enterprise. |
+| **4. Non-Negotiable Constraints** | What must NEVER happen? (Hard invariants). | 100% offline-first. Never stretch camera video aspect ratio. |
+| **5. Safety Gates & Verification** | How do we prevent mistakes or false AI triggers? | AI stages verses in preview; operator must press Spacebar to air. |
+| **6. Data & Persistence Model** | Where does data live? Cloud, SQLite, JSON, local files? | Local embedded SQLite with WAL mode & FTS5 full-text indexing. |
+| **7. Visual Brand Identity** | What is the color palette, typography, and mood? Existing logo or fresh start? | Obsidian Black, Imperial Crimson, Sacred Gold; Outfit & Inter. |
+| **8. Scope Boundaries** | What is strictly OUT OF SCOPE for Phase 1? | No cloud sync, no mobile apps, no multi-church networking. |
 
 ---
 
-# Stage 2: Tech Stack Decision Matrix
+# Stage 2: Tech Stack Decision Matrix & Tool Consolidation
 
-Never let the AI pick a default stack. The stack must be chosen based on **physics, platform constraints, and verified library versions**.
+Never let the AI pick a default or outdated stack. The stack must be chosen based on **physics, platform constraints, financial scope, and verified library versions**.
 
-### 2.1 The Evaluation Matrix Template
+### 2.1 The Latest Versions & RAG Documentation Verification Rule
+- **Latest Stable Releases Only**: Every model, framework, library, and tool must strictly use its latest stable release (e.g. Next.js 15 App Router, React 19, Tailwind CSS v4 / v3.4, current Claude 3.7 / Gemini 2.5 / OpenAI o3-mini models). Specifying stale versions or deprecated methods is an architectural violation.
+- **RAG & Docs Research Gate**: Before locking dependencies or scaffolding architecture patterns, the agent MUST retrieve and verify current upstream documentation using RAG and MCP tools (e.g., `context7`, official docs servers, or web search). Never hallucinate deprecated syntax, old router conventions, or obsolete lifecycle hooks.
+- **Evergreen / Auto-Update Infrastructure**: Build the architecture around continuous dependency maintenance: Dependabot/Renovate configurations, strict lockfile pinning, and automated CI deprecation/security scans.
+
+### 2.2 Financial Scope & Tool Consolidation (Anti-Tool Sprawl)
+- **Financial Calibration**:
+  - **Bootstrapped MVP / Lean Startup**: Target near-$0/month recurring SaaS burn. Prioritize generous free tiers, serverless edge runtimes, and consolidated BaaS. NEVER offer toy or substandard tools—the stack must remain enterprise-clean and production-grade.
+  - **Funded Startup / Enterprise Client**: Built for clients ready to invest in premium infrastructure from Day 1. Select high-availability, enterprise-grade tooling (dedicated database clusters, enterprise auth, Datadog/Sentry APM) that provides maximum value for money.
+- **The Tool Consolidation Invariant**: Strictly ban tool sprawl (introducing 7–10 disjointed SaaS vendors when 1 or 2 battle-tested platforms handle multiple responsibilities):
+  - Consolidate Auth, Database, File Storage, and Realtime into unified platforms (e.g., Supabase or Convex) instead of splintering (Auth0 + Neon + AWS S3 + Pusher).
+  - Consolidate API and backend logic into modern full-stack frameworks (e.g., Next.js App Router Server Actions / Route Handlers) before introducing dedicated backend servers, unless physical isolation is required.
+- **The Two-Stage Evolution Roadmap**:
+  - **Stage 1 (Launch / MVP)**: Cost-effective, consolidated, production-grade foundation aligned with the builder's financial scope.
+  - **Stage 2 (Scale Migration)**: Clearly defined roadmap for decoupling compute, introducing dedicated caching (Redis), read replicas, and microservices when active traffic surges.
+- **Plain English & Silicon Valley Reality**:
+  - Explain options in plain English alongside how traditional Silicon Valley engineering teams actually run them in real production.
+  - Always provide clear choices, trade-offs, and a recommended default capable of handling the most complex demands of the system.
+
+### 2.3 The Evaluation Matrix Template
 
 ```markdown
 ### Stack Selection Rationale
-- Primary Shell: [Electron / Next.js / Vite / React Native] — Why? (e.g. multi-display hardware access)
+- Primary Shell: [Electron / Next.js 15 / Vite / React Native] — Why? (e.g. multi-display hardware access)
 - UI Library: [React 19 / Vue 3 / Svelte] — Why?
-- Styling Engine: [Vanilla CSS Design Tokens] — Why? (Eliminates Tailwind purge/version bugs)
-- Data Store: [better-sqlite3 / PostgreSQL / Supabase] — Why?
-- Engine / AI Runtime: [ONNX Runtime Node / WebAssembly] — Why?
+- Styling Engine: [Vanilla CSS Design Tokens / Tailwind CSS v4] — Why? (Single-knob cascade)
+- Data Store & BaaS: [Supabase / SQLite / PostgreSQL] — Why? (Consolidation of DB + Auth + Storage)
+- Engine / AI Runtime: [Latest verified model via SDK] — Why?
+- Evolution Roadmap: Stage 1 (Consolidated MVP) -> Stage 2 (Scale Decoupling)
 ```
-
-### 2.2 Version Locking Rule
-Always lock dependencies with exact versions in `context/architecture.md` before generating `package.json`. This prevents the AI from mixing deprecated APIs (e.g. Electron remote module vs modern `contextBridge`).
 
 ---
 
-# Stage 3: Visual Direction & Two-Tier Mockup Architecture
+# Stage 3: Visual Direction & Google Stitch Protocol (Zero Shortcuts)
 
 High-end software requires **Visual Anchors** so the developer and AI know the target before building. Never guess visual layouts in code.
 
-### 3.1 Extracting Design Tokens from References
-From the reference screenshots, extract:
-* **Base Surface**: Deepest background color (`#08090B`).
-* **Elevated Surface**: Card and modal background (`#13171F`).
-* **Brand Primary**: High-intent action color (`#D92534` Crimson).
-* **Accent Highlight**: Badges and focus points (`#F59E0B` Amber Gold).
-* **Typography Pairing**: One high-character display font (Outfit) + one ultra-legible neutral body font (Inter) + one tabular monospace font (JetBrains Mono).
+### 3.1 The Interactive Visual Intake Conversation (Mandatory Stop Gate)
+> [!IMPORTANT]
+> The agent MUST NOT guess, assume, or unilaterally impose visual styles, color palettes, or fonts. The entire process must be followed sequentially as if manual copy-and-paste prompts were used.
+
+The agent MUST pause and ask the builder:
+1. **Existing Brand Assets**: Do you have an existing brand identity, logo, or color scheme to provide/upload, or are we starting completely from scratch?
+2. **Color Palette & Atmosphere**: What are your color preferences? (Primary brand accent, background tone: deep dark mode, crisp light, or hybrid, and emotional temperature: authoritative, energetic, clinical, luxurious)?
+3. **Typography & Font Preferences**: What are your typography preferences?
+
+#### Fresh Start Fallback & Non-Generic Typography
+ONLY if the builder indicates they have no existing brand assets should the agent suggest **3 distinct, curated visual directions**.
+- **Anti-Generic Typography Floor**: Strictly avoid generic, default pairings (`Inter + Roboto`, `Arial`). Propose distinctive, elite pairings:
+  - Direction A (Modern Tech / Architectural): **Syne** (Headings) + **Plus Jakarta Sans** (Body) + **JetBrains Mono** (Metrics)
+  - Direction B (High-Authority / Executive Editorial): **Instrument Serif** (Display) + **Inter** (Body) + **Geist Mono** (Utility)
+  - Direction C (Dynamic / High-Energy SaaS): **Clash Display** or **Cabinet Grotesk** (Headings) + **Satoshi** or **General Sans** (Body)
+- The builder must confirm the visual direction before `design.md` or `ui-tokens.md` are locked.
 
 ### 3.2 The Screen & Modal Inventory Matrix
 Do NOT assume an app only has 5 screens. A production system has 15–25 surfaces. In `user-flows.md`, catalog every surface into two tiers:
 1. **Tier 1: Core Anchor Screens (5 Pillars)**: Generated upfront during kickoff to establish visual identity, tokens, and aesthetic tone.
 2. **Tier 2: Feature Sub-Screens & Modals**: Generated Just-In-Time (JIT) right before their specific feature in `build-plan.md` is coded.
 
-### 3.3 The Deterministic 5-Part Google Stitch Formula
+### 3.3 The Calibrated Google Stitch Protocol
 To prevent Google Stitch or AI design tools from hallucinating unwanted clutter (random analytics graphs, floating bubbles, crypto tickers):
 
+#### Step 1: Mandatory Pre-Prompt Project Visual Overview
+Before writing the first page prompt, output a concise **Project Visual Overview** summarizing the core mission, chosen color palette, aesthetic mood, and layout principles. This visually grounds the generator before screen prompting begins.
+
+#### Step 2: Deterministic Stitch Prompt Formula (First Core Screen Only)
 ```text
 DETERMINISTIC STITCH PROMPT FORMULA:
-1. [VIEWPORT LOCK]: Flat 2D desktop application screenshot, 16:9 widescreen, 1920x1080 resolution, Windows 11 studio software, direct front-facing view, NO 3D perspective tilt, NO laptop mockup frame, NO claymockups.
-2. [ZONE ARCHITECTURE]: Zone 1 (Left 280px rail), Zone 2 (Center 60% widescreen preview stage), Zone 3 (Right 360px inspector).
+1. [VIEWPORT LOCK]: Flat 2D desktop application screenshot, 16:9 widescreen, 1920x1080 resolution, direct front-facing view, NO 3D perspective tilt, NO laptop mockup frame, NO claymockups.
+2. [ZONE ARCHITECTURE]: Zone 1 (Left 280px navigation rail), Zone 2 (Center main workspace), Zone 3 (Right 360px inspector sidebar).
 3. [ELEMENT INVENTORY]: Exact named buttons, exact cards, exact form inputs. Zero unspecified elements.
-4. [LOCKED PALETTE]: Canvas #08090B, Surface #13171F, Primary CTA #D92534, Gold badges #F59E0B, Holy White text #F8FAFC.
-5. [STRICT NEGATIVE CONSTRAINTS]: NO analytics charts, NO line graphs, NO bar charts, NO floating decorative bubbles, NO colorful gradients, NO rounded mobile pill frames, clean minimalist broadcast interface only.
+4. [LOCKED PALETTE]: Canvas #08090B, Surface #13171F, Primary CTA #D92534, Accent badges #F59E0B, Text #F8FAFC.
+5. [NO FONT NAMES]: Describe typographic style and rendering character (e.g. "clean geometric sans-serif headings, high-legibility interface typography, crisp tabular metrics"). DO NOT state specific font family names, letting Stitch choose and render typography naturally without diffusion distortion.
+6. [STRICT NEGATIVE CONSTRAINTS]: NO analytics charts, NO line graphs, NO bar charts, NO floating decorative bubbles, NO colorful gradients, NO rounded mobile pill frames, clean minimalist professional interface only.
 ```
+
+Provide this prompt for the first foundational screen, allow the builder to generate and approve it in Google Stitch, and save the resulting PNG into `context/designs/` before proceeding.
 
 ### 3.4 The Mockup Ingestion Rule
 Save all approved mockup PNGs into `context/designs/` (e.g. `context/designs/live_service_console.png`). These serve as the visual ground truth for visual regression checks and 1:1 code implementation.
