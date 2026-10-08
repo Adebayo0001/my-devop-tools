@@ -1,0 +1,19 @@
+# Temporary and backup files
+*.bak
+*.tmp
+*.log
+.DS_Store
+Thumbs.db
+__MACOSX/
+
+# Environment files and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Dependencies and build outputs
+node_modules/
+dist/
+build/
