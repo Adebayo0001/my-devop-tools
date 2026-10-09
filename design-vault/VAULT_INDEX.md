@@ -40,6 +40,22 @@ Forensic layout architectures reverse-engineered from world-class onboarding and
 | **AUTH-09** | **Asymmetric Form + Architectural Wireframe** | Left form with company/role selectors + right architectural vector sculpture | B2B Enterprise, Engineering tools, DevSecOps | Wireframe graphic hides or scales down as a subtle top watermark |
 | **AUTH-10** | **Inverted High-Contrast Split (Obsidian/White)** | Left 40% dark manifesto card ("Design with us") + Right 60% clean input canvas | Creative tools, Design marketplaces, Agency portals | Left dark card becomes top banner with white typography; form flows below |
 
+### The Sign-In & Login Suite (`design-vault/archetypes/LOGIN-SUITE-authentication-flows.md`)
+*Houses 15 production sign-in screens reverse-engineered from `design-vault/reference-images/login-signin-15-screens.png`:*
+- **LOGIN-01 to LOGIN-05**: Cinematic Road Trip Scrim, Vibrant Food 50/50 Split, Stark Monolith, Triple OAuth Pill Hub, Mosaic Wall 6-Tier Social Stack.
+- **LOGIN-06 to LOGIN-10**: Obsidian Circuit Stage, 3D Isometric Neon Grid, Classic Brand Seal, Dual Device Ecosystem Stage, Multi-Account Profile Switcher ("Recent Logins").
+- **LOGIN-11 to LOGIN-15**: Side-by-Side Dual-Card Canvas, Desktop Form with App Store Badges, Botanical Foliage Scrim, Personalized "Welcome Back" Avatar Dialogue, Minimalist Social Icon Strip.
+
+### High-Impact Visual Onboarding & Split Hero Suite (`design-vault/archetypes/ONBOARD-SUITE-travel-glass.md`)
+*Houses 10 production landing & registration hybrids from `design-vault/reference-images/auth-landing-screens-batch2.png`:*
+- **ONBOARD-01 to ONBOARD-05**: Frosted Glass on 3D Discs, Vibrant Cyan Travel Split, Dramatic Balloon Photography Split, Minimalist Form + Wireframe Iconography, Streaming Registration with reCAPTCHA.
+- **ONBOARD-06 to ONBOARD-10**: Cinematic Road Trip Split, Form Input Tooltip Popover Guide, Botanical Lotus Split, Fluid Chromatic Wave Backdrop, Cyberpunk Circuit Grid Scrim.
+
+### Next-Gen Access, QR Sync & Passkey Suite (`design-vault/archetypes/ACCESS-SUITE-qr-passkey-split.md`)
+*Houses 10 modern access gateways from `design-vault/reference-images/auth-qr-split-batch3.png`:*
+- **ACCESS-01 to ACCESS-05**: Device Security Context Popover, Passkey Profile Welcome Back, Dual Split-Action Card on Cyan Wave, Google One-Tap Floating Popover, Instant QR Code Mobile Sync Gateway.
+- **ACCESS-06 to ACCESS-10**: Split Dual-Gateway with Hairline Line, Sunset Chromatic Mesh, High-Fashion Editorial Studio Split, Side-by-Side Dual Gateway Cards, Scenic Landscape Scrim + Phone Dialer.
+
 ---
 
 ## 3. Spatial Grid Mathematics & Proportions
