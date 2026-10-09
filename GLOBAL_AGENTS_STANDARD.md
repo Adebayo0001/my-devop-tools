@@ -140,3 +140,37 @@ If a required context file is missing, halt and notify the developer rather than
 7. **Circuit Breaker (`/recover`)**: If a fix fails once, STOP IMMEDIATELY. Never attempt multiple blind patches.
 8. **Destructive Actions**: Dropping tables, deleting buckets, or overwriting `.env` requires explicit confirmation every single time.
 9. **Memory Logging**: When asked to "log memory" or run `/remember`, perform an append-only, incremental update to `memory.md` and `.ai-memory/phase-log.md`. Never ask to overwrite.
+10. **The Post-Build Verification & Dual-Testing Handoff Invariant**: After completing any feature build, the agent must never silently declare victory or jump to the next feature. It must present what was built, what to look out for across the 5 screen states, a deterministic step-by-step test script, and pause at the interactive decision gate: *"Would you like me to test this for you right now (via browser subagent / terminal automation), or will you test this manually?"* The feature remains in `VERIFYING` state until the test passes.
+
+---
+
+## 5. Post-Build Testing Handoff Standard Card
+
+Every completed feature must conclude with this exact format:
+
+```markdown
+### 🧪 Feature Verification & Testing Handoff: [Feature Name]
+
+#### 👁️ What Was Built & What to Look Out For:
+- **Visual Presentation & Atomic Hierarchy**: [Components, layout structure, typography created or modified]
+- **The 5 Screen States Handled**:
+  - Default: [Render with standard data]
+  - Loading: [Skeleton loader / progress indicator]
+  - Empty: [Zero-data guidance state]
+  - Error: [User-facing error boundary / toast notification]
+  - Edge Cases: [String truncation, responsive boundaries, overflow]
+- **Design Tokens & Single-Knob Cascade**: [Verified CSS variables (--primary, etc.) in globals.css]
+- **Mobile Responsiveness (375px Floor)**: [Touch targets ≥44px, drawer collapse, 0 horizontal scroll]
+
+#### 🎯 Exactly What to Test (Step-by-Step Script):
+1. **Step 1 [Navigate & Mount]**: Navigate to `[Target Route / URL]`. Confirm `[Initial visual rendering & focal point]`.
+2. **Step 2 [Trigger & Action]**: Perform `[Action: click button, enter input, submit form, change filter]`.
+3. **Step 3 [Expected Outcome]**: Verify `[Data mutation, visual transition, optimistic update, or notification]`.
+4. **Step 4 [Observability & Error Trap]**: Check `[Console, Network payload, Sentry breadcrumb, or backend database persistence]`.
+
+#### ❓ Testing Decision Gate (Rule of Thumb):
+> **Would you like me to test this for you right now (via browser subagent / terminal automation), or will you test this manually?**
+> - **Option A (Agent Automated Test)**: Launch the browser subagent or run automated verification scripts and report live test telemetry with screenshots/recordings.
+> - **Option B (Human Manual Test)**: Await developer acceptance testing and confirmation before marking the feature as `COMPLETED`.
+```
+

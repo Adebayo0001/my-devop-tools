@@ -90,11 +90,18 @@ Five lenses, every feature that touches input/data/rendering. Not every feature 
 - Targets: **LCP < 2.5s, INP < 200ms, CLS < 0.1.**
 - **Low-bandwidth resilience**: ensure fast initial render on 50–400kbps connections.
 
-### Testing
+### Testing & The Post-Build Handoff Protocol
 - Prioritize: business logic with branches (pricing, permissions), anything touching money/auth/personal data, anything that's already been fixed once (add the regression test), API endpoints (happy path + invalid input + unauthorized access).
 - Don't force tests on pure layout/no-logic components or auto-generated boilerplate.
 - Every async operation has three states — confirm all three are handled: loading (something visible, not blank/stale), error (specific user-facing message, not a console error), empty (deliberate empty state, not a broken-looking blank list).
 - Reserve heavy E2E (Playwright/Cypress) for genuinely critical journeys (checkout, signup, login) — not every feature.
+- **The Post-Build Testing Handoff Invariant**: Immediately upon finishing any feature build and running `/imprint`, the agent MUST output the **Testing Handoff Card** containing:
+  1. **What was built & what to look out for**: Layout hierarchy, the 5 screen states (Default, Loading, Empty, Error, Edge Cases), single-knob CSS cascade in `globals.css`, and 375px mobile responsiveness.
+  2. **Exactly what to test**: A deterministic 3-to-4 step test script (route, action, expected outcome, error/network check).
+  3. **The Rule of Thumb Decision Gate**:
+     > *"Would you like me to test this for you right now (via browser subagent / terminal automation), or will you test this manually?"*
+  4. The feature enters `VERIFYING` state. Only after a verified PASS (agent or human) is it marked `COMPLETED` in `progress-tracker.md` and appended to `memory.md`. If a test fails, trigger `/recover` immediately.
+
 
 ### Destructive actions — standing rule, not optional
 Dropping a table, deleting a production DB/bucket, force-pushing, overwriting production `.env`, running a migration against live data: **stop for an explicit, separate confirmation every time** — even mid-session, even if the broader task was approved, even if the plan seems obviously correct. Approval of a feature is not approval to delete data to build it. This is the one mistake category here that can't be fixed with a follow-up commit.

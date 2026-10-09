@@ -241,10 +241,13 @@ For Each Numbered Feature (Feature 01, Feature 02, ... Feature N):
    ├── Step 4: Run Automated Typecheck (npm run typecheck)
    ├── Step 5: Run Multi-Target Production Build (npm run build)
    ├── Step 6: Run /imprint to register new component in ui-registry.md
-   ├── Step 7: Present 3-Step Human Verification Script to the User
-   ├── Step 8: User Tests & Confirms Feature Passes
-   └── Step 9: Append Checkpoint to .ai-memory/phase-log.md & Update progress-tracker.md
+   ├── Step 7: Present Testing Handoff Card (What was built, what to look out for in 5 states, exact test script)
+   ├── Step 8: Interactive Testing Decision Gate ("Should the agent test via browser subagent, or will you test manually?")
+   ├── Step 9: Execute Test (Agent Automated via browser or Human Developer Manual Acceptance)
+   ├── Step 10: IF PASS: Update progress-tracker.md to COMPLETED & Append to .ai-memory/phase-log.md
+   └── Step 11: IF FAIL: Halt and trigger /recover Circuit Breaker (never patch blind)
 ```
+
 
 ### The Surgical Recovery Protocol
 When an error occurs (e.g. `ENOENT` spawn failure, missing binary, or unhandled event):

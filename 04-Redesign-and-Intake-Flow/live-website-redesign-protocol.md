@@ -106,3 +106,7 @@ Before shipping the redesigned interface:
    - Does copy remain authentic, human, and professional?
    - Is mobile rendering (375px) clean and free of horizontal overflow?
    - Is text contrast compliant with WCAG 2.1 AA?
+5. **The Post-Reskin Testing Handoff**:
+   - Immediately after each screen or organism is reskinned, present the **Testing Handoff Card** (what was changed, visual checklist, the 5 screen states, deterministic test steps).
+   - Pause for the Decision Gate: *"Would you like me to test this for you right now (via browser subagent), or will you test this manually?"*
+

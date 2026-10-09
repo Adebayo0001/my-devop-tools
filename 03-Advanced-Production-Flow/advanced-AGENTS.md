@@ -64,12 +64,14 @@ If any required context file is missing or out of date, **halt and request or dr
   - ZERO unhandled try/catch blocks that silently swallow errors
   - ZERO hardcoded colors or unmapped utility classes (all colors must map to `ui-tokens.md`).
 
-### 7. Deterministic 3-Step Verification Runbooks
-* Every feature defined in `context/build-plan.md` must be verified using a 3-step test script:
+### 7. Deterministic Verification Runbooks & Dual-Testing Handoff
+* Every feature defined in `context/build-plan.md` must be verified using a deterministic 3-step test script:
   1. **Step 1: Contract & Type Check** (e.g., `npm run type-check` or `tsc --noEmit`).
   2. **Step 2: Automated or Manual Acceptance Run** (e.g., Playwright spec or exact 3-step user action flow).
   3. **Step 3: State & Observability Verification** (verify loading, error, empty, database persistence, and Sentry/Datadog trace emission).
-* Never claim a feature is "done" until this runbook passes.
+* **The Testing Handoff Invariant**: The agent must NEVER silently assume or claim a feature is done. After completing the build and `/imprint`, the agent MUST present the **Feature Verification & Testing Handoff Card** (What was built, what to look out for, exact test script) and pause at the **Rule of Thumb Decision Gate**:
+  > *"Would you like me to test this for you right now (via browser subagent / terminal automation), or will you test this manually?"*
+* The feature remains in `VERIFYING` state until the test passes.
 
 ### 8. Append-Only Audit Trail (`.ai-memory/phase-log.md`)
 * After every feature passes verification, append an immutable, timestamped record to `.ai-memory/phase-log.md`:
@@ -96,4 +98,6 @@ If any required context file is missing or out of date, **halt and request or dr
 3. **Inspect the 5 Screen States**: Confirm default, loading, empty, error, and edge cases look intentional.
 4. **Run `/imprint`**: Document the new component in `ui-registry.md` with its atomic classification (`[ATOM]`, `[MOLECULE]`, or `[ORGANISM]`).
 5. **Verify Single-Knob Cascade**: Ensure changing `--primary` in `globals.css` dynamically updates the component.
-6. **Execute Runbook & Log Memory**: Pass the 3-step test script, update `progress-tracker.md`, and append to `.ai-memory/phase-log.md`.
+6. **Present Verification & Testing Handoff Card**: Output what was built, what to look out for, the exact step-by-step test script, and confirm whether the agent should test automatically or if the human will test manually.
+7. **Verify Outcome & Log Memory**: Only after verified PASS (agent or human), update `progress-tracker.md` to `COMPLETED` and append the checkpoint to `.ai-memory/phase-log.md`. If test fails, run `/recover`.
+

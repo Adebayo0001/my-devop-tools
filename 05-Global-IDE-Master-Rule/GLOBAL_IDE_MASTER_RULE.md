@@ -64,3 +64,17 @@ Before generating code, always read the project's context files in sequence:
 * **Circuit Breaker (`/recover`)**: If a fix fails once, STOP IMMEDIATELY. Never attempt repeated blind patches.
 * **Destructive Actions**: Dropping tables, deleting buckets, or overwriting `.env` requires explicit confirmation every single time.
 * **Memory Logging**: When asked to "log memory" or run `/remember`, perform an append-only, incremental update to `memory.md` and `.ai-memory/phase-log.md`. Never ask to overwrite.
+
+---
+
+## 5. Post-Build Verification & Dual-Testing Handoff Protocol (Mandatory Invariant)
+
+Immediately after completing any feature build (code written, `tsc --noEmit` and build passing, `/imprint` cataloged), the agent is **strictly forbidden** from silently declaring the feature done or advancing to the next feature. 
+
+The agent MUST output the structured **Feature Verification & Testing Handoff Card** and pause at the interactive decision gate:
+1. **What Was Built & What to Look Out For**: Visual layout, 5 screen states (Default, Loading, Empty, Error, Edge Cases), single-knob token cascade in `globals.css`, and 375px mobile viewport behaviors.
+2. **Exactly What to Test**: A deterministic 3-to-4 step test script (URL route, action trigger, expected visual/data outcome, observability check).
+3. **The Rule of Thumb Decision Gate**:
+   > *"Would you like me to test this for you right now (via browser subagent / terminal automation), or will you test this manually?"*
+4. **Outcome Recording**: The feature remains in `VERIFYING` state until the test passes. Only upon a verified pass can `progress-tracker.md` be updated to `COMPLETED` and appended to `.ai-memory/phase-log.md`. If a test fails, trigger `/recover` immediately—never attempt blind patches.
+

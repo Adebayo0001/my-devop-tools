@@ -106,10 +106,18 @@ Present the concise blueprint to the developer:
   - Molecules: [Combinations used]
   - Organisms: [Composed layout structure]
   - Single-Knob CSS Cascade: [Verified globals.css CSS variable consumption]
-- **Verification Plan**: [Commands to verify: tsc, tests, Datadog/Sentry checks, manual checks]
+- **Verification Plan & Testing Handoff Pre-Check**:
+  - What to look out for: [Visual presentation, 5 states: Default, Loading, Empty, Error, Edge Cases, 375px mobile responsiveness]
+  - Exact Step-by-Step Test Script: [1. Navigate, 2. Trigger, 3. Expected outcome, 4. Telemetry/DB check]
+  - Rule of Thumb Testing Decision Gate: [Pre-planned prompt: Agent Automated via browser vs. Human Manual Testing]
 ```
 
 Wait for human confirmation (*"Proceed" / "Approved"*).
 
-### 8. Hand Off to Build Gate
-Once approved, proceed to **Gate 2 (Build)** per `AGENTS.md` and enforce the quality gates of `ai-dev-standards`.
+### 8. Hand Off to Build Gate & Mandatory Testing Handoff
+Once approved:
+1. Proceed to **Gate 2 (Build)** per `AGENTS.md` and enforce the quality gates of `ai-dev-standards`.
+2. Assemble UI with mock data first, review 5 states, wire logic, and run `tsc --noEmit` + build.
+3. Run `/imprint` to record newly built components in `context/ui-registry.md`.
+4. **Mandatory Testing Gate**: Emit the **Feature Verification & Testing Handoff Card** and pause for developer confirmation on whether the agent should test automatically (via browser subagent) or if the human will test manually. The feature remains in `VERIFYING` state until the test passes.
+

@@ -171,4 +171,7 @@ When you sit down to build:
 2. **Build the UI with mock data first** (Law 3).
 3. **Inspect the 5 UI states before wiring database logic**.
 4. **Run `/imprint` after every UI component** to update `ui-registry.md`.
-5. **Run the 3-step test script and append the log entry to `.ai-memory/phase-log.md`**.
+5. **Present the Testing Handoff Card**: Tell the builder what was built, what to look out for, and the exact step-by-step test script.
+6. **Ask the Rule of Thumb Decision Gate**: Confirm whether the agent should test automatically (via browser subagent) or if the developer will test manually.
+7. **Only on verified PASS**: Update `progress-tracker.md` to `COMPLETED` and append to `.ai-memory/phase-log.md`.
+

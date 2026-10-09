@@ -69,4 +69,6 @@ If any required context file is missing, **stop and flag it to the developer** r
 2. **Compose Atomics**: Build atoms first, combine into molecules, and assemble into organisms.
 3. **Never Drift**: Do not invent new components or styling classes that conflict with the design tokens.
 4. **Circuit Breaker**: If a visual layout or styling bug persists after ONE failed correction, **stop immediately**. Do not guess blindly with random CSS tweaks. Inspect the root layout tree and apply a surgical fix.
-5. **Pre-Ship Verification**: Verify the page against `context/build-checklist.md` (including single-knob CSS cascade check and Sentry initialization) before reporting completion.
+5. **Post-Build Testing Handoff**: After each section or page is built, present the **Testing Handoff Card** detailing what was built, what to look out for (visual hierarchy, 375px mobile viewport, hover states, 5 states), and exact test steps. Ask: *"Would you like me to test this for you right now (via browser subagent), or will you test this manually?"*
+6. **Pre-Ship Verification**: Verify the page against `context/build-checklist.md` (including single-knob CSS cascade check and Sentry initialization) before reporting completion.
+
