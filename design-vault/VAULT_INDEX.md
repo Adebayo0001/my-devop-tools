@@ -23,7 +23,26 @@ Every layout in digital product design maps to one of these foundational spatial
 
 ---
 
-## 2. Spatial Grid Mathematics & Proportions
+## 2. Master Authentication & Onboarding Suite (AUTH-01 to AUTH-10)
+
+Forensic layout architectures reverse-engineered from world-class onboarding and sign-up flows (`design-vault/archetypes/AUTH-SUITE-onboarding-layouts.md`):
+
+| Screen ID | Architecture Archetype | Core Spatial Mechanics | Best Fit Use Cases | Mobile Collapse (375px) |
+|---|---|---|---|---|
+| **AUTH-01** | **Split 50/50 3D Obsidian Stage** | Left 50% form / Right 50% dark 3D floating geometric cubes | Web3, AI Infrastructure, Hardware, Creative Tech | 3D visual collapses into top banner; form takes 100% width |
+| **AUTH-02** | **Full-Bleed Aurora Mesh + Right Panel** | Ambient chromatic gradient with right-anchored floating card | Consumer SaaS, AI Generative Apps, Lifestyle | Aurora gradient remains as top ambient header; card becomes full-width |
+| **AUTH-03** | **Iridescent Hero Sphere Split with Nav** | Persistent top utility navbar + 50/50 split with floating chromatic bubble | SaaS Platforms, Developer Cloud, Modern Fintech | Top nav collapses to hamburger; sphere scales down 40% above form |
+| **AUTH-04** | **Centered Glass Modal on Vignette Scrim** | Moody dark plum background + centered floating white modal dialog with close trigger | Quick-auth dialogs, Paywall triggers, Modal overlays | Modal fills 100vw/100vh with corner close 'X' button; zero horizontal scroll |
+| **AUTH-05** | **Multi-Step Onboarding Stepper (KYC)** | Centered modal with step counter ("Step 1 of 3"), country flag dialer & DOB dropdowns | FinTech, Banking, Regulated SaaS, Telehealth | Inputs stack vertically; DOB 3-dropdown grid collapses to native datepicker |
+| **AUTH-06** | **Segmented Dual-Tab Switcher Modal** | Floating card with integrated top pill tab `[Sign In \| Sign Up]` on aurora scrim | Community portals, Forums, Content platforms | Segmented tab stretches to full width; social buttons stack vertically |
+| **AUTH-07** | **Minimalist Horizontal Progress Wizard** | Stark white canvas + multi-step horizontal line stepper `(1) ─── (2) ─── (3)` | Enterprise self-serve, Complex setups, B2B SaaS | Stepper changes from horizontal text labels to compact step dots `● ── ○ ── ○` |
+| **AUTH-08** | **Centered Column with Multi-OAuth Strip** | Focused narrow column form + bottom flat OAuth pill strip (Apple, Google, Meta) | Minimalist consumer tools, Newsletters, Micro-SaaS | Inputs expand to full touch targets (48px); social pills wrap or stack |
+| **AUTH-09** | **Asymmetric Form + Architectural Wireframe** | Left form with company/role selectors + right architectural vector sculpture | B2B Enterprise, Engineering tools, DevSecOps | Wireframe graphic hides or scales down as a subtle top watermark |
+| **AUTH-10** | **Inverted High-Contrast Split (Obsidian/White)** | Left 40% dark manifesto card ("Design with us") + Right 60% clean input canvas | Creative tools, Design marketplaces, Agency portals | Left dark card becomes top banner with white typography; form flows below |
+
+---
+
+## 3. Spatial Grid Mathematics & Proportions
 
 To ensure 100% responsiveness and zero generic template look:
 
@@ -44,7 +63,7 @@ To ensure 100% responsiveness and zero generic template look:
 
 ---
 
-## 3. How to Ingest & Train New Designs
+## 4. How to Ingest & Train New Designs
 
 Whenever you discover a stunning website, Dribbble shot, Behance case study, or Figma template:
 1. Take a clean screenshot or export the Figma component frame.
