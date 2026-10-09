@@ -15,6 +15,7 @@ if (-not $RepoRoot) {
     $RepoRoot = Get-Location
 }
 $Source = Join-Path $RepoRoot 'skills'
+$VaultSource = Join-Path $RepoRoot 'design-vault'
 
 if (-not (Test-Path $Source)) {
     Write-Error "Source skills directory not found at $Source"
@@ -22,8 +23,11 @@ if (-not (Test-Path $Source)) {
 }
 
 Write-Host '==========================================================' -ForegroundColor Cyan
-Write-Host ' Master DevOps Skills Suite - Synchronization Engine' -ForegroundColor Cyan
-Write-Host " Source: $Source" -ForegroundColor Gray
+Write-Host ' Master DevOps Skills & Design Vault Synchronization' -ForegroundColor Cyan
+Write-Host " Skills Source: $Source" -ForegroundColor Gray
+if (Test-Path $VaultSource) {
+    Write-Host " Vault Source:  $VaultSource" -ForegroundColor Gray
+}
 Write-Host '==========================================================' -ForegroundColor Cyan
 
 # 0. Check for Git Upstream Updates (if in a Git clone)
@@ -43,48 +47,76 @@ if (-not $SkipGitPull -and (Test-Path (Join-Path $RepoRoot '.git'))) {
 
 # 1. Google Antigravity IDE (Gemini CLI / Antigravity IDE)
 $AntigravityTarget = Join-Path $HOME '.gemini\config\skills'
+$AntigravityVault = Join-Path $HOME '.gemini\config\design-vault'
 try {
     if (-not (Test-Path $AntigravityTarget)) {
         New-Item -ItemType Directory -Force -Path $AntigravityTarget | Out-Null
     }
     cmd.exe /c xcopy /E /I /Y "$Source" "$AntigravityTarget" | Out-Null
-    Write-Host " [OK] Antigravity IDE synced -> $AntigravityTarget" -ForegroundColor Green
+    if (Test-Path $VaultSource) {
+        if (-not (Test-Path $AntigravityVault)) {
+            New-Item -ItemType Directory -Force -Path $AntigravityVault | Out-Null
+        }
+        cmd.exe /c xcopy /E /I /Y "$VaultSource" "$AntigravityVault" | Out-Null
+    }
+    Write-Host " [OK] Antigravity IDE synced (Skills & Vault) -> $AntigravityTarget" -ForegroundColor Green
 } catch {
     Write-Warning " [!] Failed to sync to Antigravity: $_"
 }
 
 # 2. Claude Code CLI
 $ClaudeTarget = Join-Path $HOME '.claude\skills'
+$ClaudeVault = Join-Path $HOME '.claude\design-vault'
 try {
     if (-not (Test-Path $ClaudeTarget)) {
         New-Item -ItemType Directory -Force -Path $ClaudeTarget | Out-Null
     }
     cmd.exe /c xcopy /E /I /Y "$Source" "$ClaudeTarget" | Out-Null
-    Write-Host " [OK] Claude Code synced -> $ClaudeTarget" -ForegroundColor Green
+    if (Test-Path $VaultSource) {
+        if (-not (Test-Path $ClaudeVault)) {
+            New-Item -ItemType Directory -Force -Path $ClaudeVault | Out-Null
+        }
+        cmd.exe /c xcopy /E /I /Y "$VaultSource" "$ClaudeVault" | Out-Null
+    }
+    Write-Host " [OK] Claude Code synced (Skills & Vault) -> $ClaudeTarget" -ForegroundColor Green
 } catch {
     Write-Warning " [!] Failed to sync to Claude Code: $_"
 }
 
 # 3. Cursor Rules Global
 $CursorTarget = Join-Path $HOME '.cursor\rules'
+$CursorVault = Join-Path $HOME '.cursor\design-vault'
 try {
     if (-not (Test-Path $CursorTarget)) {
         New-Item -ItemType Directory -Force -Path $CursorTarget | Out-Null
     }
     cmd.exe /c xcopy /E /I /Y "$Source" "$CursorTarget" | Out-Null
-    Write-Host " [OK] Cursor Rules synced -> $CursorTarget" -ForegroundColor Green
+    if (Test-Path $VaultSource) {
+        if (-not (Test-Path $CursorVault)) {
+            New-Item -ItemType Directory -Force -Path $CursorVault | Out-Null
+        }
+        cmd.exe /c xcopy /E /I /Y "$VaultSource" "$CursorVault" | Out-Null
+    }
+    Write-Host " [OK] Cursor synced (Rules & Vault) -> $CursorTarget" -ForegroundColor Green
 } catch {
     Write-Warning " [!] Failed to sync to Cursor: $_"
 }
 
 # 4. Windsurf Global Rules / Skills
 $WindsurfTarget = Join-Path $HOME '.codeium\windsurf\skills'
+$WindsurfVault = Join-Path $HOME '.codeium\windsurf\design-vault'
 try {
     if (-not (Test-Path $WindsurfTarget)) {
         New-Item -ItemType Directory -Force -Path $WindsurfTarget | Out-Null
     }
     cmd.exe /c xcopy /E /I /Y "$Source" "$WindsurfTarget" | Out-Null
-    Write-Host " [OK] Windsurf synced -> $WindsurfTarget" -ForegroundColor Green
+    if (Test-Path $VaultSource) {
+        if (-not (Test-Path $WindsurfVault)) {
+            New-Item -ItemType Directory -Force -Path $WindsurfVault | Out-Null
+        }
+        cmd.exe /c xcopy /E /I /Y "$VaultSource" "$WindsurfVault" | Out-Null
+    }
+    Write-Host " [OK] Windsurf synced (Skills & Vault) -> $WindsurfTarget" -ForegroundColor Green
 } catch {
     Write-Warning " [!] Failed to sync to Windsurf: $_"
 }

@@ -112,6 +112,9 @@ The agent MUST stop and ask the builder the **Visual Intake Inquiries**:
 
 #### When the Builder is Starting Fresh with No Existing Brand:
 - Propose **3 distinct, curated visual directions** grounded in the product's domain.
+- **Design Vault Spatial Grounding (Stealth Persona Invariant)**:
+  - The agent silently draws on the spatial layouts and architectural tension in the Master Design Vault (located at `C:\Users\user\Desktop\My DevOp Tools\design-vault\` or local `design-vault/`, including archetypes `ARCH-01` through `ARCH-06`, Figma templates, and high-converting patterns).
+  - **THE STEALTH RULE (Zero Internal File Leakage)**: The agent MUST NOT break character or mechanically state *"I am referencing design-vault/archetypes/..."* or cite internal `.md` filenames. Instead, articulate the proposal with the effortless authority of an elite Creative Director: speak about mathematical proportions, 8/4 asymmetric column splits, negative space tension, and signature moments as native design mastery.
 - **Anti-Generic Typography Floor**: Strictly avoid default, generic pairings (e.g. `Inter + Roboto`, `Arial`). Propose distinctive, elite pairings:
   - Direction A (Modern Tech / Architectural): e.g. **Syne** (Headings) + **Plus Jakarta Sans** (Body) + **JetBrains Mono** (Metrics)
   - Direction B (High-Authority / Executive Editorial): e.g. **Instrument Serif** (Display) + **Inter** (Body) + **Geist Mono** (Utility)
@@ -129,10 +132,10 @@ Once the visual direction and color palette are locked, prepare visual mockups u
 Before writing the first page prompt, output a concise **Project Visual Overview**:
 - Product mission and core user persona
 - Locked color tokens (Surface, Elevated Card, Primary CTA, Accent, Text)
-- Visual atmosphere and density rules (minimalist, high-converting, professional)
+- Visual atmosphere, spatial zoning, and density rules (minimalist, high-converting, professional)
 
 #### 2. Deterministic Google Stitch Prompt (First Core Screen Only)
-Generate the ready-to-paste prompt for the **first foundational screen only** using the 5-part formula:
+Generate the ready-to-paste prompt for the **first foundational screen only** using the 5-part formula (calibrated with the spatial grid geometry from `design-vault/`):
 1. **Viewport & Framing Lock**: `Flat 2D desktop application screenshot, 16:9 widescreen, 1920x1080 resolution, direct front-facing view, NO 3D perspective tilt, NO laptop mockup frame, NO claymockups.`
 2. **Spatial Zone Architecture**: Explicit pixel/percentage layout divisions (e.g. `Zone 1: Left 280px navigation rail. Zone 2: Center main workspace. Zone 3: Right 360px inspector sidebar.`).
 3. **Named Element Inventory**: Enumerate exact cards, buttons, inputs, and headings.
