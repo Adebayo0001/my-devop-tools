@@ -75,7 +75,22 @@ The comprehensive layout directory of 55 high-converting, non-generic landing pa
 
 ---
 
-## 4. Spatial Grid Mathematics & Proportions
+## 4. Master SaaS Hero Stages & Device Ecosystems (MOCK-01 to MOCK-35)
+
+35 elite SaaS hero stage presentations featuring multi-device ecosystems, glowing halos, 3D stacked window layers, and interactive annotated product tours (`design-vault/archetypes/HERO-STAGE-saas-device-mockups.md`):
+
+* **Series 1 (MOCK-01 to MOCK-10) — Dual-Device Pairs, Fintech Cards & Halos:**
+  - 1440px Browser Canvas on Chromatic Mesh, Fintech Card + Dual Phone Stage, Angular Metallic Laptop on Aurora Mesh, Dual Angled Smartphone Pair, Multi-Device Triad Ecosystem, Phone Overlapping Browser, Centered Laptop with Radiant Aurora Backlight, Obsidian Matte Laptop on Magenta Scrim, Dual Matte Phones with Emerald Halo Glow, Dark Laptop with Emerald/Cyan Dual Halos.
+* **Series 2 (MOCK-11 to MOCK-20) — 3D Stacked Windows, Clay Spheres & Dome Meshes:**
+  - Asymmetric Phone Duo with Gradient Mask, Floating Browser + Companion Phone, Clean Daylight Browser on Violet Mesh, 3D Stacked Perspective Browser Windows, Tablet + Phone Duo on Purple Nebula, Pastel Clay Spheres + Smartphone Pair, Centered Browser on Coral Gradient, Split Violet Browser + Phone Combo, Dark Browser Stage with Cyan Top Glow, Pure Typographic Manifesto on Green Dome.
+* **Series 3 (MOCK-21 to MOCK-30) — Topographic Isolines, Constellations & Tours:**
+  - Deep Blue Fluid Wave Hero, Cyan Fluid Ribbon Wave Hero, Magenta/Violet Chromatic Blur Hero, Topographic Contour Isolines on Tablet, Dark Matte Laptop + Phone Duo on Purple Mesh, Dark Browser with Circular Lime Backlight, Angled Tablet on Constellation Star Grid, Tablet + Phone on Blue Particle Mesh, Dual Phones with Purple Vignette Scrim, Interactive Annotated Product Tour Stage.
+* **Series 4 (MOCK-31 to MOCK-35) — 3D Tablets & Translucent Stacked Layers:**
+  - Desktop Browser on Blue Ribbon Wave, Angled 3D Perspective Tablet Stage, 3-Layer Stacked Translucent Browser Tabs, Electric Cyan/Magenta Ribbon Wave Hero, Royal Violet Cosmic Nebula Wave Hero.
+
+---
+
+## 5. Spatial Grid Mathematics & Proportions
 
 To ensure 100% responsiveness and zero generic template look:
 
@@ -96,7 +111,7 @@ To ensure 100% responsiveness and zero generic template look:
 
 ---
 
-## 5. How to Ingest & Train New Designs
+## 6. How to Ingest & Train New Designs
 
 Whenever you discover a stunning website, Dribbble shot, Behance case study, or Figma template:
 1. Take a clean screenshot or export the Figma component frame.
