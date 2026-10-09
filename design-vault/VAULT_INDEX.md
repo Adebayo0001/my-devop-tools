@@ -58,7 +58,24 @@ Forensic layout architectures reverse-engineered from world-class onboarding and
 
 ---
 
-## 3. Spatial Grid Mathematics & Proportions
+## 3. Figma Master Collection: 55 Landing Page Architectures (LP-01 to LP-55)
+
+The comprehensive layout directory of 55 high-converting, non-generic landing page hero architectures (`design-vault/archetypes/LANDING-55-figma-master-collection.md`):
+
+* **Cluster 1 (LP-01 to LP-10) — Architectural, Hardware & Multi-Card Galleries:**
+  - Chromatic 3D Disc Gallery, Asymmetric Forest Triplet, Parametric Architecture Monolith, Interior Archway Sanctuary, Tri-Column Art Ledger, Dark Microchip Hardware Stage, Cosmic Horseback Surrealism, Spiral Staircase Masonry, Fashion Capsule Collage, Organic Bowl Trio.
+* **Cluster 2 (LP-11 to LP-20) — Creative Studios, Audio Vinyl & Sci-Fi:**
+  - Neo-Brutalist Archway Studio, Wireframe Spark & Sculpture Collage, Organic Archway Portrait Duo, Dark Chocolate Vinyl Audio Player, Botanical Arched Foliage Trio, Space Travel Extraterrestrial Hero, Architectural Pavilion, Lookbook Snapshots, Superfood Ingredient Bar, Artisan Coffee Ceramic Circle.
+* **Cluster 3 (LP-21 to LP-30) — High-Impact Narratives, Food & 3D Explosions:**
+  - Monochrome Documentary Split, Cyan Kinetic 3D Laboratory, Cyberpunk VR Headset Console, Yellow Gear Musician Studio, Pastel Boba Beverage Showcase, Exploded Gourmet Burger Stage, Mind-Muscle Yoga Studio, Developer CLI & Tech Stacks, Coastal Yacht Expedition, Golden Yellow Pet Care Haven.
+* **Cluster 4 (LP-31 to LP-40) — Mentorship Bentos, 3D Mascots & Modern Communities:**
+  - Pastel Consultant Avatar Stage, Sunshine Yellow Split Portfolio, Bakery Confectionery Bento, 4-Quadrant Mentorship Grid, Monochrome Community Mosaic, Dark Mode 3D Floating Glass Tabs, Mid-Century Modern Villa, Japanese Pagoda Arch, 3D Mascot Toy Character Studio, Deep Space Galactic Orbit Bento.
+* **Cluster 5 (LP-41 to LP-55) — Physical Hardware, Vintage Tech & Flat-Lays:**
+  - Retro Macintosh "Hello" Tribute, Solitary Minimalist Horizon, Pendant Lamp Dual-Tone Split, Street Style Capsule, Mobile App Dual Mockup Studio, Sunset Travel Guidebook, Espresso Cup Overhead Split, Vintage Polaroid Camera Tribute, Sunshine Yellow Stationery Desk Flat-Lay, Floral Headpiece Model Portrait, Architectural Material Specimen Gallery.
+
+---
+
+## 4. Spatial Grid Mathematics & Proportions
 
 To ensure 100% responsiveness and zero generic template look:
 
@@ -79,7 +96,7 @@ To ensure 100% responsiveness and zero generic template look:
 
 ---
 
-## 4. How to Ingest & Train New Designs
+## 5. How to Ingest & Train New Designs
 
 Whenever you discover a stunning website, Dribbble shot, Behance case study, or Figma template:
 1. Take a clean screenshot or export the Figma component frame.
