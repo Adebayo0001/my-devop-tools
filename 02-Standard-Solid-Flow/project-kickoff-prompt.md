@@ -37,8 +37,8 @@ STAGE 2 — TECH STACK DECISION, TOOL CONSOLIDATION & OBSERVABILITY
 Based on my answers, propose a stack. Before you lock it:
 - Selection criteria: fit to actual scale, financial scope, ecosystem fit, and maturity.
 - LATEST STABLE VERSIONS ONLY: Every framework, library, and AI model must strictly be the
-  latest stable release (e.g. Next.js 15 App Router, React 19, Tailwind CSS v4 / v3.4, current
-  Claude 3.7 / Gemini 2.5 / OpenAI o3-mini models). Specifying outdated versions or deprecated APIs is an architectural defect.
+  latest stable release (e.g. latest Next.js App Router, latest React, latest Tailwind CSS, frontier
+  models including OpenAI Astra / latest o-series, latest Gemini, latest Claude). Specifying outdated versions or deprecated APIs is an architectural defect.
 - RAG & DOCS RESEARCH GATE: Retrieve and verify current documentation via RAG and MCP tools
   (e.g., context7 or official docs) before locking dependencies. Never guess from training memory.
 - TOOL CONSOLIDATION INVARIANT (ANTI-TOOL SPRAWL): Strictly ban introducing 7-10 separate SaaS

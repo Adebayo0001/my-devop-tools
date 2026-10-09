@@ -52,7 +52,7 @@ You can feed the vault from 4 primary sources:
 
 ## Step 2: The Automated AI Deconstruction Prompt
 
-When you have a screenshot, image file, or Figma frame, paste the image into your AI chat (Claude 3.7 Sonnet, Gemini 2.5 Pro, or Antigravity) along with this prompt:
+When you have a screenshot, image file, or Figma frame, paste the image into your AI chat (OpenAI Astra, latest Gemini, Claude, or Antigravity) along with this prompt:
 
 ```text
 You are an elite Creative Director and Principal UI/UX Architect.

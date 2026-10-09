@@ -73,7 +73,7 @@ Drawing on public, verifiable data sources (Reddit discussions, App Store / Goog
 Propose the production tech stack following these non-negotiable standards:
 
 1. **Latest Stable Versions Only**:
-   - Verify that all framework, library, runtime, and model versions are the latest stable releases (e.g. Next.js 15 App Router, React 19, Tailwind CSS v4 / v3.4, current Claude 3.7 / Gemini 2.5 / OpenAI o3-mini models).
+   - Verify that all framework, library, runtime, and model versions are the latest stable releases (e.g. latest Next.js App Router, React 19 / latest, Tailwind CSS v4, cutting-edge frontier models including OpenAI Astra, latest OpenAI o-series/reasoning models, latest Gemini, and latest Claude). Query live documentation to verify exact active model strings.
 2. **RAG & Docs Research Gate**:
    - Query live documentation using RAG and MCP tools (e.g., `context7` with `resolve-library-id` / `query-docs`, or web search) to verify API signatures, configuration schemas, and current best practices. Never guess from training memory.
 3. **The Tool Consolidation Invariant (Anti-Tool Sprawl)**:

@@ -52,7 +52,7 @@ These rules apply unconditionally across every tier, project, and file:
 * **ZERO SHORTCUTS GUARANTEE**: The builder must confirm and approve the visual direction before `design.md` or `ui-tokens.md` are locked. The entire pipeline must be executed sequentially as if manual copy-and-paste prompts were used.
 
 ### Modern Stack Freshness, RAG Docs Verification & Auto-Update Invariant
-* **LATEST STABLE VERSIONS ONLY**: Every framework, library, runtime, and AI model suggested must strictly be the latest stable release (e.g., Next.js 15 App Router, React 19, Tailwind CSS v4 / v3.4, current Claude 3.7 / Gemini 2.5 / OpenAI o3-mini models). Specifying outdated major versions or deprecated APIs is an architectural defect.
+* **LATEST STABLE VERSIONS ONLY**: Every framework, library, runtime, and AI model suggested must strictly be the latest stable release (e.g., latest Next.js App Router, latest React, latest Tailwind CSS, frontier models including OpenAI Astra / latest o-series, latest Gemini, latest Claude). Specifying outdated major versions or deprecated APIs is an architectural defect.
 * **RAG & OFFICIAL DOCS VERIFICATION GATE**: Before locking dependencies or scaffolding architecture patterns, the agent MUST retrieve and verify current upstream documentation using RAG and MCP tools (e.g., `context7`, official docs servers, or web search). Never hallucinate deprecated syntax, old router conventions, or obsolete lifecycle hooks.
 * **EVERGREEN / AUTO-UPDATE ARCHITECTURE**: Every production build plan must architect an auto-updating dependency pipeline:
   - Automated dependency update configurations (Dependabot / Renovate).

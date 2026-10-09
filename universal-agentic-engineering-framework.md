@@ -80,7 +80,7 @@ Before writing any file or code, the AI must interview the human across these **
 Never let the AI pick a default or outdated stack. The stack must be chosen based on **physics, platform constraints, financial scope, and verified library versions**.
 
 ### 2.1 The Latest Versions & RAG Documentation Verification Rule
-- **Latest Stable Releases Only**: Every model, framework, library, and tool must strictly use its latest stable release (e.g. Next.js 15 App Router, React 19, Tailwind CSS v4 / v3.4, current Claude 3.7 / Gemini 2.5 / OpenAI o3-mini models). Specifying stale versions or deprecated methods is an architectural violation.
+- **Latest Stable Releases Only**: Every model, framework, library, and tool must strictly use its latest stable release (e.g. latest Next.js App Router, latest React, latest Tailwind CSS, frontier models including OpenAI Astra / latest o-series, latest Gemini, latest Claude). Specifying stale versions or deprecated methods is an architectural violation.
 - **RAG & Docs Research Gate**: Before locking dependencies or scaffolding architecture patterns, the agent MUST retrieve and verify current upstream documentation using RAG and MCP tools (e.g., `context7`, official docs servers, or web search). Never hallucinate deprecated syntax, old router conventions, or obsolete lifecycle hooks.
 - **Evergreen / Auto-Update Infrastructure**: Build the architecture around continuous dependency maintenance: Dependabot/Renovate configurations, strict lockfile pinning, and automated CI deprecation/security scans.
 
