@@ -58,13 +58,20 @@ Execute discovery sequentially:
 
 #### 2. The Autonomous UX Secondary Research Engine (Runs Under the Hood)
 Drawing on public, verifiable data sources (Reddit discussions, App Store / Google Play reviews, G2/Trustpilot feedback, Product Hunt launches, Quora/Stack Exchange threads, Google Trends, industry analyst reports), the agent autonomously synthesizes research-grade intelligence:
-1. **User Intelligence**: Demographics, seniority, device profiles, psychographics, online communities.
-2. **Jobs-To-Be-Done (JTBD) Matrix**: Minimum 5–7 distinct jobs categorized across Functional, Emotional, and Social levels.
-3. **Pain Points & Frustrations Hierarchy**: Minimum 8 real-world pain points categorized by severity with **Verbatim User Language** from public forums.
-4. **Existing Mental Models & Conventions**: Established user expectations vs product reality.
-5. **Competitive Landscape & Whitespace Mapping**: Tier 1 (Direct), Tier 2 (Indirect), Tier 3 (Category Alternatives) with positioning whitespace.
-6. **Search & Language Intelligence (Human Copywriting Vault)**: High-intent queries and verbatim words users use to describe problems and ideal solutions. Fuels all headlines, eliminating hollow AI buzzwords.
-7. **Strategic Priorities**: Opportunity areas, hypothesis statements, and "How Might We" (HMW) design sprint statements.
+1. **User Intelligence & Demographic Audit**:
+   - Age demographics, seniority, device profiles, daily digital habits.
+   - **Technical Literacy Calibration**: Are users non-technical operators, busy executives, or engineers? Calibrate cognitive load accordingly (max 1 primary CTA per viewport, progressive disclosure).
+2. **Jakob's Law Familiar Market Pattern Mapping**:
+   - Map which recognized, top-tier applications (Stripe, Linear, Notion, Airbnb) users already spend their time on.
+   - Select proven interaction paradigms for search, filtering, forms, and workflows to ensure zero cognitive friction.
+3. **Jobs-To-Be-Done (JTBD) Matrix**: Minimum 5–7 distinct jobs categorized across Functional, Emotional, and Social levels.
+4. **Pain Points & Frustrations Hierarchy**: Minimum 8 real-world pain points categorized by severity with **Verbatim User Language** from public forums.
+5. **Existing Mental Models & Conventions**: Established user expectations vs product reality.
+6. **Competitive Landscape & Whitespace Mapping**: Tier 1 (Direct), Tier 2 (Indirect), Tier 3 (Category Alternatives) with positioning whitespace.
+7. **Search & Language Intelligence (Human Copywriting Vault)**:
+   - High-intent queries and verbatim words users use to describe problems and ideal solutions.
+   - **Strict Copy Domain Separation**: Human, benefit-driven copy that passes the 12-Year-Old/Executive Litmus Test. Banning developer plumbing jargon (*"dispatch gates"*, etc.) from ever entering UI copy strings.
+8. **Strategic Priorities**: Opportunity areas, hypothesis statements, and "How Might We" (HMW) design sprint statements.
 
 ---
 
@@ -168,16 +175,22 @@ Read the schema definitions from the selected Tier's context generation framewor
 #### Files Generated:
 1. **Governing Rulebook**: Stamp `AGENTS.md` in the project root.
 2. **Write Context Files into `context/`**:
-   - `context/project-overview.md` (or `site-overview.md`): PRD, User Personas, Synthesized UX Research (JTBD, Pain Points, Verbatim Copy Quotes).
+   - `context/project-overview.md` (or `site-overview.md`): PRD, User Personas, Synthesized UX Research (JTBD, Pain Points, Verbatim Copy Quotes, Demographic & Tech Literacy Audit, Jakob's Law Market Patterns).
    - `context/architecture.md`: System topology, DB schemas, Sentry/Datadog observability, Evergreen auto-update configuration, 2-Stage Evolution Roadmap.
-   - `context/design.md`: Approved visual direction, locked color tokens, and non-generic typography hierarchy.
-   - `context/ui-tokens.md`: CSS variables bound to `globals.css` (Single-knob cascade).
-   - `context/ui-rules.md`: Atomic composition rules, forms, dialogs, Wireframe Element Hierarchy, Anti-Pill Law.
+   - `context/design.md`: Approved visual direction, locked color tokens, and non-generic typography hierarchy with **Strict Monospace Quarantine**.
+   - `context/ui-tokens.md`: CSS variables bound to `globals.css` (Single-knob cascade, `--font-sans` bound to all UI tokens).
+   - `context/ui-rules.md`: Atomic composition rules, forms, dialogs, Wireframe Element Hierarchy, Anti-Pill Law, plain-English copy contracts.
    - `context/ui-registry.md`: Living component catalog classified by `[ATOM]`, `[MOLECULE]`, `[ORGANISM]` initialized with shadcn/Radix primitives.
    - `context/code-standards.md`: Zero-trust BOLA/IDOR checks, Zod validation schemas, PII scrubbing.
    - `context/library-docs.md`: Live documentation excerpts verified via RAG/MCP.
-   - `context/build-plan.md` (or `page-specs.md`): Information architecture, sequenced feature milestones with 5 UI states per screen.
-   - `context/progress-tracker.md` (or `build-checklist.md`): Milestone status checklist and Decisions Log.
+   - `context/build-plan.md` (or `page-specs.md`): Structured into the **Complete 6-Phase Production Lifecycle**:
+     - *Phase 1: Discovery & Architecture Specs*
+     - *Phase 2: Upfront Foundation (The Shell)* — dependencies, packages, `globals.css` tokens, master App Shell (Navbar, Layout, Footer, root Error Boundary).
+     - *Phase 3: Methodical Layered Sprints* — vertical slices (UI + working state handlers + live seed data + 5 screen states) with mandatory Stop & Test Gate after each feature.
+     - *Phase 4: Production Hardening & Security Audit* — CWV (LCP < 2.5s), zero-trust sweep, `.env.production`.
+     - *Phase 5: Brand Launch & Live Cutover* — `npm run build` verification, DNS/domain, SSL, OpenGraph cards.
+     - *Phase 6: Formal Handover, Vault & Post-Launch Ops* — GitHub transfer, 1Password vault, Loom admin guide, Sentry live telemetry, 30-day warranty log.
+   - `context/progress-tracker.md` (or `build-checklist.md`): Milestone status checklist tied to all 6 phases and Decisions Log.
 
 ---
 

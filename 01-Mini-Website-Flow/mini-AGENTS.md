@@ -57,18 +57,40 @@ If any required context file is missing, **stop and flag it to the developer** r
 * All images must feature descriptive `alt` tags (`alt=""` only for purely decorative SVGs).
 * Forms must use real `<label>` tags linked to inputs via `id`. Placeholders are never a substitute for labels.
 
-### 7. Observability & Crash Prevention
-* Initialize lightweight **Sentry** browser monitoring to capture unexpected client runtime crashes and unhandled exceptions with release tracking.
-* Track Core Web Vitals (LCP < 1.5s, CLS < 0.1, INP < 150ms).
+### 8. Human Copywriting & Copy Domain Isolation
+* **12-Year-Old & Executive Litmus Test**: Client-facing copy must be conversational, crystal-clear, plain English, and benefit-driven.
+* **Strict Quarantine on Internal Plumbing**: Developer jargon, architecture mechanisms, and state variables (*"dispatch gates"*, *"circuit breakers"*, *"mutation triggers"*, *"BOLA checks"*, *"ingest pipelines"*) must NEVER appear on client screens. Quarantine internal terms strictly to logs, comments, and developer runbooks.
+
+### 9. The Typography Containment & Monospace Quarantine Law
+* **Strict Monospace Quarantine**: `font-mono` is strictly quarantined to code blocks (`<pre><code>`) and developer terminals.
+* **Strictly Banned**: Applying monospace fonts to client-facing cards, headings, buttons, form inputs, badges, navigation menus, or body text.
+* Explicit brand font (e.g. `Plus Jakarta Sans`, `Inter`, `Outfit`, `Geist Sans`) in `tailwind.config.ts` with bulletproof system fallbacks. All UI tokens must bind to `--font-sans`.
+
+### 10. Human-Centered UX & Jakob's Law ($1M Craft + Effortless Flow)
+* **$1M Aesthetic**: Bespoke color harmony, crisp typographic hierarchy, refined micro-interactions, and premium whitespace.
+* **Effortless Usability (Jakob's Law)**: Users expect your website to behave like top products they already use. Adopt familiar navigation, scroll behavior, and form interactions. Never invent bizarre mechanisms that confuse visitors.
+* Zero cognitive friction: maximum 1 primary CTA per viewport, clear visual hierarchy, immediate feedback.
+
+### 11. Agile Working Software Invariant (Upfront Foundation + Methodical Layered Slices)
+* **Working software is the primary measure of progress**.
+* **Upfront Foundation First**: Dependencies, packages, `globals.css` design tokens, and the Master App Shell (Header/Navbar, Footer, Root Error Boundary) are built upfront before individual page sections.
+* **Methodical Layered Slices**: Sections must be built methodically, layer upon layer, directly connecting into the App Shell. No section or page may ever be an isolated disconnected island.
+* **The Stop & Test Gate**: After each section or feature is built, the agent **STOPS COLD**, outputs the Feature Verification Card, and awaits verified test confirmation before moving forward.
 
 ---
 
-## Execution Discipline
+## Execution Discipline & 6-Phase Lifecycle
 
-1. **Build UI with Locked Tokens First**: Assemble the visual structure and typography using `design-tokens.md` and `page-specs.md`.
-2. **Compose Atomics**: Build atoms first, combine into molecules, and assemble into organisms.
-3. **Never Drift**: Do not invent new components or styling classes that conflict with the design tokens.
-4. **Circuit Breaker**: If a visual layout or styling bug persists after ONE failed correction, **stop immediately**. Do not guess blindly with random CSS tweaks. Inspect the root layout tree and apply a surgical fix.
-5. **Post-Build Testing Handoff**: After each section or page is built, present the **Testing Handoff Card** detailing what was built, what to look out for (visual hierarchy, 375px mobile viewport, hover states, 5 states), and exact test steps. Ask: *"Would you like me to test this for you right now (via browser subagent), or will you test this manually?"*
-6. **Pre-Ship Verification**: Verify the page against `context/build-checklist.md` (including single-knob CSS cascade check and Sentry initialization) before reporting completion.
+1. **Phase 1: Discovery & Site Specs**: Audience profile, Demographic & Tech Literacy Audit, Jakob's Law pattern selection, and conversion mandate.
+2. **Phase 2: Upfront Foundation (The Shell)**: Dependencies, `globals.css` tokens, font cascade, and Master Shell (Navbar + Footer).
+3. **Phase 3: Methodical Layered Sprints**:
+   - Assemble each vertical section using locked tokens and Radix/shadcn atomics.
+   - Inspect all 5 screen states (Default, Loading, Empty, Error, Edge Case).
+   - Check 375px mobile responsiveness and zero monospace leaks.
+   - Present **Feature Verification & Testing Card** (What was built, what works, what to look out for, deterministic test script).
+   - Stop and wait for user or browser agent test confirmation before moving to the next section.
+4. **Phase 4: Production Hardening**: Lighthouse Core Web Vitals (LCP < 1.5s, CLS < 0.1, INP < 150ms), a11y contrast audit, Sentry runtime monitoring initialization.
+5. **Phase 5: Brand Launch & Cutover**: Production build (`npm run build`), custom domain & DNS setup, SSL, OpenGraph social share cards.
+6. **Phase 6: Client Handover & Ops**: Repo transfer, credentials vault transfer, client admin guide, 30-day warranty log.
+
 

@@ -147,6 +147,8 @@
 
 ---
 
+---
+
 ### 4. Cold Resumption Prompt & Exact Next Step
 
 - **Primary Project Root**: `C:\Users\user\Downloads\mynd-mark`
@@ -156,4 +158,95 @@
   - `C:\Users\user\Downloads\mynd-mark\context\build-plan.md`
   - `C:\Users\user\Downloads\mynd-mark\context\architecture.md`
   - `C:\Users\user\Downloads\mynd-mark\context\progress-tracker.md`
+
+---
+
+## Session Checkpoint: DevOps Framework Core Architecture Upgrade (2026-10-11T05:40:00+01:00)
+
+### 1. Work Completed This Session
+
+1. **Copy Domain Isolation & Anti-Slop Enforced Across All Workflows**:
+   - Established strict boundary between **Client/Public-Facing UI Copy** (plain English, conversational, 12-Year-Old & Executive Litmus Test, benefit-driven) and **Internal Plumbing** (*"dispatch gates"*, *"circuit breakers"*, *"mutation triggers"*, *"BOLA checks"*, *"ingest pipelines"* quarantined to logs/comments/runbooks).
+   - Upgraded: `GLOBAL_AGENTS_STANDARD.md`, `GLOBAL_IDE_MASTER_RULE.md`, `AGENTS.md` (root, tier-1, tier-2, tier-3, Full Build Approach), and `/kickoff`, `/architect`, `/review` skills.
+
+2. **Typography Containment & Strict Monospace Quarantine**:
+   - Monospace font (`font-mono`) is strictly quarantined to: (1) code snippet blocks (`<pre><code>`), and (2) technical developer CLI/terminal monitors.
+   - Strictly banned from client UI cards, headings, buttons, badges, navigation menus, and body text.
+   - Enforced bulletproof primary brand font declaration and system font fallbacks in `tailwind.config.ts`.
+
+3. **Human-Centered UX & Jakob's Law ($1M Craft + Effortless Flow)**:
+   - Preserved $1,000,000 visual craft in aesthetic design while enforcing Jakob's Law in interaction flows: adopt familiar interaction patterns from market leaders (Stripe, Linear, Notion, Airbnb).
+   - Added mandatory Audience Demographic & Technical Literacy Audit during Kickoff to prevent cognitive friction.
+
+4. **Agile Working Software as Primary Measure of Progress (Vertical Slices from Day 1)**:
+   - Mandated Upfront Foundation Shell (dependencies, tokens, navbar/layout/footer, error boundary) followed by methodical layered build.
+   - Enforced complete **Vertical Slices** (UI + real interactive handlers + 5 states + live/seed data) with an unbreakable **Stop & Verification Gate** after every feature.
+
+5. **The Complete 6-Phase Production & Delivery Lifecycle**:
+   - Standardized `build-plan.md` and `progress-tracker.md` across all 4 tiers to include:
+     - Phase 1: Discovery & Architecture Specs
+     - Phase 2: Upfront Foundation (The Shell)
+     - Phase 3: Methodical Layered Sprints (Working Software)
+     - Phase 4: Production Hardening & Pre-Launch Security Audit
+     - Phase 5: Brand Launch & Live Production Cutover
+     - Phase 6: Formal Handover, Credentials Vault & Post-Launch Ops (30-day warranty log)
+
+6. **Full Cross-IDE Synchronization Executed**:
+   - Ran `sync-skills.ps1` — synchronized all updated skills (`/kickoff`, `/architect`, `/review`, etc.) and vault across Antigravity (`~/.gemini/config/skills`), Claude Code, Cursor, and Windsurf.
+
+---
+
+### 2. Architectural Invariants & Rules Locked
+
+1. **Copy Domain Isolation**:
+   - Client-facing UI must pass the 12-Year-Old & Executive Litmus Test: plain, simple, conversational, benefit-driven English.
+   - Internal engineering plumbing (*"dispatch gates"*, *"circuit breakers"*, *"mutation triggers"*, *"BOLA checks"*, *"ingest pipelines"*, *"schema hydration"*) strictly quarantined to code comments, developer logs, and runbooks.
+   - Zero AI slop, zero placeholder text, zero hollow AI buzzwords.
+
+2. **Typography Containment & Monospace Quarantine**:
+   - `font-mono` strictly quarantined to `<pre><code>` code blocks and terminal logs.
+   - Public UI (cards, buttons, headings, badges, text) strictly uses the primary brand font via `--font-sans` with robust system fallbacks.
+
+3. **Human-Centered UX & Jakob's Law**:
+   - High-end $1M visual aesthetic coupled with effortless, familiar usability.
+   - Adopts battle-tested interaction patterns from market leaders (Stripe, Linear, Notion, Airbnb).
+   - Mandatory Audience Demographic & Tech Literacy Audit in `context/project-overview.md`.
+
+4. **Agile Working Software & Methodical Layering**:
+   - Upfront Foundation First: dependencies, packages, `globals.css` tokens, and master App Shell.
+   - Layered Vertical Slices: each feature is built as a complete, end-to-end working slice (UI + interactive state handlers + live seed data + 5 screen states).
+   - Mandatory Stop & Test Gate: agent pauses after each feature, outputs the Feature Verification Card, and awaits test confirmation.
+
+5. **The Complete 6-Phase Production Lifecycle**:
+   - Phase 1: Discovery & Architecture Specs
+   - Phase 2: Upfront Foundation (The Shell)
+   - Phase 3: Methodical Layered Sprints (Working Software)
+   - Phase 4: Production Hardening & Pre-Launch Security Audit
+   - Phase 5: Brand Launch & Live Production Cutover
+   - Phase 6: Formal Handover, Vault & Post-Launch Ops (30-day warranty log)
+
+---
+
+### 3. Immediate Backlog & Pending Tasks
+
+- [x] Upgrade `GLOBAL_AGENTS_STANDARD.md` and `05-Global-IDE-Master-Rule/GLOBAL_IDE_MASTER_RULE.md`.
+- [x] Upgrade `AGENTS.md` (root, tier-1, tier-2, tier-3, Full Build Approach).
+- [x] Upgrade `/kickoff`, `/architect`, and `/review` skills.
+- [x] Run `sync-skills.ps1` to sync across Antigravity, Claude Code, Cursor, and Windsurf.
+- [ ] Apply upgraded standards to active project `my-lead-ops` (clean up any leaked internal jargon, verify brand font vs monospace leaks, and ensure vertical slice testing cards).
+- [ ] Commit and push updated DevOps Tools repository to GitHub (`Adebayo0001/my-devop-tools`).
+
+---
+
+### 4. Cold Resumption Prompt & Exact Next Step
+
+- **Primary Repository**: `C:\Users\user\Desktop\My DevOp Tools`
+- **Active Project in Progress**: `C:\Users\user\Desktop\my-lead-ops`
+- **Immediate Next Action**: Review active project `my-lead-ops` under the upgraded standards or commit the changes in `My DevOp Tools` via git.
+- **Key Files for Resumption**:
+  - `C:\Users\user\Desktop\My DevOp Tools\GLOBAL_AGENTS_STANDARD.md`
+  - `C:\Users\user\Desktop\My DevOp Tools\AGENTS.md`
+  - `C:\Users\user\Desktop\My DevOp Tools\.ai-memory\phase-log.md`
+
+
 

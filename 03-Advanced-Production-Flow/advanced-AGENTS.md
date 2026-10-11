@@ -85,19 +85,52 @@ If any required context file is missing or out of date, **halt and request or dr
 * Strict N+1 prevention: Never perform database fetches or API calls inside a loop or `.map()`. Use batched joins or `IN (...)` queries.
 * Low-bandwidth resilience: Ensure critical UI renders in the first second even on 200kbps connections (critical for Nigerian and African market deployments).
 
-### 10. Circuit Breaker (`/recover`)
-* If the same error or bug persists after **ONE failed correction attempt**, STOP IMMEDIATELY.
-* Do NOT attempt blind patches or guess-driven edits. Run the `/recover` workflow to conduct root-cause forensic analysis before touching another file.
+### 11. Human Copywriting & Copy Domain Isolation
+* **12-Year-Old & Executive Litmus Test**: Client-facing copy must be conversational, crystal-clear, plain English, and benefit-driven.
+* **Strict Quarantine on Internal Plumbing**: Developer jargon, architecture mechanisms, and state variables (*"dispatch gates"*, *"circuit breakers"*, *"mutation triggers"*, *"BOLA checks"*, *"ingest pipelines"*, *"schema hydration"*) must NEVER appear on client screens. Quarantine internal terms strictly to logs, comments, and developer runbooks.
+* Zero `Lorem Ipsum`, zero placeholder text, zero hollow AI buzzwords (*"seamless"*, *"transformative"*).
+
+### 12. The Typography Containment & Monospace Quarantine Law
+* **Strict Monospace Quarantine**: `font-mono` is strictly quarantined to: (1) code snippets (`<pre><code>`), and (2) technical developer CLI/terminal consoles.
+* **Strictly Banned**: Applying monospace fonts to client-facing cards, headings, buttons, form inputs, badges, navigation menus, or body text.
+* Explicit brand font (e.g. `Plus Jakarta Sans`, `Inter`, `Outfit`, `Geist Sans`) in `tailwind.config.ts` with bulletproof system fallbacks. All UI tokens must bind to `--font-sans`.
+
+### 13. Human-Centered UX & Jakob's Law ($1M UI + Zero Cognitive Friction)
+* **$1M Aesthetic**: Bespoke color harmony, crisp typographic hierarchy, refined micro-interactions, and premium whitespace.
+* **Effortless Usability (Jakob's Law)**: Users expect your product to behave like top apps they already use. Adopt familiar interaction patterns from market leaders (Stripe for billing, Linear/Notion for organization, Airbnb/Google for search and filtering) seamlessly adapted into the project's design system.
+* Zero cognitive friction: maximum 1 primary CTA per viewport, clear visual hierarchy, progressive disclosure for complex actions.
+
+### 14. Agile Working Software Invariant (Upfront Foundation + Methodical Layered Slices)
+* **Working software is the primary measure of progress**.
+* **Upfront Foundation First**: Dependencies, packages, `globals.css` design tokens, and the Master App Shell (Header/Navbar, Sidebar, Footer, Root Error Boundary) are built upfront before individual features.
+* **Methodical Layered Slices**: Features are built methodically, layer upon layer, directly connecting into the App Shell. Every feature must be a complete **Vertical Slice** (UI presentation + interactive handlers + 5 states + live/seed data).
+* **The Stop & Test Gate**: After each feature is built, the agent **STOPS COLD**, outputs the Feature Verification Card, and awaits verified test confirmation before moving forward.
 
 ---
 
-## The Daily Build Discipline
+## The Complete 6-Phase Daily Build & Lifecycle Discipline
 
-1. **Build One Feature at a Time**: Never build multiple numbered features concurrently.
-2. **UI with Mock Data First**: Assemble and review the visual interface and all 5 states using Radix/shadcn atomic primitives before wiring database logic.
-3. **Inspect the 5 Screen States**: Confirm default, loading, empty, error, and edge cases look intentional.
-4. **Run `/imprint`**: Document the new component in `ui-registry.md` with its atomic classification (`[ATOM]`, `[MOLECULE]`, or `[ORGANISM]`).
-5. **Verify Single-Knob Cascade**: Ensure changing `--primary` in `globals.css` dynamically updates the component.
-6. **Present Verification & Testing Handoff Card**: Output what was built, what to look out for, the exact step-by-step test script, and confirm whether the agent should test automatically or if the human will test manually.
-7. **Verify Outcome & Log Memory**: Only after verified PASS (agent or human), update `progress-tracker.md` to `COMPLETED` and append the checkpoint to `.ai-memory/phase-log.md`. If test fails, run `/recover`.
+1. **Phase 1: Discovery & Architecture Specs**: Persona mental models, Audience Demographic & Tech Literacy Audit, and Jakob's Law familiar pattern mapping.
+2. **Phase 2: Upfront Foundation (The Shell)**: Core dependencies, package verification, `globals.css` font cascade, and Master App Shell (Navbar, Layout, Footer, root Error Boundary).
+3. **Phase 3: Methodical Layered Sprints (Working Vertical Slices)**:
+   - Build one vertical slice at a time (UI + working state handlers + live seed data).
+   - Inspect all 5 screen states (Default, Loading, Empty, Error, Edge Case).
+   - Run `/imprint` to record newly built components in `ui-registry.md`.
+   - Verify single-knob cascade in `globals.css`.
+   - Present **Feature Verification & Testing Card** (what was built, what works, what to look out for, deterministic test script).
+   - Stop and wait for user or automated browser test confirmation. Feature remains `VERIFYING` until PASS.
+4. **Phase 4: Production Hardening & Pre-Launch Security Audit**:
+   - Run Core Web Vitals audit (LCP < 2.0s, INP < 150ms, CLS < 0.05).
+   - Zero-trust BOLA/IDOR ownership checks and OWASP security review.
+   - Production environment variable sanitization (`.env.production`).
+5. **Phase 5: Brand Launch & Live Production Cutover**:
+   - Production build verification (`npm run build` exits 0).
+   - Custom domain, DNS, SSL, and CDN edge deployment.
+   - OpenGraph social cards and brand meta tags.
+6. **Phase 6: Formal Handover, Vault & Post-Launch Ops**:
+   - GitHub repo ownership transfer.
+   - 1Password / Bitwarden infrastructure credentials vault transfer.
+   - Non-technical Client Admin Loom video walkthrough.
+   - Live Sentry / Uptime monitoring active with 30-day warranty tracking log.
+
 

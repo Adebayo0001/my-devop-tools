@@ -42,24 +42,32 @@ Verify against `ai-dev-standards` and `references/security.md`:
   - Is Datadog RUM tracking front-end vitals (INP, LCP, CLS)?
   - Are critical endpoints protected with latency alert thresholds?
 
-### 3. Atomic Design, shadcn/Radix & Single-Knob CSS Consistency
+### 3. Atomic Design, Typography Quarantine & Single-Knob CSS Consistency
 Audit against `context/ui-tokens.md`, `globals.css`, and `context/ui-registry.md`:
 - [ ] **Atomic Hierarchy Compliance**: Are UI components correctly structured into Atoms, Molecules, and Organisms?
 - [ ] **shadcn/ui + Radix UI Foundation**: Are interactive primitives (buttons, dialogs, dropdowns, inputs) built on accessible **Radix UI** primitives and **shadcn/ui** patterns? Zero raw, unaccessible custom widgets.
+- [ ] **Typography Containment & Monospace Quarantine**:
+  - Is `font-mono` strictly quarantined to code blocks and developer consoles? Zero monospace leaks across public cards, buttons, badges, navigation, or text.
+  - Is the primary brand font loaded cleanly with bulletproof system fallbacks in `tailwind.config.ts`?
 - [ ] **Single-Knob Global CSS Cascade Test**:
   - Do all colors consume HSL/OKLCH CSS variables in `globals.css` (e.g., `hsl(var(--primary))`) mapped through `tailwind.config.ts`?
   - Zero hardcoded `#hex` values or unmapped Tailwind utility colors (`bg-blue-600`).
   - Does changing `--primary` in `globals.css` cascade cleanly across all Atoms, Molecules, and Organisms without broken selectors?
 - [ ] **Sprint Design System Immutability**: Did new feature screens strictly compose existing registered Atoms and Molecules rather than hallucinating ad-hoc, un-imprinted card or button variants?
 
-### 4. User UX Research, Design System & The 5-Second Test
+### 4. User UX Research, Jakob's Law & Human Copywriting Domain Gate
 Audit against UX research findings in `context/project-overview.md` and Bootcapt Review standards:
 - [ ] **The 5-Second Test**:
   - Can a first-time visitor identify what the product does within 5 seconds?
   - Can they immediately identify who it is for?
   - Is the primary onward action obvious and unambiguous?
-- [ ] **UX Mental Model Alignment**: Does the implemented flow match user personas and JTBD? Are all 5 screen states (loading, empty, error, default, edge cases) cleanly designed with zero cognitive dead-ends?
-- [ ] **Human Copywriting Floor**: All headings, body paragraphs, and button labels derived from verified human language or domain research. Zero `Lorem Ipsum`, zero placeholder text, and zero hollow AI buzzwords (*"seamless"*, *"transformative"*).
+- [ ] **Jakob's Law Usability & Cognitive Friction**:
+  - Does the interaction model feel intuitive and familiar based on top market apps (Stripe, Linear, Notion, Airbnb)?
+  - Are users spared from having to "learn" a convoluted custom flow? Maximum 1 primary CTA per viewport.
+- [ ] **Human Copywriting & Copy Domain Isolation**:
+  - Did the copy pass the **12-Year-Old & Executive Litmus Test**?
+  - **Zero Internal Plumbing Leaks**: Are engineering terms (*"dispatch gates"*, *"circuit breakers"*, *"mutation triggers"*, *"BOLA checks"*) completely absent from public UI?
+  - Zero `Lorem Ipsum`, zero placeholder text, zero hollow AI buzzwords (*"seamless"*, *"transformative"*).
 - [ ] **Keyboard Navigability (WCAG 2.1 AA)**: All interactive elements reachable via Tab and activatable via Enter/Space.
 - [ ] **Focus Rings & Contrast**: Visible, tokenized focus rings present (`outline: none` strictly forbidden without ring replacement). Text contrast meets WCAG AA (≥4.5:1 for body copy; ≥3:1 for large display text and UI components).
 - [ ] **Screen Readers**: Meaningful `alt` on informational images; `alt=""` for decorative assets; `aria-label` on icon-only buttons; real connected `<label>` elements on forms.
@@ -88,7 +96,7 @@ Deliver findings clearly categorized by severity:
 - None (or list any security holes, build errors, missing Error Boundaries, data loss risks, or broken 375px responsive views)
 
 #### 🟡 P1 — Critical Quality, Observability & Compliance (High priority)
-- [Missing Sentry PII scrubbing, unmapped hex codes breaking single-knob cascade, accessibility gaps, N+1 query risks, 5-second test failures]
+- [Missing Sentry PII scrubbing, unmapped hex codes, leaked internal plumbing copy, monospace font leaks, accessibility gaps, N+1 query risks]
 
 #### 🟢 P2 — Visual & Token Polish (Minor items)
 - [Token alignment, spacing polish, subtle layout refinements, micro-copy tweaks]
@@ -98,6 +106,8 @@ Deliver findings clearly categorized by severity:
 - `npm run build`: ✅ Exited 0
 - Secret Scan: ✅ 0 credentials detected
 - Observability: ✅ Sentry Error Boundaries active | ✅ Datadog RUM/APM active | ✅ PII scrubbing active
+- Typography Containment: ✅ 0 monospace leaks | Brand font cascade verified
+- Copy Domain Isolation: ✅ Passed (zero leaked plumbing, 12-year-old test passed)
 - Atomic CSS Cascade: ✅ Single-knob variable test verified
 - 5-Second Test: ✅ Passed (clear value prop & primary action)
 - Responsive Floor: ✅ Verified at 375px, 768px, 1440px

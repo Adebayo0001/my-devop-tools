@@ -37,8 +37,8 @@ Lock in what's expensive to change later: stack fit (traffic, team size = solo, 
 
 **For anything beyond a prototype, produce this file set before scaffolding** — not a free-form brief, a fixed checklist that forces gaps to surface while cheap to fix:
 
-1. **project-overview.md** — problem, target users with **Synthesized User UX Research** (persona mental models, Jobs-To-Be-Done [JTBD], task friction analysis, and cognitive load mapping), pages/nav, core flow, explicit in-scope/out-of-scope, checkable success criteria.
-2. **user-flows.md** — sitemap; one flow diagram per core journey (entry → every decision point → every branch → end state, not just happy path); a task flow per primary action; a **state inventory per screen** (default, empty, loading, error, edge cases); information hierarchy per screen (primary/secondary/tertiary); how flows connect.
+1. **project-overview.md** — problem, target users with **Synthesized User UX Research** (persona mental models, Jobs-To-Be-Done [JTBD], task friction analysis, cognitive load mapping, **Audience Demographic & Tech Literacy Audit**, and **Jakob's Law Familiar Market Pattern Mapping**), pages/nav, core flow, explicit in-scope/out-of-scope, checkable success criteria.
+2. **user-flows.md** — sitemap; one flow diagram per core journey (entry → every decision point → every branch → end state, not just happy path); a task flow per primary action; a **state inventory per screen** (default, empty, loading, error, edge cases); information hierarchy per screen (primary/secondary/tertiary); how flows connect. Must pass the Jakob's Law familiarity test: flows should feel effortless and intuitive based on industry-standard products.
 3. **architecture.md** — data model, system/integration diagram, the Stack Decision writeup (the *reasoning*, not just the conclusion), and the **Observability & Telemetry Architecture** (Sentry exception tracking, LogRocket session replay, Datadog APM/RUM, with strict PII scrubbing pipelines).
 4. **library-docs.md** — current docs for exactly the locked-stack libraries (including Radix UI primitives, shadcn/ui, Sentry, LogRocket, and Datadog SDKs), **pulled live via search, never from training memory**.
 5. **code-standards.md** — two layers. Stack-agnostic (engineering mindset, zero-trust security, React Error Boundaries hooking to Sentry, comment discipline, and a full **Accessibility & Quality Floor**: contrast ratios, keyboard nav, semantic HTML, `prefers-reduced-motion`, responsive down to 375px). Stack-specific, written fresh each time (folder structure, naming, idioms, PII sanitization helpers).
@@ -46,9 +46,16 @@ Lock in what's expensive to change later: stack fit (traffic, team size = solo, 
    - **The shadcn/Radix Foundation**: Built exclusively on **shadcn/ui** and headless **Radix UI** primitives using our established colors. Zero component guessing.
    - **The Atomic Principle**: Classified into **Atoms** (`Button`, `Input`, `Badge`, `Label`), **Molecules** (`SearchBar`, `FormField`), and **Organisms** (`ProductCard`, `HeaderNav`).
    - **Global CSS Single-Knob Cascade (Figma Webhook Parity)**: All theme colors are configured as CSS variables in `globals.css` (`--primary`, `--background`, `--card`, `--radius`). Changing a single variable updates every atom, molecule, and organism app-wide instantaneously.
+   - **Typography Cascade & Strict Monospace Quarantine**: Explicit brand font configuration in `tailwind.config.ts` with bulletproof system fallbacks. Monospace (`font-mono`) is strictly quarantined to code blocks and developer terminals—never applied to public UI cards, buttons, badges, or headers.
    - **Sprint Design System Immutability**: Any future sprint feature not in the initial overview MUST automatically reuse registered Atoms and Molecules without the builder prompting.
-7. **build-plan.md** — phased, built from user-flows.md. UI with mock data before logic is wired. Every feature's UI section includes ALL its states from user-flows.md, not just default. Every feature gets a **Definition of Done**: screenshot vs. design reference, quality-floor check, component-level genericness check, atomic registry compliance, progress-tracker update.
-8. **progress-tracker.md** — phase/status table tied to the Definition of Done above; a **Decisions Made During Build** log; a Notes section.
+7. **build-plan.md** — structured into the **Complete 6-Phase Production Lifecycle**:
+   - **Phase 1: Discovery & Architecture Specs**
+   - **Phase 2: Upfront Foundation (The Shell)** — dependencies, packages, `globals.css` tokens, and global App Shell (Header/Navbar, Sidebar, Footer, Root Error Boundary).
+   - **Phase 3: Methodical Layered Sprints (Working Software)** — features built as complete **Vertical Slices** (UI + real interactive handlers + 5 states + live/seed data). Unbreakable Stop & Verification Gate after each feature.
+   - **Phase 4: Production Hardening & Security Audit** — Core Web Vitals (LCP < 2.5s, INP < 150ms), zero-trust sweeps, `.env.production` sanitization.
+   - **Phase 5: Brand Launch & Live Cutover** — production build (`npm run build`), custom domain/DNS, SSL, OpenGraph social cards.
+   - **Phase 6: Formal Handover, Vault & Post-Launch Ops** — GitHub transfer, 1Password/Bitwarden vault, non-technical Loom admin guide, Sentry live telemetry, 30-day warranty log.
+8. **progress-tracker.md** — phase/status table tied to the 6 phases above; a **Decisions Made During Build** log; a Notes section.
 
 If a request is genuinely ambiguous even after drafting these — ask. Don't silently pick an interpretation.
 
@@ -56,15 +63,30 @@ If a request is genuinely ambiguous even after drafting these — ask. Don't sil
 
 ## Gate 2 — Build (while writing each feature)
 
-Five lenses, every feature that touches input/data/rendering. Not every feature needs full strength on every lens, but default to checking, not skipping.
+Seven lenses, every feature that touches input/data/rendering. Default to checking, not skipping.
 
-### Design System & Atomic UI
+### 1. Agile Working Software & Methodical Layering (Primary Measure of Progress)
+- **Foundations Upfront**: Always build dependencies, tokens, and the master App Shell upfront before feature modules.
+- **Vertical Slices Only**: Every feature must be an end-to-end working slice (UI presentation + interactive state handlers + live seed data + 5 screen states). No disconnected horizontal mock islands.
+- **The Stop & Test Gate**: The agent is strictly forbidden from building multiple features in one pass. It must stop after each feature, output the Feature Verification Card, and await test confirmation.
+
+### 2. Human Copywriting & Copy Domain Isolation
+- **12-Year-Old & Executive Litmus Test**: Client-facing copy must be conversational, crystal-clear, plain English, and benefit-driven.
+- **Strict Quarantine on Internal Plumbing**: Developer jargon, architecture mechanisms, and state machine variables (*"dispatch gates"*, *"circuit breakers"*, *"mutation triggers"*, *"BOLA checks"*, *"ingest pipelines"*) must NEVER appear on client UI. Quarantine internal terms strictly to logs, comments, and developer runbooks.
+- Zero `Lorem Ipsum`, zero placeholder text, zero hollow AI buzzwords (*"seamless"*, *"transformative"*).
+
+### 3. Human-Centered UX & Jakob's Law ($1M Craft + Effortless Flow)
+- **$1M Aesthetic**: Bespoke color harmony, refined elevation, micro-interactions, and premium typography.
+- **Effortless Usability (Jakob's Law)**: Users expect your product to behave like top apps they already use. Adopt familiar interaction patterns from market leaders (Stripe, Linear, Notion, Airbnb) seamlessly adapted into the project's design system.
+- Zero cognitive friction: maximum 1 primary CTA per viewport, clear visual hierarchy, progressive disclosure for complex actions.
+
+### 4. Design System & Typography Containment
 - **Zero Component Guessing**: Every interactive component must use **shadcn/ui** and **Radix UI** primitives. Never create un-accessible custom modal overlays, custom dropdowns, or unstyled form controls.
 - **Atomic Composition**: Assemble features by composing established **Atoms** into **Molecules**, and Molecules into **Organisms**.
-- **No Hardcoded Hex / Raw Utility Colors**: Never use `#hex` or raw Tailwind color numbers (`bg-blue-600`). Reference only semantic tokens tied to CSS variables (`bg-primary`, `text-foreground`).
-- **Sprint Immutability**: New sprint features must strictly consume existing design tokens and atomic primitives.
+- **No Hardcoded Hex / Raw Utility Colors**: Reference only semantic tokens tied to CSS variables (`bg-primary`, `text-foreground`).
+- **Strict Monospace Quarantine**: `font-mono` is strictly quarantined to code blocks (`<pre><code>`) and developer terminals. Brand sans-serif must govern all public UI.
 
-### Security
+### 5. Security (Zero-Trust)
 - **Secrets**: never in source, ever. `.env` gitignored from commit #1. Client bundles get public/publishable keys only — never a secret key.
 - **Input validation**: server-side, always, even if also client-side (client-side is UX, not a boundary). Use a schema library (Zod/Yup) — **show the actual schema**, don't just assert "it's validated."
 - **Injection**: parameterized queries / ORM only, never string-concatenated SQL. Rely on framework default escaping; `dangerouslySetInnerHTML`/`v-html` needs explicit sanitization (DOMPurify), never raw user input.
@@ -73,14 +95,14 @@ Five lenses, every feature that touches input/data/rendering. Not every feature 
 - Rate-limit auth endpoints. CORS: never `*` for anything non-public.
 - File uploads: validate type/size server-side, don't trust client-reported MIME type.
 
-### Accessibility (WCAG 2.1 AA — the baseline, not a stretch goal)
+### 6. Accessibility (WCAG 2.1 AA — the baseline, not a stretch goal)
 - Semantic HTML: real `<button>`/`<a>`/`<nav>`/`<main>`/heading hierarchy backed by Radix UI.
 - Full keyboard operability on every interactive element. Never remove focus outlines without a clear visible replacement. Modals trap focus, return it on close.
 - `alt` text on meaningful images, `alt=""` on decorative ones. Real `<label>`s (not placeholders). Icon-only buttons need `aria-label`. Dynamic content (toasts, errors) needs `aria-live`.
 - Contrast ≥4.5:1 normal text / ≥3:1 large text, checked in both light and dark themes. Never color-alone for meaning.
 - Forms: labels, required-field indicators, specific errors tied via `aria-describedby`.
 
-### Performance & Observability
+### 7. Performance & Observability
 - **Error Tracking**: Wrap layouts with React Error Boundaries reporting to **Sentry** with release tags and sourcemaps. Enable **LogRocket** session capture for critical interactive flows.
 - **Performance APM**: Instrument **Datadog** APM and RUM to monitor Core Web Vitals, API latency, and server health.
 - **PII Scrubbing**: Telemetry MUST sanitize auth tokens, credit cards, passwords, and client PII before transmitting.
@@ -90,27 +112,27 @@ Five lenses, every feature that touches input/data/rendering. Not every feature 
 - Targets: **LCP < 2.5s, INP < 200ms, CLS < 0.1.**
 - **Low-bandwidth resilience**: ensure fast initial render on 50–400kbps connections.
 
-### Testing & The Post-Build Handoff Protocol
+### The Post-Build Testing Handoff Protocol
 - Prioritize: business logic with branches (pricing, permissions), anything touching money/auth/personal data, anything that's already been fixed once (add the regression test), API endpoints (happy path + invalid input + unauthorized access).
 - Don't force tests on pure layout/no-logic components or auto-generated boilerplate.
 - Every async operation has three states — confirm all three are handled: loading (something visible, not blank/stale), error (specific user-facing message, not a console error), empty (deliberate empty state, not a broken-looking blank list).
-- Reserve heavy E2E (Playwright/Cypress) for genuinely critical journeys (checkout, signup, login) — not every feature.
-- **The Post-Build Testing Handoff Invariant**: Immediately upon finishing any feature build and running `/imprint`, the agent MUST output the **Testing Handoff Card** containing:
-  1. **What was built & what to look out for**: Layout hierarchy, the 5 screen states (Default, Loading, Empty, Error, Edge Cases), single-knob CSS cascade in `globals.css`, and 375px mobile responsiveness.
-  2. **Exactly what to test**: A deterministic 3-to-4 step test script (route, action, expected outcome, error/network check).
-  3. **The Rule of Thumb Decision Gate**:
+- **The Post-Build Testing Handoff Invariant**: Immediately upon finishing any feature build and running `/imprint`, the agent MUST output the **Feature Verification & Testing Handoff Card** containing:
+  1. **What was built**: Exactly what components, state handlers, and live/seed data were created or wired.
+  2. **What is working right now**: Concrete interactive capabilities testable in production mode.
+  3. **What to look out for**: Layout hierarchy, the 5 screen states (Default, Loading, Empty, Error, Edge Cases), plain-English human copy (zero leaked plumbing), typography integrity (zero monospace leaks), and 375px mobile responsiveness.
+  4. **Exactly what to test**: A deterministic 3-to-4 step test script (route, action, expected outcome, error/network check).
+  5. **The Rule of Thumb Decision Gate**:
      > *"Would you like me to test this for you right now (via browser subagent / terminal automation), or will you test this manually?"*
-  4. The feature enters `VERIFYING` state. Only after a verified PASS (agent or human) is it marked `COMPLETED` in `progress-tracker.md` and appended to `memory.md`. If a test fails, trigger `/recover` immediately.
-
+  6. The feature enters `VERIFYING` state. Only after a verified PASS (agent or human) is it marked `COMPLETED` in `progress-tracker.md` and appended to `memory.md`. If a test fails, trigger `/recover` immediately.
 
 ### Destructive actions — standing rule, not optional
 Dropping a table, deleting a production DB/bucket, force-pushing, overwriting production `.env`, running a migration against live data: **stop for an explicit, separate confirmation every time** — even mid-session, even if the broader task was approved, even if the plan seems obviously correct. Approval of a feature is not approval to delete data to build it. This is the one mistake category here that can't be fixed with a follow-up commit.
 
 ---
 
-## Gate 3 — Ship (before saying "ready" / deploying)
+## Gate 3 — Ship, Launch & Client Handover (Full Lifecycle Completion)
 
-If `progress-tracker.md` exists, check against it directly — a feature not marked "done" there isn't ready for this checklist regardless of how finished it looks in the browser.
+If `progress-tracker.md` exists, check against it directly — a project is not ready to deploy until Phases 1–3 are verified complete, and Phases 4–6 are executed systematically.
 
 **Pre-ship checklist:**
 - [ ] No secrets in source or git history; `.env` gitignored
@@ -122,11 +144,15 @@ If `progress-tracker.md` exists, check against it directly — a feature not mar
 - [ ] UI built with shadcn/ui and Radix UI primitives; Atomic hierarchy respected
 - [ ] Single-knob CSS cascade verified: changing `--primary` in `globals.css` propagates app-wide
 - [ ] Sprint Design System Immutability verified: no unmapped or guessed component variants
+- [ ] Plain English copy verified: zero internal plumbing terms (*"dispatch gates"*, etc.) in public UI
+- [ ] Typography quarantine verified: zero monospace font leaks across client cards, buttons, or text
 - [ ] Keyboard nav works everywhere; meaningful `alt` text; WCAG AA contrast; labeled forms
 - [ ] No obvious N+1s or waterfalls; images sized/compressed; no unbounded unpaginated lists
 - [ ] Responsive down to 375px
 - [ ] No stubbed/mocked code silently presented as finished — disclosed instead
 - [ ] No unconfirmed destructive actions in the session history
+- [ ] Production build verified: `npm run build` exits 0 with zero type or lint errors
+- [ ] Handover Package prepared: GitHub repo transfer, credentials vault, Loom runbook, 30-day warranty log
 
 Report results in plain terms: what was checked, and the one thing left for a real decision — not a wall of checkmarks.
 

@@ -36,12 +36,12 @@ Read the project context files in the strict sequence defined in `AGENTS.md`:
 5. `context/code-standards.md` & `context/library-docs.md` (Engineering rules)
 6. `context/build-plan.md` (The exact feature milestone & acceptance criteria)
 
-### 2. User UX Research & Behavioral Mental Model Pre-Check
+### 2. User UX Research, Jakob's Law & Human-Centered Usability Pre-Check
 Before proposing technical architecture, verify user alignment against `context/project-overview.md`:
-- **Target Persona & Mental Model**: Which user persona is this for, what is their existing cognitive mental model, and what emotional state do they bring to this screen?
-- **3-Level Jobs-To-Be-Done (JTBD)**: Which exact Functional, Emotional, or Social job (from the project's JTBD Matrix) does this feature satisfy?
-- **Friction & Objection Audit**: What pain points or objections from the UX Research Pain Points Hierarchy are being eliminated? How do we eliminate redundant inputs, prevent validation surprises, and provide immediate optimistic feedback?
-- **Language Intelligence & Copy Contract**: Pull exact user phrasing from the Language Intelligence repository in `context/project-overview.md` for headlines, helper text, and CTA buttons. Strictly ban generic placeholder copy and hollow AI buzzwords.
+- **Audience Demographic & Literacy Audit**: Who is the target user, what is their age bracket, and what is their technical literacy level (e.g. non-technical operator vs developer)? How do we eliminate cognitive friction?
+- **Jakob's Law Familiar Pattern Mapping**: What proven, industry-standard product (e.g. Stripe, Linear, Notion, Airbnb) has already perfected this interaction pattern? How do we adapt that familiar pattern into our design system rather than forcing the user to learn an unfamiliar mechanism?
+- **3-Level Jobs-To-Be-Done (JTBD)**: Which exact Functional, Emotional, or Social job does this feature satisfy?
+- **Copy Domain Isolation & Plain English**: Derive conversational, benefit-driven headlines, helper text, and CTA buttons that pass the **12-Year-Old & Executive Litmus Test**. Strictly quarantine internal plumbing terms (*"dispatch gates"*, *"circuit breakers"*, *"mutation triggers"*, *"BOLA checks"*) to logs/code—NEVER allow them into public UI.
 
 ### 3. Define Technical Contract & Interfaces (Spec-First)
 Before writing any implementation code, define the **Contract Boundaries**:
@@ -61,13 +61,13 @@ Cross-reference the proposed approach against `context/architecture.md` and `ai-
   - How are distributed trace headers passed across API calls?
   - What Core Web Vitals thresholds (INP < 200ms, LCP < 2.5s) apply to this screen?
 
-### 5. Wireframe Specification & Atomic UI Decomposition
+### 5. Wireframe Specification, Atomic UI & Typography Containment
 Consult `context/ui-rules.md` and `context/ui-registry.md` to specify the UI before coding:
 - **User Journey Stage**:
   - `| Stage | Action | Thought | Emotion | What screen must provide |`
 - **Section Wireframe Hierarchy**:
   - Layout structure (grid, split-column, centered stack).
-  - Visual weight (dominant focal point vs supporting elements).
+  - Visual weight (dominant focal point vs supporting elements; max 1 primary CTA per viewport).
   - Elements listed in strict descending order of visual prominence.
   - Interaction behaviors (hover, focus, transitions, loading skeletons).
   - Mobile behavior (how columns collapse at 375px; touch targets ≥44px).
@@ -77,6 +77,9 @@ Consult `context/ui-rules.md` and `context/ui-registry.md` to specify the UI bef
   - Form field labels (always visible above fields; no placeholder-only labels).
   - Explicit error messages (plain language explaining root cause and resolution).
   - Success confirmations and toasts.
+- **Typography Containment**:
+  - Confirm all UI headings, body, cards, and buttons strictly consume `--font-sans` (brand typeface).
+  - Strict Monospace Quarantine: `font-mono` is strictly forbidden except inside code blocks or developer consoles.
 - **Atomic Primitives (shadcn/Radix)**:
   - Atoms reused (`Button`, `Input`, `Label`, `Dialog`, `DropdownMenu`).
   - Molecules composed (`SearchBar`, `FormField`, `FilterGroup`).
@@ -94,14 +97,15 @@ Present the concise blueprint to the developer:
 ```markdown
 ### 📐 Architecture Blueprint: [Feature Name]
 - **Summary**: [What will be built in 1–2 sentences]
-- **UX Research & JTBD**: [Target persona, mental model, and friction reduction strategy]
-- **Verbatim Copy & Micro-Copy**: [Exact headline, CTA text, and key form labels derived from Language Intelligence]
+- **UX Research, Jakob's Law & Demographic Alignment**: [Target persona, tech literacy, familiar market pattern adapted]
+- **Plain English Copy & Micro-Copy**: [Exact headline, CTA text, labels passing 12-year-old test; zero leaked plumbing]
 - **Contracts & Schemas**: [Key types/interfaces touched]
-- **State & Data Flow**: [Where state lives & how data flows]
+- **State & Data Flow (Vertical Slice)**: [Where state lives, live/seed data binding, and interactive flow]
 - **Invariants Verified**: [Ownership, RLS, zero-trust boundaries checked]
 - **Observability Architecture**: [Sentry Error Boundary placement, PII scrubbing, Datadog trace budget]
 - **Wireframe & Atomic Hierarchy**:
   - Wireframe Layout: [Structure, visual weight, 375px mobile collapse]
+  - Typography: [Verified brand font; zero monospace leaks]
   - Atoms: [shadcn/Radix primitives reused]
   - Molecules: [Combinations used]
   - Organisms: [Composed layout structure]

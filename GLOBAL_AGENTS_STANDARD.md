@@ -13,9 +13,45 @@ These rules apply unconditionally across every tier, project, and file:
 * **BANNED**: Placing rounded pill badges, emoji chips, or miniature uppercase tags above headings (e.g., `[✨ OUR SERVICES]`, `[🚀 WHY CHOOSE US]`, `[⚡ FAST SETUP]`).
 * **ENFORCED**: Pure, commanding typographic hierarchy. Sections must open with bold, intentional semantic headings (`h1`, `h2`, `h3`) with carefully calibrated font sizes, line heights, and letter spacing. Eyebrow labels are permitted ONLY when representing genuine domain metadata (e.g., `OCTOBER 2026`, `INVOICE #9201`).
 
-### The Human Copywriting Floor
-* **BANNED**: `Lorem Ipsum`, placeholder text, and hollow AI buzzwords (*"seamless"*, *"cutting-edge"*, *"transformative"*, *"unlock your potential"*).
-* **ENFORCED**: Every headline, body sentence, and button label must read as if drafted by a human senior content strategist. If copy is undefined, derive precise, benefit-driven statements grounded in the subject matter.
+### The Human Copywriting & Copy Domain Isolation Law
+* **BANNED**: `Lorem Ipsum`, placeholder text, hollow AI buzzwords (*"seamless"*, *"cutting-edge"*, *"transformative"*, *"unlock your potential"*), and **internal framework plumbing leaks**.
+* **STRICT DOMAIN SEPARATION**:
+  - **Client/Public-Facing UI Domain**: Must strictly pass the **12-Year-Old & Executive Litmus Test**. All copy must be conversational, crystal-clear, plain English, and benefit-driven. Strictly ban internal engineering jargon, state machine variables, and architecture terms (*"dispatch gates"*, *"circuit breakers"*, *"mutation triggers"*, *"BOLA checks"*, *"ingest pipelines"*, *"schema hydration"*) from ever appearing on client screens. E.g., replace *"Evaluate Dispatch Gates"* with *"Review Inbound Requests"*.
+  - **Internal Plumbing Domain**: Architecture terms, telemetry events, and state machine transitions belong **strictly** inside backend logs, code comments, developer terminals, and `docs/runbooks/`—never visible to users in public UI.
+* **ENFORCED**: Every headline, body sentence, and button label must read as if drafted by an elite human content strategist grounded in the end-user's day-to-day reality.
+
+### The Typography Containment & Monospace Quarantine Law
+* **STRICT MONOSPACE QUARANTINE**:
+  - Monospace font (`font-mono`) is strictly quarantined to: (1) literal code snippets (`<pre><code>`), and (2) technical developer CLI/terminal consoles.
+  - **STRICTLY BANNED**: Applying monospace fonts to client-facing cards, headings, buttons, form inputs, badges, navigation menus, or body text.
+* **FAIL-SAFE FONT CASCADE**:
+  - Every project must cleanly import and declare the primary brand font (e.g. `Plus Jakarta Sans`, `Inter`, `Outfit`, `Geist Sans`) in the root layout with bulletproof system fallbacks in `tailwind.config.ts`:
+    `fontFamily: { sans: ['var(--font-brand)', 'Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'], mono: ['JetBrains Mono', 'Menlo', 'monospace'] }`
+  - In `context/ui-tokens.md`, all UI typography tokens (`display`, `heading`, `body`, `caption`, `button`) must strictly bind to `--font-sans`.
+
+### Human-Centered UX & Jakob's Law Invariant ($1M UI + Effortless Friction-Free Flows)
+* **THE $1,000,000 CRAFT VS. USABILITY DISTINCTION**:
+  - **Visual Presentation ($1M Aesthetic)**: Bespoke color harmony, crisp typographic hierarchy, micro-interactions, refined border radiuses, and zero generic AI slop.
+  - **User Journey (Zero Cognitive Friction)**: Radically simple and intuitive. Never invent bizarre, unfamiliar interaction paradigms that force users to "re-learn" basic actions or cause mental fatigue.
+* **JAKOB'S LAW OF INTERNET USER EXPERIENCE**:
+  - Users spend most of their time on other applications. They expect your product to work like the ones they already know.
+  - When designing user flows (search, filtering, checkout, settings, form submissions, data tables), **adopt proven, familiar interaction patterns from market leaders** (e.g., Stripe for billing, Linear/Notion for organization, Airbnb/Google for search and filtering). Adapt the proven pattern seamlessly into the product's custom design system.
+* **MANDATORY AUDIENCE DEMOGRAPHIC & TECH LITERACY AUDIT**:
+  - In `context/project-overview.md`, the agent must explicitly audit the target audience's age bracket, daily digital habits, and technical literacy level (e.g. non-technical operational staff vs developer).
+  - Enforce maximum 1 primary visual call-to-action (CTA) per viewport, progressive disclosure for complex settings, and immediate plain-English feedback on all interactions.
+
+### Agile Working Software Invariant (Upfront Foundations + Methodical Layered Slices)
+* **WORKING SOFTWARE IS THE PRIMARY MEASURE OF PROGRESS**:
+  - In accordance with the Agile Manifesto, progress is measured **only** by working, testable software that brings value to the user—not by isolated mockups or lines of code.
+* **UPFRONT FOUNDATION (THE SHELL) FIRST**:
+  - Dependencies, package installation, design tokens in `globals.css`, and the Master App Shell (Header/Navbar, Sidebar, Footer, root Error Boundary, route structure) are built upfront before individual features are constructed.
+* **METHODICAL LAYERED VERTICAL SLICES (ZERO ISOLATED PAGES)**:
+  - Features must be built methodically, layer upon layer, directly connecting into the App Shell. No page or feature may ever be built as an isolated, disconnected mock island.
+  - Every feature must be a complete **Vertical Slice**: UI presentation + real interactive handlers + 5 screen states (Default, Loading, Empty, Error, Edge Case) + seed/live data binding.
+  - The application remains in a runnable, production-mode state from Day 1.
+* **THE UNBREAKABLE STOP & VERIFICATION GATE**:
+  - The agent is **strictly forbidden** from building multiple features in one blind pass.
+  - After completing each feature, the agent must **STOP COLD**, output the structured Feature Verification & Testing Card, and await user confirmation (or automated browser agent verification) before proceeding to the next feature.
 
 ### The Anti-Drift Invariant (UI Registry & Atomic Principle)
 * Models naturally drift after 2–3 build passes, abandoning tokens and inventing rogue styles.
@@ -151,15 +187,23 @@ Every completed feature must conclude with this exact format:
 ```markdown
 ### 🧪 Feature Verification & Testing Handoff: [Feature Name]
 
-#### 👁️ What Was Built & What to Look Out For:
-- **Visual Presentation & Atomic Hierarchy**: [Components, layout structure, typography created or modified]
+#### 🛠️ What Was Built:
+- **Components & Handlers**: [List of atoms, molecules, organisms, and backend/state handlers added]
+- **Atomic Hierarchy & Design Tokens**: [Registered in context/ui-registry.md, CSS variables verified]
+
+#### ⚡ What Is Working Right Now:
+- **Interactive Capabilities**: [Specific actions the user can perform immediately in production mode]
+- **Working Seed / Live Data**: [Exact data bound and interactive]
+
+#### 👁️ What to Look Out For (5 States & Usability Floor):
 - **The 5 Screen States Handled**:
   - Default: [Render with standard data]
   - Loading: [Skeleton loader / progress indicator]
   - Empty: [Zero-data guidance state]
   - Error: [User-facing error boundary / toast notification]
   - Edge Cases: [String truncation, responsive boundaries, overflow]
-- **Design Tokens & Single-Knob Cascade**: [Verified CSS variables (--primary, etc.) in globals.css]
+- **Human Copywriting & Plain English**: [Zero leaked plumbing, zero AI slop, 12-year-old test passed]
+- **Typography Integrity**: [Zero monospace leaks; brand font loaded cleanly]
 - **Mobile Responsiveness (375px Floor)**: [Touch targets ≥44px, drawer collapse, 0 horizontal scroll]
 
 #### 🎯 Exactly What to Test (Step-by-Step Script):
@@ -173,4 +217,48 @@ Every completed feature must conclude with this exact format:
 > - **Option A (Agent Automated Test)**: Launch the browser subagent or run automated verification scripts and report live test telemetry with screenshots/recordings.
 > - **Option B (Human Manual Test)**: Await developer acceptance testing and confirmation before marking the feature as `COMPLETED`.
 ```
+
+---
+
+## 6. The Complete 6-Phase Production & Delivery Lifecycle
+
+A build does not terminate when the last UI feature is checked off. Every production build plan must guide the application across the complete, battle-tested agency and engineering lifecycle:
+
+```
+[Phase 1: Discovery & Context Architecture]
+  • Audience Demographic & Tech Literacy Audit
+  • Jakob's Law Familiar Market Pattern Mapping
+  • Design Tokens & CSS Variable Single-Knob Setup
+                 │
+                 ▼
+[Phase 2: Upfront Foundation (The Shell)]
+  • Core Dependencies & Package Installation
+  • globals.css Font Cascade & Fallback Verification
+  • Master App Shell (Header/Navbar, Sidebar, Footer, Root Error Boundary)
+                 │
+                 ▼
+[Phase 3: Methodical Layered Sprints (Working Software)]
+  • Vertical Slices (UI + Working Interactive Handlers + Live Seed Data)
+  • Mandatory Stop & Testing Gate after EVERY Feature
+                 │
+                 ▼
+[Phase 4: Production Hardening & Security Audit]
+  • Core Web Vitals Optimization (LCP < 2.5s, INP < 150ms, CLS < 0.05)
+  • Zero-Trust Ownership & OWASP Security Sweep
+  • Production Environment Variable Sanitization (.env.production)
+                 │
+                 ▼
+[Phase 5: Brand Launch & Live Production Cutover]
+  • Deterministic Production Build Verification (`npm run build`)
+  • Custom Domain, DNS, SSL & CDN Edge Configuration
+  • OpenGraph Social Cards & Brand Meta Tags
+                 │
+                 ▼
+[Phase 6: Formal Handover, Vault & Post-Launch Operations]
+  • GitHub Repository Ownership Transfer
+  • 1Password / Bitwarden Infrastructure Vault Transfer
+  • Non-Technical Client Admin Video Walkthrough
+  • Live Sentry / Uptime Telemetry & 30-Day Warranty Tracking Log
+```
+
 
