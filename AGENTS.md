@@ -57,15 +57,28 @@ Lock in what's expensive to change later: stack fit (traffic, team size = solo, 
    - **Phase 6: Formal Handover, Vault & Post-Launch Ops** — GitHub transfer, 1Password/Bitwarden vault, non-technical Loom admin guide, Sentry live telemetry, 30-day warranty log.
 8. **progress-tracker.md** — phase/status table tied to the 6 phases above; a **Decisions Made During Build** log; a Notes section.
 
-If a request is genuinely ambiguous even after drafting these — ask. Don't silently pick an interpretation.
+### The Zero-Assumption Clarification Protocol (Anti-Guessing Law)
+- **The agent must NEVER assume what it is to be doing**. If a request, feature requirement, or data model is ambiguous, unstated, or has multiple valid interpretations, **STOP IMMEDIATELY**.
+- Invoke the **Clarification Gate**: present the ambiguity, provide concrete options with trade-offs, and wait for human confirmation. Never silently pick an interpretation.
+
+### The 100% Detail Ingestion & Traceability Matrix (Anti-Information-Loss Standard)
+- Before writing code or specs, dissect the user's prompt into an explicit, numbered **Requirement Ingestion Matrix** (`D-1`, `D-2`, etc.).
+- High-level summaries must never dilute or drop granular user requirements. Every single explained detail must map 1:1 to an implementation target and a testable acceptance criterion (`AC-1`, `AC-2`).
 
 ---
 
 ## Gate 2 — Build (while writing each feature)
 
-Seven lenses, every feature that touches input/data/rendering. Default to checking, not skipping.
+Eight lenses, every feature that touches input/data/rendering. Default to checking, not skipping.
 
-### 1. Agile Working Software & Methodical Layering (Primary Measure of Progress)
+### 1. Non-Destructive Surgical Modification & Blast-Radius Lock (Anti-Regression Law)
+- **Mandatory Blast-Radius Declaration**: Before modifying any existing code, explicitly declare:
+  1. **Target Blast Radius**: Exact files, functions, and lines to be edited.
+  2. **Protected Working Surface ("DO NOT TOUCH")**: Exact existing features, state hooks, props, and UI sections that are working and must remain 100% untouched.
+- **Strict Ban on Wholesale File Rewrites**: When modifying an existing feature, the agent must NEVER re-generate or overwrite entire files from scratch. Use surgical block edits only.
+- **Zero Collateral Regressions**: Modifying an existing feature must NEVER break or remove previously working features. Rebuilding previously working code due to agent carelessness is an architectural defect. Preserve all existing props, exports, and styles.
+
+### 2. Agile Working Software & Methodical Layering (Primary Measure of Progress)
 - **Foundations Upfront**: Always build dependencies, tokens, and the master App Shell upfront before feature modules.
 - **Vertical Slices Only**: Every feature must be an end-to-end working slice (UI presentation + interactive state handlers + live seed data + 5 screen states). No disconnected horizontal mock islands.
 - **The Stop & Test Gate**: The agent is strictly forbidden from building multiple features in one pass. It must stop after each feature, output the Feature Verification Card, and await test confirmation.
@@ -112,18 +125,25 @@ Seven lenses, every feature that touches input/data/rendering. Default to checki
 - Targets: **LCP < 2.5s, INP < 200ms, CLS < 0.1.**
 - **Low-bandwidth resilience**: ensure fast initial render on 50–400kbps connections.
 
-### The Post-Build Testing Handoff Protocol
+### The Post-Build Testing & Verification Lifecycle (`/test`, `/check`, `/sync`)
+- **Automated Test Generation (`/test`)**: Immediately upon implementing code changes, run `/test` to inspect uncommitted git diffs, classify files (component, page, api, logic, cli), and generate unit/integration test suites matching numbered acceptance criteria.
 - Prioritize: business logic with branches (pricing, permissions), anything touching money/auth/personal data, anything that's already been fixed once (add the regression test), API endpoints (happy path + invalid input + unauthorized access).
 - Don't force tests on pure layout/no-logic components or auto-generated boilerplate.
 - Every async operation has three states — confirm all three are handled: loading (something visible, not blank/stale), error (specific user-facing message, not a console error), empty (deliberate empty state, not a broken-looking blank list).
+- **Runtime Proof (`/check verify`)**: Drives the live application to verify all numbered acceptance criteria in runtime mode.
+- **Pre-Merge Review (`/check review` or `/review`)**: Inspects the git diff, auditing security (BOLA/IDOR), token compliance, typography quarantine, and copywriting.
 - **The Post-Build Testing Handoff Invariant**: Immediately upon finishing any feature build and running `/imprint`, the agent MUST output the **Feature Verification & Testing Handoff Card** containing:
   1. **What was built**: Exactly what components, state handlers, and live/seed data were created or wired.
   2. **What is working right now**: Concrete interactive capabilities testable in production mode.
-  3. **What to look out for**: Layout hierarchy, the 5 screen states (Default, Loading, Empty, Error, Edge Cases), plain-English human copy (zero leaked plumbing), typography integrity (zero monospace leaks), and 375px mobile responsiveness.
-  4. **Exactly what to test**: A deterministic 3-to-4 step test script (route, action, expected outcome, error/network check).
-  5. **The Rule of Thumb Decision Gate**:
+  3. **Captured Details Verification Matrix**: 100% prompt detail ingestion check (`D-1`, `D-2`, etc.) mapped to implementation files and verified status.
+  4. **Non-Destructive Blast-Radius Audit**: Declared blast radius, Protected Working Surface ("DO NOT TOUCH") verified untouched, and regression check confirming zero broken pre-existing features.
+  5. **What to look out for**: Layout hierarchy, the 5 screen states (Default, Loading, Empty, Error, Edge Cases), plain-English human copy (zero leaked plumbing), typography integrity (zero monospace leaks), and 375px mobile responsiveness.
+  6. **Exactly what to test**: A deterministic 3-to-4 step test script (route, action, expected outcome, error/network check).
+  7. **The Rule of Thumb Decision Gate**:
      > *"Would you like me to test this for you right now (via browser subagent / terminal automation), or will you test this manually?"*
-  6. The feature enters `VERIFYING` state. Only after a verified PASS (agent or human) is it marked `COMPLETED` in `progress-tracker.md` and appended to `memory.md`. If a test fails, trigger `/recover` immediately.
+  8. The feature enters `VERIFYING` state. Only after a verified PASS (agent or human) is it marked `COMPLETED` in `progress-tracker.md` and appended to `memory.md`. If a test fails, trigger `/recover` immediately.
+- **Post-Merge Context Sync (`/sync`)**: After merge, run `/sync` to perform single-line reconciliations of `progress-tracker.md`, advance spec statuses to `Accepted`, and surface any unratified `Assumed` specs. Run `/document pr` to draft clean PR bodies.
+
 
 ### Destructive actions — standing rule, not optional
 Dropping a table, deleting a production DB/bucket, force-pushing, overwriting production `.env`, running a migration against live data: **stop for an explicit, separate confirmation every time** — even mid-session, even if the broader task was approved, even if the plan seems obviously correct. Approval of a feature is not approval to delete data to build it. This is the one mistake category here that can't be fixed with a follow-up commit.

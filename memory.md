@@ -248,5 +248,62 @@
   - `C:\Users\user\Desktop\My DevOp Tools\AGENTS.md`
   - `C:\Users\user\Desktop\My DevOp Tools\.ai-memory\phase-log.md`
 
+---
+
+## Session Checkpoint: Non-Destructive Blast-Radius, Zero-Assumption & 100% Detail Ingestion Protocol (2026-10-13T03:30:00+01:00)
+
+### 1. Work Completed This Session
+
+1. **The Non-Destructive Surgical Modification & Blast-Radius Law Enforced**:
+   - Eliminated collateral damage and working code breakage during feature changes.
+   - Enforced **Target Blast Radius** declaration and explicit **Protected Working Surface ("DO NOT TOUCH")** inventory before touching any code.
+   - Strictly banned wholesale file rewrites in favor of surgical block diffs.
+   - Added anti-regression checks to `/check review` and the Post-Build Verification Card.
+
+2. **The Zero-Assumption Clarification Protocol (Anti-Guessing Law)**:
+   - Enforced that agents must NEVER assume what they are supposed to be doing.
+   - Institutionalized the **Clarification Gate**: whenever a requirement or edge case is ambiguous, the agent must halt and ask the user with concrete options before writing code.
+   - Strictly prohibited silent, unratified assumptions.
+
+3. **The 100% Detail Ingestion & Traceability Matrix (Anti-Information-Loss Standard)**:
+   - Enforced systematic prompt decomposition into a numbered **Requirement Ingestion Matrix** (`D-1`, `D-2`, etc.) before design or coding.
+   - Omission or lossy summarization of granular user constraints is strictly banned.
+   - Added the **Captured Details Verification Matrix** to the Post-Build Verification Card and `/check review`.
+
+4. **Upgraded Core Standards & Skills**:
+   - Upgraded: `GLOBAL_AGENTS_STANDARD.md`, `05-Global-IDE-Master-Rule/GLOBAL_IDE_MASTER_RULE.md`, `AGENTS.md` (root and `02-Standard-Solid-Flow`).
+   - Upgraded skills: `/architect` (`skills/architect/SKILL.md`), `/check` (`skills/check/SKILL.md`), and `/recover` (`skills/recover/SKILL.md`).
+   - Ran `sync-skills.ps1` to synchronize all 13 skills across Antigravity IDE (`.gemini/config/skills`), Claude Code, Cursor, and Windsurf.
+
+---
+
+### 2. Architectural Invariants & Rules Locked
+
+1. **Non-Destructive Blast-Radius Invariant**: Never touch or break what is working. Declare blast radius and protected working surface upfront. Zero wholesale file rewrites.
+2. **Zero-Assumption Invariant**: Never guess user intent. If in doubt, halt and trigger the Clarification Gate.
+3. **100% Detail Ingestion Invariant**: Dissect user prompts 1:1 into a numbered matrix. Reconcile every detail in the verification card before marking complete.
+
+---
+
+### 3. Immediate Backlog & Pending Tasks
+
+- [x] Institutionalize the 3 laws in `GLOBAL_AGENTS_STANDARD.md` and `GLOBAL_IDE_MASTER_RULE.md`.
+- [x] Institutionalize in `AGENTS.md` across root and Tier 2 flows.
+- [x] Update `/architect`, `/check`, and `/recover` skills.
+- [x] Synchronize via `sync-skills.ps1` across all IDE platforms.
+- [ ] Commit and push updated standards to Git repository (`Adebayo0001/my-devop-tools`).
+
+---
+
+### 4. Cold Resumption Prompt & Exact Next Step
+
+- **Primary Repository**: `C:\Users\user\Desktop\My DevOp Tools`
+- **Immediate Next Action**: Commit and push changes to remote or apply the newly locked standards to active project features.
+- **Key Files for Resumption**:
+  - `C:\Users\user\Desktop\My DevOp Tools\GLOBAL_AGENTS_STANDARD.md`
+  - `C:\Users\user\Desktop\My DevOp Tools\AGENTS.md`
+  - `C:\Users\user\Desktop\My DevOp Tools\skills\architect\SKILL.md`
+
+
 
 

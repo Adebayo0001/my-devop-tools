@@ -17,6 +17,8 @@ Invoke with `/recover` immediately when an unexpected error occurs and **one cor
 2. **Inspect the Git Baseline**: Before diagnosing, inspect `git status` and `git diff` to understand what was touched in the failed attempt. Never let speculative edits linger.
 3. **No Hallucinated Diagnoses**: If logs, terminal outputs, or stack traces are ambiguous, state the missing data and ask for it. Never present a guess as a diagnosis.
 4. **Mandatory Regression Shield**: Every bug resolved via `/recover` must result in a regression test or an explicit manual QA reproduction step to guarantee it cannot be reintroduced.
+5. **Strict Blast Radius Lock & Ban on File Rewrites**: Fixes must be surgical, localized block edits. Wholesale file rewrites or modifying files outside the immediate failure path is strictly prohibited.
+6. **Preservation of Working Features**: Never rebuild what is already working. Preserve all surrounding functioning components, props, hooks, and styles untouched.
 
 ---
 

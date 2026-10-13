@@ -122,14 +122,18 @@ try {
 }
 
 Write-Host '==========================================================' -ForegroundColor Cyan
-Write-Host ' All 9 skills successfully synchronized across your AI IDEs!' -ForegroundColor Cyan
+Write-Host ' All 13 skills successfully synchronized across your AI IDEs!' -ForegroundColor Cyan
 Write-Host '  1. /kickoff                  (Discovery, UX research, 4-tier context generator)' -ForegroundColor White
 Write-Host '  2. /intake                   (Tier 4 codebase audit and live site redesign)' -ForegroundColor White
-Write-Host '  3. /architect                (Spec-first blueprint, Atomic decomposition, APM)' -ForegroundColor White
+Write-Host '  3. /architect                (Spec-first blueprint, Atomic decomposition, persistent specs)' -ForegroundColor White
 Write-Host '  4. /imprint                  (Living UI registry compiler and token check)' -ForegroundColor White
-Write-Host '  5. /review                   (QA, zero-trust security and observability gate)' -ForegroundColor White
-Write-Host '  6. /recover                  (Circuit breaker on 1st failed bugfix)' -ForegroundColor White
-Write-Host '  7. /remember                 (Cold session persistence to memory.md)' -ForegroundColor White
-Write-Host '  8. /broadcast                (Proof-of-work 4 daily posts generator)' -ForegroundColor White
-Write-Host '  9. adebayo-authority-engine  (Positioning, commercial offers and voice rules)' -ForegroundColor White
+Write-Host '  5. /test                     (Autonomous git-diff test generator & classifier)' -ForegroundColor White
+Write-Host '  6. /check                    (Dual-mode runtime verification & code review gate)' -ForegroundColor White
+Write-Host '  7. /review                   (QA, zero-trust security and observability release gate)' -ForegroundColor White
+Write-Host '  8. /document                 (Grounded technical writer: PRs, changelog, releases, postmortems)' -ForegroundColor White
+Write-Host '  9. /sync                     (Post-merge progress tracker & spec status synchronizer)' -ForegroundColor White
+Write-Host ' 10. /recover                  (Circuit breaker on 1st failed bugfix & 3-tier RCA)' -ForegroundColor White
+Write-Host ' 11. /remember                 (Cold session persistence to memory.md)' -ForegroundColor White
+Write-Host ' 12. /broadcast                (Proof-of-work authority marketing & case studies)' -ForegroundColor White
+Write-Host ' 13. adebayo-authority-engine  (Positioning, commercial offers and voice rules)' -ForegroundColor White
 Write-Host '==========================================================' -ForegroundColor Cyan

@@ -36,6 +36,19 @@
   - Modifying a single color variable in `globals.css` must cascade instantaneously and update every Atom, Molecule, and Organism across the entire codebase—mirroring a live Figma Tokens API / webhook code updater. Hardcoded hex values or unmapped Tailwind utility colors (`bg-blue-600`) are strictly banned.
 * **SPRINT DESIGN SYSTEM IMMUTABILITY**:
   - When building newly requested sprint features not in the initial overview, the agent must preserve the established design system automatically without manual prompting. The agent is strictly constrained to construct new features by assembling existing Atoms and Molecules from `context/ui-registry.md`.
+* **THE NON-DESTRUCTIVE SURGICAL MODIFICATION & BLAST-RADIUS LAW**:
+  - Before modifying, fixing, or extending any existing feature, the agent MUST explicitly declare: (1) **Target Blast Radius** (exact files and functions to modify), and (2) **Protected Working Surface ("DO NOT TOUCH")** (exact existing features and components that must remain completely untouched).
+  - The agent is strictly forbidden from touching any file outside the declared blast radius.
+  - Wholesale file rewrites are strictly banned: all modifications must be surgical, localized block edits.
+  - Zero collateral regressions: modifying a feature must NEVER break, remove, or degrade existing working code. Rebuilding previously working code due to agent carelessness is an architectural defect.
+* **THE ZERO-ASSUMPTION CLARIFICATION PROTOCOL (ANTI-GUESSING LAW)**:
+  - The agent must **NEVER** guess or assume what it is supposed to be doing.
+  - If a requirement is ambiguous, unstated, or has multiple technical paths, the agent MUST STOP IMMEDIATELY and invoke the Clarification Gate: ask the user directly with concrete, structured options before touching code.
+  - Ban silent assumptions: any provisional assumption must be explicitly surfaced in an Assumptions Table for human ratification.
+* **THE 100% DETAIL INGESTION & TRACEABILITY MATRIX**:
+  - The agent must systematically decompose every user prompt into a numbered **Requirement Ingestion Matrix** (`D-1`, `D-2`, etc.) before coding.
+  - Zero dropped details: every single constraint, nuance, and edge case explained by the user must be mapped 1:1 to an implementation location and testable acceptance criterion (`AC-1`, `AC-2`).
+  - Handoff reconciliation: every feature completion must explicitly verify that 100% of user details were captured and implemented without omission.
 * **ZERO-PLACEHOLDER GUARANTEE**: Production code must contain ZERO `// TODO`, ZERO empty try/catch blocks, and ZERO mock data presented as complete.
 
 ---
@@ -105,6 +118,17 @@ The agent MUST output the structured **Feature Verification & Testing Handoff Ca
 - **Human Copywriting & Plain English**: [Zero leaked plumbing, zero AI slop, 12-year-old test passed]
 - **Typography Integrity**: [Zero monospace leaks; brand font loaded cleanly]
 - **Mobile Responsiveness (375px Floor)**: [Touch targets ≥44px, drawer collapse, 0 horizontal scroll]
+
+#### 📋 Captured Details Verification Matrix (100% Detail Ingestion Check):
+| Detail # | User-Explained Detail / Constraint | Implementation Location | Verification Method & Status |
+|---|---|---|---|
+| **D-1** | [Verbatim user requirement/constraint] | [File / Component / Handler] | [Test condition passed] |
+| **D-2** | [Specific business rule or edge case] | [File / Component / Handler] | [Test condition passed] |
+
+#### 🛡️ Non-Destructive Blast-Radius & Anti-Regression Audit:
+- **Declared Blast Radius**: [Exact files, functions, and lines modified]
+- **Protected Working Surface ("DO NOT TOUCH")**: [List of pre-existing working features verified 100% untouched]
+- **Regression Check**: [Confirmed zero wholesale file rewrites; all edits were surgical; zero previously working features broken]
 
 #### 🎯 Exactly What to Test (Step-by-Step Script):
 1. **Step 1 [Navigate & Mount]**: Navigate to `[Target Route / URL]`. Confirm `[Initial visual rendering & focal point]`.

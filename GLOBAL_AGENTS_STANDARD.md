@@ -124,6 +124,40 @@ The same architectural rigor applies universally across all target media and pla
 4. **Interactive 3D / WebGL / Canvas**: Scene graph hierarchy, asset bundle loading pipelines, material/shader token registries, and 60 FPS frame-time budgets (<16.6ms).
 5. **Games & Simulations**: Deterministic tick loops (fixed physics step vs variable render), Entity-Component Systems (ECS), finite state machines, input buffering, and zero garbage-collection stutter.
 
+### The Non-Destructive Surgical Modification & Blast-Radius Law (Anti-Regression Guarantee)
+* **THE BLAST-RADIUS DECLARATION BEFORE ANY EDIT**:
+  - Before touching, modifying, or refactoring any existing feature or file, the agent MUST explicitly declare:
+    1. **Target Blast Radius**: Exact list of files, functions, and lines to be modified.
+    2. **Protected Working Surface ("DO NOT TOUCH" Inventory)**: Explicit list of existing working features, components, state handlers, routes, and endpoints that must remain 100% untouched.
+  - The agent is **strictly forbidden** from touching any file, component, or code block outside the declared blast radius.
+* **STRICT BAN ON WHOLESALE FILE REWRITES**:
+  - When updating existing code, the agent must NEVER re-generate or overwrite entire files from scratch.
+  - All modifications must be surgical, localized block diffs targeting only the precise lines required.
+* **ZERO COLLATERAL REGRESSIONS (NEVER REBUILD WORKING CODE)**:
+  - Modifying an existing feature must NEVER break, delete, or degrade previously working features. Rebuilding a previously built feature because an agent touched unrequested code is an architectural defect.
+  - Preserve all existing component props, exported interfaces, styling tokens, error boundaries, and state mechanisms unless the user explicitly requested their alteration.
+
+### The Zero-Assumption Clarification Protocol (Anti-Guessing Law)
+* **NEVER ASSUME USER INTENT**:
+  - The agent must **NEVER** guess or assume what it is supposed to be doing. 
+  - If a prompt or requirement is ambiguous, incomplete, underspecified, or has multiple valid technical interpretations, the agent MUST STOP IMMEDIATELY and invoke the **Clarification Gate**.
+* **THE CLARIFICATION GATE**:
+  - Present the exact ambiguity or decision point in plain English.
+  - Provide structured, concrete options with technical trade-offs.
+  - Await explicit human choice before writing or editing a single line of code.
+* **STRICT BAN ON SILENT ASSUMPTIONS**:
+  - Never make quiet decisions in model memory. If a minor implementation detail must be provisionally assumed during discovery, it must be prominently highlighted in an **Assumptions Requiring Ratification Table** and confirmed with the builder.
+
+### The 100% Detail Ingestion & Traceability Matrix (Anti-Information-Loss Standard)
+* **MANDATORY PROMPT DECOMPOSITION**:
+  - Before drafting a plan or editing code, the agent must systematically parse every sentence, nuance, edge case, and constraint from the user's prompt into an explicit, numbered **Requirement Ingestion Matrix** (`D-1`, `D-2`, `D-3`, etc.).
+* **ZERO DROPPED DETAILS (ANTI-LOSSY SUMMARIZATION)**:
+  - High-level summaries may NEVER omit or dilute granular instructions provided by the user. Every explained detail must be mapped 1:1 to:
+    1. An exact target implementation file and function.
+    2. A numbered acceptance criterion (`AC-1`, `AC-2`).
+* **TRACEABILITY RECONCILIATION**:
+  - Every completed feature must reconcile against the Requirement Ingestion Matrix in the post-build verification card, proving that 100% of the user's explained details were captured, built, and verified.
+
 ### Zero-Placeholder Guarantee
 * All code delivered must be production-ready:
   - ZERO `// TODO: finish this`
@@ -206,6 +240,17 @@ Every completed feature must conclude with this exact format:
 - **Typography Integrity**: [Zero monospace leaks; brand font loaded cleanly]
 - **Mobile Responsiveness (375px Floor)**: [Touch targets ≥44px, drawer collapse, 0 horizontal scroll]
 
+#### 📋 Captured Details Verification Matrix (100% Detail Ingestion Check):
+| Detail # | User-Explained Detail / Constraint | Implementation Location | Verification Method & Status |
+|---|---|---|---|
+| **D-1** | [Verbatim user requirement/constraint] | [File / Component / Handler] | [Test condition passed] |
+| **D-2** | [Specific business rule or edge case] | [File / Component / Handler] | [Test condition passed] |
+
+#### 🛡️ Non-Destructive Blast-Radius & Anti-Regression Audit:
+- **Declared Blast Radius**: [Exact files, functions, and lines modified]
+- **Protected Working Surface ("DO NOT TOUCH")**: [List of pre-existing working features and components verified 100% untouched]
+- **Regression Check**: [Confirmed zero wholesale file rewrites; all edits were surgical; zero previously working features broken]
+
 #### 🎯 Exactly What to Test (Step-by-Step Script):
 1. **Step 1 [Navigate & Mount]**: Navigate to `[Target Route / URL]`. Confirm `[Initial visual rendering & focal point]`.
 2. **Step 2 [Trigger & Action]**: Perform `[Action: click button, enter input, submit form, change filter]`.
@@ -260,5 +305,51 @@ A build does not terminate when the last UI feature is checked off. Every produc
   • Non-Technical Client Admin Video Walkthrough
   • Live Sentry / Uptime Telemetry & 30-Day Warranty Tracking Log
 ```
+
+---
+
+## 7. The Unified DevOps Skills Suite & Lifecycle Loop
+
+To ensure absolute engineering rigor and zero spec drift from discovery to merge, every workflow leverages the complete, interlocked DevOps Skills Suite:
+
+```
+[Discovery & Architecture]
+  /kickoff ──► /architect (Writes docs/specs/ with Numbered Acceptance Criteria)
+                    │
+                    ▼
+[Vertical Slice Construction]
+  Build Vertical Slice ──► /imprint (Registers Atoms & Molecules in context/ui-registry.md)
+                                 │
+                                 ▼
+[Automated Testing & Runtime Proof]
+  /test (Generates test suite from git diff) ──► /check verify (Runtime proof against Acceptance Criteria)
+                                                       │
+                                                       ▼
+[Release Gate & Human Documentation]
+  /check review (or /review P0/P1/P2 audit) ──► /document pr (Generates PR / changelog / release notes)
+                                                       │
+                                                       ▼
+[Post-Merge Reconciliation]
+  /sync (Reconciles progress-tracker.md & marks specs Accepted) ──► /remember (Incremental memory log)
+```
+
+### The Master Skills Registry
+
+| Skill | Command | Artifact Owned | Core Responsibility |
+|---|---|---|---|
+| **Kickoff** | `/kickoff` | `context/*.md` | Universal tier calibration (Tier 1–4), UX secondary research, Jakob's Law mapping, brand discovery, and context compilation. |
+| **Architect** | `/architect` | `docs/specs/` | Load-bearing technical decision maker. Writes persistent specs with numbered acceptance criteria (`AC-1`, `AC-2`), ratifies `Assumed` specs, and offers cross-model critique. |
+| **Imprint** | `/imprint` | `context/ui-registry.md` | UI component registry lock. Classifies components into Atoms, Molecules, and Organisms; audits design tokens; prevents UI fragmentation. |
+| **Test** | `/test` | `*.test.ts`, `test-preferences.json` | Autonomous test engineer. Scopes uncommitted git diffs, classifies files (component, page, api, logic, cli), and authors test suites tied to acceptance criteria. |
+| **Check** | `/check` | `docs/reviews/` | Pre-merge dual-mode gate: `/check verify` drives runtime app behavior against acceptance criteria; `/check review` audits diffs for security, tokens, and anti-slop rules. |
+| **Review** | `/review` | Terminal CI & Defect Report | Final release gate executing `tsc --noEmit`, `npm run build`, secret scans, BOLA/IDOR checks, and prioritized P0/P1/P2 defect reporting. |
+| **Document** | `/document` | `CHANGELOG.md`, `docs/releases/`, PRs | Grounded technical writer. Drafts PR descriptions, changelog entries, user release notes, and incident postmortems from real git commits. |
+| **Sync** | `/sync` | `context/progress-tracker.md`, specs | Post-merge context reconciler. Performs surgical single-line updates to progress tracker and spec statuses based strictly on repo evidence. |
+| **Recover** | `/recover` | Surgical Modification Contract | SRE circuit breaker triggered after ONE failed patch. Inspects git baseline, classifies failure across 3 tiers, and enforces surgical fix. |
+| **Remember** | `/remember` | `memory.md`, `phase-log.md` | Multi-session state persistence. Append-only, incremental update logging previous milestones, decisions, and active work without overwriting. |
+| **Intake** | `/intake` | Forensic Audit & Logic Spec | Tier 4 protocol for messy AI codebases. Imposes logic freeze, audits technical debt, and migrates styling to shadcn/Radix tokens. |
+| **Broadcast** | `/broadcast` | Case Studies & Content | Authority marketing engine. Converts completed features and architectural lessons into proof-of-work case studies and thought leadership. |
+| **Authority** | `/adebayo-authority-engine` | Positioning & MVP Offers | Encapsulates Adebayo's AI Architect positioning, $5k–$12k MVP offers, and high-ticket client engagement frameworks. |
+
 
 
