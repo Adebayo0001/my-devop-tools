@@ -81,6 +81,10 @@ Audit the diff across 7 mandatory categories:
    - Are UI components composed from registered Atoms and Molecules from `context/ui-registry.md`?
    - Do all styles consume CSS variables in `globals.css`? Zero hardcoded `#hex` colors or unmapped utilities.
    - Core Web Vitals checks: images sized, zero unbounded lists, clean mobile collapse at 375px.
+8. **Dev Harness Quarantine & Production Surface Cleanliness (P0 Gate)**:
+   - Are public navigation bars (`HeaderNav` `navItems`) completely free of test harnesses, token inspectors (`/test-tokens`), or crash simulators?
+   - Is the root landing page (`app/page.tsx` or `/`) strictly delivering the authentic customer value proposition rather than engineering launcher buttons (*"Open Shell"*, *"Inspect Tokens"*) or internal infrastructure specs?
+   - Are all developer harnesses strictly isolated under non-production routes (e.g. `app/(dev)/_workbench/...`) or automated test suites?
 
 ### 3. Deliver Prioritized Review Report
 Deliver findings structured into standard severity tiers:
@@ -89,7 +93,7 @@ Deliver findings structured into standard severity tiers:
 ### 🛡️ Check Review Report: [Feature Name]
 
 #### 🔴 P0 — Release Blockers (Must fix before merge)
-- [Accidental regressions, collateral damage to previously working code, unauthorized blast-radius expansion, security vulnerabilities, BOLA holes, build failures]
+- [Dev harness or test routes leaking into HeaderNav or root landing page, accidental regressions, collateral damage to previously working code, unauthorized blast-radius expansion, security vulnerabilities, BOLA holes, build failures]
 
 #### 🟡 P1 — Critical Quality & Standards (High priority)
 - [Omitted prompt details from Requirement Ingestion Matrix, monospace leaks, unmapped hex codes, leaked internal plumbing copy, missing Sentry PII scrubbing, N+1 query risks]

@@ -103,8 +103,33 @@ If any required context file is missing or out of date, **halt and request or dr
 ### 14. Agile Working Software Invariant (Upfront Foundation + Methodical Layered Slices)
 * **Working software is the primary measure of progress**.
 * **Upfront Foundation First**: Dependencies, packages, `globals.css` design tokens, and the Master App Shell (Header/Navbar, Sidebar, Footer, Root Error Boundary) are built upfront before individual features.
+* **DEV HARNESS QUARANTINE & PRODUCTION SURFACE INTEGRITY (ANTI-HARNESS-LEAK LAW)**:
+  - Internal developer test harnesses, token inspectors (`/test-tokens`), component variant showcases (`/shell-preview`), crash simulators, and mock launchers must **NEVER** enter shared production navigation bars (`HeaderNav` `navItems`), the public root landing page (`app/page.tsx` or `/`), or customer product views.
+  - All developer verification harnesses must be isolated under dedicated non-production routes (e.g. `app/(dev)/_workbench/...` or `app/(dev)/_tokens/...`) or automated test suites (`/test`), completely detached from public sitemaps and navigation menus.
+  - The root home page (`app/page.tsx` or `/`) is the sacred public front door. It must strictly render the customer landing page or authentic product entrypoint defined in `project-overview.md` and `user-flows.md`. Overwriting the root page with buttons like *"Open Shell"* or *"Inspect Design Tokens"* is an architectural defect.
+  - Zero framework plumbing in public UI: footers and public copy must never display internal framework specifications (e.g., *"Governed by Tier 3 Advanced SaaS Invariants"* or database architecture specs).
 * **Methodical Layered Slices**: Features are built methodically, layer upon layer, directly connecting into the App Shell. Every feature must be a complete **Vertical Slice** (UI presentation + interactive handlers + 5 states + live/seed data).
 * **The Stop & Test Gate**: After each feature is built, the agent **STOPS COLD**, outputs the Feature Verification Card, and awaits verified test confirmation before moving forward.
+
+### 15. The Mandatory Pre-Flight Grounding Mandate (Anti-Blind-Coding Law)
+* Before an agent calls ANY code-modifying tool (`write_to_file`, `replace_file_content`, `multi_replace_file_content`), the agent **MUST prove it has read the project's rules and active context**.
+* The agent must output the **Pre-Flight Grounding Card** before generating code diffs:
+  1. **3 Governing Invariants Cited**: Exact 3 rules from `AGENTS.md` governing this build step.
+  2. **Target Blast Radius**: Exact files, functions, and lines to modify.
+  3. **Protected Working Surface ("DO NOT TOUCH")**: Pre-existing working features and routes to remain 100% untouched.
+  4. **Dev Quarantine Verification**: Confirmation that no test harness, token inspector, or developer launcher is leaking into `HeaderNav` or public routes.
+* Calling code-writing tools without outputting this Pre-Flight Grounding Card is an **automatic architectural defect**.
+
+### 16. The Mandatory `.agents/` Root Architecture & Multi-IDE Discovery Shim
+* In every project repository root, there must ALWAYS be a `.agents/` directory:
+  - `.agents/rules/` containing `AGENTS.md` (or `.agents/AGENTS.md` / `GEMINI.md`).
+  - `.agents/skills/` for local project-level skills.
+* Every project root must maintain native discovery shims linking or mirroring `AGENTS.md`:
+  - `AGENTS.md` — Canonical standards.
+  - `CLAUDE.md` — Native for Claude Code (contains `@AGENTS.md` reference + core pre-flight instructions).
+  - `.cursorrules` — Native for Cursor (forces Cursor to load `AGENTS.md` into prompt context).
+  - `.windsurfrules` — Native for Windsurf.
+  - `GEMINI.md` — Native for Antigravity IDE.
 
 ---
 

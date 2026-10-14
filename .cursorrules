@@ -1,0 +1,18 @@
+# Cursor Rules — Master Invariants for My DevOp Tools
+
+You must read and strictly obey `AGENTS.md` and `.agents/rules/AGENTS.md` before taking any action.
+
+## Mandatory Pre-Flight Grounding Mandate
+Before creating or modifying code:
+1. Cite the 3 governing invariants from `AGENTS.md`.
+2. Declare Target Blast Radius and Protected Working Surface ("DO NOT TOUCH").
+3. Verify that developer test harnesses remain strictly quarantined and NEVER leak into customer navigation or `app/page.tsx`.
+
+## Dev Harness Quarantine Law
+- Public navigation must contain ONLY customer routes.
+- `app/page.tsx` is the sacred customer landing page—never a developer launcher.
+- Test harnesses (`/test-tokens`, `/shell-preview`) must be quarantined under `app/(dev)/_workbench/...` or test suites.
+
+## Mandatory `.agents/` Architecture
+- Every project root must maintain `.agents/rules/` containing `AGENTS.md` and `GEMINI.md`.
+- Every project root must maintain multi-IDE discovery shims (`CLAUDE.md`, `.cursorrules`, `.windsurfrules`, `GEMINI.md`).

@@ -45,6 +45,14 @@ These rules apply unconditionally across every tier, project, and file:
   - In accordance with the Agile Manifesto, progress is measured **only** by working, testable software that brings value to the user—not by isolated mockups or lines of code.
 * **UPFRONT FOUNDATION (THE SHELL) FIRST**:
   - Dependencies, package installation, design tokens in `globals.css`, and the Master App Shell (Header/Navbar, Sidebar, Footer, root Error Boundary, route structure) are built upfront before individual features are constructed.
+* **DEV HARNESS QUARANTINE & PRODUCTION SURFACE INTEGRITY (ANTI-HARNESS-LEAK LAW)**:
+  - **Zero Test Harness Leakage**: Internal developer test harnesses, token inspectors (`/test-tokens`), component variant galleries (`/shell-preview`), crash simulators, and mock launchers must **NEVER** enter:
+    1. Shared production navigation organisms (`HeaderNav` `navItems`).
+    2. The public root landing page (`app/page.tsx` or `/`).
+    3. Customer-facing product workspaces (e.g. Studio, Flyers, Invoices).
+  - **Strict Quarantine Routes**: All developer verification harnesses created during Phase 2 must be isolated under dedicated non-production routes (e.g. `app/(dev)/_workbench/...` or `app/(dev)/_tokens/...`) or automated test suites (`/test`), completely detached from public sitemaps and navigation menus.
+  - **The Sacred Root Entrypoint**: The root home page (`app/page.tsx` or `/`) is the public, client-facing front door of the product. It must strictly render the authentic customer landing page or application entrypoint as defined in `project-overview.md` and `user-flows.md`. Overwriting the root page with buttons like *"Open Shell"* or *"Inspect Design Tokens"* is an architectural defect.
+  - **Zero Leaked Framework Plumbing**: Public UI and footers must NEVER display internal framework specifications (e.g., *"Governed by Tier 3 Advanced SaaS Invariants"* or database architecture specs).
 * **METHODICAL LAYERED VERTICAL SLICES (ZERO ISOLATED PAGES)**:
   - Features must be built methodically, layer upon layer, directly connecting into the App Shell. No page or feature may ever be built as an isolated, disconnected mock island.
   - Every feature must be a complete **Vertical Slice**: UI presentation + real interactive handlers + 5 screen states (Default, Loading, Empty, Error, Edge Case) + seed/live data binding.
@@ -163,6 +171,30 @@ The same architectural rigor applies universally across all target media and pla
   - ZERO `// TODO: finish this`
   - ZERO unhandled exceptions or empty `catch` blocks
   - ZERO stubbed data silently presented as complete.
+
+### The Mandatory Pre-Flight Grounding Mandate (Anti-Blind-Coding Law)
+* **PROOF OF READING REQUIRED BEFORE ANY CODE MODIFICATION**:
+  - AI build agents have an inherent bias toward eager execution, frequently skipping `AGENTS.md` and jumping straight into writing code. This is **strictly prohibited**.
+  - Before an agent calls ANY code-modifying tool (`write_to_file`, `replace_file_content`, `multi_replace_file_content`), the agent **MUST prove it has read the project's rules and active context**.
+  - The agent must output the **Pre-Flight Grounding Card** before generating code diffs:
+    1. **3 Governing Invariants Cited**: The exact 3 rules from `AGENTS.md` that apply directly to this build step.
+    2. **Target Blast Radius**: Exact files, functions, and lines to be modified.
+    3. **Protected Working Surface ("DO NOT TOUCH")**: Pre-existing working features, props, and routes that must remain 100% untouched.
+    4. **Dev Quarantine Verification**: Confirmation that no test harness, token inspector, or developer launcher is leaking into `HeaderNav` or public routes.
+  - Calling code-writing tools without outputting this Pre-Flight Grounding Card is classified as an **automatic architectural defect**.
+
+### The Mandatory `.agents/` Root Architecture & Multi-IDE Discovery Shim
+* **EVERY PROJECT ROOT MUST CONTAIN `.agents/`**:
+  - In every project repository, there must ALWAYS be a `.agents/` directory in the root:
+    - `.agents/rules/` containing `AGENTS.md` (or `.agents/AGENTS.md` / `GEMINI.md`).
+    - `.agents/skills/` for local, project-level skills.
+* **THE MULTI-IDE DISCOVERY SHIM (UNIVERSAL INJECTION)**:
+  - Different AI coding IDEs use different native rule filenames. To guarantee that NO agent skips `AGENTS.md` regardless of the IDE used, every project root must maintain native discovery shims linking or mirroring `AGENTS.md`:
+    - `AGENTS.md` — Canonical standards.
+    - `CLAUDE.md` — Native for Claude Code (contains `@AGENTS.md` reference + core pre-flight instructions).
+    - `.cursorrules` — Native for Cursor (forces Cursor to load `AGENTS.md` into prompt context).
+    - `.windsurfrules` — Native for Windsurf.
+    - `GEMINI.md` — Native for Antigravity IDE.
 
 ---
 

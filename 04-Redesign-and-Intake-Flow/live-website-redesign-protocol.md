@@ -72,6 +72,11 @@ Apply human-centered Design Thinking to create a bespoke aesthetic that looks li
 
 Never attempt a blanket overhaul across the entire repository in one prompt. Reskin **layer-by-layer following Atomic Design**:
 
+* **The Mandatory Pre-Flight Grounding Mandate (Anti-Blind-Coding Law)**:
+  - Before modifying ANY code, the agent MUST output the Pre-Flight Grounding Card citing 3 governing invariants from this protocol, target blast radius, protected working surface ("DO NOT TOUCH"), and dev quarantine verification.
+* **DEV HARNESS QUARANTINE & PRODUCTION SURFACE INTEGRITY (ANTI-HARNESS-LEAK LAW)**:
+  - Internal preview harnesses or token testing pages must never be injected into shared customer navigation or public root routes. All harness testing must be isolated under non-production routes (`app/(dev)/_workbench/...`) or automated test suites.
+
 1. **Phase 3A: Reskin Atoms (Primitives)**:
    - Reskin base primitives (`Button`, `Input`, `Label`, `Checkbox`, `Dialog`, `DropdownMenu`) using official **shadcn/ui** components backed by **Radix UI**.
    - Verify every atom consumes the CSS variables from `globals.css`.

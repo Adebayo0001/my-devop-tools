@@ -118,3 +118,39 @@ Whenever you discover a stunning website, Dribbble shot, Behance case study, or 
 2. Follow the protocol in [`ingestion-protocol.md`](file:///c:/Users/user/Desktop/My%20DevOp%20Tools/design-vault/ingestion-protocol.md).
 3. The extraction engine generates a structured layout card in `archetypes/` or `figma-templates/`.
 4. The entire AI agent suite instantly incorporates that layout DNA into all future project prompts!
+
+---
+
+## 7. Master Visual Intelligence Engines (Consolidated Ecosystem)
+
+The Design Vault houses 8 advanced visual intelligence registries synthesized from world-class open-source design ecosystems:
+
+1. **Taste & Spatial Calculus Engine** (`taste-spatial-calculus.md`):
+   - The 8px modular spacing calculus (anti-uneven-space formulas).
+   - The 3 Master Taste Dials: *Design Variance*, *Visual Density*, and *Motion Intensity*.
+   - Typographic tension and 75-character reading constraints.
+2. **Motion & Animation Registry** (`motion-registry.md`):
+   - Spectrum UI 250+ animated components & Framer Motion physics curves.
+   - Micro-interactions: Magnetic buttons, border-beam glows, staggered reveals.
+   - Spectrum UI MCP server integration (`@spectrumui/mcp`).
+3. **Creative Onboarding & Intake Suite** (`archetypes/ONBOARD-CREATIVE-agency-flows.md`):
+   - High-agency conversational split-screens (45% driver, 55% live reactive preview).
+   - Dynamic morphing step cards with circular progress indicators.
+   - Interactive brand asset dropzones and palette synthesis stages.
+4. **Cursify Custom Cursor Registry** (`cursify-registry.md`):
+   - Smooth spring followers, neural glow spotlights, and magnetic cursors.
+   - Strict touch-screen quarantine (`@media (pointer: coarse)`).
+5. **Shaders & Ambient Canvas Surfaces** (`shaders-and-backgrounds.md`):
+   - Paper Shaders (`@paper-design/shaders-react`): Mesh gradients, animated dithering, dot orbits.
+   - Canvas UI WebGL fluid refractions layered over accessible DOM elements.
+6. **Archify Interactive AI Diagrams** (`diagrams-engine.md`):
+   - Validate-preview-deliver pipeline for interactive SVG/HTML architecture & sequence diagrams.
+   - Theme adaptability, node focusing, and trace-route signal flows.
+7. **Blocks.so & UI Layouts Registry** (`blocks-registry.md`):
+   - 80+ open-source Shadcn React blocks via `@blocks-so` remote registry.
+   - AI chat inputs, advanced sidebars, stats grids, and filter drawers.
+8. **Brand Design Systems & Zero-Runtime Animations**:
+   - `brand-design-systems.md`: Linear, Stripe, Vercel, Notion, Apple token systems.
+   - `trickle-css-animations.md`: Zero-runtime pure CSS text keyframes for React Server Components.
+   - `mdxcn-components.md`: 30+ Shadcn MDX content components.
+

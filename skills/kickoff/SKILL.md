@@ -173,7 +173,14 @@ Read the schema definitions from the selected Tier's context generation framewor
 - For Tier 3: `references/tier-3-advanced/advanced-context-framework.md`
 
 #### Files Generated:
-1. **Governing Rulebook**: Stamp `AGENTS.md` in the project root.
+1. **Governing Rulebooks & Native IDE Discovery Shims**:
+   - Create `.agents/` directory in the project root: `.agents/rules/AGENTS.md` and `.agents/skills/`.
+   - Stamp canonical `AGENTS.md` in the project root.
+   - Stamp native multi-IDE discovery shims in project root so NO agent ignores the rules regardless of which IDE is used:
+     - `CLAUDE.md` (Native for Claude Code: imports `@AGENTS.md` + pre-flight citation rule).
+     - `.cursorrules` (Native for Cursor: forces Cursor to load `AGENTS.md` into prompt context).
+     - `.windsurfrules` (Native for Windsurf).
+     - `GEMINI.md` (Native for Antigravity IDE).
 2. **Write Context Files into `context/`**:
    - `context/project-overview.md` (or `site-overview.md`): PRD, User Personas, Synthesized UX Research (JTBD, Pain Points, Verbatim Copy Quotes, Demographic & Tech Literacy Audit, Jakob's Law Market Patterns).
    - `context/architecture.md`: System topology, DB schemas, Sentry/Datadog observability, Evergreen auto-update configuration, 2-Stage Evolution Roadmap.
@@ -185,7 +192,7 @@ Read the schema definitions from the selected Tier's context generation framewor
    - `context/library-docs.md`: Live documentation excerpts verified via RAG/MCP.
    - `context/build-plan.md` (or `page-specs.md`): Structured into the **Complete 6-Phase Production Lifecycle**:
      - *Phase 1: Discovery & Architecture Specs*
-     - *Phase 2: Upfront Foundation (The Shell)* — dependencies, packages, `globals.css` tokens, master App Shell (Navbar, Layout, Footer, root Error Boundary).
+     - *Phase 2: Upfront Foundation (The Shell)* — dependencies, packages, `globals.css` tokens, master App Shell (Navbar, Layout, Footer, root Error Boundary). **Enforce Dev Quarantine**: all verification harnesses (token swatches, component matrices) must be quarantined to `app/(dev)/_workbench/...` or test suites—strictly forbidden from entering `HeaderNav` or the public landing page.
      - *Phase 3: Methodical Layered Sprints* — vertical slices (UI + working state handlers + live seed data + 5 screen states) with mandatory Stop & Test Gate after each feature.
      - *Phase 4: Production Hardening & Security Audit* — CWV (LCP < 2.5s), zero-trust sweep, `.env.production`.
      - *Phase 5: Brand Launch & Live Cutover* — `npm run build` verification, DNS/domain, SSL, OpenGraph cards.

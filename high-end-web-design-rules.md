@@ -46,6 +46,11 @@ Typography carries the personality of the entire page — treat it as a primary 
 
 ## 4. Layout & Grid Principles
 
+- **The 8px Modular Spacing Calculus**: Banish arbitrary spacing offsets (`mt-7`, `p-5`, `gap-3`). All padding, margins, and gaps mathematically lock to the 8px modular scale (`8px`, `16px`, `24px`, `32px`, `48px`, `64px`, `96px`).
+- **The 3 Taste Dials (Calibrate before coding)**:
+  - *Design Variance (0.0 to 1.0)*: 0.2 = corporate symmetry; 0.8 = bold editorial asymmetric 8/4 grid, overlapping layers, deliberate visual tension.
+  - *Visual Density (0.0 to 1.0)*: 0.3 = luxury airy art-gallery breathing room (40%+ negative space); 0.8 = dense operational console.
+  - *Motion Intensity (0.0 to 1.0)*: 0.0 = static/accessible; 0.4 = subtle magnetic micro-interactions; 0.8 = cinematic spring reveals.
 - **Bento grids, broken grids, and asymmetric layouts are tools, not requirements.** Use bento only when content is genuinely made of discrete, comparably-weighted chunks (features, stats, product specs). Using it purely for visual interest is decoration masquerading as structure.
 - **Structural devices must encode real information.** Numbered steps (01/02/03), dividers, eyebrows, and labels should only appear if they represent something true — a real sequence, a real category, a real hierarchy. If content isn't actually a sequence, don't number it.
 - **Whitespace is a decision, not a leftover.** Generous spacing near a signature element; tighter, denser spacing in data-heavy or utility areas. Spacing should shift intentionally as the page's purpose shifts section to section.
