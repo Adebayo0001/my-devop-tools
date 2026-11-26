@@ -15,81 +15,46 @@ separate build agent afterward.
 Work through this in four stages. Do not skip ahead to a later stage until
 the current one is done.
 
-STAGE 1 — DISCOVERY
-Ask me the following questions one at a time, waiting for my answer before
-asking the next one. Don't bundle them:
-- What is being built, in one sentence
-- Who is the user, and what's their technical comfort level
-- What are the 3–6 core user flows / pages
-- Scale expectations — side project, funded startup, enterprise
-- Hard constraints — compliance, latency, offline support, budget ceiling,
-  existing infrastructure it must integrate with
-- Any known team/personal stack preferences or existing skills to bias
-  toward
-- Timeline pressure
-- Do I already have a visual design or reference material, or does design
-  need to be brainstormed as part of this
+STAGE 1 — THE 4 CONVERSATIONAL DISCOVERY PILLARS (No Overwhelm, High Coverage)
+Guide me through discovery using 4 conversational pillars with helpful examples, capturing critical requirements without cognitive fatigue:
+1. Pillar 1: Product Mission, Target Users & Real Problem
+   - What core commercial problem is being solved? Who is the primary paying user, what is their technical fluency, and what is the end-to-end user journey from first landing to the core "aha!" moment?
+2. Pillar 2: Brand Identity & Visual Personality
+   - Do we have existing brand guidelines, logo files, or hex codes to provide/upload, or are we creating the design system from scratch? If starting fresh: what visual atmosphere fits best (crisp light, deep dark, or modern clean tech)?
+3. Pillar 3: People, Roles & Access Control (Plain-English Database & RLS)
+   - Who logs in (Customers, Team Managers, Platform Admins)? What can each user see or edit? (e.g., "Customers only see their own projects; Admins review all projects, manage billing, and delete users"). This defines database tables, ownership boundaries, and Row Level Security (RLS) policies from Day 1.
+4. Pillar 4: Crucial Operations & Hidden Needs (Quietly Enforcing the 111-Item Production Safeguards)
+   - Will users make payments or subscriptions? Do they need automated transactional emails/receipts? Will they upload sensitive files? What third-party APIs/webhooks are needed? Is this a lean MVP ($0/month free-tier target) or a funded scale architecture?
 
-STAGE 2 — TECH STACK DECISION
-Based on my answers, propose a stack. Before you lock it:
-- State your selection criteria in order: fit to actual scale, currency and
-  quality of official documentation, ecosystem fit with what I need to
-  integrate, hosting/cost fit, my stated familiarity, maturity over hype
-- Actually search for current versions and current best-practice guidance
-  for your shortlisted options — don't rely on training data, it may be
-  stale
-- Give me 2–3 alternatives you considered and why the one you're proposing
-  won
-- Wait for my confirmation before locking it
+STAGE 2 — TECH STACK DECISION, TOOL CONSOLIDATION & PLAIN-ENGLISH RATIONALE
+Based on my answers, propose a stack explained in plain, everyday English:
+- State selection criteria in order: fit to actual scale, currency and quality of official documentation, ecosystem fit with what I need to integrate, hosting/cost fit, my stated familiarity, maturity over hype.
+- Consolidate DB + Auth + File Storage + Realtime into unified platforms (e.g. Supabase or Convex) instead of multi-vendor sprawl.
+- Propose a 2-stage evolution roadmap (Launch / MVP vs Scale Migration).
+- Wait for my confirmation before locking it.
 
-STAGE 3 — VISUAL DIRECTION
-If I said I have reference material but no finished design: ask me to
-describe what I like about each reference in terms of layout rhythm, type
-personality, color temperature, and overall mood — not specific elements.
-Then write me a Google Stitch generation prompt using only those abstracted
-qualities plus the actual subject of this product. Never name the source
-product/app the reference came from in that prompt.
+STAGE 3 — VISUAL DIRECTION & GOOGLE STITCH PIPELINE (PRODUCT DESIGNER MODE)
+1. Visual Intake Stop Gate:
+   - If I have existing branding (logo, colors, fonts): Ask me to provide/upload them, and lock them directly.
+   - If starting from scratch: Propose 3 distinct, curated visual directions with non-generic typography.
+   - Wait for my confirmation before finalizing.
 
-If I said I already have a finished design: skip this stage.
+2. Google Stitch Mockup Protocol:
+   - Screen Inventory Mapping: Map out all core screens required across the user journey (e.g. SCR-01 Landing, SCR-02 Auth, SCR-03 Dashboard, SCR-04 Workspace, SCR-05 Settings).
+   - Full-Fidelity Google Stitch Prompts: Write ready-to-paste prompts for ALL core screens using the 5-part formula (viewport lock, spatial zones, named elements, locked palette, strict negative constraints—no font family names).
+   - HTML Screen Vault (`context/screens/`): Generated HTML files are saved into `context/screens/*.html` and inspected 1:1 during subsequent sprint builds.
 
-If I said design needs to be brainstormed with no reference at all: run a
-short design brainstorm — ground it in the actual subject matter, propose a
-palette (4–6 named hex values), a type pairing, a layout concept, and one
-signature element. Check it against the question "would this look the same
-for any other brand in this space" before finalizing.
+STAGE 4 — INSTANT BATCHED FILE GENERATION (ZERO QUALITY LOSS)
+Generate all 8 context files in a **single comprehensive pass**, completely eliminating multi-turn approval bottlenecks while embedding full technical depth:
 
-STAGE 4 — FILE GENERATION
-Generate the following files in this exact order, each depending on what
-came before:
-
-1. project-overview.md — problem, users, pages/nav, core flow, in-scope,
-   out-of-scope, success criteria
-2. user-flows.md — sitemap, one flow diagram per core journey (entry point
-   → every decision point → every branch → end state), a task flow for
-   each primary action, a state inventory per screen (default, empty,
-   loading, error, edge cases — not just the happy path), information
-   hierarchy per screen (primary/secondary/tertiary content), and how
-   flows connect to each other
-3. architecture.md — data model, system/integration diagram, and the Stack
-   Decision writeup from Stage 2
-4. library-docs.md — current documentation excerpts for exactly the
-   libraries in the locked stack, pulled live, not from memory
-5. code-standards.md — two layers: a stack-agnostic layer (engineering
-   mindset, error handling, comment discipline, and a full Accessibility &
-   Quality Floor section covering contrast ratios, keyboard nav, semantic
-   HTML, reduced motion, and responsive behavior down to 375px), and a
-   stack-specific layer written fresh for the locked stack (folder
-   structure, naming conventions, code patterns)
-6. ui-tokens.md / ui-rules.md / ui-registry.md — only if Stage 3 produced a
-   design or one already existed
-7. build-plan.md — phased feature list built from user-flows.md, UI built
-   with mock data before logic is wired, every feature's UI section
-   includes its states from user-flows.md (not just default), and a
-   Definition of Done on every feature: screenshot comparison against the
-   design reference, quality-floor check, component-level genericness
-   check, progress-tracker update
-8. progress-tracker.md — phase/status table tied to the Definition of Done
-   above, a Decisions Made During Build log, a Notes section
+1. project-overview.md — problem, users, pages/nav, core journey, in-scope, out-of-scope, success criteria.
+2. user-flows.md — sitemap, one flow diagram per core journey, a task flow for each primary action, a 5-state inventory per screen (default, empty, loading, error, edge cases), and information hierarchy.
+3. architecture.md — data model with full SQL DDL and Row Level Security (RLS) policies, system/integration diagram, the Stack Decision writeup from Stage 2, and Observability topology (Sentry, Datadog with PII scrubbing).
+4. library-docs.md — current documentation excerpts for exactly the libraries in the locked stack, pulled live via search.
+5. code-standards.md — stack-agnostic layer (zero-trust security, 111-concept safeguards, error handling with React Error Boundaries hooking into Sentry) + stack-specific layer.
+6. ui-tokens.md / ui-rules.md / ui-registry.md — shadcn/Radix atomic primitives, single-knob CSS cascade, Sprint Design System Immutability.
+7. build-plan.md — phased feature list derived from real **User Stories**. Features build pure user flows (zero repetitive boilerplate loading states from foundation) and include **In-Phase API Setup Gates** and deterministic 3-step verification runbooks.
+8. progress-tracker.md — phase/status table tied to the Definition of Done above, a Decisions Made During Build log, a Notes section.
 
 Before finalizing, check your own output: does every screen in
 user-flows.md have more than just its happy-path state listed? Is the Stack

@@ -35,11 +35,24 @@ If unsure which mode applies: ask. "Throwaway or heading toward production?" sav
 
 Lock in what's expensive to change later: stack fit (traffic, team size = solo, budget, deploy target), data model shape, auth model (does this even need accounts?), environment strategy (secrets/config per environment), and design system architecture.
 
-**For anything beyond a prototype, produce this file set before scaffolding** — not a free-form brief, a fixed checklist that forces gaps to surface while cheap to fix:
+### The 4 Conversational Discovery Pillars (No Overwhelm, High Coverage)
+Instead of lengthy single-question interrogation loops, discovery is grouped into 4 conversational pillars with helpful examples, capturing vital details without cognitive fatigue:
+1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core problem does it solve? Who is the primary user, what is their technical fluency, and what is the end-to-end user journey from first landing to the core "aha!" moment?
+2. **Pillar 2: Brand Identity & Visual Personality**: Do you have existing brand colors, a logo, or typography guidelines? (Always ask upfront). If starting fresh: What atmosphere fits best (clean light, deep dark, or modern clean tech)?
+3. **Pillar 3: People, Roles & Access Control (Demystifying Database & RLS)**: Who logs in (Customers, Team Managers, Platform Admins)? What can each user see or edit? (e.g., "Customers only see their own projects; Admins review all projects and can delete accounts"). This defines database tables, ownership boundaries, and Row Level Security (RLS) policies from Day 1.
+4. **Pillar 4: Crucial Operations & Hidden Needs (Quietly Enforcing the 111 Production Safeguards)**: Will users make payments or subscriptions? Do they need automated transactional emails/receipts? Will they upload sensitive files? What third-party APIs/webhooks are needed? Is this a lean MVP ($0/month free-tier target) or a funded scale architecture?
 
-1. **project-overview.md** — problem, target users with **Synthesized User UX Research** (persona mental models, Jobs-To-Be-Done [JTBD], task friction analysis, cognitive load mapping, **Audience Demographic & Tech Literacy Audit**, and **Jakob's Law Familiar Market Pattern Mapping**), pages/nav, core flow, explicit in-scope/out-of-scope, checkable success criteria.
+### The Google Stitch UI Pipeline (Product Designer Mode)
+- **Screen Inventory Mapping**: Map every screen required across the user journey (e.g., `SCR-01: Landing Page`, `SCR-02: Sign In / Sign Up`, `SCR-03: Main Dashboard`, `SCR-04: Detail Workspace`, `SCR-05: Account Settings`).
+- **Product Designer Stitch Prompts**: The agent writes full-fidelity Google Stitch prompts for each screen, detailing 2D viewport framing (16:9, front-facing, no 3D tilt), spatial layout zones, named components, locked brand palette, and typographic descriptions **without font family names** (preventing Stitch from distorting text).
+- **The HTML Screen Vault (`context/screens/`)**: Generated HTML screens (or screenshots) are saved in `context/screens/<screen-name>.html`. In every subsequent development phase, the agent inspects that screen's HTML file and translates it 1:1 into accessible React + Tailwind components.
+
+### Instant Batched Context Compilation (Zero Quality Loss)
+For anything beyond a prototype, produce the complete context suite in a **single comprehensive pass**—eliminating multi-turn, file-by-file approval bottlenecks while maintaining complete technical depth:
+
+1. **project-overview.md** — problem, target users with **Synthesized User UX Research** (persona mental models, Jobs-To-Be-Done [JTBD], task friction analysis, cognitive load mapping, **Audience Demographic & Tech Literacy Audit**, and **Jakob's Law Familiar Market Pattern Mapping**), pages/nav, narrative core journey, explicit in-scope/out-of-scope, checkable success criteria.
 2. **user-flows.md** — sitemap; one flow diagram per core journey (entry → every decision point → every branch → end state, not just happy path); a task flow per primary action; a **state inventory per screen** (default, empty, loading, error, edge cases); information hierarchy per screen (primary/secondary/tertiary); how flows connect. Must pass the Jakob's Law familiarity test: flows should feel effortless and intuitive based on industry-standard products.
-3. **architecture.md** — data model, system/integration diagram, the Stack Decision writeup (the *reasoning*, not just the conclusion), and the **Observability & Telemetry Architecture** (Sentry exception tracking, LogRocket session replay, Datadog APM/RUM, with strict PII scrubbing pipelines).
+3. **architecture.md** — data model with full SQL DDL, tables, and Row Level Security (RLS) policies; system/integration topology; the Stack Decision writeup (plain-English reasoning and trade-offs); and the **Observability & Telemetry Architecture** (Sentry exception tracking, LogRocket session replay, Datadog APM/RUM, with strict PII scrubbing pipelines).
 4. **library-docs.md** — current docs for exactly the locked-stack libraries (including Radix UI primitives, shadcn/ui, Sentry, LogRocket, and Datadog SDKs), **pulled live via search, never from training memory**.
 5. **code-standards.md** — two layers. Stack-agnostic (engineering mindset, zero-trust security, React Error Boundaries hooking to Sentry, comment discipline, and a full **Accessibility & Quality Floor**: contrast ratios, keyboard nav, semantic HTML, `prefers-reduced-motion`, responsive down to 375px). Stack-specific, written fresh each time (folder structure, naming, idioms, PII sanitization helpers).
 6. **ui-tokens.md / ui-rules.md / ui-registry.md** — 
@@ -50,8 +63,8 @@ Lock in what's expensive to change later: stack fit (traffic, team size = solo, 
    - **Sprint Design System Immutability**: Any future sprint feature not in the initial overview MUST automatically reuse registered Atoms and Molecules without the builder prompting.
 7. **build-plan.md** — structured into the **Complete 6-Phase Production Lifecycle**:
    - **Phase 1: Discovery & Architecture Specs**
-   - **Phase 2: Upfront Foundation (The Shell)** — dependencies, packages, `globals.css` tokens, and global App Shell (Header/Navbar, Sidebar, Footer, Root Error Boundary).
-   - **Phase 3: Methodical Layered Sprints (Working Software)** — features built as complete **Vertical Slices** (UI + real interactive handlers + 5 states + live/seed data). Unbreakable Stop & Verification Gate after each feature.
+   - **Phase 2: Upfront Foundation (The Shell)** — dependencies, packages, `globals.css` tokens, master App Shell (Header/Navbar, Sidebar, Footer, Root Error Boundary), database tables with RLS policies, and global loading skeletons.
+   - **Phase 3: Methodical Layered Sprints (Working Software & Pure User Stories)** — features built as complete **Vertical Slices** along the user journey (UI + real interactive handlers + live seed data). **Zero repetitive plumbing**: once foundation is built, never repeat loading state setups or boilerplates. Inspect `context/screens/*.html` for 1:1 visual fidelity. Includes **In-Phase API Setup Gates** (pauses to request external keys so features work live immediately) and an unbreakable Stop & Verification Gate after each feature.
    - **Phase 4: Production Hardening & Security Audit** — Core Web Vitals (LCP < 2.5s, INP < 150ms), zero-trust sweeps, `.env.production` sanitization.
    - **Phase 5: Brand Launch & Live Cutover** — production build (`npm run build`), custom domain/DNS, SSL, OpenGraph social cards.
    - **Phase 6: Formal Handover, Vault & Post-Launch Ops** — GitHub transfer, 1Password/Bitwarden vault, non-technical Loom admin guide, Sentry live telemetry, 30-day warranty log.
@@ -78,8 +91,11 @@ Eight lenses, every feature that touches input/data/rendering. Default to checki
 - **Strict Ban on Wholesale File Rewrites**: When modifying an existing feature, the agent must NEVER re-generate or overwrite entire files from scratch. Use surgical block edits only.
 - **Zero Collateral Regressions**: Modifying an existing feature must NEVER break or remove previously working features. Rebuilding previously working code due to agent carelessness is an architectural defect. Preserve all existing props, exports, and styles.
 
-### 2. Agile Working Software & Methodical Layering (Primary Measure of Progress)
-- **Foundations Upfront**: Always build dependencies, tokens, and the master App Shell upfront before feature modules.
+### 2. Agile Working Software & Pure User Stories (Primary Measure of Progress)
+- **Foundations Upfront**: Always build dependencies, tokens, database tables with Row Level Security (RLS), and the master App Shell upfront before feature modules.
+- **Pure User Journey Sprints (Zero Repetitive Plumbing)**: Once foundation is complete, sprints MUST follow the real **User Journey and User Stories** (e.g. "Story 1: User Onboarding & Sign In", "Story 2: Core Workspace Dashboard"). Never dwell on or re-list abstract boilerplate or loading states from foundation. The very first feature must be a tangible, interactive screen that the user can point to, click, and use immediately.
+- **Inspect `context/screens/*.html` for 1:1 Fidelity**: When building any screen or user story, open and inspect the corresponding HTML mockup generated during the Google Stitch phase to mirror the layout, spacing, and micro-copy with high fidelity.
+- **In-Phase API & Credential Setup Gate**: Whenever a feature requires an external integration (e.g., Supabase keys, Stripe keys, Resend email tokens, AI model credentials), the agent MUST pause at that exact phase, explain in plain English what key is needed and where to place it in `.env.local`, and verify the connection before marking the feature done.
 - **DEV HARNESS QUARANTINE & PRODUCTION SURFACE INTEGRITY (ANTI-HARNESS-LEAK LAW)**:
   - Internal developer test harnesses, token inspectors (`/test-tokens`), component variant showcases (`/shell-preview`), crash simulators, and mock launchers must **NEVER** enter shared production navigation bars (`HeaderNav` `navItems`), the public root landing page (`app/page.tsx` or `/`), or customer product views.
   - All developer verification harnesses must be isolated under dedicated non-production routes (e.g. `app/(dev)/_workbench/...` or `app/(dev)/_tokens/...`) or automated test suites (`/test`), completely detached from public sitemaps and navigation menus.

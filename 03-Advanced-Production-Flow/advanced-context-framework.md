@@ -5,13 +5,13 @@
 
 ---
 
-## The Principle: One File at a Time, Instructive and Complete
+## The Principle: Instant Batched Generation, Instructive and Complete
 
-A context file that arrives bundled with three others provides none of the protection an engineering gate exists for. **Files in this tier are generated and approved strictly one file at a time.**
-* The agent writes exactly one file.
-* The agent stops, presents it, and highlights architectural trade-offs.
-* The developer reviews and approves (*"Approved"* / *"Proceed"*) before the next file is drafted.
-* Every file must be complete, instructive, and specific. Broad generalizations, placeholder bullets, and `// TODO` comments are strictly rejected.
+All 11 context files are generated in a **single comprehensive pass**—eliminating slow multi-turn approval bottlenecks without sacrificing any quality, precision, or technical depth.
+* The agent writes all 11 files in one comprehensive execution.
+* Every file must be complete, instructive, and specific, grounded strictly in real **User Stories** and end-to-end **User Journeys**.
+* Broad generalizations, placeholder bullets, and `// TODO` comments remain strictly rejected.
+* Includes the complete **Google Stitch Screen Inventory** and **HTML Screen Vault** (`context/screens/*.html`).
 
 ---
 
@@ -19,17 +19,18 @@ A context file that arrives bundled with three others provides none of the prote
 
 ```text
 context/
-├── 1. project-overview.md     <-- PRD, Narrative Core Journey & Data Architecture
+├── 1. project-overview.md     <-- PRD, Narrative Core Journey & Plain-English Data Architecture
 ├── 2. user-flows.md           <-- Sitemap, Task Flows & 5-State Inventory Per Screen
-├── 3. design.md               <-- Visual Identity & Constrained Core Page Prompts
-├── 4. architecture.md         <-- System Boundaries, API Specs & Complete SQL Schema
+├── 3. design.md               <-- Visual Identity & Complete Google Stitch Screen Prompts
+├── 4. architecture.md         <-- System Boundaries, DB Schemas with Row Level Security (RLS) & Observability
 ├── 5. library-docs.md         <-- Live-Searched Documentation for Pinned Dependencies
-├── 6. code-standards.md       <-- Stack-Agnostic Invariants & Stack-Specific Idioms
+├── 6. code-standards.md       <-- Stack-Agnostic Invariants (111-Concept Safeguards) & Stack-Specific Idioms
 ├── 7. ui-rules.md             <-- Visual Layout Rules, Component Anatomy & Form Patterns
-├── 8. ui-tokens.md            <-- CSS Custom Properties & Token Invariants
+├── 8. ui-tokens.md            <-- CSS Custom Properties & Single-Knob Cascading Token Invariants
 ├── 9. ui-registry.md          <-- Living Reusable Component Catalog (via /imprint)
-├── 10. build-plan.md          <-- Phased Features with 3-Step Verification Runbooks
-└── 11. progress-tracker.md    <-- Real-time Milestone Status & Decision Log
+├── 10. build-plan.md          <-- Pure User Story Sprints with In-Phase API Setup Gates
+├── 11. progress-tracker.md    <-- Real-time Milestone Status & Decision Log
+└── screens/                   <-- HTML Screen Vault (Generated Stitch HTML for 1:1 sprint fidelity)
 ```
 
 ---

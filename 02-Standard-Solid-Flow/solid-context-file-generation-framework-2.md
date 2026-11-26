@@ -81,15 +81,17 @@ The living design system contracts. Once generated, all build work strictly cons
 
 ## **7\. `build-plan.md`**
 
-The phased feature list, built directly from `user-flows.md` — not a separate invention. Rules:
+The phased feature list, built directly from real **User Stories** and `user-flows.md` along the 6-phase lifecycle:
 
-* **UI before logic.** Build the UI for a phase with mock/static data first, wire real logic in second. This catches layout and information-hierarchy problems while they're still cheap to fix (before they're entangled with data-fetching code).  
-* **Every feature's UI section includes its states from `user-flows.md`** — not just the default/happy-path state. If `user-flows.md` defined an empty state and an error state for a screen, `build-plan.md`'s task list for that screen includes building those states, not just noting they exist.  
+* **Foundation Upfront (Phase 2)**: Core dependencies, design tokens, database tables with Row Level Security (RLS) policies, master App Shell, and global loading skeletons.
+* **Pure User Story Sprints (Phase 3)**: Features strictly follow the real **User Journey and User Stories** (e.g. Onboarding ➔ Dashboard ➔ Core Workspace). **Zero repetitive plumbing**: never re-list or re-explain foundation loading states. The very first feature must be a tangible, working, clickable screen that the user can immediately use.
+* **Inspect `context/screens/*.html` for 1:1 Fidelity**: Every feature references its corresponding HTML mockup generated during the Google Stitch phase to mirror layout, spacing, and micro-copy.
+* **In-Phase API Setup Gate**: Whenever a feature requires an external integration (Supabase, Stripe, Resend, AI models), pause at that phase, explain in plain English what key is needed, and let the user add it to `.env.local` before moving to test the live feature.
 * **A Definition of Done on every feature**, consistently applied:  
-  * Screenshot comparison against the design reference (if one exists)  
-  * Quality-floor check (the Accessibility & Quality Floor section of `code-standards.md` — treat this as the same checklist, not a separate audit)  
-  * Component-level genericness check — does this look like a distinctive, intentional piece of this product, or a template default that could belong to any project? (Ties to the anti-generic standards this skill's design-facing counterpart enforces, where applicable.)  
-  * Progress-tracker update (see file 8\)
+  * Deterministic test script pass
+  * Quality-floor check (the Accessibility & Quality Floor section of `code-standards.md`)
+  * Component-level genericness check and Atomic Registry `/imprint`
+  * Progress-tracker update (see file 8)
 
 This Definition of Done is the Build gate and Ship gate, applied per-feature instead of only at the very end — it's what prevents "looks done" from being confused with "is done" at the point where it's cheapest to catch.
 

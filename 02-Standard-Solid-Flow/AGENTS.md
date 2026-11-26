@@ -50,8 +50,8 @@ Lock in what's expensive to change later: stack fit (traffic, team size = solo, 
    - **Sprint Design System Immutability**: Any future sprint feature not in the initial overview MUST automatically reuse registered Atoms and Molecules without the builder prompting.
 7. **build-plan.md** — structured into the **Complete 6-Phase Production Lifecycle**:
    - **Phase 1: Discovery & Architecture Specs**
-   - **Phase 2: Upfront Foundation (The Shell)** — dependencies, packages, `globals.css` tokens, and global App Shell (Header/Navbar, Sidebar, Footer, Root Error Boundary).
-   - **Phase 3: Methodical Layered Sprints (Working Software)** — features built as complete **Vertical Slices** (UI + real interactive handlers + 5 states + live/seed data). Unbreakable Stop & Verification Gate after each feature.
+   - **Phase 2: Upfront Foundation (The Shell)** — dependencies, packages, `globals.css` tokens, database tables with Row Level Security (RLS) policies, master App Shell (Header/Navbar, Sidebar, Footer, Root Error Boundary), and global loading skeletons.
+   - **Phase 3: Methodical Layered Sprints (Pure User Stories & Working Software)** — features built as complete **Vertical Slices** along the user journey (UI + real interactive handlers + live seed data). **Zero repetitive plumbing**: do not re-list or repeat foundation loading states. Inspect `context/screens/*.html` for 1:1 visual fidelity. Includes **In-Phase API Setup Gates** (pause to request external keys so features work live immediately) and an unbreakable Stop & Verification Gate after each feature.
    - **Phase 4: Production Hardening & Security Audit** — Core Web Vitals (LCP < 2.5s, INP < 150ms), zero-trust sweeps, `.env.production` sanitization.
    - **Phase 5: Brand Launch & Live Cutover** — production build (`npm run build`), custom domain/DNS, SSL, OpenGraph social cards.
    - **Phase 6: Formal Handover, Vault & Post-Launch Ops** — GitHub transfer, 1Password/Bitwarden vault, non-technical Loom admin guide, Sentry live telemetry, 30-day warranty log.
@@ -85,8 +85,11 @@ Eight lenses, every feature that touches input/data/rendering. Default to checki
 - **Strict Ban on Wholesale File Rewrites**: When modifying an existing feature, the agent must NEVER re-generate or overwrite entire files from scratch. Use surgical block edits only.
 - **Zero Collateral Regressions**: Modifying an existing feature must NEVER break or remove previously working features. Rebuilding previously working code due to agent carelessness is an architectural defect. Preserve all existing props, exports, and styles.
 
-### 2. Agile Working Software & Methodical Layering (Primary Measure of Progress)
-- **Foundations Upfront**: Always build dependencies, tokens, and the master App Shell upfront before feature modules.
+### 2. Agile Working Software & Pure User Stories (Primary Measure of Progress)
+- **Foundations Upfront**: Always build dependencies, tokens, database tables with Row Level Security (RLS) policies, and the master App Shell upfront before feature modules.
+- **Pure User Journey Sprints (Zero Repetitive Plumbing)**: Once foundation is complete, sprints MUST follow the real **User Journey and User Stories** (e.g. Onboarding ➔ Dashboard ➔ Core Workspace). Never dwell on or re-list boilerplate loading states from foundation. The very first feature must be a tangible, interactive screen that the user can point to, click, and use immediately.
+- **Inspect `context/screens/*.html` for 1:1 Fidelity**: When building any screen, inspect the corresponding HTML mockup generated during the Google Stitch phase to mirror layout, spacing, and micro-copy with high fidelity.
+- **In-Phase API & Credential Setup Gate**: Whenever a feature requires an external integration (Supabase, Stripe, Resend, AI models), pause at that phase, explain in plain English what key is needed, and let the user add it to `.env.local` before moving to test the live feature.
 - **DEV HARNESS QUARANTINE & PRODUCTION SURFACE INTEGRITY (ANTI-HARNESS-LEAK LAW)**:
   - Internal developer test harnesses, token inspectors (`/test-tokens`), component variant showcases (`/shell-preview`), crash simulators, and mock launchers must **NEVER** enter shared production navigation bars (`HeaderNav` `navItems`), the public root landing page (`app/page.tsx` or `/`), or customer product views.
   - All developer verification harnesses must be isolated under dedicated non-production routes (e.g. `app/(dev)/_workbench/...` or `app/(dev)/_tokens/...`) or automated test suites (`/test`), completely detached from public sitemaps and navigation menus.

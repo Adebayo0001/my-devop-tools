@@ -18,3 +18,16 @@ node_modules/
 dist/
 build/
 external-repos/
+
+# Adebayo Personal Business, Strategy & Private Engines (Kept local, excluded from public repo)
+business strategy/
+industry knowledge/
+memory.md
+.ai-memory/
+skills/adebayo-authority-engine/
+skills/broadcast/
+ai_development_starter_kit_adrian/
+*.zip
+*.skill
+*.skill.bak
+

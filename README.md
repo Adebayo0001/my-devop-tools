@@ -20,8 +20,11 @@ graph TD
         RE["/review (DevOps QA Gate)"]
         RC["/recover (Circuit Breaker)"]
         RM["/remember (Cold Persistence)"]
-        BC["/broadcast (Proof-of-Work Content)"]
-        AU["adebayo-authority-engine"]
+        CH["/check (Runtime & Code Verification)"]
+        TE["/test (Automated Test Generator)"]
+        RD["/redesign (UI Polish & Layout Rhythm)"]
+        DO["/document (PRs & Release Notes)"]
+        SY["/sync (Post-Merge Reconciler)"]
     end
 
     subgraph Project_Plane["Plane 2: The Repository Markdown Plane (Local Project Context)"]
@@ -101,17 +104,20 @@ C:\Users\user\Desktop\My DevOp Tools\
 ├── 04-Redesign-and-Intake-Flow/        <-- Tier 4 Intake audit protocol & live website redesign protocol
 ├── 05-Global-IDE-Master-Rule/          <-- Master IDE rule file (GLOBAL_IDE_MASTER_RULE.md)
 ├── Full Build Approach/               <-- Universal skill specifications & standard AGENTS.md
-├── skills/                            <-- 9 Master Portable Agent Skills
+├── skills/                            <-- 12 Master Portable Agent Skills
 │   ├── kickoff/                       <-- /kickoff (4-tier orchestrator with full references)
 │   ├── intake/                        <-- /intake (Tier 4 forensic audit & live redesign)
+│   ├── redesign/                      <-- /redesign (Surgical UI elevation & visual polish)
 │   ├── architect/                     <-- /architect (Spec-first blueprint engine)
 │   ├── imprint/                       <-- /imprint (Atomic UI registry compiler)
+│   ├── test/                          <-- /test (Autonomous git-diff test generator)
+│   ├── check/                         <-- /check (Runtime verification & code review)
 │   ├── review/                        <-- /review (DevOps QA & observability gate)
+│   ├── document/                      <-- /document (PRs, changelog & release notes)
+│   ├── sync/                          <-- /sync (Post-merge status synchronizer)
 │   ├── recover/                       <-- /recover (Circuit breaker on 1st bug failure)
-│   ├── remember/                      <-- /remember (Multi-session persistence)
-│   ├── broadcast/                     <-- /broadcast (4 daily proof-of-work posts)
-│   └── adebayo-authority-engine/      <-- Commercial positioning, offers & human voice
-├── business strategy/                 <-- Client acquisition & deployment playbooks
+│   └── remember/                      <-- /remember (Multi-session persistence)
+├── design-vault/                      <-- Master Design Vault & UI Archetypes
 ├── AGENTS.md                          <-- Root governing agent standard
 ├── GLOBAL_AGENTS_STANDARD.md          <-- Universal anti-slop directive & core engineering invariants
 ├── sync-skills.ps1                    <-- One-click cross-IDE distribution script
@@ -183,12 +189,12 @@ The agent executes terminal commands (`tsc --noEmit`, `npm run build`, automated
 
 ---
 
-### Playbook F: Daily Proof-of-Work Marketing
-At the end of your build day, run:
+### Playbook F: Autonomous Documentation & Release Generation
+At the end of your feature sprint or before opening a PR, run:
 ```text
-/broadcast
+/document pr
 ```
-The skill reads your completed features and architectural lessons from `progress-tracker.md`, generates **4 daily LinkedIn/X posts** following your human-voice positioning rules, and saves them directly to `C:\Users\user\Desktop\Lifestream\content\queue\` for your Telegram publisher bot.
+The skill reads your actual git commits and diffs, verifies zero hallucinated features, and drafts an executive PR description, changelog entry, and release notes grounded strictly in codebase reality.
 
 ---
 

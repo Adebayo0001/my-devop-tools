@@ -6,24 +6,17 @@ Run this before opening the build tool. The output of this process *is* the cont
 
 ---
 
-## Step 0 — Discovery Brief
+## Step 0 — The 4 Conversational Discovery Pillars (No Overwhelm, High Coverage)
 
-Before anything gets written, these questions must be answered — either by you directly, or by having the AI ask them back to you one at a time:
-
-- What is being built, in one sentence
-- Who is the user, and what's their technical comfort level
-- What are the 3–6 core user flows / pages
-- Scale expectations — side project, funded startup, enterprise. This one decision quietly determines half the stack.
-- Hard constraints — compliance, latency, offline support, budget ceiling, existing infrastructure it must integrate with
-- Known team/personal stack preferences or existing skills that should bias the choice
-- Timeline pressure — affects how much you can justify "boring and proven" vs. "new but faster to ship"
-- Does a visual design already exist (Figma, comps, screenshots) — or does design need to be brainstormed as part of this build
-
-This maps directly onto `project-overview.md`. The *shape* of that file (Problem / Users / Pages / In-scope / Out-of-scope / Success criteria) is reusable every time. The content is never copied forward.
+Instead of lengthy single-question interrogation loops or overwhelming technical walls, discovery is grouped into 4 conversational pillars with helpful examples:
+1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core problem does it solve? Who is the primary user, what is their technical fluency, and what is the end-to-end user journey from first landing to the core "aha!" moment?
+2. **Pillar 2: Brand Identity & Visual Personality**: Do you have existing brand colors, a logo, or typography guidelines? (Always ask upfront). If starting fresh: What atmosphere fits best (clean light, deep dark, or modern clean tech)?
+3. **Pillar 3: People, Roles & Access Control (Plain-English Database & RLS)**: Who logs in (Customers, Team Managers, Platform Admins)? What can each user see or edit? (e.g., "Customers only see their own projects; Admins review all projects, manage billing, and delete users"). This defines database tables, ownership boundaries, and Row Level Security (RLS) policies from Day 1.
+4. **Pillar 4: Crucial Operations & Hidden Needs (Quietly Enforcing the 111 Production Safeguards)**: Will users make payments or subscriptions? Do they need automated transactional emails/receipts? Will they upload sensitive files? What third-party APIs/webhooks are needed? Is this a lean MVP ($0/month free-tier target) or a funded scale architecture?
 
 ---
 
-## Step 1 — Tech Stack Selection Protocol
+## Step 1 — Tech Stack Selection Protocol (Plain English Rationale)
 
 This is the actual answer to "the build agent needs to use the best tech stack." Give the agent these rules explicitly, every project, before it's allowed to name a single library:
 
@@ -43,35 +36,26 @@ If the brief doesn't give enough signal to pick confidently (e.g., scale is genu
 
 ---
 
-## Step 1.5 — Visual Reference & Google Stitch Protocol
+## Step 1.5 — The Google Stitch UI Pipeline (Product Designer Mode)
 
-Use this whenever Step 0 turns up reference material — competitor sites, Dribbble/Pinterest saves, screenshots — but no delivered design of your own exists yet. The goal is to use references for *direction*, never for replication.
+Map every screen required across the user journey based on user stories, generate full-fidelity prompts for ALL screens, and maintain the HTML screen repository:
 
-1. **Extract qualities, not elements.** For each reference, write down the abstract qualities it's contributing — not "the hero from X app," but things like: layout rhythm (dense/sparse), type personality (geometric/humanist/serif-editorial), color temperature, density, one word for the overall feeling it gives off. Throw away anything that's a specific, copyable UI element (a particular icon set, a specific illustration style, a distinctive named component).
-2. **Never name the source product in the generation prompt.** A Stitch prompt that says "make it look like [App]'s dashboard" is asking for replication, not direction — and produces something too close to protectable UI design. Describe the extracted qualities and the actual subject matter instead.
-3. **Stitch prompt template** — fill this in per project and paste into Google Stitch:
-
-   ```
-   Product: [one sentence — what this is and who it's for]
-   Page: [which screen — e.g. dashboard, onboarding, landing]
-   Page's single job: [the one thing this screen needs to accomplish]
-
-   Layout direction: [density — sparse/dense; structure — grid/asymmetric/bento; derived from reference qualities, not copied elements]
-   Type personality: [e.g. "confident geometric sans for headings, warm humanist body text"]
-   Color direction: [temperature and mood, not exact hex values yet — e.g. "cool, low-saturation, one warm accent"]
-   Signature element: [the one memorable thing this screen should be built around]
-
-   This should be an original composition inspired by the direction above — not a reproduction of any specific existing product's interface.
-   ```
-
-4. **Save Stitch output into `context/designs/`** the same way a delivered Figma comp would be saved — one image per key screen.
-5. **Extract tokens from the Stitch output**, not from the original references, when writing `ui-tokens.md`. The references did their job in step 1; from here forward the Stitch screens are the single source of truth.
+1. **Screen Inventory Mapping**: Catalog every core screen (e.g. `SCR-01 Landing`, `SCR-02 Auth`, `SCR-03 Dashboard`, `SCR-04 Detail Workspace`, `SCR-05 Settings`).
+2. **Deterministic Google Stitch Prompts for ALL Screens**:
+   - 2D viewport framing (16:9 widescreen, front-facing, no 3D tilt).
+   - Spatial layout zones (navigation rail, main stage, contextual inspector).
+   - Named components, buttons, and form labels down to the smallest detail.
+   - Locked brand palette.
+   - **NO font family names** in the prompt (preventing diffusion distortion).
+3. **The HTML Screen Vault (`context/screens/`)**:
+   - Save generated HTML files (or screenshots) directly into `context/screens/<screen-name>.html`.
+   - During subsequent sprint builds, the agent inspects that screen's HTML file and translates it 1:1 into accessible React + Tailwind components.
 
 ---
 
-## Step 2 — File Generation Order & Shape
+## Step 2 — Instant Batched Context Suite Generation (Zero Quality Loss)
 
-Generate in this order — each file depends on the ones before it being settled.
+All context files are generated in a **single comprehensive pass**, completely eliminating slow multi-turn approval bottlenecks while embedding full technical depth:
 
 ### 2.1 `project-overview.md`
 From Step 0 directly. Shape is reusable: problem statement, pages/navigation, core user flow, in-scope features, explicitly out-of-scope features, success criteria. Being explicit about out-of-scope is what keeps the build agent from silently expanding scope later — keep this section even when it feels obvious.
@@ -113,10 +97,12 @@ Two layers, generated differently:
 Only generated if Step 0 confirms a visual design already exists (delivered comps) or is being deliberately brainstormed as part of this session. If brainstorming from scratch, apply the anti-genericness and signature-element discipline (see the companion design rules file) *before* locking these — once locked here, the coding agent should treat them as fixed, not up for aesthetic debate. Shape (how a design translates into tokens/rules/a component registry) is reusable; every value inside is unique per brand.
 
 ### 2.7 `build-plan.md`
-Built from `project-overview.md` + `user-flows.md` + `architecture.md`. Shape is fully reusable regardless of stack:
-- UI-first-then-logic ordering (build the interface with mock data, verify visually, then wire real logic)
-- Every feature's UI section must include its states from `user-flows.md` — not just the happy path. If a feature is written up with only its default state described, that's a signal `user-flows.md` wasn't consulted; go back and fill it in rather than letting the build agent invent states on the fly.
-- A **Definition of Done** gate on every feature, copy-paste every project: screenshot comparison against the design reference, quality-floor check against `code-standards.md`, a component-level genericness check, and a progress-tracker update. Nothing moves to the next feature until all four pass.
+Built from `project-overview.md` + `user-flows.md` + `architecture.md`. Structured into pure **User Stories** and the 6-phase lifecycle:
+- **Phase 2 Foundation**: Dependencies, tokens, database tables with Row Level Security (RLS) policies, master App Shell, and global loading skeletons.
+- **Phase 3 Pure User Story Sprints**: Sprints strictly follow the real **User Journey and User Stories** (e.g. Onboarding ➔ Dashboard ➔ Core Workspace). **Zero repetitive plumbing**: never re-list or re-explain foundation loading states. The very first feature must be a tangible, working, clickable screen that the user can immediately use.
+- **Inspect `context/screens/*.html` for 1:1 Fidelity**: Every feature references its corresponding HTML mockup generated during the Google Stitch phase to mirror layout, spacing, and micro-copy.
+- **In-Phase API Setup Gate**: Whenever a feature requires an external integration (Supabase, Stripe, Resend, AI models), pause at that phase, explain in plain English what key is needed, and let the user add it to `.env.local` before moving to test the live feature.
+- A **Definition of Done** gate on every feature: verification runbook pass, quality-floor check against `code-standards.md`, component genericness check, atomic registry `/imprint`, and a progress-tracker update.
 
 ### 2.8 `progress-tracker.md`
 Shape is 100% reusable — status/phase table, a Decisions Made During Build log, a Notes section. Content empties and refills per project. Tie its checkboxes explicitly to the Definition of Done in `build-plan.md` so "checked off" always means the same thing.

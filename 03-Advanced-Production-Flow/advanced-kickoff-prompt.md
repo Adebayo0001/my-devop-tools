@@ -16,99 +16,66 @@ DO NOT write any code, scaffold directories, or generate design assets yet.
 DO NOT settle for the fastest or easiest path just because it is convenient.
 DO NOT treat me with levity or flattery: hold the line on production standards, challenge short-sighted shortcuts, and proactively flag hidden failure modes, security vectors, and architectural debt.
 
-Work through this in four strict stages. Do not skip ahead or bundle stages.
+Work through this in four strict stages.
 
 ---
 
-#### STAGE 1 — ARCHITECTURAL, FINANCIAL & PRODUCT DISCOVERY (Ask one by one)
-Ask me the following questions one at a time. Wait for my answer before asking the next:
-1. **The Product Mandate & User UX Research**: What is being built, what core commercial problem does it solve, and who is the paying user? What is their technical fluency, persona mental model, core skepticism, and Jobs-To-Be-Done (JTBD)?
-2. **Financial & Operational Scope**: Is this a Bootstrapped MVP / Lean Startup (targeting near-$0/month recurring SaaS burn using generous free tiers and consolidated BaaS, without compromising production quality) or a Funded Startup / Enterprise Client (ready to invest in premium infrastructure from Day 1 for maximum high-availability and reliability)?
-3. **Scale & Concurrency Expectations**: Is this a private alpha, a venture-backed MVP, or an enterprise application with strict SLA and concurrent user requirements?
-4. **Data Model & Invariants**: What are the 3–5 core business entities, their ownership boundaries, and the strict rules that must never break (e.g., "funds can never be deducted without a ledger entry", "tenants can never see cross-tenant rows")?
-5. **Auth & Permission Boundaries**: Who logs in, how do they authenticate, and what role-based access control (RBAC) or ownership rules apply? (Remember: "Logged in" != "Allowed to touch this specific record").
-6. **Observability & Error Tracking Standards**: Do we have existing accounts or configurations for **Sentry** (crash tracking), **LogRocket** (session replay), or **Datadog** (APM and real-user monitoring)? What PII scrubbing constraints apply?
-7. **Hard Constraints & Compliance**: Latency budgets, offline/low-bandwidth resilience, regulatory compliance (GDPR, HIPAA, SOC2), external API integrations, or hosting cost ceilings.
-8. **Builder Experience & Mentorship**: What is my current familiarity with this stack? (Treat me like a rising engineer: explain architectural trade-offs, how the backend interacts with the frontend, and *why* specific patterns are mandated).
-9. **Visual Brand Assets & Preferences**: Do we have existing brand guidelines, logo files, or hex codes to provide/upload, or are we creating the design system from scratch?
+#### STAGE 1 — THE 4 CONVERSATIONAL DISCOVERY PILLARS (No Overwhelm, High Coverage)
+Guide me through discovery using 4 conversational pillars with helpful examples, capturing critical requirements without cognitive fatigue:
+1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core commercial problem is being solved? Who is the primary paying user, what is their technical fluency, and what is the end-to-end user journey from first landing to the core "aha!" moment?
+2. **Pillar 2: Brand Identity & Visual Personality**: Do we have existing brand guidelines, logo files, or hex codes to provide/upload, or are we creating the design system from scratch? If starting fresh: what visual atmosphere fits best (crisp light, deep dark, or modern clean tech)?
+3. **Pillar 3: People, Roles & Access Control (Plain-English Database & RLS)**: Who logs in (Customers, Team Managers, Platform Admins)? What can each user see or edit? (e.g., "Customers only see their own projects; Admins review all projects, manage billing, and delete users"). This defines database tables, ownership boundaries, and Row Level Security (RLS) policies from Day 1.
+4. **Pillar 4: Crucial Operations & Hidden Needs (Quietly Enforcing the 111-Item Production Safeguards)**: Will users make payments or subscriptions? Do they need automated transactional emails/receipts? Will they upload sensitive files? What third-party APIs/webhooks are needed? Is this a lean MVP ($0/month free-tier target) or a funded scale architecture?
 
 ---
 
-### STAGE 2 — TECH STACK SELECTION, TOOL CONSOLIDATION & LIVE RAG VERIFICATION
-Based on Stage 1 answers, propose a modern, future-proof stack. Before locking it:
+### STAGE 2 — TECH STACK SELECTION, TOOL CONSOLIDATION & PLAIN-ENGLISH RATIONALE
+Based on Stage 1 answers, propose a modern, future-proof stack explained in plain English:
 1. **LATEST STABLE VERSIONS ONLY**:
-   - Every framework, runtime, library, and AI model suggested must strictly be the latest stable release (e.g., latest Next.js App Router, latest React, latest Tailwind CSS, frontier models including OpenAI Astra / latest o-series, latest Gemini, latest Claude). Specifying outdated major versions or deprecated APIs is an architectural defect.
+   - Every framework, runtime, library, and AI model suggested must strictly be the latest stable release (latest Next.js App Router, React 19 / latest, Tailwind CSS, frontier models).
 2. **RAG & OFFICIAL DOCS VERIFICATION GATE**:
-   - Retrieve and verify current documentation via RAG and MCP tools (e.g., context7 or official docs) before locking dependencies. Never guess from training memory.
+   - Retrieve and verify current documentation via RAG and MCP tools (e.g. context7 or official docs) before locking dependencies.
 3. **THE TOOL CONSOLIDATION INVARIANT (ANTI-TOOL SPRAWL)**:
-   - Strictly ban introducing 7–10 separate SaaS vendors when 1 or 2 battle-tested platforms handle multiple responsibilities:
-     * Consolidate Auth, Database, File Storage, and Realtime into unified platforms (e.g., Supabase or Convex) instead of splintering (Auth0 + Neon + AWS S3 + Pusher).
-     * Consolidate API and backend logic into modern full-stack frameworks (e.g., Next.js App Router Server Actions / Route Handlers) before introducing dedicated backend servers.
+   - Strictly ban introducing 7–10 separate SaaS vendors when 1 or 2 battle-tested platforms handle multiple responsibilities (e.g. Supabase for DB + Auth + Storage + Realtime).
 4. **THE TWO-STAGE EVOLUTION ROADMAP**:
-   - Stage 1 (Launch / MVP): Highly consolidated, cost-effective, production-grade foundation aligned with my financial scope.
+   - Stage 1 (Launch / MVP): Highly consolidated, cost-effective, production-grade foundation.
    - Stage 2 (Scale Migration): Clear path for decoupling compute, adding read replicas, caching tiers (Redis), and dedicated workers when traffic explodes.
 5. **Architectural Foundations**:
    - UI Component Foundation: Mandate **shadcn/ui** built on headless **Radix UI** primitives using established colors.
    - Observability Foundation: Mandate **Sentry** (exception tracking), **LogRocket** (session replay), and **Datadog** (APM/RUM) with strict PII scrubbing.
-   - Evergreen Auto-Update: Include automated dependency updates (Dependabot/Renovate), strict lockfile pinning, and CI audit checks.
 6. **Plain English & Silicon Valley Reality**:
-   - Explain options and trade-offs in plain English alongside how top Silicon Valley engineering teams run them in real production. Provide clear choices and recommend the single best stack capable of handling the product's highest complexity.
+   - Explain options and trade-offs in plain English so non-technical stakeholders and clients can make informed decisions.
 
 Wait for my explicit confirmation before locking the stack.
 
 ---
 
-### STAGE 3 — VISUAL DIRECTION, INTERACTIVE INTAKE & GOOGLE STITCH PROTOCOL (MANDATORY STOP GATE)
+### STAGE 3 — VISUAL DIRECTION & GOOGLE STITCH PIPELINE (PRODUCT DESIGNER MODE)
 Apply human-centered Design Thinking to guarantee the user interface looks like a bespoke, $1,000,000 application.
-Do NOT skip this stage, do NOT assume my visual preferences, and do NOT impose fonts or colors.
-The entire process must be followed sequentially as if manual copy-and-paste prompts were used:
-
 1. **The Interactive Visual Intake Stop Gate**:
-   - If I have existing branding (logo, colors, typography): Inquire and lock them directly.
-   - If starting from scratch: Ask for my color preferences (primary brand accent, background tone: deep dark mode, crisp light, or hybrid, and emotional temperature) and typography preferences.
-   - Propose 3 distinct, curated visual directions with NON-GENERIC typography (e.g. Syne + Plus Jakarta Sans, Outfit + Plus Jakarta Sans, Instrument Serif + Inter, Clash Display + Satoshi, Geist + Geist Mono). Strictly ban generic pairings like Inter + Roboto.
-   - Wait for my confirmation and approval before finalizing.
-
-2. **The Atomic Principle & Anti-AI-Slop Invariants (Non-Negotiable)**:
-   - **The Atomic Design Invariant**: All components must be classified and built strictly according to atomic hierarchy: Atoms (Radix + shadcn), Molecules, Organisms.
-   - **Global CSS Single-Knob Cascading (Figma Webhook Parity)**: All theme colors, typography scales, and radiuses MUST be configured as CSS variables in `globals.css` (`--primary`, `--background`, `--card`, `--radius`). Changing `--primary` must cascade instantaneously across every Atom, Molecule, and Organism app-wide without manual overrides.
-   - **Sprint Design System Immutability**: Any subsequent sprint build or unplanned feature must strictly assemble existing Atoms and Molecules without prompting.
-   - **THE ANTI-PILL / ANTI-BADGE LAW**: STRICTLY FORBIDDEN to use lazy rounded pill badges with icons or tiny uppercase text above section titles (e.g., `[✨ ENTERPRISE SECURITY]`). Titles must use commanding, human-designed typography hierarchy (`h1`, `h2`, `h3`).
-   - **HUMAN CONTENT STRATEGY**: Ban hollow AI buzzwords (*"seamless"*, *"cutting-edge"*, *"transformative"*). Write precise, informative, domain-specific copy.
-   - **DIFFERENT LAYOUTS FOR DIFFERENT PURPOSES**: Never duplicate the same 3-card template across pages. Contrast data tables with visual analytics, split forms, and breathing room.
-
-3. **Google Stitch Mockup Protocol**:
-   - **Mandatory Pre-Prompt Project Visual Overview**: Before writing the first screen prompt, output a brief overview summarizing the product mission, chosen colors, and layout mood to visually ground the generator.
-   - **Screen 1 Deterministic Stitch Prompt**:
-     * Write the prompt for the FIRST core screen only using the 5-part formula (viewport lock, spatial zones, named elements, locked palette, strict negative constraints).
-     * **NO FONT NAMES IN THE PROMPT**: Describe typographic style and rendering character (e.g. "clean geometric sans-serif headings, high-legibility interface typography, crisp tabular metrics"). Never specify exact font family names in the prompt, letting Google Stitch render typography naturally without distortion.
-     * Give me this prompt, allow me to run it in Stitch, and wait for my confirmation before generating subsequent prompts.
+   - Honor provided logo/hex codes or propose 3 distinct, curated visual directions with non-generic typography.
+2. **Google Stitch Mockup Protocol**:
+   - **Screen Inventory**: Map out all screens required across the user journey (e.g. SCR-01 Landing, SCR-02 Auth, SCR-03 Dashboard, SCR-04 Workspace, SCR-05 Settings).
+   - **Full-Fidelity Google Stitch Prompts**: Write ready-to-paste prompts for ALL core screens using the 5-part formula (viewport lock, spatial zones, named elements, locked palette, strict negative constraints—no font family names).
+   - **HTML Screen Vault (`context/screens/`)**: Resulting HTML files are saved into `context/screens/*.html` and inspected 1:1 during subsequent sprint builds.
 
 Wait for my confirmation before proceeding to Stage 4.
 
 ---
 
-### STAGE 4 — THE ONE-FILE-AT-A-TIME GENERATION GATE
-Generate the 11 advanced context files **ONE FILE AT A TIME, NEVER BATCHED**. 
-Generate exactly one file, stop, present it, and wait for my explicit approval (*"Approved" / "Proceed"*) before generating the next.
+### STAGE 4 — INSTANT BATCHED CONTEXT SUITE GENERATION (ZERO QUALITY SACRIFICE)
+Generate the complete 11 advanced context files in a **single comprehensive pass**. Eliminates multi-turn bottlenecks while embedding the full depth of SQL DDL, Row Level Security (RLS) policies, Zod schemas, and 5-state inventories:
 
-Every file must be instructive, complete, and contain zero placeholder stubs (`// TODO`, `Lorem Ipsum`):
-
-1. `context/project-overview.md` — Full PRD-level scope: commercial problem, synthesized User UX Research (persona mental models, JTBD, task friction audits), user profiles, clear navigation, explicit in-scope/out-of-scope, checkable success criteria, narrative core journey walk-through, and narrative data architecture.
+1. `context/project-overview.md` — Full PRD-level scope: commercial problem, synthesized User UX Research, narrative core journey, explicit in-scope/out-of-scope, and checkable success criteria.
 2. `context/user-flows.md` — Sitemap; step-by-step user journeys; task flows; and a complete **5-state inventory per screen** (default, loading, empty, error, edge cases).
-3. `context/design.md` & Core Page Prompts — Locked palette, typography roles, aesthetic personality, plus up to 5 exact Stitch prompts for foundational pages.
-4. `context/architecture.md` — System boundaries, data flow diagram, complete API route specs (request/response DTOs), full SQL database schema with RLS policies, and **Observability Architecture** (Sentry, LogRocket, Datadog with PII scrubbing pipelines).
-5. `context/library-docs.md` — Live-searched documentation excerpts for exact pinned library versions (Radix UI, shadcn/ui, Sentry, LogRocket, Datadog), APIs called, and known version gotchas.
-6. `context/code-standards.md` — Stack-agnostic layer (zero-trust security, error handling with React Error Boundaries hooking into Sentry, PII sanitization helpers, comment discipline) + Stack-specific layer (folder structure, component structure, route handler pattern, constants location).
-7. `context/ui-rules.md` — Visual rules extracted from design: **The Atomic Principle** (Atoms, Molecules, Organisms), grid, typography hierarchy, card conventions, form inputs, button states, tables, and modal patterns.
-8. `context/ui-tokens.md` — Full CSS custom properties in `globals.css` with single-knob cascade (Figma webhook parity): colors, spacing scale, font scales, border radiuses, shadows, and token-level invariants.
-9. `context/ui-registry.md` — Initialized component registry cataloging Atoms, Molecules, and Organisms (maintained via `/imprint`), locking Sprint Design System Immutability.
-10. `context/build-plan.md` — Phased feature list derived from `user-flows.md`. Each feature includes:
-    - Dedicated anchor prompt referencing architecture and token rules.
-    - UI-with-mock-data built using Radix/shadcn atomic primitives before wiring real logic.
-    - Inclusion of all 5 screen states.
-    - **Deterministic 3-Step Verification Runbook** (automated or manual test steps with pass/fail criteria, including telemetry and cascade verification).
-    - Definition of Done (screenshot check, quality-floor check, genericness check, atomic registry compliance).
+3. `context/design.md` & Core Page Prompts — Locked palette, typography roles, aesthetic personality, plus exact Google Stitch prompts for all core screens.
+4. `context/architecture.md` — System boundaries, data flow diagram, complete API route specs, full SQL database schema with Row Level Security (RLS) policies, and Observability Architecture.
+5. `context/library-docs.md` — Live-searched documentation excerpts for exact pinned library versions.
+6. `context/code-standards.md` — Stack-agnostic layer (zero-trust security, 111-concept safeguards, error handling with React Error Boundaries hooking into Sentry) + Stack-specific layer.
+7. `context/ui-rules.md` — Visual rules: The Atomic Principle (Atoms, Molecules, Organisms), grid, typography hierarchy, Anti-Pill Law, plain-English copy contracts.
+8. `context/ui-tokens.md` — Full CSS custom properties in `globals.css` with single-knob cascade (Figma webhook parity).
+9. `context/ui-registry.md` — Initialized component registry cataloging Atoms, Molecules, and Organisms (maintained via `/imprint`).
+10. `context/build-plan.md` — Phased feature list derived from real **User Stories**. Features build pure user flows (zero repetitive boilerplate loading states from foundation) and include **In-Phase API Setup Gates** and deterministic 3-step verification runbooks.
 11. `context/progress-tracker.md` — Living phase status table, Decisions Made During Build log, and Notes section.
 11. `context/progress-tracker.md` — Living phase status table, Decisions Made During Build log, and Notes section.
 ```

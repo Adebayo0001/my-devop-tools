@@ -18,6 +18,7 @@ Before writing or modifying any HTML, CSS, or component code, **read the project
 2. `context/design-tokens.md` (The locked **shadcn/Radix** token system, CSS variables in `globals.css`, typography scale, spacing system, and micro-interactions)
 3. `context/page-specs.md` (Atomic layout definitions [Atoms, Molecules, Organisms] and exact human copy)
 4. `context/build-checklist.md` (The Definition of Done: responsive, a11y, Core Web Vitals, and **Sentry** error tracking)
+5. `context/screens/*.html` (The HTML Screen Vault: inspected for 1:1 design fidelity during build)
 
 If any required context file is missing, **stop and flag it to the developer** rather than guessing.
 

@@ -22,7 +22,8 @@ context/
 ├── site-overview.md       <-- The Brand, Persona & Conversion Intent
 ├── design-tokens.md       <-- The Visual System (Bespoke Palette, Type & Rhythm)
 ├── page-specs.md          <-- Section-by-Section Wireframes & Final Human Copy
-└── build-checklist.md     <-- Mobile, Accessibility & Performance Floor
+├── build-checklist.md     <-- Mobile, Accessibility & Performance Floor
+└── screens/               <-- HTML Screen Vault (Generated Stitch HTML for 1:1 build fidelity)
 ```
 
 ---

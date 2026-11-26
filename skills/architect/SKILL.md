@@ -131,44 +131,25 @@ For complex features involving financial transactions, auth boundaries, or datab
 ---
 
 ### 8. Present the Blueprint & Persist Spec File
-Persist the spec to `docs/specs/NNNN-<feature-slug>/index.md` and present the blueprint:
+
+Save the full technical specification (complete state taxonomy, Zod schemas, SQL DDL, observability spans, and zero-trust proofs) into `docs/specs/NNNN-<feature-slug>/index.md`.
+
+Keep the **visible chat presentation concise, conversational, and plain English**—protecting the user from technical clutter while locking the full architecture in the file:
 
 ```markdown
 ### 📐 Architecture Blueprint: [Feature Name]
-- **Summary**: [What will be built in 1–2 sentences]
-- **Spec File**: `docs/specs/NNNN-[feature-slug]/index.md` (Status: Proposed)
+- **What We Are Building**: [1–2 plain-English sentences explaining the feature and why it matters to the user]
+- **User Screen & Experience**: [Plain-English description of what the user sees, clicks, and experiences on screen]
+- **Design Mockup Reference**: `context/screens/[scr-name].html` (Inspected for 1:1 layout & styling)
+- **External Keys / Credentials Needed**: [None, or specify the exact key needed, e.g. "Stripe Secret Key for .env.local"]
+- **Decisions for You**: [Any key product or business decision required, or "None — ready to build"]
+- **Full Technical Spec**: Locked in `docs/specs/NNNN-[feature-slug]/index.md` (Acceptance criteria, data contracts & security invariants preserved)
 
-#### 📋 100% Requirement Ingestion Matrix (Anti-Lossy Traceability):
-| Detail # | User-Explained Detail / Constraint | Implementation Target | Acceptance Criterion |
-|---|---|---|---|
-| **D-1** | [Verbatim requirement from prompt] | [File / Function / Component] | AC-1 |
-| **D-2** | [Specific business rule or edge case] | [File / Function / Component] | AC-2 |
+#### 🛡️ Protection & Blast-Radius Guarantee:
+- **Target Blast Radius**: [Exact files and functions to modify]
+- **Protected Working Surface ("DO NOT TOUCH")**: [Confirmed pre-existing working features remain 100% untouched]
 
-#### 🛡️ Non-Destructive Blast-Radius Contract (Anti-Regression Lock):
-- **Target Blast Radius**: [Exact files, functions, and lines to modify]
-- **Protected Working Surface ("DO NOT TOUCH")**: [List of existing working components, routes, state hooks to remain 100% untouched]
-- **Surgical Edit Guarantee**: [Confirmed zero wholesale file replacements; surgical block diffs only]
-
-- **UX Research, Jakob's Law & Demographic Alignment**: [Target persona, tech literacy, familiar market pattern adapted]
-- **Plain English Copy & Micro-Copy**: [Exact headline, CTA text, labels passing 12-year-old test; zero leaked plumbing]
-- **Contracts & Schemas**: [Key types/interfaces touched]
-- **Numbered Acceptance Criteria**:
-  - AC-1: [Specific testable condition — tied to D-1]
-  - AC-2: [Specific testable condition — tied to D-2]
-  - AC-3: [Zero-trust ownership condition]
-- **State & Data Flow (Vertical Slice)**: [Where state lives, live/seed data binding, and interactive flow]
-- **Invariants Verified**: [Ownership, RLS, zero-trust boundaries checked]
-- **Observability Architecture**: [Sentry Error Boundary placement, PII scrubbing, Datadog trace budget]
-- **Wireframe & Atomic Hierarchy**:
-  - Wireframe Layout: [Structure, visual weight, 375px mobile collapse]
-  - Typography: [Verified brand font; zero monospace leaks]
-  - Atoms: [shadcn/Radix primitives reused]
-  - Molecules: [Combinations used]
-  - Organisms: [Composed layout structure]
-  - Single-Knob CSS Cascade: [Verified globals.css CSS variable consumption]
-- **Verification Plan & Testing Pre-Check**:
-  - What to look out for: [Visual presentation, 5 states: Default, Loading, Empty, Error, Edge Cases, 375px mobile responsiveness]
-  - Exact Step-by-Step Test Script: [1. Navigate, 2. Trigger, 3. Expected outcome, 4. Telemetry/DB check]
+Confirm with "Proceed" to begin building.
 ```
 
 Wait for human confirmation (*"Proceed" / "Approved"*).

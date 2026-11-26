@@ -23,6 +23,7 @@ Before generating, editing, or refactoring ANY code, **read the project's contex
 7. `context/library-docs.md` (Live-extracted documentation for Radix UI, shadcn, Sentry, LogRocket, and Datadog)
 8. `context/build-plan.md` (The exact feature milestone & 3-step verification runbook)
 9. `context/progress-tracker.md` (Current milestone status & architectural decision log)
+10. `context/screens/*.html` (The HTML Screen Vault: inspected for 1:1 design fidelity during sprint feature development)
 
 If any required context file is missing or out of date, **halt and request or draft it before proceeding**.
 
@@ -100,9 +101,12 @@ If any required context file is missing or out of date, **halt and request or dr
 * **Effortless Usability (Jakob's Law)**: Users expect your product to behave like top apps they already use. Adopt familiar interaction patterns from market leaders (Stripe for billing, Linear/Notion for organization, Airbnb/Google for search and filtering) seamlessly adapted into the project's design system.
 * Zero cognitive friction: maximum 1 primary CTA per viewport, clear visual hierarchy, progressive disclosure for complex actions.
 
-### 14. Agile Working Software Invariant (Upfront Foundation + Methodical Layered Slices)
+### 14. Agile Working Software Invariant (Pure User Stories & Working Software)
 * **Working software is the primary measure of progress**.
-* **Upfront Foundation First**: Dependencies, packages, `globals.css` design tokens, and the Master App Shell (Header/Navbar, Sidebar, Footer, Root Error Boundary) are built upfront before individual features.
+* **Upfront Foundation First**: Dependencies, packages, `globals.css` design tokens, database schemas with Row Level Security (RLS) policies, and the Master App Shell (Header/Navbar, Sidebar, Footer, Root Error Boundary) are built upfront before individual features.
+* **Pure User Journey Sprints (Zero Repetitive Plumbing)**: Once foundation is established, sprints strictly follow the real **User Journey and User Stories** (e.g. Onboarding ➔ Dashboard ➔ Core Workspace). Never dwell on or re-list boilerplate loading states from foundation. The very first feature must be a tangible, interactive screen that the user can point to, click, and use immediately.
+* **Inspect `context/screens/*.html` for 1:1 Fidelity**: When building any screen, inspect the corresponding HTML mockup generated during the Google Stitch phase to mirror layout, spacing, and micro-copy with high fidelity.
+* **In-Phase API Setup Gate**: Whenever a feature requires an external integration (Supabase, Stripe, Resend, AI models), pause at that phase, explain in plain English what key is needed, and let the user add it to `.env.local` before moving to test the live feature.
 * **DEV HARNESS QUARANTINE & PRODUCTION SURFACE INTEGRITY (ANTI-HARNESS-LEAK LAW)**:
   - Internal developer test harnesses, token inspectors (`/test-tokens`), component variant showcases (`/shell-preview`), crash simulators, and mock launchers must **NEVER** enter shared production navigation bars (`HeaderNav` `navItems`), the public root landing page (`app/page.tsx` or `/`), or customer product views.
   - All developer verification harnesses must be isolated under dedicated non-production routes (e.g. `app/(dev)/_workbench/...` or `app/(dev)/_tokens/...`) or automated test suites (`/test`), completely detached from public sitemaps and navigation menus.
@@ -135,11 +139,13 @@ If any required context file is missing or out of date, **halt and request or dr
 
 ## The Complete 6-Phase Daily Build & Lifecycle Discipline
 
-1. **Phase 1: Discovery & Architecture Specs**: Persona mental models, Audience Demographic & Tech Literacy Audit, and Jakob's Law familiar pattern mapping.
-2. **Phase 2: Upfront Foundation (The Shell)**: Core dependencies, package verification, `globals.css` font cascade, and Master App Shell (Navbar, Layout, Footer, root Error Boundary).
-3. **Phase 3: Methodical Layered Sprints (Working Vertical Slices)**:
-   - Build one vertical slice at a time (UI + working state handlers + live seed data).
-   - Inspect all 5 screen states (Default, Loading, Empty, Error, Edge Case).
+1. **Phase 1: Discovery, Google Stitch & Architecture Specs**: 4 Conversational Discovery Pillars, full Google Stitch Screen Inventory & Prompts, and Instant Batched Generation of all 11 context files.
+2. **Phase 2: Upfront Foundation (The Shell & Database)**: Core dependencies, package verification, `globals.css` font cascade, database tables with Row Level Security (RLS) policies, master App Shell (Navbar, Layout, Footer, root Error Boundary), and global loading skeletons.
+3. **Phase 3: Methodical Layered Sprints (Pure User Stories & Working Software)**:
+   - Build one vertical slice at a time along the user journey (UI + working state handlers + live seed data).
+   - Zero repetitive plumbing: do not re-list or re-explain foundation loading states.
+   - Inspect `context/screens/*.html` for 1:1 visual design fidelity.
+   - In-Phase API Setup Gate: Pause to request required third-party keys/credentials so features work live.
    - Run `/imprint` to record newly built components in `ui-registry.md`.
    - Verify single-knob cascade in `globals.css`.
    - Present **Feature Verification & Testing Card** (what was built, what works, what to look out for, deterministic test script).

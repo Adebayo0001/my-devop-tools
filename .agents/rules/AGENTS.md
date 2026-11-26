@@ -28,8 +28,20 @@
     - All developer verification harnesses must be isolated under dedicated non-production routes (e.g. `app/(dev)/_workbench/...` or `app/(dev)/_tokens/...`) or automated test suites (`/test`), completely detached from public sitemaps and navigation menus.
     - The root home page (`app/page.tsx` or `/`) is the sacred public front door. It must strictly render the customer landing page or authentic product entrypoint defined in `project-overview.md` and `user-flows.md`. Overwriting the root page with buttons like *"Open Shell"* or *"Inspect Design Tokens"* is an architectural defect.
     - Zero framework plumbing in public UI: footers and public copy must never display internal framework specifications (e.g., *"Governed by Tier 3 Advanced SaaS Invariants"* or database architecture specs).
-  - **Methodical Layered Slices (Zero Isolated Pages)**: Features are built methodically, layer upon layer, directly connecting into the App Shell. Every feature must be a complete **Vertical Slice** (UI presentation + interactive handlers + 5 states + live/seed data).
+  - **Methodical Layered Slices (Pure User Stories & Journey)**:
+    - Features are built methodically, layer upon layer along the real **User Journey and User Stories** (e.g. Onboarding, Dashboard, Workspace).
+    - **Zero Repetitive Plumbing**: Once the upfront foundation (App Shell, design tokens, DB tables with Row Level Security [RLS], global loading skeletons) is established, sprints NEVER dwell on or re-list boilerplate loading states. The very first feature must be a tangible, working, clickable screen that the user can immediately use.
+    - **Inspect `context/screens/*.html` for 1:1 Fidelity**: When building any screen, inspect the corresponding HTML mockup generated during the Google Stitch phase to mirror layout, spacing, and micro-copy with high fidelity.
+    - **In-Phase API Setup Gate**: Whenever a feature requires an external integration (Supabase, Stripe, Resend, AI models), pause at that phase, explain in plain English what key is needed, and let the user add it to `.env.local` before moving to test the live feature.
+    - Every feature must be a complete **Vertical Slice** (UI presentation + interactive handlers + 5 states + live/seed data).
   - **The Stop & Test Gate**: After each feature is built, the agent **STOPS COLD**, outputs the Feature Verification Card, and awaits verified test confirmation before moving forward.
+* **THE 4 CONVERSATIONAL DISCOVERY PILLARS (NO OVERWHELM, HIGH COVERAGE)**:
+  - Discovery is structured into 4 conversational pillars with helpful examples: (1) Product Mission & Real Problem, (2) Brand Identity & Visual Personality (always ask for logo/colors), (3) People, Roles & Access Control (defining DB tables & RLS upfront), and (4) Crucial Operations & Hidden Needs (payments, transactional emails, webhooks, covering the 111-concept production safeguards quietly).
+* **THE GOOGLE STITCH UI PIPELINE (PRODUCT DESIGNER MODE)**:
+  - Generate full-fidelity Google Stitch prompts for all screens across the user journey.
+  - Generated HTML files (or screenshots) are saved in `context/screens/<screen-name>.html` and used as the 1:1 design blueprint during development sprints.
+* **INSTANT BATCHED CONTEXT GENERATION (TIER 3 / ALL TIERS)**:
+  - All context files are generated in a single comprehensive pass without quality sacrifice, eliminating slow multi-turn approval bottlenecks.
 * **THE ATOMIC DESIGN INVARIANT (ZERO COMPONENT GUESSING)**:
   - All workflow UI must be built on **shadcn/ui** powered by headless **Radix UI** primitives from established color variables. No interactive component may ever be guessed, improvised, or hand-rolled from a styled `div`.
   - Classify all UI components strictly into the Atomic hierarchy:
@@ -84,7 +96,7 @@ Reference the toolkits located in `C:\Users\user\Desktop\My DevOp Tools\`:
 |---|---|---|---|
 | **Tier 1: Mini-Website** | 2–3 page sites, landing pages, portfolios | 4 Lean Files (`site-overview`, `design-tokens`, `page-specs`, `build-checklist`) | `01-Mini-Website-Flow/mini-AGENTS.md` |
 | **Tier 2: Standard Solid** | Standard full-stack CRUD apps, dashboards | 8 Files (Solid Context Suite) | `02-Standard-Solid-Flow/AGENTS.md` |
-| **Tier 3: Advanced SaaS** | Multi-tenant SaaS, fintech, enterprise apps | 11 Files (1-by-1 approval, runbooks, `.ai-memory`) | `03-Advanced-Production-Flow/advanced-AGENTS.md` |
+| **Tier 3: Advanced SaaS** | Multi-tenant SaaS, fintech, enterprise apps | 11 Files (Batched 1-pass generation, runbooks, `.ai-memory`) | `03-Advanced-Production-Flow/advanced-AGENTS.md` |
 | **Tier 4: Intake & Redesign** | WIP intake or live website redesign | Forensic Audit / Logic Freeze Spec | `04-Redesign-and-Intake-Flow/live-website-redesign-protocol.md` |
 
 ---

@@ -43,39 +43,38 @@ When invoked, inspect the user's initial description or ask the Calibration Ques
 
 ---
 
-### Stage 2: Intake, Financial Scope & Autonomous UX Secondary Research Engine
+### Stage 2: The 4 Conversational Discovery Pillars (No Overwhelm, High Coverage)
 
-Execute discovery sequentially:
+Instead of tedious single-question interrogation loops or overwhelming technical walls, discovery is structured into **4 conversational pillars with helpful examples**, allowing the user to provide critical information they might not have thought of without feeling fatigued:
 
-#### 1. Phase 0 & Phase 1 Intake & Financial Scope Inquiry
-- Transform raw human intent (brief, voice note transcript, screenshots) into structured discovery.
-- **Financial & Operational Scope Inquiry**:
-  Ask the builder:
-  > *"What is the financial and operational scope of this project?*  
-  > *A) Bootstrapped MVP / Lean Startup (target near-$0/month recurring SaaS burn using generous free tiers and consolidated BaaS, without compromising production quality)*  
-  > *B) Funded Startup / Enterprise Client (ready to invest in premium infrastructure from Day 1 for maximum high-availability and reliability)"*
-- **Strict Assumption Flagging**: Do not invent missing facts. Flag every unverified assumption and open question explicitly.
+#### Pillar 1: Product Mission, Target Users & Real Problem
+- *Core Purpose*: What commercial problem or operational bottleneck is being solved?
+- *Target User*: Who is the primary user, what is their technical fluency (non-technical operator vs executive vs engineer), and what is their daily digital environment?
+- *Narrative User Journey*: What is the ideal flow from landing on the product to the core "aha!" moment?
 
-#### 2. The Autonomous UX Secondary Research Engine (Runs Under the Hood)
-Drawing on public, verifiable data sources (Reddit discussions, App Store / Google Play reviews, G2/Trustpilot feedback, Product Hunt launches, Quora/Stack Exchange threads, Google Trends, industry analyst reports), the agent autonomously synthesizes research-grade intelligence:
-1. **User Intelligence & Demographic Audit**:
-   - Age demographics, seniority, device profiles, daily digital habits.
-   - **Technical Literacy Calibration**: Are users non-technical operators, busy executives, or engineers? Calibrate cognitive load accordingly (max 1 primary CTA per viewport, progressive disclosure).
-2. **Jakob's Law Familiar Market Pattern Mapping**:
-   - Map which recognized, top-tier applications (Stripe, Linear, Notion, Airbnb) users already spend their time on.
-   - Select proven interaction paradigms for search, filtering, forms, and workflows to ensure zero cognitive friction.
-3. **Jobs-To-Be-Done (JTBD) Matrix**: Minimum 5–7 distinct jobs categorized across Functional, Emotional, and Social levels.
-4. **Pain Points & Frustrations Hierarchy**: Minimum 8 real-world pain points categorized by severity with **Verbatim User Language** from public forums.
-5. **Existing Mental Models & Conventions**: Established user expectations vs product reality.
-6. **Competitive Landscape & Whitespace Mapping**: Tier 1 (Direct), Tier 2 (Indirect), Tier 3 (Category Alternatives) with positioning whitespace.
-7. **Search & Language Intelligence (Human Copywriting Vault)**:
-   - High-intent queries and verbatim words users use to describe problems and ideal solutions.
-   - **Strict Copy Domain Separation**: Human, benefit-driven copy that passes the 12-Year-Old/Executive Litmus Test. Banning developer plumbing jargon (*"dispatch gates"*, etc.) from ever entering UI copy strings.
-8. **Strategic Priorities**: Opportunity areas, hypothesis statements, and "How Might We" (HMW) design sprint statements.
+#### Pillar 2: Brand Identity & Visual Atmosphere (Always Inquire Upfront)
+- *Existing Assets*: *"Do you have an existing brand identity, logo, or color scheme to provide/upload, or are we starting completely from scratch?"*
+- *Atmosphere & Mood*: Crisp light mode, deep dark mode, or clean modern hybrid? Authoritative and corporate, energetic, or clinical and precise?
+- *Typography Preferences*: Any required brand fonts, or should tailored non-generic pairings be proposed?
+
+#### Pillar 3: People, Roles & Access Control (Plain-English Database & RLS from Day 1)
+- *User Types*: Who interacts with this app? (e.g., Just customers? Team managers? Platform administrators?)
+- *Permission Boundaries*: What can each person see or do? (e.g., *"Customers can only view and edit their own projects; Admins can review all projects, manage billing, and delete users."*)
+- *Authentication Flow*: How do they sign in? (Email + password, Google one-click, magic links?)
+- *Data Architecture*: What core records need to be saved, and where does data sovereignty reside? (Directly defines PostgreSQL tables and Row-Level Security [RLS] policies).
+
+#### Pillar 4: Crucial Operations & Hidden Needs (Quietly Enforcing the 111-Item Production Safeguards)
+- *Financial & Operational Scope*: Bootstrapped MVP ($0/month recurring SaaS burn using generous free tiers) vs Funded Startup / Enterprise (high-availability infrastructure from Day 1).
+- *Payments & Subscriptions*: Are there paid tiers, one-time checkouts, or trials?
+- *Transactional Communications*: Do users need automated welcome emails, password resets, or payment receipts?
+- *File Storage & Uploads*: Will users upload images, PDFs, or files? Who has access to view/download them?
+- *External APIs & Webhooks*: What third-party platforms must connect?
+- *The Autonomous UX Secondary Research Engine (Runs Under the Hood)*:
+  Drawing on public, verifiable data sources (Reddit, App Store reviews, G2/Trustpilot, Product Hunt, Google Trends), the agent synthesizes research-grade intelligence (Jakob's Law market patterns, 3-level JTBD, pain point hierarchy, verbatim human copy vault) quietly into `context/project-overview.md`.
 
 ---
 
-### Stage 3: Tech Stack Decision & Tool Consolidation (RAG-Verified & Latest Versions)
+### Stage 3: Tech Stack Decision & Tool Consolidation (Plain English Rationale)
 
 Propose the production tech stack following these non-negotiable standards:
 
@@ -131,26 +130,30 @@ The agent MUST stop and ask the builder the **Visual Intake Inquiries**:
 
 ---
 
-### Stage 5: Google Stitch Visual Mockup Generation
+### Stage 5: Google Stitch UI Pipeline (Product Designer Mode)
 
 Once the visual direction and color palette are locked, prepare visual mockups using the calibrated Google Stitch protocol:
 
-#### 1. Mandatory Pre-Prompt Brief Overview
-Before writing the first page prompt, output a concise **Project Visual Overview**:
-- Product mission and core user persona
-- Locked color tokens (Surface, Elevated Card, Primary CTA, Accent, Text)
-- Visual atmosphere, spatial zoning, and density rules (minimalist, high-converting, professional)
+#### 1. Mandatory Screen Inventory Mapping
+Map every screen required across the user journey based on user stories:
+- `SCR-01`: Landing / Public Front Door
+- `SCR-02`: Authentication & Onboarding (Sign-In / Sign-Up)
+- `SCR-03`: Primary User Dashboard / Main Overview
+- `SCR-04`: Core Interactive Workspace / Task Detail Screen
+- `SCR-05`: Account, Team & Billing Settings
 
-#### 2. Deterministic Google Stitch Prompt (First Core Screen Only)
-Generate the ready-to-paste prompt for the **first foundational screen only** using the 5-part formula (calibrated with the spatial grid geometry from `design-vault/`):
+#### 2. Full-Fidelity Google Stitch Prompts (For All Screens)
+Generate ready-to-paste prompts for **all** core screens using the 5-part formula (calibrated with spatial grid geometry from `design-vault/`):
 1. **Viewport & Framing Lock**: `Flat 2D desktop application screenshot, 16:9 widescreen, 1920x1080 resolution, direct front-facing view, NO 3D perspective tilt, NO laptop mockup frame, NO claymockups.`
 2. **Spatial Zone Architecture**: Explicit pixel/percentage layout divisions (e.g. `Zone 1: Left 280px navigation rail. Zone 2: Center main workspace. Zone 3: Right 360px inspector sidebar.`).
-3. **Named Element Inventory**: Enumerate exact cards, buttons, inputs, and headings.
+3. **Named Element Inventory**: Enumerate exact cards, buttons, inputs, form labels, and headings down to granular details.
 4. **Locked Palette**: Specify exact hex codes from `design.md`.
 5. **No Font Names**: Describe typographic style and hierarchy (e.g. *"clean geometric sans-serif headings, high-legibility interface typography, crisp tabular metrics"*). **DO NOT** name specific font families like Syne or Inter in the prompt, letting Google Stitch render typography naturally without diffusion distortion.
 6. **Strict Negative Constraints**: `STRICT NEGATIVE CONSTRAINTS: NO analytics charts, NO line graphs, NO bar charts, NO floating decorative bubbles, NO colorful gradients, NO mobile frames, clean minimalist professional interface only.`
 
-Provide this prompt to the builder, allow them to run it in Google Stitch, and await confirmation or adjustments before generating subsequent core screen prompts.
+#### 3. The HTML Screen Vault (`context/screens/`)
+- Save generated HTML screens (or screenshots) directly into `context/screens/<screen-name>.html` (e.g. `context/screens/scr-01-landing.html`, `context/screens/scr-03-dashboard.html`).
+- During sprint phases, the agent directly reads and inspects each HTML file to replicate layout, spacing, and micro-copy with 1:1 visual fidelity.
 
 ---
 
@@ -165,14 +168,16 @@ Draft the structural backbone:
 
 ---
 
-### Stage 7: Context Suite Generation & Repo Lock-In
+### Stage 7: Instant Batched Context Generation & Repo Lock-In
+
+All context files are generated in a **single comprehensive pass**, completely eliminating multi-turn approval bottlenecks while maintaining 100% technical depth:
 
 Read the schema definitions from the selected Tier's context generation framework:
 - For Tier 1: `references/tier-1-mini/mini-context-framework.md`
 - For Tier 2: `references/tier-2-solid/solid-context-file-generation-framework-2.md`
 - For Tier 3: `references/tier-3-advanced/advanced-context-framework.md`
 
-#### Files Generated:
+#### Files Generated (All-at-Once Pass):
 1. **Governing Rulebooks & Native IDE Discovery Shims**:
    - Create `.agents/` directory in the project root: `.agents/rules/AGENTS.md` and `.agents/skills/`.
    - Stamp canonical `AGENTS.md` in the project root.
@@ -183,8 +188,8 @@ Read the schema definitions from the selected Tier's context generation framewor
      - `GEMINI.md` (Native for Antigravity IDE).
 2. **Write Context Files into `context/`**:
    - `context/project-overview.md` (or `site-overview.md`): PRD, User Personas, Synthesized UX Research (JTBD, Pain Points, Verbatim Copy Quotes, Demographic & Tech Literacy Audit, Jakob's Law Market Patterns).
-   - `context/architecture.md`: System topology, DB schemas, Sentry/Datadog observability, Evergreen auto-update configuration, 2-Stage Evolution Roadmap.
-   - `context/design.md`: Approved visual direction, locked color tokens, and non-generic typography hierarchy with **Strict Monospace Quarantine**.
+   - `context/architecture.md`: System topology, DB schemas with Row Level Security (RLS) policies, Sentry/Datadog observability, Evergreen auto-update configuration, 2-Stage Evolution Roadmap.
+   - `context/design.md`: Approved visual direction, locked color tokens, non-generic typography hierarchy with **Strict Monospace Quarantine**, and Google Stitch prompt registry.
    - `context/ui-tokens.md`: CSS variables bound to `globals.css` (Single-knob cascade, `--font-sans` bound to all UI tokens).
    - `context/ui-rules.md`: Atomic composition rules, forms, dialogs, Wireframe Element Hierarchy, Anti-Pill Law, plain-English copy contracts.
    - `context/ui-registry.md`: Living component catalog classified by `[ATOM]`, `[MOLECULE]`, `[ORGANISM]` initialized with shadcn/Radix primitives.
@@ -192,8 +197,8 @@ Read the schema definitions from the selected Tier's context generation framewor
    - `context/library-docs.md`: Live documentation excerpts verified via RAG/MCP.
    - `context/build-plan.md` (or `page-specs.md`): Structured into the **Complete 6-Phase Production Lifecycle**:
      - *Phase 1: Discovery & Architecture Specs*
-     - *Phase 2: Upfront Foundation (The Shell)* — dependencies, packages, `globals.css` tokens, master App Shell (Navbar, Layout, Footer, root Error Boundary). **Enforce Dev Quarantine**: all verification harnesses (token swatches, component matrices) must be quarantined to `app/(dev)/_workbench/...` or test suites—strictly forbidden from entering `HeaderNav` or the public landing page.
-     - *Phase 3: Methodical Layered Sprints* — vertical slices (UI + working state handlers + live seed data + 5 screen states) with mandatory Stop & Test Gate after each feature.
+     - *Phase 2: Upfront Foundation (The Shell)* — dependencies, packages, `globals.css` tokens, master App Shell (Navbar, Layout, Footer, root Error Boundary), DB tables with RLS policies, and global loading skeletons. **Enforce Dev Quarantine**: all verification harnesses (token swatches, component matrices) must be quarantined to `app/(dev)/_workbench/...` or test suites—strictly forbidden from entering `HeaderNav` or the public landing page.
+     - *Phase 3: Methodical Layered Sprints (Pure User Stories & Working Software)* — vertical slices built along the user journey (UI + working state handlers + live seed data + 5 screen states) with mandatory Stop & Test Gate after each feature. **Zero repetitive plumbing**: do not repeat foundation loading states or boilerplates. Inspect `context/screens/*.html` for 1:1 visual fidelity. Includes **In-Phase API Setup Gates** (pause to request external keys so features work live immediately).
      - *Phase 4: Production Hardening & Security Audit* — CWV (LCP < 2.5s), zero-trust sweep, `.env.production`.
      - *Phase 5: Brand Launch & Live Cutover* — `npm run build` verification, DNS/domain, SSL, OpenGraph cards.
      - *Phase 6: Formal Handover, Vault & Post-Launch Ops* — GitHub transfer, 1Password vault, Loom admin guide, Sentry live telemetry, 30-day warranty log.

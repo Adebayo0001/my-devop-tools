@@ -173,7 +173,7 @@ try {
 }
 
 Write-Host '==========================================================' -ForegroundColor Cyan
-Write-Host ' All 14 skills successfully synchronized across your AI IDEs!' -ForegroundColor Cyan
+Write-Host ' Universal DevOps Skills Suite synchronized across your AI IDEs!' -ForegroundColor Cyan
 Write-Host '  1. /kickoff                  (Discovery, UX research, 4-tier context generator)' -ForegroundColor White
 Write-Host '  2. /intake                   (Tier 4 codebase audit and live site redesign)' -ForegroundColor White
 Write-Host '  3. /redesign                 (Surgical UI elevation & human designer polish under Logic Freeze)' -ForegroundColor White
@@ -186,6 +186,7 @@ Write-Host '  9. /document                 (Grounded technical writer: PRs, chan
 Write-Host ' 10. /sync                     (Post-merge progress tracker & spec status synchronizer)' -ForegroundColor White
 Write-Host ' 11. /recover                  (Circuit breaker on 1st failed bugfix & 3-tier RCA)' -ForegroundColor White
 Write-Host ' 12. /remember                 (Cold session persistence to memory.md)' -ForegroundColor White
-Write-Host ' 13. /broadcast                (Proof-of-work authority marketing & case studies)' -ForegroundColor White
-Write-Host ' 14. adebayo-authority-engine  (Positioning, commercial offers and voice rules)' -ForegroundColor White
+if (Test-Path (Join-Path $Source 'adebayo-authority-engine')) {
+    Write-Host ' [+] Personal Authority & Broadcast Engines (Local Active)' -ForegroundColor Green
+}
 Write-Host '==========================================================' -ForegroundColor Cyan

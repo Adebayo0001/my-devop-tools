@@ -53,13 +53,23 @@ These rules apply unconditionally across every tier, project, and file:
   - **Strict Quarantine Routes**: All developer verification harnesses created during Phase 2 must be isolated under dedicated non-production routes (e.g. `app/(dev)/_workbench/...` or `app/(dev)/_tokens/...`) or automated test suites (`/test`), completely detached from public sitemaps and navigation menus.
   - **The Sacred Root Entrypoint**: The root home page (`app/page.tsx` or `/`) is the public, client-facing front door of the product. It must strictly render the authentic customer landing page or application entrypoint as defined in `project-overview.md` and `user-flows.md`. Overwriting the root page with buttons like *"Open Shell"* or *"Inspect Design Tokens"* is an architectural defect.
   - **Zero Leaked Framework Plumbing**: Public UI and footers must NEVER display internal framework specifications (e.g., *"Governed by Tier 3 Advanced SaaS Invariants"* or database architecture specs).
-* **METHODICAL LAYERED VERTICAL SLICES (ZERO ISOLATED PAGES)**:
-  - Features must be built methodically, layer upon layer, directly connecting into the App Shell. No page or feature may ever be built as an isolated, disconnected mock island.
+* **METHODICAL LAYERED VERTICAL SLICES (PURE USER STORIES & WORKING SOFTWARE)**:
+  - Features must be built methodically, layer upon layer along the real **User Journey and User Stories** (e.g. Onboarding ➔ Dashboard ➔ Core Workspace).
+  - **Zero Repetitive Plumbing**: Once the upfront foundation (App Shell, design tokens, DB tables with Row Level Security [RLS], global loading skeletons) is established, sprints NEVER dwell on or re-list boilerplate loading states. The very first feature must be a tangible, working, clickable screen that the user can immediately use.
+  - **Inspect `context/screens/*.html` for 1:1 Fidelity**: When building any screen, inspect the corresponding HTML mockup generated during the Google Stitch phase to mirror layout, spacing, and micro-copy with high fidelity.
+  - **In-Phase API Setup Gate**: Whenever a feature requires an external integration (Supabase, Stripe, Resend, AI models), pause at that phase, explain in plain English what key is needed, and let the user add it to `.env.local` before moving to test the live feature.
   - Every feature must be a complete **Vertical Slice**: UI presentation + real interactive handlers + 5 screen states (Default, Loading, Empty, Error, Edge Case) + seed/live data binding.
   - The application remains in a runnable, production-mode state from Day 1.
 * **THE UNBREAKABLE STOP & VERIFICATION GATE**:
   - The agent is **strictly forbidden** from building multiple features in one blind pass.
   - After completing each feature, the agent must **STOP COLD**, output the structured Feature Verification & Testing Card, and await user confirmation (or automated browser agent verification) before proceeding to the next feature.
+* **THE 4 CONVERSATIONAL DISCOVERY PILLARS (NO OVERWHELM, HIGH COVERAGE)**:
+  - Discovery is structured into 4 conversational pillars with helpful examples: (1) Product Mission & Real Problem, (2) Brand Identity & Visual Personality (always ask for logo/colors upfront), (3) People, Roles & Access Control (defining DB tables & Row Level Security [RLS] upfront), and (4) Crucial Operations & Hidden Needs (payments, transactional emails, webhooks, covering the 111-concept production safeguards quietly).
+* **THE GOOGLE STITCH UI PIPELINE (PRODUCT DESIGNER MODE)**:
+  - Generate full-fidelity Google Stitch prompts for all screens across the user journey.
+  - Generated HTML files (or screenshots) are saved in `context/screens/<screen-name>.html` and used as the 1:1 design blueprint during development sprints.
+* **INSTANT BATCHED CONTEXT GENERATION (TIER 3 / ALL TIERS)**:
+  - All context files are generated in a single comprehensive pass without quality sacrifice, eliminating slow multi-turn approval bottlenecks.
 
 ### The Anti-Drift Invariant (UI Registry & Atomic Principle)
 * Models naturally drift after 2–3 build passes, abandoning tokens and inventing rogue styles.
@@ -206,7 +216,7 @@ Whenever starting or working in a project, calibrate rigor based on the project'
 |---|---|---|---|
 | **Tier 1** | 2–3 Page Site, Portfolio, Landing Page | 4 Lean Files (`site-overview`, `design-tokens`, `page-specs`, `build-checklist`) | `01-Mini-Website-Flow/mini-AGENTS.md` |
 | **Tier 2** | Standard Full-Stack App, Dashboard | 8 Files (Standard Solid Context Suite) | `02-Standard-Solid-Flow/AGENTS.md` |
-| **Tier 3** | Complex SaaS, Multi-Tenant, Mission-Critical | 11 Files (1-at-a-time gate + Runbooks + `.ai-memory`) | `03-Advanced-Production-Flow/advanced-AGENTS.md` |
+| **Tier 3** | Complex SaaS, Multi-Tenant, Mission-Critical | 11 Files (Batched 1-pass generation + Runbooks + `.ai-memory`) | `03-Advanced-Production-Flow/advanced-AGENTS.md` |
 | **Tier 4** | Ingesting WIP or Live Site Redesign | Forensic Audit / Frozen Logic Spec | `04-Redesign-and-Intake-Flow/live-website-redesign-protocol.md` |
 
 ---
