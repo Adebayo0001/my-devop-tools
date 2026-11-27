@@ -151,10 +151,12 @@ If any required context file is missing or out of date, **halt and request or dr
    - Present **Feature Verification & Testing Card** (what was built, what works, what to look out for, deterministic test script).
    - Stop and wait for user or automated browser test confirmation. Feature remains `VERIFYING` until PASS.
 4. **Phase 4: Production Hardening, Cybersecurity & Legal Compliance Audit**:
-   - Run Core Web Vitals audit (LCP < 2.0s, INP < 150ms, CLS < 0.05).
-   - Zero-trust BOLA/IDOR ownership checks and OWASP Top 10 security review.
+   - Audit against `06-Security-and-Legal-Compliance/compliance-audit-checklist.md` and `production-readiness-security-legal-handbook.md`.
+   - OWASP ASVS 5.0.0 Level 2 verification, CISA KEV scans, and PCI DSS 4.0.1 Req 6.4.3 payment script integrity.
+   - Zero-trust BOLA/IDOR ownership checks and Backend-for-Frontend (BFF) cookie session encapsulation.
    - HTTP security headers (CSP, HSTS, X-Content-Type-Options: nosniff, X-Frame-Options: DENY, Permissions-Policy).
-   - Statutory legal pages (Privacy Policy, Terms of Service, Accessibility Statement, Refund Policy, Impressum) and Cookie consent with equal-weight Reject All verified.
+   - Nigerian statutory governance: CAC CAMA 2020 corporate imprint (RC number, registered office address, directors; enforced August 1, 2026), FCCPA 2018 consumer rules (no blanket "No Refund" text; checkout price matching; itemized receipts), NDPC GAID 2025 tiering & CAR schedule, and ngCERT 72h cyber reporting readiness.
+   - Global standards: GPC automation (`/.well-known/gpc.json`), Responsible Disclosure (`/.well-known/security.txt`), UK DUAA 30-day complaints form, and EAA 2025 WCAG 2.1 AA accessibility.
    - DSAR workflows (Account Deletion & Data Export) and AI model training opt-outs verified.
    - Production environment variable sanitization (`.env.production`).
 5. **Phase 5: Brand Launch & Live Production Cutover**:

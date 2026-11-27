@@ -69,12 +69,14 @@ These rules apply unconditionally across every tier, project, and file:
     2. **Pillar 2: Brand Identity & Visual References (Always Inquire Upfront)**: Inquire about existing brand colors, logo, or visual references (competitor URLs, moodboards, screenshots, Dribbble comps).
        - *Reference-to-Concept Synthesis*: Cross-reference reference materials with `design-vault/` archetypes to synthesize a **unique, non-generic design concept** (zero cloning, zero generic AI defaults).
        - *Live In-Chat Color Palette & Rendered UI Preview*: Right in the kickoff chat, output the exact CSS color combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so the builder visually confirms the aesthetic before locking tokens.
-    3. **Pillar 3: People, Roles & Access Control (Demystifying Database & RLS)**: Who logs in, role hierarchy, ownership boundaries, and database tables + Row Level Security (RLS) policies from Day 1.
-    4. **Pillar 4: Crucial Operations, Privacy & Legal Safeguards (Quietly Enforcing the 111 Production Invariants)**:
+    3. **Pillar 3: People, Roles & Access Control (Demystifying Database, BFF & RLS)**: Who logs in, role hierarchy, ownership boundaries, and database tables + Row Level Security (RLS) policies from Day 1. Mandate Backend-for-Frontend (BFF) session token encapsulation and non-guessable UUIDv4s.
+    4. **Pillar 4: Crucial Operations, Privacy & Statutory Legal Safeguards (Enforcing the 111 Production Invariants)**:
        - Scope: Bootstrapped MVP ($0/mo SaaS burn) vs Scale infrastructure.
-       - Legal Jurisdictions & Regulatory Compliance: Target regions (EU/GDPR, US/CCPA, Nigeria/NDPA 2023, UK/ICO). Mandatory statutory Cookie Consent Banner, Impressum (DACH/Germany), and Terms of Sale/Refund policies.
+       - Nigerian Statutory Governance: NDPC GAID 2025 tiering (UHL/EHL/OHL, March 31 CAR filing), CAC CAMA 2020 legal imprint (RC number, registered address, directors; enforced August 1, 2026), FCCPA 2018 consumer rules (no blanket "No Refund" text; checkout price matching; itemized receipts), and ngCERT 72h cyber disruption reporting (Cybercrimes Act 2024).
+       - Extraterritorial Frameworks: EU GDPR, UK DUAA 2025 (30-day complaints form), European Accessibility Act (EAA 2025 WCAG 2.1 AA), and California CCPA/CPRA.
+       - Technical Privacy Protocols: Global Privacy Control (GPC `Sec-GPC` / `/.well-known/gpc.json`) and Responsible Disclosure (`/.well-known/security.txt` with authorized scope under Cybercrimes Act s.6(2)).
        - Data Protection & AI Training: Opt-out toggle for AI model training (`[ ] Allow my data to train AI models`), Zero Data Retention (ZDR) third-party AI APIs, and DSAR (Self-serve Account Deletion & Data Export).
-       - Operations: Payments, transactional emails, file uploads, webhooks/APIs.
+       - Operations: Payments (PCI DSS v4.0.1 script integrity Req 6.4.3 & 11.6.1 tamper detection), transactional emails, file uploads, and 72-hour incident response runbook.
 * **THE GOOGLE STITCH UI PIPELINE (PRODUCT DESIGNER MODE & 111-SYSTEM SCREEN MAPPING)**:
   - **Comprehensive 111-System Screen Inventory**: A production application requires complete screen coverage derived from the **111 Core Systems Concepts**:
     - `SCR-01: Landing & Conversion` (Value Prop, Pricing & Comparison, FAQ)

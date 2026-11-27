@@ -21,10 +21,14 @@ Guide me through discovery using 4 conversational pillars with helpful examples,
    - What core commercial problem is being solved? Who is the primary paying user, what is their technical fluency, and what is the end-to-end user journey from first landing to the core "aha!" moment?
 2. Pillar 2: Brand Identity & Visual References (Always Inquire Upfront)
    - Do we have existing brand guidelines, logo files, or visual references (competitor URLs, moodboards, screenshots, Dribbble comps)? If references are provided, synthesize a unique, non-generic design concept matching `design-vault/` archetypes (zero cloning, zero generic AI defaults). Right in the kickoff chat, output the exact CSS color combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so we visually confirm the aesthetic before locking tokens.
-3. Pillar 3: People, Roles & Access Control (Plain-English Database & RLS)
-   - Who logs in (Customers, Team Managers, Platform Admins)? What can each user see or edit? (e.g., "Customers only see their own projects; Admins review all projects, manage billing, and delete users"). This defines database tables, ownership boundaries, and Row Level Security (RLS) policies from Day 1.
-4. Pillar 4: Crucial Operations, Privacy & Legal Safeguards (Quietly Enforcing the 111-Item Production Safeguards)
-   - Will users make payments or subscriptions? What is the statutory refund / cancellation policy ("Click to Cancel" rule)? Which legal jurisdictions are targeted (EU/GDPR, US/CCPA, Nigeria/NDPA 2023, UK/ICO)? Does the app need a statutory Cookie Consent banner and Impressum (DACH/Germany)? Will user data be processed by AI models (mandatory opt-out toggle required)? Does the platform provide self-serve account deletion ("Right to be Forgotten") and data export (JSON/CSV)? Is this a lean MVP ($0/month free-tier target) or a funded scale architecture?
+3. Pillar 3: People, Roles & Access Control (Plain-English Database, BFF & RLS)
+   - Who logs in (Customers, Team Managers, Platform Admins)? What can each user see or edit? Defines database tables, non-guessable UUIDv4s, Backend-for-Frontend (BFF) session token encapsulation, and Row Level Security (RLS) policies from Day 1.
+4. Pillar 4: Crucial Operations, Privacy & Statutory Legal Safeguards (Enforcing the 111 Production Invariants)
+   - Scope: Bootstrapped MVP ($0/month free tier target) vs Scale infrastructure.
+   - Nigerian Statutory Governance: Classify under NDPC GAID 2025 (UHL, EHL, OHL) for CAR filing by March 31. Incorporate CAC CAMA 2020 imprint (RC number, registered office address, directors; enforced August 1, 2026). Comply with FCCPA 2018 consumer rules (no blanket "No Refund" text; checkout price matching; itemized receipts) and ngCERT 72h cyber reporting.
+   - Global Standards: EU GDPR, UK DUAA 2025 (30-day complaints form), EAA 2025 (WCAG 2.1 AA), CCPA/CPRA, Global Privacy Control (`Sec-GPC` / `/.well-known/gpc.json`), and `/.well-known/security.txt`.
+   - Data Protection & AI Model Training: Mandatory opt-out toggle (`[ ] Allow my data to train AI models`), Zero Data Retention (ZDR) third-party AI APIs, and self-serve DSAR (Account Deletion & Data Export).
+   - Payments & Operations: PCI DSS v4.0.1 script integrity (Req 6.4.3 & 11.6.1), transactional emails, file uploads, and 72-hour incident response runbook.
 
 STAGE 2 — TECH STACK DECISION, TOOL CONSOLIDATION & PLAIN-ENGLISH RATIONALE
 Based on my answers, propose a stack explained in plain, everyday English:

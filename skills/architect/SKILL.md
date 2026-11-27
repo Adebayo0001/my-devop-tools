@@ -30,7 +30,10 @@ Invoke with `/architect` before starting any complex feature — or applied auto
 11. **The Zero-Assumption Clarification Invariant (Anti-Guessing Law)**: Never guess user intent, data models, or unstated business rules. If a request is ambiguous or underspecified, the architect MUST STOP and invoke the **Clarification Gate** with concrete options.
 12. **The Non-Destructive Blast-Radius Invariant (Anti-Regression Law)**: When modifying existing features, lock the **Target Blast Radius** and explicitly inventory the **Protected Working Surface ("DO NOT TOUCH")**. Wholesale file rewrites are strictly forbidden; only surgical block diffs are permitted. Zero collateral regressions on working features.
 13. **Dev Harness Quarantine & Production Surface Integrity Invariant (Anti-Harness-Leak Law)**: All developer verification harnesses (token inspectors, component showcases, crash simulators, and mock launchers) must be strictly quarantined to dedicated internal routes (`app/(dev)/_workbench/...` or automated test suites). Shared navigation bars (`HeaderNav` `navItems`) and the public root landing page (`app/page.tsx` or `/`) are sacred customer surfaces and must NEVER be polluted with dev verification controls or internal plumbing specs.
-14. **The Mandatory Pre-Flight Grounding Mandate (Anti-Blind-Coding Law)**: An agent is strictly forbidden from editing code until it outputs the Pre-Flight Grounding Card citing 3 governing invariants from `AGENTS.md`, target blast radius, and verifying that test harnesses remain strictly quarantined.
+14. **Backend-for-Frontend (BFF) & Phishing-Resistant Auth Invariant**: Browser JavaScript must never hold raw bearer tokens or JWTs in `localStorage`/`sessionStorage`. Tokens are encapsulated server-side via the BFF pattern and passed via `HttpOnly; Secure; SameSite=Lax` cookies. OAuth 2.1 must enforce PKCE. Privileged administrative roles mandate WebAuthn/FIDO2 passkeys.
+15. **Vulnerability Class Elimination & DTO Allowlists**: Architect solutions that ban the entire class of vulnerability rather than patching single lines. Explicit Data Transfer Object (DTO) field allowlists must be enforced on all mutations to eliminate Mass Assignment vulnerabilities.
+16. **Forward-Compatible Staged Database Migrations**: All schema updates must follow a two-phase rollout (additive phase first, historic backfill, switch reads, deprecation phase in subsequent release) paired with automated pre-deploy snapshots.
+17. **The Mandatory Pre-Flight Grounding Mandate (Anti-Blind-Coding Law)**: An agent is strictly forbidden from editing code until it outputs the Pre-Flight Grounding Card citing 3 governing invariants from `AGENTS.md`, target blast radius, and verifying that test harnesses remain strictly quarantined.
 
 ---
 
@@ -76,11 +79,15 @@ Before writing any implementation code, define the **Contract & Blast Radius Bou
 
 ### 4. Check System Invariants, Zero-Trust, Cybersecurity & Legal Compliance Boundaries
 Cross-reference the proposed approach against `06-Security-and-Legal-Compliance/compliance-audit-checklist.md` and `context/architecture.md`:
-- **Ownership & Authorization Boundary**: Does this feature check *resource ownership* (preventing BOLA/IDOR), not merely login status?
+- **Ownership & Authorization Boundary**: Does this feature check *resource ownership* (preventing BOLA/IDOR), not merely login status? Are non-guessable UUIDv4s enforced?
 - **Data Integrity & RLS Invariants**: Does it respect database constraints, unique keys, and row-level security (RLS) on multi-tenant tables?
+- **Mass Assignment Defense**: Are all mutations protected by explicit Data Transfer Object (DTO) field allowlists (Zod)?
+- **Backend-for-Frontend (BFF) Pattern**: Are session tokens encapsulated in `HttpOnly; Secure; SameSite=Lax` cookies with zero raw JWT exposure in client JavaScript?
 - **Statutory Legal & Consent Invariants**:
   - Does the data schema track user consent (`marketing_consent`, `cookie_preferences`, `ai_training_opt_in`)?
-  - Does the design account for statutory legal routes (`/privacy`, `/terms`, `/cookies`, `/accessibility`)?
+  - Does the design account for statutory legal routes (`/privacy`, `/terms`, `/cookies`, `/accessibility`, `/refunds`)?
+  - Does the legal footer incorporate the CAC CAMA 2020 imprint (RC number, registered office address, directors)?
+  - Are Global Privacy Control (`/.well-known/gpc.json`) and Responsible Disclosure (`/.well-known/security.txt`) configured?
   - Do AI integrations enforce Zero Data Retention (ZDR) contracts and respect `robots.txt` / `noai` crawlers?
   - Does the user profile include self-serve Data Subject Rights (DSAR: Data Export and Account Deletion)?
 - **HTTP Security Headers & Cookies**: Are endpoints shielded by CSP, HSTS, rate-limiting, and `HttpOnly; Secure; SameSite=Lax` cookies?

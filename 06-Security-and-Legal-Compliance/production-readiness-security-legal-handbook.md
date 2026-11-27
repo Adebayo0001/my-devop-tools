@@ -1,260 +1,232 @@
-# Production-Readiness, Cybersecurity & Legal Compliance Handbook
-### A Silicon Valley Principal Engineer, DevOps, and Legal Engineering Master Guide
+# Production-Readiness, Cybersecurity, Legal & Monitoring Master Handbook
+### Silicon Valley Principal Engineer, SRE, and Regulatory Engineering Standard
 
-This handbook establishes the definitive engineering, security, and legal standard for taking modern software and web applications from development into hostile production environments.
+This handbook establishes the definitive engineering, security, regulatory, and monitoring standard for taking modern software and web applications from development into hostile production environments—meeting **OWASP ASVS 5.0.0**, **NIST SSDF SP 800-218 v1.2**, **PCI DSS v4.0.1**, **Nigerian statutory frameworks (NDPC, FCCPC, CAC, ngCERT, NITDA)**, and extraterritorial laws (**EU GDPR, UK DUAA 2025, California CCPA/CPRA, EAA 2025**).
 
 ---
 
 ## Table of Contents
-1. [Part 1: The Production-Readiness Gate (What DevOps & QA Look For)](#part-1-the-production-readiness-gate)
-2. [Part 2: Anti-Hacker Defense & Hardening (OWASP Top 10 Countermeasures)](#part-2-anti-hacker-defense--hardening)
-3. [Part 3: Legally Required Pages & Governing Bodies](#part-3-legally-required-pages--governing-bodies)
-4. [Part 4: Data Protection, Cookies, AI Training & Industry Compliance](#part-4-data-protection-cookies-ai-training--industry-compliance)
-5. [Part 5: Production Deployment Verification Checklist](#part-5-production-deployment-verification-checklist)
+1. [Part 1: Engineering, QA & DevSecOps Production Gates](#part-1-engineering-qa--devsecops-production-gates)
+2. [Part 2: Essential Governing Bodies & Statutory Legal Policies](#part-2-essential-governing-bodies--statutory-legal-policies)
+3. [Part 3: Industry-Standard Data Protection, Cookies & AI Governance](#part-3-industry-standard-data-protection-cookies--ai-governance)
+4. [Part 4: Common Developer Mistakes & CWE Prevention (OWASP / MITRE 2025)](#part-4-common-developer-mistakes--cwe-prevention)
+5. [Part 5: 5-Layer Real-Time Monitoring & Availability Architecture](#part-5-5-layer-real-time-monitoring--availability-architecture)
+6. [Part 6: Synchronized 72-Hour Legal Incident Response Runbook](#part-6-synchronized-72-hour-legal-incident-response-runbook)
 
 ---
 
-## Part 1: The Production-Readiness Gate
+## Part 1: Engineering, QA & DevSecOps Production Gates
 
-In world-class engineering organizations, code is never deployed to production simply because a developer ran it locally on `localhost`. DevOps, Site Reliability Engineers (SRE), and Quality Assurance (QA) teams enforce rigorous pre-flight quality gates.
+Production readiness replaces late pre-launch bottlenecks with continuous verification across four mature industry frameworks:
+* **OWASP ASVS 5.0.0 (May 30, 2025)**: 345 requirements across 17 chapters categorized into:
+  * **Level 1 (Baseline)**: Automated verification floor (covers <50% of security requirements).
+  * **Level 2 (Standard for PII, Healthcare & Financial Apps)**: Required for all production SaaS handling customer accounts, payments, and private data. Demands targeted manual business-logic and authorization review.
+  * **Level 3 (Critical / Defense-in-Depth)**: For critical infrastructure, banking, and government applications.
+* **NIST SSDF SP 800-218 (v1.1 & draft v1.2 Dec 2025)**: Secures the software development environment (PO.5, PS.1). CI/CD runners must eliminate static cloud credentials in favor of least-privilege OIDC workload federation.
+* **OWASP SAMM & DSOMM**: Measures organizational and CI/CD DevSecOps maturity.
+* **SLSA v1.0–v1.2 & SBOM**: Every build generates signed build provenance and a Software Bill of Materials (SBOM) for supply chain transparency.
+* **SOC 2 Type II & ISO/IEC 27001:2022 (Annex A 8.29 & 8.32)**: Auditability requires retaining immutable evidence linking each deployed artifact digest to its passing tests, scans, and approvals.
 
-```
-       [Developer Code]
-              │
-              ▼
-   ┌──────────────────────┐
-   │  1. QA Gate (Quality)│ ➔ Unit, Integration, E2E, 5 Screen States, Accessibility
-   └──────────┬───────────┘
-              ▼
-   ┌──────────────────────┐
-   │ 2. DevSecOps (Sec)   │ ➔ SAST, SCA, DAST, Secret Scan, Zero-Trust Access
-   └──────────┬───────────┘
-              ▼
-   ┌──────────────────────┐
-   │ 3. DevOps/SRE (Ops)  │ ➔ CI/CD, IaC, Zero-Downtime, Telemetry, APM, Auto-Scaling
-   └──────────┬───────────┘
-              ▼
-    [Production Release]
-```
-
-### 1.1 What QA Professionals Look Out For
-* **The Test Pyramid**:
-  * **Unit Tests (70%)**: Pure business logic, utilities, edge-case math, and state machines. Fast, isolated, in-memory execution.
-  * **Integration Tests (20%)**: Testing API endpoints against live database instances (using ephemeral test containers or staging DBs), authentication middleware, and external service contracts.
-  * **End-to-End (E2E) Tests (10%)**: Automated browser testing via Playwright or Cypress covering critical revenue paths (Sign-up ➔ Onboarding ➔ Checkout ➔ Dashboard).
-* **The 5 Universal Screen States**:
-  Every single UI view must gracefully render:
-  1. *Default / Ideal State*: Populated with normal data.
-  2. *Loading State*: Skeleton screens (no layout shift / CLS < 0.05).
-  3. *Empty State*: Helpful onboarding prompt and primary action when no records exist.
-  4. *Error State*: User-friendly recovery actions without leaking stack traces.
-  5. *Edge Cases*: Extremely long strings, boundary numbers, 0 results, 10,000 items (virtualized pagination).
-* **Cross-Platform & Responsive Floors**:
-  * Mobile viewport integrity down to 375px (iPhone SE minimum).
-  * Minimum touch target sizes of 44x44px.
-  * Zero horizontal scrolling on standard viewports.
-* **Accessibility (a11y) Verification**:
-  * Compliance with **WCAG 2.1 / 2.2 AA**.
-  * Full keyboard navigability (focus rings visible, Tab/Shift-Tab order logical, `Esc` closes modals).
-  * Valid ARIA roles, labels on icon buttons, and color contrast ratios (minimum 4.5:1 for normal text, 3:1 for large text).
-
-### 1.2 What DevOps & SRE Professionals Look Out For
-* **Deterministic CI/CD Pipelines**: Automated builds triggered on Pull Requests with zero human intervention. If linting, type-checking, or tests fail, the build halts immediately.
-* **Zero-Downtime Deployment Strategies**:
-  * *Blue/Green Deployments*: Two identical environments; switch traffic instantly at the router level once verification passes.
-  * *Canary Deployments*: Route 5% of user traffic to the new version, monitor error rates for 15 minutes, then gradually scale to 100%.
-* **Automated Rollback Runbooks**: Instant one-click or automated rollbacks triggered if 5xx error spikes or latency thresholds exceed SLA budgets.
-* **Observability & Application Performance Monitoring (APM)**:
-  * *Error Tracking*: Real-time exception capture via **Sentry** with source maps, environment tags, and breadcrumbs.
-  * *Session Replay*: Tooling like **LogRocket** to capture exact DOM and network timelines leading to bugs.
-  * *Metrics & Tracing*: **Datadog** or OpenTelemetry for distributed request tracing across services and database query monitoring.
-* **Core Web Vitals Performance Targets**:
-  * **LCP (Largest Contentful Paint)**: < 2.5 seconds (measures perceived load speed).
-  * **INP (Interaction to Next Paint)**: < 200 milliseconds (measures UI responsiveness).
-  * **CLS (Cumulative Layout Shift)**: < 0.1 (measures visual stability).
-
----
-
-## Part 2: Anti-Hacker Defense & Hardening
-
-The web is an inherently hostile environment. Hackers constantly deploy automated crawlers, botnets, and credential-stuffing tools. To withstand attacks, applications must implement defense-in-depth based on the **OWASP Top 10**.
-
-### 2.1 Critical Threat Categories & Countermeasures
-
-#### 1. Broken Object-Level Authorization (BOLA / IDOR)
-* **The Threat**: An attacker changes `GET /api/invoices/104` to `GET /api/invoices/105` and views another customer's financial records because the server only checked that the user was logged in, not that they owned invoice 105.
-* **The Countermeasure**: Zero-trust authorization on every single server route and mutation:
-  ```typescript
-  // REQUIRED: Always verify tenant/user ownership
-  const invoice = await db.invoices.findFirst({
-    where: { id: invoiceId, organizationId: session.organizationId }
-  });
-  if (!invoice) throw new ForbiddenError("Access denied");
-  ```
-  Enforce **Row-Level Security (RLS)** in PostgreSQL/Supabase so the database engine itself rejects unauthorized queries.
-
-#### 2. Injection Attacks (SQLi, NoSQLi, Command Injection)
-* **The Threat**: Attackers inject raw SQL statements into search inputs or form fields (`' OR '1'='1`).
-* **The Countermeasure**:
-  * Never concatenate strings into raw SQL queries.
-  * Strictly use parameterized queries, typed ORMs (Prisma, Drizzle), or prepared statements.
-  * Validate all inputs using strict schema libraries like **Zod**.
-
-#### 3. Cross-Site Scripting (XSS) & Content Security Policy (CSP)
-* **The Threat**: Attackers inject malicious JavaScript into comments, profile names, or URL parameters, stealing session cookies or redirecting users.
-* **The Countermeasure**:
-  * Modern frameworks (React, Next.js) auto-escape HTML by default; never use `dangerouslySetInnerHTML` without rigorous sanitization (e.g. DOMPurify).
-  * Set a strict **Content Security Policy (CSP)** HTTP header restricting where scripts, styles, and frames can load from:
-    ```http
-    Content-Security-Policy: default-src 'self'; script-src 'self' https://trusted-cdn.com; object-src 'none'; base-uri 'self';
-    ```
-
-#### 4. Cross-Site Request Forgery (CSRF) & Session Hijacking
-* **The Threat**: A malicious site tricks a user's browser into submitting requests to your app while the user is logged in.
-* **The Countermeasure**:
-  * Quarantined session cookies:
-    ```http
-    Set-Cookie: session_token=abc123xyz; Secure; HttpOnly; SameSite=Lax; Path=/
-    ```
-    * `Secure`: Cookie is only transmitted over HTTPS.
-    * `HttpOnly`: JavaScript cannot access `document.cookie` (neutralizing XSS cookie theft).
-    * `SameSite=Lax` or `SameSite=Strict`: Protects against third-party cross-site request leakage.
-
-#### 5. Server-Side Request Forgery (SSRF)
-* **The Threat**: A user inputs a URL for webhooks, avatar fetching, or PDF generation, and the server fetches internal cloud metadata (e.g. `http://169.254.169.254/latest/meta-data/` on AWS) to steal IAM credentials.
-* **The Countermeasure**: Parse and validate all outbound URLs. Disallow private IP blocks (RFC 1918: `10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `127.0.0.1`, and cloud link-local metadata addresses).
-
-#### 6. Denial of Service (DoS) & Brute-Force Rate Limiting
-* **The Countermeasure**:
-  * Implement IP-based and user-based rate limiting on sensitive routes (`/login`, `/signup`, `/api/ai`, `/checkout`) using Redis token buckets (e.g., Upstash Rate Limit).
-  * Place edge reverse-proxies (Cloudflare, AWS CloudFront) with Web Application Firewalls (WAF) to filter DDoS volumetric traffic.
-
-#### 7. Essential HTTP Security Headers Checklist
-Every production server must return these security headers:
-```http
-Strict-Transport-Security: max-age=63072000; includeSubDomains; preload
-X-Content-Type-Options: nosniff
-X-Frame-Options: DENY
-Referrer-Policy: strict-origin-when-cross-origin
-Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()
-```
-
----
-
-## Part 3: Legally Required Pages & Governing Bodies
-
-Publishing a website or commercial web application binds the operators to international, national, and state laws. Failure to display legally mandated notices can result in severe fines, domain takedowns, or liability.
-
-### 3.1 The 7 Legally Required Pages & Disclosures
-
-| Legal Page | Governing Law / Standard | Who Needs It | Key Mandatory Contents |
+### 1.1 The 4-Stage CI/CD Release Gates
+| Pipeline Gate | QA Verification Criteria | DevSecOps & Security Criteria | Enforcement & Failure Action |
 |---|---|---|---|
-| **Privacy Policy** | GDPR (EU), CCPA/CPRA (US/CA), NDPA (Nigeria), CalOPPA, PIPEDA (Canada) | **Every website** collecting any personal data (IP addresses, emails, cookies). | Exact categories of personal data collected, legal basis, third-party processors (analytics, stripe, hosting), data retention window, user rights (deletion/portability), DPO contact. |
-| **Terms of Service (ToS)** | Commercial Contract Law, UCC | Any platform with users, accounts, user-generated content, or billing. | Governing jurisdiction, acceptable use policy, account termination rights, warranty disclaimers, limitation of liability, intellectual property ownership. |
-| **Cookie Policy & Banner** | EU ePrivacy Directive ("Cookie Law"), GDPR Art. 7 | Any website using non-essential cookies (Google Analytics, Meta Pixel). | Clear explanation of cookie types (Essential, Performance, Advertising), explicit **Opt-In** before tracking scripts fire, granular toggles, and equal-weight "Reject All" button. |
-| **Terms of Sale / Refund Policy** | FTC Regulations (US), EU Consumer Rights Directive | Any e-commerce, digital product, or SaaS platform accepting payments. | Billing frequency, refund windows (14-day statutory withdrawal in EU), cancellation policy ("Click to Cancel" rule), chargeback dispute terms. |
-| **Accessibility Statement** | ADA Title III (US), European Accessibility Act (EAA 2025), Section 508 | Public-facing websites, SaaS, commercial portals. | Declaration of WCAG 2.1 AA conformance, known accessibility limitations, accessibility roadmap, and a dedicated contact for accessibility feedback. |
-| **Legal Notice / Impressum** | German Telemedia Act (§ 5 TMG), Austrian ECG, Swiss law | Any website targeting users in Germany, Austria, or Switzerland (DACH). | Registered business name, physical legal address, corporate registration number, VAT/Tax ID, phone number, email address, executive leadership names. |
-| **Disclaimers & Disclosures** | FTC 16 CFR Part 255 (US), Advertising Standards Authority | Sites with affiliate links, financial advice, medical or health info. | Explicit disclosure if compensation is received for referrals, clear notice that content is not certified legal/financial/medical advice. |
+| **Commit / Pull Request** | Unit tests pass (≥70% coverage of core logic); peer review signed off; test cases traced to requirements. | Pre-commit and CI secrets scanning with automatic block; SAST and IaC misconfiguration scans; signed commits. | Merge blocked until tests pass and critical findings/secrets are resolved. |
+| **Build / Artifact** | Integration tests and build smoke tests pass; dependency lockfiles committed and reproducible. | Software Composition Analysis (SCA) cross-referenced against **CISA Known Exploited Vulnerabilities (KEV)**; container scans against CIS Benchmarks; signed SLSA provenance & SBOM generated. | Artifact rejected from staging promotion; vulnerable builds quarantined. |
+| **Pre-Release / Staging** | Full regression suite passes; zero open critical defects; cross-browser, accessibility (WCAG 2.1 AA), and **≥3× peak load tests** pass; UAT signed off. | Authenticated DAST; manual business-logic & BOLA verification; cloud posture checks; OWASP ASVS L2 evidence archived; **zero live customer PII** in staging (synthetic/masked data only). | Release held; emergency shipping requires a logged, approver-signed exception with a hard expiration date. |
+| **Production Cutover** | End-to-end synthetic smoke tests verify login, checkout, and error paths (beyond HTTP 200); canary metrics monitored. | Runtime WAF/RASP active; payment script integrity verified (PCI DSS 6.4.3); immutable audit logs linked to deployment digests. | Automated or runbook-driven rollback for code faults; disaster recovery failover for data corruption. |
 
-### 3.2 The Key Governing Bodies & Regulators
-
-1. **European Union (EU)**:
-   * **EDPB (European Data Protection Board)**: Sets unified GDPR interpretations.
-   * **National DPAs (Data Protection Authorities)**: *CNIL* (France), *BfDI* (Germany), *DPC* (Ireland). Issue multi-million-euro penalties for tracking violations and security breaches.
-2. **United States**:
-   * **FTC (Federal Trade Commission)**: Regulates unfair business practices, deceptive privacy policies, data security failures, and dark patterns.
-   * **CPPA (California Privacy Protection Agency)**: Enforces CCPA/CPRA, regulating sales and sharing of consumer personal data.
-   * **HHS (Health & Human Services)**: Enforces HIPAA for health data.
-3. **United Kingdom**:
-   * **ICO (Information Commissioner's Office)**: Enforces UK-GDPR and Privacy and Electronic Communications Regulations (PECR).
-4. **Nigeria**:
-   * **NDPC (Nigeria Data Protection Commission)**: Enforces the **Nigeria Data Protection Act (NDPA 2023)**. Mandates registering Data Controllers of Major Importance, local privacy notices, and audits.
-5. **Standards & Certification Bodies**:
-   * **PCI Security Standards Council**: Enforces PCI-DSS for credit card security.
-   * **ISO (International Organization for Standardization)**: ISO/IEC 27001 (Information Security Management).
-   * **AICPA**: Manages SOC 2 (Service Organization Control) trust criteria.
+### 1.2 Environment Parity & Forward-Compatible Migrations
+* **Environment Parity**: Dev, QA, Test, Ephemeral PR Previews, and Staging must mirror production OS, middleware, and network topology via Infrastructure as Code (IaC).
+* **Certificate Transparency Leak Prevention**: Never issue public TLS certificates for internal/unreleased staging or preview subdomains (`project-titan-staging.company.com`). Public CT logs broadcast internal infrastructure to attackers. Use private internal PKI or wildcard certs.
+* **Forward-Compatible Staged Database Migrations**:
+  1. *Phase 1*: Add new nullable column/table; deploy code that dual-writes to both old and new schemas.
+  2. *Phase 2*: Backfill historic data.
+  3. *Phase 3*: Switch reads to the new column.
+  4. *Phase 4*: Deprecate and drop the old column in a subsequent release.
+  * Automated pre-deploy DB snapshots and tested RTO/RPO disaster recovery drills are mandatory.
 
 ---
 
-## Part 4: Data Protection, Cookies, AI Training & Industry Compliance
+## Part 2: Essential Governing Bodies & Statutory Legal Policies
 
-Modern software must be architected from Day 1 with privacy-by-design and regulatory compliance.
+Publishing a web application binds operators to the laws of their corporate domicile, operating regions, and user locations.
 
-### 4.1 The 7 Core Data Protection Principles (GDPR / NDPA / CCPA)
-1. **Lawfulness, Fairness & Transparency**: You must have a recognized legal basis (Consent, Contractual Necessity, Legal Obligation, or Legitimate Interests).
-2. **Purpose Limitation**: You can only use data for the specific reason stated at collection. You cannot collect emails for password resets and secretly sell them to advertisers.
-3. **Data Minimization**: Collect only what is strictly necessary. Never ask for a home address or telephone number if an email address is all that is required.
-4. **Accuracy**: Maintain accurate records and provide mechanisms for users to update out-of-date information.
-5. **Storage Limitation**: Do not keep user data indefinitely. Establish automated data retention and pruning schedules.
-6. **Integrity & Confidentiality**: Encrypt all data in transit (TLS 1.3) and at rest (AES-256). Implement strict access control and audit logging.
-7. **Accountability**: You must be able to prove compliance with documentation, Data Protection Impact Assessments (DPIAs), and audit trails.
+### 2.1 Nigerian Statutory Bodies & Legal Requirements
+| Governing Body | Core Law / Regulation | Key Website Obligations & Enforceable Deadlines | Maximum Statutory Penalties |
+|---|---|---|---|
+| **NDPC (Nigeria Data Protection Commission)** | **NDPA 2023 & GAID 2025** (Replaced NDPR) | • Classify as Data Controller/Processor of Major Importance: **UHL** (>5k subjects, all banks/fintechs/insurers), **EHL** (1k–5k subjects, MDAs), or **OHL** (200–1k subjects).<br>• Appoint DPO (s.32); conduct DPIA for high-risk data (s.28); display prominent homepage privacy & cookie notices; opt-in non-essential cookies; report breaches in 72h.<br>• Engage licensed DPCO to audit 5 pillars and file annual **Compliance Audit Return (CAR)** by **March 31** (2026 cycle extended to May 30, 2026; next due March 31, 2027).<br>• GAID Art. 44: AI deployments require DPIA, data anonymization, and low-risk environment testing. | UHL/EHL: Greater of **₦10,000,000 or 2% of preceding year's gross revenue** (late CAR adds up to 50% filing fee). Standard tier: ₦2,000,000 or 2%. |
+| **FCCPC (Federal Competition & Consumer Protection Commission)** | **FCCPA 2018** (Part XV, ss. 114–132) & E-Commerce Guidance | • Plain, jargon-free Terms & Conditions hyperlinked before checkout.<br>• **Anti-"No Refund" Invariant**: Blanket "No Refund" or "Goods sold are not returnable" disclaimers are **strictly void** under s.129. Policies must define statutory remedies (refund, repair, replacement) for defective goods or failed SaaS.<br>• Pricing transparency: Displayed price must strictly match final checkout total (s.115).<br>• Itemized digital receipts provided (s.118); second-hand/reconditioned goods labeled (s.117). | Liability waivers void (s.129); product recalls, compliance orders, and statutory operational sanctions. |
+| **CAC (Corporate Affairs Commission)** | **CAMA 2020** (ss. 304, 729) | • **Corporate Identity Legal Imprint**: Legibly state on website footers, contact pages, and digital invoices/receipts:<br>  1. Registered corporate company name.<br>  2. **RC Number** (Registration Company Number).<br>  3. Registered physical office address.<br>  4. Directors' particulars (names, former names, non-Nigerian nationality).<br>• **Active enforcement begins August 1, 2026**. | Statutory sanctions against the company and defaulting corporate officers. |
+| **ONSA / ngCERT & Sectoral CERTs/SOCs** | **Cybercrimes (Amendment) Act 2024** | • **Mandatory 72-Hour Cyber Reporting**: Report any cyber attack, disruption, or intrusion to the sectoral CERT/SOC (feeding ngCERT) within 72 hours (s.21).<br>• Route/integrate traffic to sectoral SOCs (s.41).<br>• Retain traffic and subscriber data for **2 years** under NDPA (s.38). Online payment fraud covered (s.30). | **Mandatory ₦2,000,000 fine** for failing to report within 72h; ₦7M–₦10M+ fines and 2–14 years prison for cyber offences; ≥2% turnover fine for levy default. |
+| **NITDA** | **NITDA Act 2007** & IT Project Clearance Guidelines (2026) | • Mandatory for Federal Public Institutions (FPIs)/MDAs: Pre-project IT clearance and independent QA certification via Licensed Compliance Assurance Firms. | Criminal offence under NITDA Act sections 17 & 18. |
 
-### 4.2 Data Subject Rights (DSAR Workflows)
-Any compliant software must support automated or administrative workflows for users exercising their legal rights:
-* **Right to Access / Portability**: Export all user data in a readable machine format (JSON / CSV).
-* **Right to Erasure ("Right to be Forgotten")**: An account deletion feature that cascades across all tables, anonymizes foreign keys, and cancels recurring subscriptions.
-* **Right to Rectification**: Simple self-serve profile editing tools.
-* **Right to Object / Opt-Out**: Ability to opt out of marketing communications and automated profiling.
+### 2.2 Extraterritorial Governing Bodies & Regulations
+* **European Union (EU)**:
+  * **EU GDPR & EDPB**: Prior explicit opt-in for tracking cookies, 72h breach notification to DPAs, Art. 13/14 transparency notices. Fines up to **€20M or 4% of global turnover**.
+  * **European Accessibility Act (EAA, Dir. 2019/882)**: Applied since June 28, 2025 (transitional window to 2030 for existing services). Mandates **EN 301 549 / WCAG 2.1 AA** compliance and an Accessibility Statement for e-commerce, banking, media, and SaaS serving EU users (microenterprises <10 staff and ≤€2M turnover exempt).
+  * **EU AI Act**: GPAI training data transparency documentation active August 2, 2026; ban on untargeted facial scraping active December 2, 2026.
+* **United Kingdom**:
+  * **Information Commission (Succeeded ICO Sept 30, 2026)**: Enforces UK GDPR, DPA 2018, PECR, and the **Data (Use and Access) Act 2025 (DUAA)**.
+  * Mandatory electronic data protection complaints process with **statutory 30-day response acknowledgement** (active June 19, 2026). Fines up to **£17.5M or 4% global turnover**.
+* **United States (California)**:
+  * **CPPA & Attorney General (CCPA / CPRA)**: "Do Not Sell or Share My Personal Information" link; **automated detection and honoring of Global Privacy Control (GPC)** browser signals; unauthenticated `/.well-known/gpc.json`. Fines up to $7,988 per intentional violation.
+* **Global Payment Security**:
+  * **PCI Security Standards Council (PCI DSS v4.0.1 — Full Enforcement March 31, 2025)**:
+    * **Req 6.4.3**: Authorize, document business justification, and verify integrity/hashes of every JavaScript file running on customer payment pages.
+    * **Req 11.6.1**: Deploy client-side tamper detection guarding against Magecart and formjacking.
+    * **Req 6.3.3**: Patch critical vulnerabilities within 1 month.
 
-### 4.3 Cookie Compliance & Anti-Dark-Pattern Rules
-* **Explicit Opt-In (Not Opt-Out)**: Under GDPR and the ePrivacy Directive, tracking scripts (Google Analytics, Meta Pixel, Hotjar) **CANNOT** execute until the user actively clicks "Accept". Browsing the site or continuing to scroll does *not* constitute consent.
-* **Equal Visual Weight (Anti-Dark Pattern)**: The "Reject All" button must have equal visual prominence (size, color, contrast) as the "Accept All" button. Hiding "Reject" in a sub-menu or making it a faint gray link is illegal.
-* **Strictly Necessary Exemption**: Only cookies strictly required to keep the user logged in, preserve cart items, or maintain security are exempt from cookie consent banners.
-
-### 4.4 Artificial Intelligence & Data Training Compliance
-With the advent of generative AI, the legal landscape surrounding AI models has tightened significantly (EU AI Act, FTC Enforcement, Copyright Law):
-
-1. **User Data Training Opt-Out / Opt-In**:
-   * Users must be explicitly informed if their inputs, prompts, uploaded files, or interactions are used to train machine learning models.
-   * Under GDPR Article 21, users have the right to object to automated processing and AI training.
-   * Best practice: Provide an explicit toggle in Account Settings: `[ ] Allow my data to improve AI models`.
-2. **Third-Party AI APIs (Zero Data Retention)**:
-   * When integrating AI APIs (OpenAI, Anthropic, Google Gemini), commercial platforms must utilize Enterprise / Zero Data Retention (ZDR) agreements.
-   * Ensure third-party vendors do not retain user queries to train public models.
-3. **AI Transparency & Content Labeling**:
-   * The **EU AI Act** mandates that platforms must disclose to users when they are interacting with an AI system or viewing synthetic/AI-generated media.
-4. **Web Scraping & Robots.txt**:
-   * Websites must deploy explicit headers and robots directives if they wish to restrict commercial crawlers from harvesting site content for model training:
-     ```
-     User-agent: GPTBot
-     Disallow: /
-     
-     User-agent: CCBot
-     Disallow: /
-     ```
-   * Include the HTTP response header: `X-Robots-Tag: noai, noimageai`.
+### 2.3 Required Website Legal Components Summary
+1. `SCR-10: Trust, Privacy & Legal Hub` — Centralized navigation in footer.
+2. **Privacy Notice** (`/privacy`): Controller identity, DPO contact, lawful basis, data retention, international safeguards, user rights.
+3. **Cookie Banner & Preferences** (`/cookies`): Equal-weight Accept/Reject, zero pre-consent tracking, persistent withdrawal link.
+4. **Terms of Service** (`/terms`): Clear language, UCC contract terms, limitation of liability, dispute jurisdiction.
+5. **Refund & Cancellation Policy** (`/refunds`): FCCPA s.129 compliant statutory remedies (refund, repair, replace); no void "No Refund" text.
+6. **CAC Legal Corporate Imprint** (`/imprint` or footer): Registered name, RC number, registered office, directors' particulars.
+7. **Accessibility Statement** (`/accessibility`): WCAG 2.1 AA / EN 301 549 conformance status and feedback contact.
+8. **Responsible Disclosure** (`/.well-known/security.txt`): Security contact, PGP key, and authorized scope under Cybercrimes Act s.6(2).
+9. **Global Privacy Control** (`/.well-known/gpc.json`): Machine-readable GPC support declaration.
 
 ---
 
-## Part 5: Production Deployment Verification Checklist
+## Part 3: Industry-Standard Data Protection, Cookies & AI Governance
 
-Before deploying any production application or client website, verify every item on this pre-flight punch list:
+### 3.1 Identity, Cryptography & Architecture Invariants
+* **Cryptographic Standards**:
+  * **TLS 1.3 enforced** across all endpoints. TLS 1.2 permitted only with forward-secret AEAD ciphers (`ECDHE-ECDSA/RSA with AES-256-GCM` or `CHACHA20-POLY1305`). Disallow SSL, TLS 1.0, and TLS 1.1.
+  * HSTS with `max-age=63072000` (2 years), `includeSubDomains`, and `preload`.
+  * **AES-256-GCM envelope encryption** at rest with automated 90-day key rotation inside FIPS 140-2 Level 3 HSMs or Cloud KMS.
+* **Backend-for-Frontend (BFF) Pattern**:
+  * **Zero Raw Bearer Tokens in Browser JavaScript**: Browser JS must never store access tokens in `localStorage` or `sessionStorage` (where XSS can exfiltrate them).
+  * The BFF server holds the tokens and exchanges them with the browser via secure, encrypted `HttpOnly; Secure; SameSite=Lax/Strict` cookies.
+* **OAuth 2.1 & Modern Authentication**:
+  * OAuth 2.1 mandating **PKCE (Proof Key for Code Exchange)** on all authorization code grants.
+  * **Phishing-Resistant MFA**: WebAuthn / FIDO2 passkeys or hardware security keys mandatory for administrators and privileged roles.
+  * Minimum 12-character password requirement (PCI DSS 4.0.1 Req 8.3.6).
 
-### 🛡️ Security & Hardening
-- [ ] TLS 1.3 enforced across all domains with automatic HTTP-to-HTTPS redirect.
-- [ ] Database credentials, API tokens, and private keys strictly stored in environment variables (`.env.production`), never committed to git.
-- [ ] Security headers active: CSP, HSTS, X-Content-Type-Options, X-Frame-Options, Permissions-Policy.
-- [ ] Row-Level Security (RLS) active on all multi-tenant tables.
-- [ ] Zero BOLA/IDOR vulnerabilities: every server route validates that `session.userId` owns the target resource.
-- [ ] Rate limiting active on authentication, payment, and AI endpoints.
-- [ ] Session cookies configured with `HttpOnly`, `Secure`, and `SameSite=Lax/Strict`.
-- [ ] Passwords hashed using modern algorithms (Argon2id or bcrypt with cost factor >= 12).
+### 3.2 Cookies & Global Privacy Control (GPC)
+* **Zero-Pre-Consent Tracking**: No analytics or advertising tracking scripts (Google Analytics, Meta Pixel) execute prior to affirmative opt-in.
+* **Global Privacy Control (GPC)**:
+  * Application middleware detects the `Sec-GPC: 1` request header and JavaScript `navigator.globalPrivacyControl === true`.
+  * Automatically suppresses all third-party data selling, sharing, or tracking without displaying intrusive banners.
+  * Serve `/.well-known/gpc.json`:
+    ```json
+    {
+      "gpc": true,
+      "lastUpdate": "2026-03-31"
+    }
+    ```
 
-### ⚖️ Legal & Regulatory
-- [ ] Privacy Policy live, accessible from footer on all pages, detailing data categories, third-party processors, and DPO/contact email.
-- [ ] Terms of Service live with limitation of liability, governing jurisdiction, and acceptable use terms.
-- [ ] Cookie consent banner installed; tracking scripts blocked until explicit user opt-in. "Reject All" button has equal prominence.
-- [ ] Terms of Sale / Refund Policy active for e-commerce/SaaS with explicit cancellation terms.
-- [ ] Accessibility Statement published; WCAG 2.1 AA keyboard navigation verified.
-- [ ] Self-serve account deletion ("Right to be Forgotten") and data export mechanisms tested.
-- [ ] AI training terms disclosed if machine learning models process user data.
-- [ ] Impressum / Legal Notice published if operating in or targeting DACH (Germany, Austria, Switzerland).
+### 3.3 AI Model Training & Scraping Governance
+* **3-Layer Outbound Scraping Defense**:
+  1. *Declarative Layer*: `robots.txt` blocking bots (`GPTBot`, `CCBot`), `ai.txt`, express Text and Data Mining (TDM) opt-out headers (`X-Robots-Tag: noai, noimageai`), and explicit ToS prohibitions.
+  2. *Access Layer*: Placing user directories, customer profiles, and proprietary data strictly behind authenticated session walls.
+  3. *Technical Layer*: Edge rate limiting, behavioral bot detection (Cloudflare Turnstile/Bot Management), and IP reputation filtering.
+* **Inbound AI Training Compliance**:
+  * **EDPB Guidelines 03/2026 & GAID Art. 44**: Legitimate Interest for AI training requires a documented 3-part balancing test, respect for `robots.txt`, and automated pre-ingestion PII filtering.
+  * **Zero Data Retention (ZDR)**: Commercial integrations with LLM APIs (OpenAI, Anthropic, Google) must enforce enterprise Zero Data Retention agreements preventing customer queries from training public models.
+  * **User Opt-Out Toggle**: Provide an explicit toggle in user settings: `[ ] Allow my data to train AI models`.
 
-### 🚀 QA & DevOps Infrastructure
-- [ ] Automated CI/CD pipeline running lint, type-check, and automated test suite on every PR.
-- [ ] Sentry / LogRocket initialized with client-side and server-side PII scrubbing (`beforeSend`).
-- [ ] Datadog or OpenTelemetry APM monitoring Core Web Vitals (LCP < 2.5s, INP < 200ms, CLS < 0.1).
-- [ ] 5 Screen States handled for every view (Default, Loading Skeleton, Empty, Error Boundary, Edge Cases).
-- [ ] Automated database backup schedule verified with tested point-in-time recovery.
-- [ ] Zero developer test harnesses or debug routes exposed in production navigation or sitemaps.
+---
+
+## Part 4: Common Developer Mistakes & CWE Prevention (OWASP / MITRE 2025)
+
+| Vulnerability Class | 2025 / 2023 Ranking | Common Developer Mistake | Attacker Exploit & Impact | Industry-Standard Prevention |
+|---|---|---|---|---|
+| **Cross-Site Scripting (XSS)** | **#1 CWE Top 25** (CWE-79, score 60.38); OWASP A05:2025 | Rendering untrusted input into HTML/DOM templates without context-aware encoding. | Hijacks user sessions, performs unauthorized actions in user context. | Context-aware auto-escaping (React default), strict CSP, HTTP-only cookies via **BFF pattern**. |
+| **Broken Object-Level Auth (BOLA / IDOR)** | **#4 CWE-862**, #17 CWE-863, #24 CWE-639; OWASP A01:2025, API1:2023 | Verifying authentication on `/api/orders/5001` without checking if the user owns order 5001; sequential IDs. | Attacker iterates IDs to dump or alter other tenants' data (~40% of API attacks). | Centralized ownership middleware on every parent and nested child route; PostgreSQL **Row-Level Security (RLS)**; non-guessable **UUIDv4s**. |
+| **SQL & Command Injection** | **#2 CWE-89** SQLi, **#9 CWE-78** OS Command (#1 on 2025 KEV list) | Concatenating strings into SQL queries or passing user input to shell/eval interpreters. | Full database exfiltration, authentication bypass, Remote Code Execution (RCE). | Parameterized queries / typed ORMs (Prisma, Drizzle) strictly enforced by linters; dynamic shell/eval calls completely banned. |
+| **CSRF & SSRF** | **#3 CWE-352** CSRF; **#22 CWE-918** SSRF; OWASP A01:2025 & API7:2023 | Accepting cookie mutations without anti-CSRF tokens; fetching user-supplied URLs server-side (webhooks, previews). | Forces victim browser into unwanted actions; SSRF queries cloud metadata (`169.254.169.254`) to steal IAM credentials. | SameSite cookies + CSRF tokens; strict domain allowlists and network egress blocks on RFC 1918 private IPs and cloud metadata addresses. |
+| **Supply Chain & Payment Formjacking** | OWASP A03 & A08:2025; **#15 CWE-502** (Deserialization) | Deserializing untrusted objects; unpinned dependencies; loading unverified third-party JS on payment forms. | Server RCE; browser Magecart/formjacking card skimming. | Safe JSON parsing; SLSA provenance & SBOM; **PCI DSS 6.4.3** script inventory and SRI hash verification. |
+| **Unrestricted File Upload** | **#6 CWE-22** (Path Traversal), **#12 CWE-434** File Upload | Serving uploaded files from web-executable paths; trusting user-supplied filenames containing `../`. | Web shell uploads leading to server compromise; arbitrary config/credential reads. | Non-executable object storage (S3/R2); random UUID filenames; magic-byte MIME validation; path canonicalization. |
+| **Mass Assignment & Shadow APIs** | **#21 CWE-306**; OWASP API3:2023, A07:2025 | Binding raw request JSON bodies directly to database models (allowing `isAdmin: true`). | Privilege escalation, account takeover. | **Explicit DTO field allowlists**; per-endpoint rate limits; continuous API discovery and retirement of deprecated `/v1/` routes. |
+| **Misconfiguration & Fail-Open Errors** | OWASP A02 & A10:2025; **#13 CWE-476**, **#20 CWE-200** | Shipping debug stack traces, exposed `.env` files, open cloud buckets, or auth checks that fail open on error. | Credential theft, authorization bypass triggered by malformed inputs. | **Fail-closed** error handling, automated secret scanning in CI/CD, PII/secret masking in logs. |
+
+### The Three Damaging Habits to Eliminate
+1. **Patching Instances Instead of Banning Classes**: Never fix one SQL injection by escaping a string while leaving raw concatenation permitted elsewhere. Enforce ESLint rules that ban raw queries across the entire repository.
+2. **Deploying Code Fixes Without Rotating Secrets**: After discovering path-traversal or information disclosure bugs, immediately rotate all database credentials, session signing keys, and API tokens that could have been read.
+3. **Broadcasting Previews via Public TLS**: Never create public TLS certificates for internal test environments; use private PKI or wildcard certs to avoid leaking infrastructure to Certificate Transparency logs.
+
+---
+
+## Part 5: 5-Layer Real-Time Monitoring & Availability Architecture
+
+```
+                  ┌────────────────────────────────────────┐
+                  │ 1. Edge WAF & DDoS Protection (Edge)   │
+                  └───────────────────┬────────────────────┘
+                                      ▼
+                  ┌────────────────────────────────────────┐
+                  │ 2. Runtime Application Self-Protection │
+                  │    (RASP - In-Process Zero-Day Guard)  │
+                  └───────────────────┬────────────────────┘
+                                      ▼
+                  ┌────────────────────────────────────────┐
+                  │ 3. Client-Side Payment Script Monitor  │
+                  │    (PCI DSS 11.6.1 Tamper Detection)   │
+                  └───────────────────┬────────────────────┘
+                                      ▼
+                  ┌────────────────────────────────────────┐
+                  │ 4. OpenTelemetry, SIEM & SOAR Engine   │
+                  │    (Active BOLA Enumeration Detection) │
+                  └───────────────────┬────────────────────┘
+                                      ▼
+                  ┌────────────────────────────────────────┐
+                  │ 5. Certificate Transparency & External │
+                  │    Attack Surface Watch (DNSSEC, CAA)  │
+                  └────────────────────────────────────────┘
+```
+
+1. **Edge WAF + Runtime RASP (Runtime Application Self-Protection)**:
+   * Edge WAF absorbs volumetric DDoS, blocks bad bots, and filters known injection signatures.
+   * RASP embeds directly inside the runtime, inspecting data flows into SQL drivers, deserializers, and OS calls. Blocks zero-day attacks and terminates malicious sessions even if traffic bypasses the WAF.
+2. **Client-Side Script Tamper Detection (PCI DSS v4.0.1 Req 11.6.1)**:
+   * Continuously audits rendered payment pages and checkout forms. Alerts immediately on unauthorized DOM modifications, script hash mismatches, or unexpected external network transmissions (Magecart defense).
+3. **OpenTelemetry, SIEM & Active BOLA Enumeration Detection**:
+   * Telemetry pipelines stream correlated logs, traces, and metrics into Cloud SIEM/SOAR.
+   * **Active BOLA Detection Rule**: Flags and throttles any single user/token that generates anomalous spikes in `401`, `403`, or `404` errors, or sequentially increments numeric entity IDs.
+   * Automated SOAR playbooks trigger instant session revocation and IP throttling while logging MTTA/MTTR metrics for SOC 2 and ISO 27001 audits.
+4. **Synthetic Transaction Monitoring & Real User Monitoring (RUM)**:
+   * Scripted synthetic journeys (Sign-in ➔ Add to Cart ➔ Checkout ➔ Dashboard) execute continuously from global checkpoints.
+   * Passive RUM tracks live user Core Web Vitals (LCP < 2.5s, INP < 200ms, CLS < 0.1) and JavaScript runtime errors.
+5. **Certificate Transparency (CT) & External Attack Surface Watch**:
+   * Continuous CT monitoring (Cert Spotter, CertStream) alerts within minutes if a rogue certificate is issued for your domains due to DNS compromise, dangling CNAMEs, or CA mis-issuance.
+   * Immediate escalation: File a Certificate Problem Report with the issuing CA (which must investigate and revoke unauthorized certificates within **24 hours** under CA/Browser Forum rules).
+   * Track certificate validity against CA/B Forum lifespan cuts (200 days in March 2026, 100 days in March 2027, 47 days in March 2029).
+   * Continuous fuzzy Levenshtein and Punycode monitoring to detect lookalike homograph phishing domains.
+   * Enforce **DNSSEC**, **CAA records** (`accounturi` and `validationmethods`), and strict email authentication (**DMARC `p=reject` or `p=quarantine`**, SPF, DKIM).
+
+---
+
+## Part 6: Synchronized 72-Hour Legal Incident Response Runbook
+
+When monitoring detects an active intrusion, unauthorized TLS certificate, or personal data breach, engineering and legal teams execute this synchronized 4-step runbook:
+
+### Step 1: Triage, Classify & Start the 72-Hour Clock
+* SIEM/SOAR alert opens a dedicated emergency incident war room.
+* Assign Incident Commander and Lead Security Engineer.
+* **Start the 72-Hour Countdown Immediately**: Under the Nigerian Cybercrimes (Amendment) Act 2024, start the clock from the **earliest sign of intrusion or disruption** rather than waiting for post-mortem confirmation.
+
+### Step 2: Contain the Attack & Preserve Evidence
+* Isolate compromised server instances or containers.
+* Block attacker IPs and revoke affected session tokens via WAF and RASP.
+* Revoke and rotate all potentially exposed API keys, database credentials, and signing secrets.
+* If an unauthorized TLS certificate appears: Immediately submit a Certificate Problem Report to the issuing CA (24-hour mandatory revocation).
+* **Preserve Forensic Evidence**: Take live memory and disk snapshots, and secure immutable audit logs (never wipe or power off servers blindly).
+
+### Step 3: File Parallel Regulatory Notifications Within 72 Hours
+1. **Nigerian Sectoral CERT / SOC (Feeding ngCERT)**:
+   * Mandatory under **Cybercrimes (Amendment) Act 2024 Section 21**. Report any cyber attack or disruption liable to hinder system functioning within 72 hours to avoid the **₦2,000,000 non-reporting fine**.
+2. **Nigeria Data Protection Commission (NDPC)**:
+   * If personal data is impacted, file statutory breach notification under **NDPA 2023 Section 40** detailing nature of breach, categories of data subjects, likely consequences, and mitigation measures.
+3. **European Union DPAs (if EU users affected)**:
+   * Notify lead Supervisory Authority under **GDPR Article 33** within 72 hours.
+4. **UK Information Commission (if UK users affected)**:
+   * Submit breach notification aligned to 72 hours under UK GDPR and PECR.
+
+### Step 4: Remediate Classes, Rotate Secrets & Close Audit Loop
+* Eradicate the entire vulnerability class across the repository (e.g. static analysis rules banning dynamic SQL or eval).
+* Rotate every machine key, service account, and signing secret.
+* Verify recovery through automated synthetic smoke tests.
+* Publish a blameless post-mortem within 24–48 hours detailing root cause, timeline, and permanent architectural preventative measures.
+* Encode new regression checks into the CI/CD pipeline gate.

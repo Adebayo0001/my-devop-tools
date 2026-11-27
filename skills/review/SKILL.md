@@ -26,20 +26,26 @@ Execute and verify each command in the terminal:
 - **Strict Type Check**: Run `tsc --noEmit` (or language compiler). Must exit `0` with zero errors and zero `as any` / `@ts-ignore` evasions.
 - **Production Build**: Run `npm run build` (or framework build). Must exit `0` with zero bundle or asset failures.
 - **Automated Secret Scan**: Inspect modified files for accidental credential commits (`sk-...`, `AIza...`, `ghp-...`, private keys).
-- **Dependency Integrity**: Verify that no unvetted or hallucinated packages exist in `package.json`.
+- **Dependency Integrity & CISA KEV**: Cross-reference Software Composition Analysis (SCA) against CISA's Known Exploited Vulnerabilities (KEV) catalog. Verify that no unvetted or hallucinated packages exist in `package.json`.
 
-### 2. Cybersecurity, OWASP Top 10 Hardening & Legal Compliance Gate
+### 2. Cybersecurity, OWASP ASVS 5.0.0 & Legal Compliance Gate
 Verify against `06-Security-and-Legal-Compliance/compliance-audit-checklist.md` and `production-readiness-security-legal-handbook.md`:
-- [ ] **Authorization & Ownership (BOLA / IDOR Defense)**: Do all database mutations and endpoints verify that the authenticated user owns the resource (`WHERE organization_id = session.org_id`)?
+- [ ] **OWASP ASVS 5.0.0 Level 2 Verification**: Manual verification of business logic, authorization boundaries, and tenant isolation; zero critical defects.
+- [ ] **Authorization & Ownership (BOLA / IDOR Defense)**: Do all database mutations and endpoints verify that the authenticated user owns the resource (`WHERE organization_id = session.org_id`)? Non-guessable UUIDv4s used.
+- [ ] **Backend-for-Frontend (BFF) Token Encapsulation**: Browser JS must never hold raw bearer tokens or JWTs in `localStorage`/`sessionStorage`. Tokens encapsulated in `HttpOnly; Secure; SameSite=Lax` cookies.
+- [ ] **Mass Assignment Defense**: Are all incoming payloads validated through strict Data Transfer Object (DTO) field allowlists (Zod)? Raw JSON bodies never bound directly to DB models.
 - [ ] **Row-Level Security (RLS)**: Is PostgreSQL RLS active on all multi-tenant tables?
-- [ ] **Boundary Validation & Injection Defense**: Are all external payloads (forms, query params, webhooks) parsed through strict schemas (Zod)? Zero raw string concatenation in SQL queries (strictly parameterized).
-- [ ] **Safe Rendering & XSS Protection**: Are all dynamic user strings escaped? Zero un-sanitized `dangerouslySetInnerHTML`.
-- [ ] **HTTP Security Headers**: Are strict security headers configured (HSTS, CSP, X-Content-Type-Options: nosniff, X-Frame-Options: DENY, Permissions-Policy)?
-- [ ] **Session Cookie Hygiene**: Are cookies flagged with `HttpOnly; Secure; SameSite=Lax` (or `SameSite=Strict`)?
-- [ ] **SSRF & Rate Limiting Defense**: Are outbound URL fetchers blocked from accessing private IP ranges (RFC 1918) and cloud metadata (`169.254.169.254`)? Are sensitive endpoints (`/login`, `/signup`, `/api/ai`, `/checkout`) rate-limited?
-- [ ] **Mandatory Statutory Legal Pages**: Are Privacy Policy (`/privacy`), Terms of Service (`/terms`), and Accessibility Statement (`/accessibility`) live in the footer? If e-commerce/SaaS, is the Refund & Cancellation Policy published? If operating in DACH, is Impressum published?
-- [ ] **Cookie Consent Compliance**: Do tracking scripts stay blocked until explicit opt-in? Does the Cookie Banner feature an equal-weight "Reject All" button (zero dark patterns)?
-- [ ] **Data Protection & AI Model Ethics**: Are self-serve Data Export (JSON/CSV) and Account Deletion ("Right to be Forgotten") functional? If user data is processed by AI, is there an explicit opt-out toggle and Zero Data Retention (ZDR) API guarantee?
+- [ ] **Boundary Validation & Injection Defense**: 100% of queries parameterized via typed ORMs (Prisma, Drizzle); dynamic shell/eval calls completely banned.
+- [ ] **Safe Rendering & XSS Protection**: Context-aware auto-escaping; zero un-sanitized `dangerouslySetInnerHTML`. Strict Content Security Policy (CSP) active.
+- [ ] **Payment Page Protection (PCI DSS v4.0.1 Req 6.4.3 & 11.6.1)**: If payments exist, verify SRI hashes and business justification for every client script, and verify client-side tamper detection.
+- [ ] **CAC CAMA 2020 Corporate Identity Imprint**: Does the legal footer and digital invoice template state registered company name, **RC Number**, registered office address, and directors' particulars?
+- [ ] **FCCPC Consumer Protection**: No blanket "No Refund" text (statutory remedies declared for defective goods/failed SaaS); checkout price strictly matches displayed price; itemized digital receipts generated.
+- [ ] **Global Privacy Control (GPC)**: Automatic detection of `Sec-GPC: 1` request header and `navigator.globalPrivacyControl`; `/.well-known/gpc.json` served.
+- [ ] **Responsible Disclosure**: `/.well-known/security.txt` published with authorized testing scope under Cybercrimes Act s.6(2).
+- [ ] **Mandatory Statutory Legal Pages**: Privacy Policy (`/privacy`), Terms of Service (`/terms`), Accessibility Statement (`/accessibility` WCAG 2.1 AA / EAA 2025), and Refund Policy (`/refunds`) live with verified DPO contact details.
+- [ ] **Cookie Consent Compliance**: Zero pre-consent tracking; Cookie Banner features equal-weight "Reject All" button (zero dark patterns).
+- [ ] **Data Subject Rights & AI Ethics**: Functional self-serve Account Deletion ("Right to be Forgotten") and Data Export (JSON/CSV); AI model training opt-out toggle and ZDR API contracts confirmed.
+- [ ] **72-Hour Legal Incident Readiness**: Verified incident protocol linking to `06-Security-and-Legal-Compliance/72-hour-incident-response-runbook.md` (ngCERT, NDPC, EU DPAs).
 - [ ] **Error Tracking Integration (Sentry / LogRocket)**:
   - Do Error Boundaries wrap all major organism routes and screen layouts?
   - Are unhandled promise rejections and window errors captured?

@@ -57,21 +57,23 @@ Instead of tedious single-question interrogation loops or overwhelming technical
 - *Atmosphere & Mood*: Crisp light mode, deep dark mode, or clean modern hybrid? Authoritative and corporate, energetic, or clinical and precise?
 - *Typography Preferences*: Any required brand fonts, or should tailored non-generic pairings be proposed?
 
-#### Pillar 3: People, Roles & Access Control (Plain-English Database & RLS from Day 1)
-- *User Types*: Who interacts with this app? (e.g., Just customers? Team managers? Platform administrators?)
+#### Pillar 3: People, Roles & Access Control (Plain-English Database, BFF & RLS from Day 1)
+- *User Types*: Who interacts with this app? (e.g., Customers, Team Managers, Platform Administrators).
 - *Permission Boundaries*: What can each person see or do? (e.g., *"Customers can only view and edit their own projects; Admins can review all projects, manage billing, and delete users."*)
-- *Authentication Flow*: How do they sign in? (Email + password, Google one-click, magic links?)
-- *Data Architecture*: What core records need to be saved, and where does data sovereignty reside? (Directly defines PostgreSQL tables and Row-Level Security [RLS] policies).
+- *Authentication Security*: How do they sign in? (Email + password, Google one-click, WebAuthn/passkeys for privileged admin roles). Is the Backend-for-Frontend (BFF) pattern required to prevent raw token exposure?
+- *Data Architecture & Isolation*: What core records need to be saved, and where does data sovereignty reside? (Directly defines PostgreSQL tables, non-guessable UUIDv4s, and Row-Level Security [RLS] policies).
 
 #### Pillar 4: Crucial Operations, Privacy & Legal Safeguards (Quietly Enforcing the 111 Production Invariants)
 - *Financial & Operational Scope*: Bootstrapped MVP ($0/month recurring SaaS burn using generous free tiers) vs Funded Startup / Enterprise (high-availability infrastructure from Day 1).
-- *Payments & Subscriptions*: Are there paid tiers, one-time checkouts, or trials? What is the statutory refund / cancellation policy ("Click to Cancel" rule)?
-- *Legal Jurisdictions & Regulatory Compliance*: Which regions are targeted? (EU/GDPR, California/CCPA, Nigeria/NDPA 2023, UK/ICO, Canada/PIPEDA). Does the app need a statutory Cookie Consent banner and Impressum (DACH/Germany)?
-- *Data Protection & AI Model Training*: Will user data or prompts be used to train AI models? (Mandatory opt-out toggle required by law). What third-party AI APIs connect, and do they enforce Zero Data Retention (ZDR)?
+- *Payments & Subscriptions*: Are there paid tiers, one-time checkouts, or trials? What is the statutory refund / cancellation policy ("Click to Cancel" rule)? (For payment pages, PCI DSS v4.0.1 script integrity Req 6.4.3 & 11.6.1 tamper detection apply).
+- *Legal Jurisdictions & Regulatory Compliance*: Which regions are targeted?
+  * **Nigeria**: Classify under NDPC GAID 2025 (UHL >5k subjects/fintech, EHL 1k-5k, OHL 200-1k) for annual Compliance Audit Return (CAR) by March 31. Incorporate CAC CAMA 2020 imprint (RC number, registered office address, directors' particulars; enforced August 1, 2026). Comply with FCCPA 2018 consumer rules (no blanket "No Refund" text; checkout price matching; itemized receipts) and ngCERT 72h cyber disruption reporting (Cybercrimes Act 2024).
+  * **EU / UK / US**: EU GDPR (prior cookie consent, 72h breach notice), European Accessibility Act (EAA 2025 EN 301 549 / WCAG 2.1 AA), UK DUAA 2025 (30-day complaints form), and California CCPA/CPRA.
+- *Technical Privacy Protocols*: Automatic Global Privacy Control (GPC `Sec-GPC` / `/.well-known/gpc.json`) and Responsible Disclosure (`/.well-known/security.txt` with authorized scope under Cybercrimes Act s.6(2)).
+- *Data Protection & AI Model Training*: Will user data or prompts be used to train AI models? (Mandatory opt-out toggle required by law). What third-party AI APIs connect, and do they enforce Zero Data Retention (ZDR)? (GAID Art. 44 DPIA & anonymization).
 - *User Rights & DSAR*: Does the app provide self-serve account deletion ("Right to be Forgotten") and data export (JSON/CSV)?
-- *Transactional Communications*: Do users need automated welcome emails, password resets, or payment receipts?
-- *File Storage & Uploads*: Will users upload images, PDFs, or files? Who has access to view/download them?
-- *External APIs & Webhooks*: What third-party platforms must connect?
+- *Transactional Communications & Files*: Automated receipts, password resets, secure non-executable file upload storage.
+- *External APIs & Webhooks*: What third-party platforms connect (strict SSRF blocks on private IPs and cloud metadata)?
 - *The Autonomous UX Secondary Research Engine (Runs Under the Hood)*:
   Drawing on public, verifiable data sources (Reddit, App Store reviews, G2/Trustpilot, Product Hunt, Google Trends), the agent synthesizes research-grade intelligence (Jakob's Law market patterns, 3-level JTBD, pain point hierarchy, verbatim human copy vault) quietly into `context/project-overview.md`.
 
