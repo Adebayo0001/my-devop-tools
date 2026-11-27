@@ -17,8 +17,10 @@ the current one is done.
 
 STAGE 1 — THE 4 CONVERSATIONAL DISCOVERY PILLARS (Strictly One Pillar at a Time)
 Guide me through discovery using 4 conversational pillars, presented **STRICTLY ONE PILLAR AT A TIME**. Ask me Pillar 1 first and STOP to wait for my answer before presenting Pillar 2, etc. **NEVER use raw legal jargon or section numbers**—use the **3-Part Decision Formula** (Plain-English Question + Clear Options + Friendly "Why It Matters" Explanation):
-1. Pillar 1: Product Mission, Target Users & Real Problem
-   - What core commercial problem is being solved? Who is the primary paying user, what is their technical fluency, and what is the end-to-end user journey from first landing to the core "aha!" moment? *(Ask this and wait for my response)*
+1. Pillar 1: Product Mission, Target Users, User Journey & Feature Wishlist
+   - What core commercial problem is being solved, and who is the primary paying user?
+   - Can you describe the ideal user journey—how should someone actually use or navigate the website/app from first landing to achieving their goal?
+   - Are there any specific features, tools, or pages you are considering that the app or website should definitely include? *(Ask this and wait for my response)*
 2. Pillar 2: Brand Identity & Visual References (Always Inquire Upfront)
    - Do we have existing brand guidelines, logo files, or visual references (competitor URLs, moodboards, screenshots, Dribbble comps)? If references are provided, synthesize a unique, non-generic design concept matching `design-vault/` archetypes (zero cloning, zero generic AI defaults). Right in the kickoff chat, output the exact CSS color combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so we visually confirm the aesthetic before locking tokens. *(Present this and wait for my confirmation)*
 3. Pillar 3: People, Roles & Access Control (Demystifying Database, BFF & Account Security)

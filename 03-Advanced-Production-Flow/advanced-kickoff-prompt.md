@@ -22,7 +22,10 @@ Work through this in four strict stages.
 
 #### STAGE 1 — THE 4 CONVERSATIONAL DISCOVERY PILLARS (Strictly One Pillar at a Time)
 Guide me through discovery using 4 conversational pillars, presented **STRICTLY ONE PILLAR AT A TIME**. Present Pillar 1 first and STOP to wait for my answer before moving to Pillar 2. **NEVER use raw legal jargon or section numbers**—use the **3-Part Decision Formula** (Plain-English Question + Clear Options + Friendly "Why It Matters" Explanation):
-1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core problem does it solve? Who is the primary paying user, what is their technical fluency, and what is the user journey from landing to the "aha!" moment? *(Ask this and wait for my response before proceeding)*
+1. **Pillar 1: Product Mission, Target Users, User Journey & Feature Wishlist**:
+   - What core commercial or operational problem does it solve, and who is the primary paying user?
+   - Can you describe the ideal user journey—how should someone actually use or navigate the website/app from first landing to reaching their main goal?
+   - Are there any specific features, tools, or pages you are considering that the app or website should definitely include? *(Ask this and wait for my response before proceeding)*
 2. **Pillar 2: Brand Identity & Visual References (Always Inquire Upfront)**: Do we have existing brand assets, logo files, or visual references (competitors, moodboards, screenshots)? If provided, synthesize a unique design concept matching `design-vault/` archetypes. Output the live color palette combo and visual UI preview directly in chat for confirmation before locking tokens. *(Present this and wait for my confirmation)*
 3. **Pillar 3: People, Roles & Access Control (Demystifying Database, BFF & Account Security)**:
    - Who will log in (Customers, Team Managers, Platform Admins)? How do they sign in (Email/pass, Google one-click, Passkeys for admins)? What can each user see or edit?

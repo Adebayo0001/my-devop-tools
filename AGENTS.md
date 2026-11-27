@@ -38,7 +38,11 @@ Lock in what's expensive to change later: stack fit (traffic, team size = solo, 
 ### The 4 Conversational Discovery Pillars (Strictly One Pillar at a Time)
 Instead of lengthy single-question interrogation loops or overwhelming the builder with all questions at once, discovery is grouped into 4 conversational pillars using the **3-Part Decision Formula** (Plain-English Question + Clear Examples + Friendly "Why It Matters" Explanation).
 **Mandatory Stop Gate**: The agent MUST present discovery **strictly ONE PILLAR AT A TIME**, stopping and waiting for the builder's response before advancing to the next pillar:
-1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core problem does it solve? Who is the primary user, what is their technical fluency, and what is the end-to-end user journey from first landing to the core "aha!" moment? *(Stop & wait for builder reply)*
+1. **Pillar 1: Product Mission, Target Users, User Journey & Feature Wishlist**:
+   - What core commercial or operational problem does it solve?
+   - Who is the primary user, and what is their technical fluency?
+   - *Ideal User Journey*: How should the ideal user actually use or navigate the website/app from first landing to reaching their main goal?
+   - *Specific Features*: Are there any specific features, tools, or pages you already have in mind that the website or app should definitely include? *(Stop & wait for builder reply)*
 2. **Pillar 2: Brand Identity & Visual References (Always Inquire Upfront)**: Do you have existing brand colors, a logo, or visual references (competitor URLs, moodboards, screenshots, Dribbble comps)?
    - *Reference-to-Concept Synthesis*: If references are provided, use them as inspiration while cross-referencing system design vault archetypes (`design-vault/`) to synthesize a **unique, non-generic design concept** tailored to the domain. Ban generic AI defaults (no cream/terracotta buttons, no 3-card grids).
    - *Live In-Chat Color Combo & UI Preview*: Right in the kickoff chat, generate the actual color palette combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so the builder visually confirms the aesthetic before locking tokens. *(Stop & wait for visual confirmation)*

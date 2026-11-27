@@ -38,7 +38,10 @@
 * **THE 4 CONVERSATIONAL DISCOVERY PILLARS (STRICTLY ONE PILLAR AT A TIME)**:
   - Discovery is structured into 4 conversational pillars using the **3-Part Decision Formula** (Plain-English Question + Clear Examples + Friendly "Why It Matters" Explanation).
   - **MANDATORY SEQUENTIAL STOP GATE**: The agent is strictly forbidden from dumping all 4 pillars at once. Questions must be presented **strictly ONE PILLAR AT A TIME**, stopping and waiting for the builder's response before proceeding:
-    1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core problem does it solve? Primary user technical fluency, and user journey from landing to the "aha!" moment. *(Stop & wait for builder answer)*
+    1. **Pillar 1: Product Mission, Target Users, User Journey & Feature Wishlist**:
+       - What core commercial problem does it solve, and who is the primary user?
+       - *Ideal User Journey*: How should the ideal user navigate and use the website/app from first visit to their goal?
+       - *Specific Features*: Are there any specific features, tools, or pages you are considering that the app or website should definitely include? *(Stop & wait for builder answer)*
     2. **Pillar 2: Brand Identity & Visual References (Always Inquire Upfront)**: Inquire about existing brand colors, logo, or visual references (competitor URLs, moodboards, screenshots, Dribbble comps).
        - *Reference-to-Concept Synthesis*: Cross-reference reference materials with `design-vault/` archetypes to synthesize a **unique, non-generic design concept** (zero cloning, zero generic AI defaults).
        - *Live In-Chat Color Palette & Rendered UI Preview*: Output the exact CSS color combo and live rendered UI preview so the builder visually confirms the aesthetic before locking tokens. *(Stop & wait for visual confirmation)*

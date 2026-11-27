@@ -65,10 +65,11 @@ When invoked, inspect the user's initial description or ask the Calibration Ques
 
 Instead of tedious single-question interrogation loops or technical walls, discovery is structured into **4 conversational pillars presented strictly one at a time**:
 
-#### Pillar 1: Product Mission, Target Users & Real Problem
+#### Pillar 1: Product Mission, Target Users, User Journey & Feature Wishlist
 - *Core Purpose*: What commercial problem or operational bottleneck is being solved?
-- *Target User*: Who is the primary user, what is their technical fluency (non-technical operator vs executive vs engineer), and what is their daily digital environment?
-- *Narrative User Journey*: What is the ideal flow from landing on the product to the core "aha!" moment?
+- *Target User*: Who is the primary paying user, what is their technical fluency (non-technical operator vs executive vs engineer), and what is their daily digital environment?
+- *Narrative User Journey*: Ask the builder: *"Can you describe the ideal user journey—how should someone actually use or navigate the website/app from the moment they land to achieving their main goal?"*
+- *Specific Features in Mind*: Ask the builder: *"Are there any specific features, tools, or pages you already have in mind that the app or website should definitely include?"*
 
 #### Pillar 2: Brand Identity & Visual Atmosphere (Always Inquire Upfront)
 - *Existing Assets*: *"Do you have an existing brand identity, logo, or color scheme to provide/upload, or are we starting completely from scratch?"*
