@@ -40,7 +40,16 @@ If the brief doesn't give enough signal to pick confidently (e.g., scale is genu
 
 Map every screen required across the user journey based on user stories, generate full-fidelity prompts for ALL screens, and maintain the HTML screen repository:
 
-1. **Screen Inventory Mapping**: Catalog every core screen (e.g. `SCR-01 Landing`, `SCR-02 Auth`, `SCR-03 Dashboard`, `SCR-04 Detail Workspace`, `SCR-05 Settings`).
+1. **Comprehensive 111-System Screen Inventory Mapping**: Catalog every core screen required derived from the **111 Core Systems Concepts**:
+   - `SCR-01: Landing & Conversion` (Value Prop, Pricing, FAQ)
+   - `SCR-02: Identity & Auth Security` (Sign-In, Sign-Up, MFA/2FA, Password Reset — *Concepts 68–73*)
+   - `SCR-03: Workspace Onboarding` (Team Invite, Role Assignment, Seed Data)
+   - `SCR-04: Primary Workspace Dashboard` (Telemetry Stream, Core Canvas, Metrics — *Concepts 1–19, 22–24*)
+   - `SCR-05: Entity Management & Detail Inspector` (Filterable Grid, Entity Detail View, Empty States — *Concepts 25–27, 36–37*)
+   - `SCR-06: Administrative Governance Console` (User Management, RLS Matrix, Audit Log — *Concepts 68, 81–82*)
+   - `SCR-07: Billing & Usage Quotas` (Stripe Portal, Tier Management, Quota Alerts — *Concept 88*)
+   - `SCR-08: Platform & Webhook Settings` (API Vault, Webhook Dispatcher, Rate-Limit Analytics — *Concepts 67, 101–103*)
+   - `SCR-09: Resilience & Error Boundaries` (500 Error Recovery Boundary, 404, 429 Rate-Limit Throttled Screen — *Concepts 10–13, 55, 83–85, 109–111*)
 2. **Deterministic Google Stitch Prompts for ALL Screens**:
    - 2D viewport framing (16:9 widescreen, front-facing, no 3D tilt).
    - Spatial layout zones (navigation rail, main stage, contextual inspector).

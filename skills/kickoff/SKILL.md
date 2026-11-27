@@ -99,50 +99,62 @@ Propose the production tech stack following these non-negotiable standards:
 
 ---
 
-### Stage 4: Interactive Visual Intake & Brand Exploration (MANDATORY STOP GATE — ZERO SHORTCUTS)
+### Stage 4: Interactive Visual Intake, Reference Synthesis & Live In-Chat UI Preview (MANDATORY STOP GATE)
 
 > [!IMPORTANT]
-> The agent MUST NOT guess, assume, or unilaterally impose visual styles, color palettes, or fonts. The entire process must be followed sequentially as if manual copy-and-paste prompts were used.
+> The agent MUST NOT guess, assume, or unilaterally impose visual styles, color palettes, or fonts. When the builder provides references, they MUST be used as conceptual inspiration while the system synthesizes a bespoke, non-generic design. The agent MUST generate the actual color combo and visual UI preview directly in the kickoff chat for the builder to see.
 
 The agent MUST stop and ask the builder the **Visual Intake Inquiries**:
 
-1. **Existing Brand Assets**:
-   > *"Do you have an existing brand identity, logo, or color scheme to provide/upload, or are we starting completely from scratch?"*
+1. **Existing Brand Assets & Visual References**:
+   > *"Do you have existing brand assets (logo, colors), or visual references (competitor links, moodboards, screenshots, Dribbble comps) to use as inspiration, or are we starting completely from scratch?"*
 2. **Color Palette & Atmosphere**:
-   > *"What are your color preferences? (Primary brand accent color, background mood: deep dark mode, crisp light, or hybrid, and emotional temperature: authoritative, energetic, clinical, luxurious)?"*
+   > *"What are your color preferences? (Primary brand accent, background mood: deep dark mode, crisp light, or hybrid, and emotional temperature: authoritative, energetic, clinical, luxurious)?"*
 3. **Typography & Font Preferences**:
    > *"Do you have specific font preferences, or should I propose tailored, high-character typographic pairings?"*
 
-#### When the Builder Provides Brand Assets / Colors:
+#### When the Builder Supplies Visual References:
+- **Reference-to-Concept Synthesis (Zero Clones, Zero Generic Slop)**:
+  - Treat references strictly as **conceptual inspiration**, never for literal cloning.
+  - Extract abstract design qualities: layout rhythm (dense vs sparse, asymmetric vs modular), typographic character, color temperature, and atmospheric gravity.
+  - Cross-reference with the **Master Design Vault** (`design-vault/`, archetypes `ARCH-01` through `ARCH-06`, high-converting patterns) to synthesize a **completely unique, bespoke design concept** for the builder's specific product domain. Ban generic AI defaults (no generic cream/terracotta buttons, no repetitive 3-card grids, no pill badges).
+
+#### When the Builder Supplies Locked Brand Assets / Colors:
 - Honor and lock the builder's hex codes, logo files, and font choices directly into `context/design.md` and `context/ui-tokens.md`.
 
 #### When the Builder is Starting Fresh with No Existing Brand:
-- Propose **3 distinct, curated visual directions** grounded in the product's domain.
-- **Design Vault Spatial Grounding (Stealth Persona Invariant)**:
-  - The agent silently draws on the spatial layouts and architectural tension in the Master Design Vault (located at `C:\Users\user\Desktop\My DevOp Tools\design-vault\` or local `design-vault/`, including archetypes `ARCH-01` through `ARCH-06`, Figma templates, and high-converting patterns).
-  - **THE STEALTH RULE (Zero Internal File Leakage)**: The agent MUST NOT break character or mechanically state *"I am referencing design-vault/archetypes/..."* or cite internal `.md` filenames. Instead, articulate the proposal with the effortless authority of an elite Creative Director: speak about mathematical proportions, 8/4 asymmetric column splits, negative space tension, and signature moments as native design mastery.
-- **Anti-Generic Typography Floor**: Strictly avoid default, generic pairings (e.g. `Inter + Roboto`, `Arial`). Propose distinctive, elite pairings:
-  - Direction A (Modern Tech / Architectural): e.g. **Syne** (Headings) + **Plus Jakarta Sans** (Body) + **JetBrains Mono** (Metrics)
-  - Direction B (High-Authority / Executive Editorial): e.g. **Instrument Serif** (Display) + **Inter** (Body) + **Geist Mono** (Utility)
-  - Direction C (Dynamic / High-Energy SaaS): e.g. **Clash Display** or **Cabinet Grotesk** (Headings) + **Satoshi** or **General Sans** (Body)
-- Explain the psychological rationale of each direction and let the builder select or customize.
-- **Confirm Selection**: Wait for the builder's confirmation before locking `design.md` or moving to Stitch prompts.
+- Propose **3 distinct, curated visual directions** grounded in the product's domain using the stealth design vault archetypes and anti-generic typography floor (e.g. Syne + Plus Jakarta Sans, Instrument Serif + Inter, Clash Display + Satoshi).
+
+#### Mandatory Live In-Chat Color Combo & UI Preview Generator:
+Right in the kickoff chat, the agent MUST render the **Live Color Palette & Visual UI Preview** so the builder can see the tangible design before approving:
+1. **The Live Color Palette & Contrast Matrix**:
+   - Canvas Background (`--background`), Elevated Card (`--card`), Primary Brand Accent (`--primary`), Sub-Accent (`--secondary`), Border (`--border`), High-Contrast Text (`--foreground`). Every pairing verified for WCAG 2.1 AA contrast (≥4.5:1).
+2. **The In-Chat Rendered UI Component Mockup**:
+   - Render a live visual component block directly in the chat conversation (using Generative UI `<agent-embed>` HTML widget in Antigravity IDE and high-fidelity markdown visual swatch cards across all IDEs):
+     - An elevated preview card with clean typography hierarchy.
+     - Live Primary Action Button and Secondary Ghost Button in proposed brand colors.
+     - Form input / badge with semantic border and focus states.
+- **Confirm Selection**: Wait for the builder's explicit visual approval (*"Color and UI Approved"*) before locking `design.md` or moving to screen prompts.
 
 ---
 
-### Stage 5: Google Stitch UI Pipeline (Product Designer Mode)
+### Stage 5: Google Stitch UI Pipeline (Product Designer Mode & 111-System Screen Mapping)
 
 Once the visual direction and color palette are locked, prepare visual mockups using the calibrated Google Stitch protocol:
 
-#### 1. Mandatory Screen Inventory Mapping
-Map every screen required across the user journey based on user stories:
-- `SCR-01`: Landing / Public Front Door
-- `SCR-02`: Authentication & Onboarding (Sign-In / Sign-Up)
-- `SCR-03`: Primary User Dashboard / Main Overview
-- `SCR-04`: Core Interactive Workspace / Task Detail Screen
-- `SCR-05`: Account, Team & Billing Settings
+#### 1. Comprehensive 111-Core System Screen Inventory Mapping
+A production-grade application requires complete screen coverage across the entire system. Derived from the **111 Core Systems, Architecture & DevOps Concepts**, map out every required screen:
+- `SCR-01: Public Front Door & Conversion` (Landing Page, Value Proposition, Pricing & Comparison, FAQ)
+- `SCR-02: Identity, Auth & Access Security` (Sign-In, Sign-Up, MFA/2FA Verification, Password Reset, Magic Link — *Concepts 68–73*)
+- `SCR-03: Workspace Onboarding & Team Setup` (Workspace Setup, Role-Based Access Invitation, Initial Data Ingestion)
+- `SCR-04: Primary Product Workspace Dashboard` (Live Telemetry Stream, Core Interactive Workspace / Studio / Canvas, Metric Cards — *Concepts 1–19, 22–24*)
+- `SCR-05: Entity Management & Detail Inspector` (Searchable/Filterable Paginated Data View, Entity Detail / Edit View, Purposeful Empty States — *Concepts 25–27, 36–37*)
+- `SCR-06: Administrative Governance & Audit Console` (User Management, RLS Role Switching, Permissions Matrix, Audit Trail & Activity Logs — *Concepts 68, 81–82*)
+- `SCR-07: Billing, Quotas & Invoicing` (Stripe Customer Portal, Subscription Tier Management, Quota Alerts & Usage Metering — *Concept 88*)
+- `SCR-08: Platform, Secrets & Webhook Settings` (API Keys Vault, Webhook Configuration & Dispatcher, Rate-Limit Analytics — *Concepts 67, 101–103*)
+- `SCR-09: System Resilience & Error Boundaries` (Global 500 Error Recovery Boundary, 404 Not Found, 429 Rate-Limit Throttled Page with exponential backoff timer, Offline Sync Fallback — *Concepts 10–13, 55, 83–85, 109–111*)
 
-#### 2. Full-Fidelity Google Stitch Prompts (For All Screens)
+#### 2. Full-Fidelity Google Stitch Prompts (For All Mapped Screens)
 Generate ready-to-paste prompts for **all** core screens using the 5-part formula (calibrated with spatial grid geometry from `design-vault/`):
 1. **Viewport & Framing Lock**: `Flat 2D desktop application screenshot, 16:9 widescreen, 1920x1080 resolution, direct front-facing view, NO 3D perspective tilt, NO laptop mockup frame, NO claymockups.`
 2. **Spatial Zone Architecture**: Explicit pixel/percentage layout divisions (e.g. `Zone 1: Left 280px navigation rail. Zone 2: Center main workspace. Zone 3: Right 360px inspector sidebar.`).
@@ -152,7 +164,7 @@ Generate ready-to-paste prompts for **all** core screens using the 5-part formul
 6. **Strict Negative Constraints**: `STRICT NEGATIVE CONSTRAINTS: NO analytics charts, NO line graphs, NO bar charts, NO floating decorative bubbles, NO colorful gradients, NO mobile frames, clean minimalist professional interface only.`
 
 #### 3. The HTML Screen Vault (`context/screens/`)
-- Save generated HTML screens (or screenshots) directly into `context/screens/<screen-name>.html` (e.g. `context/screens/scr-01-landing.html`, `context/screens/scr-03-dashboard.html`).
+- Save generated HTML screens (or screenshots) directly into `context/screens/<screen-name>.html` (e.g. `context/screens/scr-01-landing.html`, `context/screens/scr-04-workspace.html`).
 - During sprint phases, the agent directly reads and inspects each HTML file to replicate layout, spacing, and micro-copy with 1:1 visual fidelity.
 
 ---

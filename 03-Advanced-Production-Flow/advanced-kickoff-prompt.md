@@ -23,7 +23,7 @@ Work through this in four strict stages.
 #### STAGE 1 — THE 4 CONVERSATIONAL DISCOVERY PILLARS (No Overwhelm, High Coverage)
 Guide me through discovery using 4 conversational pillars with helpful examples, capturing critical requirements without cognitive fatigue:
 1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core commercial problem is being solved? Who is the primary paying user, what is their technical fluency, and what is the end-to-end user journey from first landing to the core "aha!" moment?
-2. **Pillar 2: Brand Identity & Visual Personality**: Do we have existing brand guidelines, logo files, or hex codes to provide/upload, or are we creating the design system from scratch? If starting fresh: what visual atmosphere fits best (crisp light, deep dark, or modern clean tech)?
+2. **Pillar 2: Brand Identity & Visual References (Always Inquire Upfront)**: Do we have existing brand guidelines, logo files, or visual references (competitor URLs, moodboards, screenshots, Dribbble comps)? If references are provided, synthesize a unique, non-generic design concept matching `design-vault/` archetypes (zero cloning, zero generic AI defaults). Right in the kickoff chat, output the exact CSS color combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so we visually confirm the aesthetic before locking tokens.
 3. **Pillar 3: People, Roles & Access Control (Plain-English Database & RLS)**: Who logs in (Customers, Team Managers, Platform Admins)? What can each user see or edit? (e.g., "Customers only see their own projects; Admins review all projects, manage billing, and delete users"). This defines database tables, ownership boundaries, and Row Level Security (RLS) policies from Day 1.
 4. **Pillar 4: Crucial Operations & Hidden Needs (Quietly Enforcing the 111-Item Production Safeguards)**: Will users make payments or subscriptions? Do they need automated transactional emails/receipts? Will they upload sensitive files? What third-party APIs/webhooks are needed? Is this a lean MVP ($0/month free-tier target) or a funded scale architecture?
 
@@ -55,7 +55,16 @@ Apply human-centered Design Thinking to guarantee the user interface looks like 
 1. **The Interactive Visual Intake Stop Gate**:
    - Honor provided logo/hex codes or propose 3 distinct, curated visual directions with non-generic typography.
 2. **Google Stitch Mockup Protocol**:
-   - **Screen Inventory**: Map out all screens required across the user journey (e.g. SCR-01 Landing, SCR-02 Auth, SCR-03 Dashboard, SCR-04 Workspace, SCR-05 Settings).
+   - **Comprehensive 111-System Screen Inventory**: Map out all screens required across the user journey derived from the 111 Core Systems Concepts:
+     * `SCR-01: Landing & Conversion` (Value Prop, Pricing & Comparison, FAQ)
+     * `SCR-02: Identity & Auth Security` (Sign-In, Sign-Up, MFA/2FA, Password Reset, Magic Link — *Concepts 68–73*)
+     * `SCR-03: Workspace Onboarding` (Team Invite, RLS Role Assignment, Initial Seed Data)
+     * `SCR-04: Primary Workspace Dashboard` (Live Telemetry Stream, Core Studio/Canvas, Metric Cards — *Concepts 1–19, 22–24*)
+     * `SCR-05: Entity Management & Detail Inspector` (Filterable/Paginated Data Grid, Entity Detail View, Empty States — *Concepts 25–27, 36–37*)
+     * `SCR-06: Administrative Governance Console` (User Management, RLS Permission Matrix, Audit Log — *Concepts 68, 81–82*)
+     * `SCR-07: Billing & Usage Quotas` (Stripe Customer Portal, Tier Management, Quota Alerts — *Concept 88*)
+     * `SCR-08: Platform & Webhook Settings` (API Keys Vault, Webhook Dispatcher, Rate-Limit Analytics — *Concepts 67, 101–103*)
+     * `SCR-09: Resilience & Error Boundaries` (500 Error Recovery Boundary, 404, 429 Rate-Limit Throttled Screen with exponential backoff indicator — *Concepts 10–13, 55, 83–85, 109–111*)
    - **Full-Fidelity Google Stitch Prompts**: Write ready-to-paste prompts for ALL core screens using the 5-part formula (viewport lock, spatial zones, named elements, locked palette, strict negative constraints—no font family names).
    - **HTML Screen Vault (`context/screens/`)**: Resulting HTML files are saved into `context/screens/*.html` and inspected 1:1 during subsequent sprint builds.
 

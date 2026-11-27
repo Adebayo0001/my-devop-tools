@@ -139,7 +139,7 @@ If any required context file is missing or out of date, **halt and request or dr
 
 ## The Complete 6-Phase Daily Build & Lifecycle Discipline
 
-1. **Phase 1: Discovery, Google Stitch & Architecture Specs**: 4 Conversational Discovery Pillars, full Google Stitch Screen Inventory & Prompts, and Instant Batched Generation of all 11 context files.
+1. **Phase 1: Discovery, Reference Synthesis & 111-System Google Stitch Specs**: 4 Conversational Discovery Pillars, Reference-to-Concept synthesis (`design-vault/`), live in-chat color & UI preview, full 111-system Google Stitch Screen Inventory (`SCR-01` to `SCR-09`) & Prompts, and Instant Batched Generation of all 11 context files.
 2. **Phase 2: Upfront Foundation (The Shell & Database)**: Core dependencies, package verification, `globals.css` font cascade, database tables with Row Level Security (RLS) policies, master App Shell (Navbar, Layout, Footer, root Error Boundary), and global loading skeletons.
 3. **Phase 3: Methodical Layered Sprints (Pure User Stories & Working Software)**:
    - Build one vertical slice at a time along the user journey (UI + working state handlers + live seed data).

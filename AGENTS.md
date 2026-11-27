@@ -38,12 +38,23 @@ Lock in what's expensive to change later: stack fit (traffic, team size = solo, 
 ### The 4 Conversational Discovery Pillars (No Overwhelm, High Coverage)
 Instead of lengthy single-question interrogation loops, discovery is grouped into 4 conversational pillars with helpful examples, capturing vital details without cognitive fatigue:
 1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core problem does it solve? Who is the primary user, what is their technical fluency, and what is the end-to-end user journey from first landing to the core "aha!" moment?
-2. **Pillar 2: Brand Identity & Visual Personality**: Do you have existing brand colors, a logo, or typography guidelines? (Always ask upfront). If starting fresh: What atmosphere fits best (clean light, deep dark, or modern clean tech)?
+2. **Pillar 2: Brand Identity & Visual References (Always Inquire Upfront)**: Do you have existing brand colors, a logo, or visual references (competitor URLs, moodboards, screenshots, Dribbble comps)?
+   - *Reference-to-Concept Synthesis*: If references are provided, use them as inspiration while cross-referencing system design vault archetypes (`design-vault/`) to synthesize a **unique, non-generic design concept** tailored to the domain. Ban generic AI defaults (no cream/terracotta buttons, no 3-card grids).
+   - *Live In-Chat Color Combo & UI Preview*: Right in the kickoff chat, generate the actual color palette combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so the builder visually confirms the aesthetic before locking tokens.
 3. **Pillar 3: People, Roles & Access Control (Demystifying Database & RLS)**: Who logs in (Customers, Team Managers, Platform Admins)? What can each user see or edit? (e.g., "Customers only see their own projects; Admins review all projects and can delete accounts"). This defines database tables, ownership boundaries, and Row Level Security (RLS) policies from Day 1.
 4. **Pillar 4: Crucial Operations & Hidden Needs (Quietly Enforcing the 111 Production Safeguards)**: Will users make payments or subscriptions? Do they need automated transactional emails/receipts? Will they upload sensitive files? What third-party APIs/webhooks are needed? Is this a lean MVP ($0/month free-tier target) or a funded scale architecture?
 
-### The Google Stitch UI Pipeline (Product Designer Mode)
-- **Screen Inventory Mapping**: Map every screen required across the user journey (e.g., `SCR-01: Landing Page`, `SCR-02: Sign In / Sign Up`, `SCR-03: Main Dashboard`, `SCR-04: Detail Workspace`, `SCR-05: Account Settings`).
+### The Google Stitch UI Pipeline (Product Designer Mode & 111-System Screen Mapping)
+- **Comprehensive 111-System Screen Inventory**: A production application requires complete screen coverage derived from the **111 Core Systems Concepts**:
+  - `SCR-01: Landing & Conversion` (Value Prop, Pricing & Comparison, FAQ)
+  - `SCR-02: Identity & Auth Security` (Sign-In, Sign-Up, MFA/2FA, Password Reset, Magic Link — *Concepts 68–73*)
+  - `SCR-03: Workspace Onboarding` (Team Invite, RLS Role Assignment, Initial Seed Data)
+  - `SCR-04: Primary Workspace Dashboard` (Live Telemetry Stream, Core Studio/Canvas, Metric Cards — *Concepts 1–19, 22–24*)
+  - `SCR-05: Entity Management & Detail Inspector` (Filterable/Paginated Data Grid, Entity Detail View, Empty States — *Concepts 25–27, 36–37*)
+  - `SCR-06: Administrative Governance Console` (User Management, RLS Permission Matrix, Audit Log — *Concepts 68, 81–82*)
+  - `SCR-07: Billing & Usage Quotas` (Stripe Customer Portal, Tier Management, Quota Alerts — *Concept 88*)
+  - `SCR-08: Platform & Webhook Settings` (API Keys Vault, Webhook Dispatcher, Rate-Limit Analytics — *Concepts 67, 101–103*)
+  - `SCR-09: Resilience & Error Boundaries` (500 Error Recovery Boundary, 404, 429 Rate-Limit Throttled Screen with exponential backoff indicator — *Concepts 10–13, 55, 83–85, 109–111*)
 - **Product Designer Stitch Prompts**: The agent writes full-fidelity Google Stitch prompts for each screen, detailing 2D viewport framing (16:9, front-facing, no 3D tilt), spatial layout zones, named components, locked brand palette, and typographic descriptions **without font family names** (preventing Stitch from distorting text).
 - **The HTML Screen Vault (`context/screens/`)**: Generated HTML screens (or screenshots) are saved in `context/screens/<screen-name>.html`. In every subsequent development phase, the agent inspects that screen's HTML file and translates it 1:1 into accessible React + Tailwind components.
 

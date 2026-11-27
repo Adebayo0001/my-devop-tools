@@ -64,10 +64,26 @@ These rules apply unconditionally across every tier, project, and file:
   - The agent is **strictly forbidden** from building multiple features in one blind pass.
   - After completing each feature, the agent must **STOP COLD**, output the structured Feature Verification & Testing Card, and await user confirmation (or automated browser agent verification) before proceeding to the next feature.
 * **THE 4 CONVERSATIONAL DISCOVERY PILLARS (NO OVERWHELM, HIGH COVERAGE)**:
-  - Discovery is structured into 4 conversational pillars with helpful examples: (1) Product Mission & Real Problem, (2) Brand Identity & Visual Personality (always ask for logo/colors upfront), (3) People, Roles & Access Control (defining DB tables & Row Level Security [RLS] upfront), and (4) Crucial Operations & Hidden Needs (payments, transactional emails, webhooks, covering the 111-concept production safeguards quietly).
-* **THE GOOGLE STITCH UI PIPELINE (PRODUCT DESIGNER MODE)**:
-  - Generate full-fidelity Google Stitch prompts for all screens across the user journey.
-  - Generated HTML files (or screenshots) are saved in `context/screens/<screen-name>.html` and used as the 1:1 design blueprint during development sprints.
+  - Discovery is structured into 4 conversational pillars with helpful examples:
+    1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core problem does it solve? Primary user technical fluency, and user journey from landing to the "aha!" moment.
+    2. **Pillar 2: Brand Identity & Visual References (Always Inquire Upfront)**: Inquire about existing brand colors, logo, or visual references (competitor URLs, moodboards, screenshots, Dribbble comps).
+       - *Reference-to-Concept Synthesis*: Cross-reference reference materials with `design-vault/` archetypes to synthesize a **unique, non-generic design concept** (zero cloning, zero generic AI defaults).
+       - *Live In-Chat Color Palette & Rendered UI Preview*: Right in the kickoff chat, output the exact CSS color combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so the builder visually confirms the aesthetic before locking tokens.
+    3. **Pillar 3: People, Roles & Access Control (Demystifying Database & RLS)**: Who logs in, role hierarchy, ownership boundaries, and database tables + Row Level Security (RLS) policies from Day 1.
+    4. **Pillar 4: Crucial Operations & Hidden Needs (Quietly Enforcing the 111 Production Safeguards)**: Payments, transactional emails, file uploads, webhooks/APIs, and MVP vs scale infrastructure target.
+* **THE GOOGLE STITCH UI PIPELINE (PRODUCT DESIGNER MODE & 111-SYSTEM SCREEN MAPPING)**:
+  - **Comprehensive 111-System Screen Inventory**: A production application requires complete screen coverage derived from the **111 Core Systems Concepts**:
+    - `SCR-01: Landing & Conversion` (Value Prop, Pricing & Comparison, FAQ)
+    - `SCR-02: Identity & Auth Security` (Sign-In, Sign-Up, MFA/2FA, Password Reset, Magic Link — *Concepts 68–73*)
+    - `SCR-03: Workspace Onboarding` (Team Invite, RLS Role Assignment, Initial Seed Data)
+    - `SCR-04: Primary Workspace Dashboard` (Live Telemetry Stream, Core Studio/Canvas, Metric Cards — *Concepts 1–19, 22–24*)
+    - `SCR-05: Entity Management & Detail Inspector` (Filterable/Paginated Data Grid, Entity Detail View, Empty States — *Concepts 25–27, 36–37*)
+    - `SCR-06: Administrative Governance Console` (User Management, RLS Permission Matrix, Audit Log — *Concepts 68, 81–82*)
+    - `SCR-07: Billing & Usage Quotas` (Stripe Customer Portal, Tier Management, Quota Alerts — *Concept 88*)
+    - `SCR-08: Platform & Webhook Settings` (API Keys Vault, Webhook Dispatcher, Rate-Limit Analytics — *Concepts 67, 101–103*)
+    - `SCR-09: Resilience & Error Boundaries` (500 Error Recovery Boundary, 404, 429 Rate-Limit Throttled Screen with exponential backoff indicator — *Concepts 10–13, 55, 83–85, 109–111*)
+  - Generate full-fidelity Google Stitch prompts for each screen (2D viewport framing, spatial zones, named components, locked brand palette, no font family names).
+  - Generated HTML files (or screenshots) are saved in `context/screens/<screen-name>.html` and inspected 1:1 during subsequent sprint development.
 * **INSTANT BATCHED CONTEXT GENERATION (TIER 3 / ALL TIERS)**:
   - All context files are generated in a single comprehensive pass without quality sacrifice, eliminating slow multi-turn approval bottlenecks.
 
