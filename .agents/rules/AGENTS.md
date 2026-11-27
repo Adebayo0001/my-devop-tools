@@ -35,18 +35,19 @@
     - **In-Phase API Setup Gate**: Whenever a feature requires an external integration (Supabase, Stripe, Resend, AI models), pause at that phase, explain in plain English what key is needed, and let the user add it to `.env.local` before moving to test the live feature.
     - Every feature must be a complete **Vertical Slice** (UI presentation + interactive handlers + 5 states + live/seed data).
   - **The Stop & Test Gate**: After each feature is built, the agent **STOPS COLD**, outputs the Feature Verification Card, and awaits verified test confirmation before moving forward.
-* **THE 4 CONVERSATIONAL DISCOVERY PILLARS (NO OVERWHELM, HIGH COVERAGE)**:
-  - Discovery is structured into 4 conversational pillars using the **3-Part Decision Formula** (Plain-English Question + Clear Examples + Friendly "Why It Matters" Explanation):
-    1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core problem does it solve? Primary user technical fluency, and user journey from landing to the "aha!" moment.
+* **THE 4 CONVERSATIONAL DISCOVERY PILLARS (STRICTLY ONE PILLAR AT A TIME)**:
+  - Discovery is structured into 4 conversational pillars using the **3-Part Decision Formula** (Plain-English Question + Clear Examples + Friendly "Why It Matters" Explanation).
+  - **MANDATORY SEQUENTIAL STOP GATE**: The agent is strictly forbidden from dumping all 4 pillars at once. Questions must be presented **strictly ONE PILLAR AT A TIME**, stopping and waiting for the builder's response before proceeding:
+    1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core problem does it solve? Primary user technical fluency, and user journey from landing to the "aha!" moment. *(Stop & wait for builder answer)*
     2. **Pillar 2: Brand Identity & Visual References (Always Inquire Upfront)**: Inquire about existing brand colors, logo, or visual references (competitor URLs, moodboards, screenshots, Dribbble comps).
        - *Reference-to-Concept Synthesis*: Cross-reference reference materials with `design-vault/` archetypes to synthesize a **unique, non-generic design concept** (zero cloning, zero generic AI defaults).
-       - *Live In-Chat Color Palette & Rendered UI Preview*: Output the exact CSS color combo and live rendered UI preview so the builder visually confirms the aesthetic before locking tokens.
+       - *Live In-Chat Color Palette & Rendered UI Preview*: Output the exact CSS color combo and live rendered UI preview so the builder visually confirms the aesthetic before locking tokens. *(Stop & wait for visual confirmation)*
     3. **Pillar 3: People, Roles & Access Control (Demystifying Database, BFF & Account Security)**:
        - Who logs in, how they sign in, and permission boundaries.
-       - *(Why it matters: Defines database tables, non-guessable UUIDv4s, Backend-for-Frontend [BFF] session token encapsulation, and Row Level Security [RLS] policies from Day 1).*
+       - *(Why it matters: Defines database tables, non-guessable UUIDv4s, Backend-for-Frontend [BFF] session token encapsulation, and Row Level Security [RLS] policies from Day 1).* *(Stop & wait for builder answer)*
     4. **Pillar 4: Crucial Operations, Privacy & Statutory Legal Safeguards (Demystifying Compliance)**:
        - Plain questions on customer locations (Nigeria/EU/US), cookies & analytics, payments/refunds, registered business name/RC number, AI model training opt-outs, and self-serve account deletion/data export.
-       - *(Why it matters: Quietly maps and enforces NDPC GAID 2025, CAC CAMA 2020, FCCPA 2018, ngCERT 72h cyber reporting, GDPR, GPC `/.well-known/gpc.json`, `/.well-known/security.txt`, and PCI DSS 4.0.1 behind the scenes).*
+       - *(Why it matters: Quietly maps and enforces NDPC GAID 2025, CAC CAMA 2020, FCCPA 2018, ngCERT 72h cyber reporting, GDPR, GPC `/.well-known/gpc.json`, `/.well-known/security.txt`, and PCI DSS 4.0.1 behind the scenes).* *(Stop & wait for builder answer)*
 * **THE GOOGLE STITCH UI PIPELINE (PRODUCT DESIGNER MODE & 111-SYSTEM SCREEN MAPPING)**:
   - **Comprehensive 111-System Screen Inventory**: A production application requires complete screen coverage derived from the **111 Core Systems Concepts**:
     - `SCR-01: Landing & Conversion` (Value Prop, Pricing & Comparison, FAQ)

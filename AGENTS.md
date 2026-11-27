@@ -35,15 +35,16 @@ If unsure which mode applies: ask. "Throwaway or heading toward production?" sav
 
 Lock in what's expensive to change later: stack fit (traffic, team size = solo, budget, deploy target), data model shape, auth model (does this even need accounts?), environment strategy (secrets/config per environment), and design system architecture.
 
-### The 4 Conversational Discovery Pillars (No Overwhelm, High Coverage)
-Instead of lengthy single-question interrogation loops or technical jargon, discovery is grouped into 4 conversational pillars using the **3-Part Decision Formula** (Plain-English Question + Clear Examples + Friendly "Why It Matters" Explanation):
-1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core problem does it solve? Who is the primary user, what is their technical fluency, and what is the end-to-end user journey from first landing to the core "aha!" moment?
+### The 4 Conversational Discovery Pillars (Strictly One Pillar at a Time)
+Instead of lengthy single-question interrogation loops or overwhelming the builder with all questions at once, discovery is grouped into 4 conversational pillars using the **3-Part Decision Formula** (Plain-English Question + Clear Examples + Friendly "Why It Matters" Explanation).
+**Mandatory Stop Gate**: The agent MUST present discovery **strictly ONE PILLAR AT A TIME**, stopping and waiting for the builder's response before advancing to the next pillar:
+1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core problem does it solve? Who is the primary user, what is their technical fluency, and what is the end-to-end user journey from first landing to the core "aha!" moment? *(Stop & wait for builder reply)*
 2. **Pillar 2: Brand Identity & Visual References (Always Inquire Upfront)**: Do you have existing brand colors, a logo, or visual references (competitor URLs, moodboards, screenshots, Dribbble comps)?
    - *Reference-to-Concept Synthesis*: If references are provided, use them as inspiration while cross-referencing system design vault archetypes (`design-vault/`) to synthesize a **unique, non-generic design concept** tailored to the domain. Ban generic AI defaults (no cream/terracotta buttons, no 3-card grids).
-   - *Live In-Chat Color Combo & UI Preview*: Right in the kickoff chat, generate the actual color palette combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so the builder visually confirms the aesthetic before locking tokens.
+   - *Live In-Chat Color Combo & UI Preview*: Right in the kickoff chat, generate the actual color palette combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so the builder visually confirms the aesthetic before locking tokens. *(Stop & wait for visual confirmation)*
 3. **Pillar 3: People, Roles & Access Control (Demystifying Database, BFF & Account Security)**:
    - Ask: Who will log in (Customers, Team Managers, Admins)? How do they sign in? What can each user see or edit?
-   - *(Why it matters: Defines database tables, non-guessable UUIDv4s, Backend-for-Frontend session encapsulation, and Row Level Security [RLS] policies from Day 1).*
+   - *(Why it matters: Defines database tables, non-guessable UUIDv4s, Backend-for-Frontend session encapsulation, and Row Level Security [RLS] policies from Day 1).* *(Stop & wait for builder reply)*
 4. **Pillar 4: Crucial Operations, Privacy & Statutory Legal Safeguards (Demystifying Compliance)**:
    - *Customer Locations*: Where are your users located (Nigeria/Africa, UK/Europe, US, or Global)?
      *(Why it matters: Quietly activates the right privacy protection rules—NDPC in Nigeria, GDPR in Europe, or CCPA in California—avoiding regulatory fines).*
@@ -57,7 +58,7 @@ Instead of lengthy single-question interrogation loops or technical jargon, disc
      *(Why it matters: Privacy laws require an explicit opt-out toggle in user settings and Zero Data Retention API guarantees).*
    - *Account Deletion & Data*: Will users create accounts?
      *(Why it matters: Mandates a self-serve button in settings for users to export data or permanently delete accounts).*
-   - *Financial Scope*: Bootstrapped MVP ($0/month free tiers) vs Funded Startup / Enterprise.
+   - *Financial Scope*: Bootstrapped MVP ($0/month free tiers) vs Funded Startup / Enterprise. *(Stop & wait for builder reply)*
 
 ### The Google Stitch UI Pipeline (Product Designer Mode & 111-System Screen Mapping)
 - **Comprehensive 111-System Screen Inventory**: A production application requires complete screen coverage derived from the **111 Core Systems Concepts**:

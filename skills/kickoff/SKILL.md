@@ -43,7 +43,17 @@ When invoked, inspect the user's initial description or ask the Calibration Ques
 
 ---
 
-### Stage 2: The 4 Conversational Discovery Pillars (No Overwhelm, High Coverage)
+### Stage 2: The 4 Conversational Discovery Pillars (One Pillar at a Time)
+
+> [!IMPORTANT]
+> **MANDATORY SEQUENTIAL INTERVIEW: PRESENT ONE PILLAR AT A TIME (ANTI-OVERWHELM GATE)**
+> - **NEVER dump all 4 pillars or a wall of questions in a single response.** Presenting all questions at once causes cognitive overload and decision fatigue for the builder.
+> - **Strict 1-Pillar-Per-Turn Rule**:
+>   1. Output questions for **Pillar 1 ONLY**, then **STOP COLD** and wait for the builder to answer.
+>   2. Once Pillar 1 is answered, acknowledge it and output **Pillar 2 ONLY** (along with the color palette combo and UI component preview), then **STOP COLD** and wait for visual confirmation.
+>   3. Once Pillar 2 is confirmed, output **Pillar 3 ONLY**, then **STOP COLD** and wait for the builder's answer.
+>   4. Once Pillar 3 is answered, output **Pillar 4 ONLY** (Crucial Operations & Legal Compliance), then **STOP COLD** and wait for the builder's answer.
+>   5. Only after all 4 pillars are answered one-by-one, proceed to **Stage 3: Tech Stack Selection & Plain-English Rationale**.
 
 > [!IMPORTANT]
 > **The Plain-English Regulatory & Decision Question Invariant**:
@@ -53,7 +63,7 @@ When invoked, inspect the user's initial description or ask the Calibration Ques
 > 2. **Clear Options or Examples**.
 > 3. **(Why it matters)**: A friendly 1-sentence explanation of what the agent will quietly set up behind the scenes to keep them compliant and protected.
 
-Instead of tedious single-question interrogation loops or technical walls, discovery is structured into **4 conversational pillars with helpful examples**:
+Instead of tedious single-question interrogation loops or technical walls, discovery is structured into **4 conversational pillars presented strictly one at a time**:
 
 #### Pillar 1: Product Mission, Target Users & Real Problem
 - *Core Purpose*: What commercial problem or operational bottleneck is being solved?
