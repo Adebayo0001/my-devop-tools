@@ -23,8 +23,8 @@ Guide me through discovery using 4 conversational pillars with helpful examples,
    - Do we have existing brand guidelines, logo files, or visual references (competitor URLs, moodboards, screenshots, Dribbble comps)? If references are provided, synthesize a unique, non-generic design concept matching `design-vault/` archetypes (zero cloning, zero generic AI defaults). Right in the kickoff chat, output the exact CSS color combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so we visually confirm the aesthetic before locking tokens.
 3. Pillar 3: People, Roles & Access Control (Plain-English Database & RLS)
    - Who logs in (Customers, Team Managers, Platform Admins)? What can each user see or edit? (e.g., "Customers only see their own projects; Admins review all projects, manage billing, and delete users"). This defines database tables, ownership boundaries, and Row Level Security (RLS) policies from Day 1.
-4. Pillar 4: Crucial Operations & Hidden Needs (Quietly Enforcing the 111-Item Production Safeguards)
-   - Will users make payments or subscriptions? Do they need automated transactional emails/receipts? Will they upload sensitive files? What third-party APIs/webhooks are needed? Is this a lean MVP ($0/month free-tier target) or a funded scale architecture?
+4. Pillar 4: Crucial Operations, Privacy & Legal Safeguards (Quietly Enforcing the 111-Item Production Safeguards)
+   - Will users make payments or subscriptions? What is the statutory refund / cancellation policy ("Click to Cancel" rule)? Which legal jurisdictions are targeted (EU/GDPR, US/CCPA, Nigeria/NDPA 2023, UK/ICO)? Does the app need a statutory Cookie Consent banner and Impressum (DACH/Germany)? Will user data be processed by AI models (mandatory opt-out toggle required)? Does the platform provide self-serve account deletion ("Right to be Forgotten") and data export (JSON/CSV)? Is this a lean MVP ($0/month free-tier target) or a funded scale architecture?
 
 STAGE 2 — TECH STACK DECISION, TOOL CONSOLIDATION & PLAIN-ENGLISH RATIONALE
 Based on my answers, propose a stack explained in plain, everyday English:
@@ -63,6 +63,7 @@ STAGE 3 — VISUAL DIRECTION & GOOGLE STITCH PIPELINE (PRODUCT DESIGNER MODE)
      * `SCR-07: Billing & Usage Quotas` (Stripe Portal, Tier Management, Quota Alerts — *Concept 88*)
      * `SCR-08: Platform & Webhook Settings` (API Vault, Webhook Dispatcher, Rate-Limit Analytics — *Concepts 67, 101–103*)
      * `SCR-09: Resilience & Error Boundaries` (500 Error Recovery Boundary, 404, 429 Rate-Limit Throttled Screen — *Concepts 10–13, 55, 83–85, 109–111*)
+     * `SCR-10: Trust, Privacy & Legal Hub` (Privacy Policy, Terms of Service, Cookie Preference Center with granular opt-in & equal-weight Reject All, Data Subject Rights [DSAR] Account Deletion / Data Export page, and Accessibility Statement — *Concepts 68, 71, 74, 111*)
    - Full-Fidelity Google Stitch Prompts: Write ready-to-paste prompts for ALL core screens using the 5-part formula (viewport lock, spatial zones, named elements, locked palette, strict negative constraints—no font family names).
    - HTML Screen Vault (`context/screens/`): Generated HTML files are saved into `context/screens/*.html` and inspected 1:1 during subsequent sprint builds.
 

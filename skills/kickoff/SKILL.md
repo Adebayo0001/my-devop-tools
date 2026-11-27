@@ -63,9 +63,12 @@ Instead of tedious single-question interrogation loops or overwhelming technical
 - *Authentication Flow*: How do they sign in? (Email + password, Google one-click, magic links?)
 - *Data Architecture*: What core records need to be saved, and where does data sovereignty reside? (Directly defines PostgreSQL tables and Row-Level Security [RLS] policies).
 
-#### Pillar 4: Crucial Operations & Hidden Needs (Quietly Enforcing the 111-Item Production Safeguards)
+#### Pillar 4: Crucial Operations, Privacy & Legal Safeguards (Quietly Enforcing the 111 Production Invariants)
 - *Financial & Operational Scope*: Bootstrapped MVP ($0/month recurring SaaS burn using generous free tiers) vs Funded Startup / Enterprise (high-availability infrastructure from Day 1).
-- *Payments & Subscriptions*: Are there paid tiers, one-time checkouts, or trials?
+- *Payments & Subscriptions*: Are there paid tiers, one-time checkouts, or trials? What is the statutory refund / cancellation policy ("Click to Cancel" rule)?
+- *Legal Jurisdictions & Regulatory Compliance*: Which regions are targeted? (EU/GDPR, California/CCPA, Nigeria/NDPA 2023, UK/ICO, Canada/PIPEDA). Does the app need a statutory Cookie Consent banner and Impressum (DACH/Germany)?
+- *Data Protection & AI Model Training*: Will user data or prompts be used to train AI models? (Mandatory opt-out toggle required by law). What third-party AI APIs connect, and do they enforce Zero Data Retention (ZDR)?
+- *User Rights & DSAR*: Does the app provide self-serve account deletion ("Right to be Forgotten") and data export (JSON/CSV)?
 - *Transactional Communications*: Do users need automated welcome emails, password resets, or payment receipts?
 - *File Storage & Uploads*: Will users upload images, PDFs, or files? Who has access to view/download them?
 - *External APIs & Webhooks*: What third-party platforms must connect?
@@ -153,6 +156,7 @@ A production-grade application requires complete screen coverage across the enti
 - `SCR-07: Billing, Quotas & Invoicing` (Stripe Customer Portal, Subscription Tier Management, Quota Alerts & Usage Metering — *Concept 88*)
 - `SCR-08: Platform, Secrets & Webhook Settings` (API Keys Vault, Webhook Configuration & Dispatcher, Rate-Limit Analytics — *Concepts 67, 101–103*)
 - `SCR-09: System Resilience & Error Boundaries` (Global 500 Error Recovery Boundary, 404 Not Found, 429 Rate-Limit Throttled Page with exponential backoff timer, Offline Sync Fallback — *Concepts 10–13, 55, 83–85, 109–111*)
+- `SCR-10: Trust, Privacy & Legal Hub` (Privacy Policy, Terms of Service, Cookie Preference Center with granular opt-in & equal-weight Reject All, Data Subject Rights [DSAR] Account Deletion / Data Export page, and Accessibility Statement — *Concepts 68, 71, 74, 111*)
 
 #### 2. Full-Fidelity Google Stitch Prompts (For All Mapped Screens)
 Generate ready-to-paste prompts for **all** core screens using the 5-part formula (calibrated with spatial grid geometry from `design-vault/`):

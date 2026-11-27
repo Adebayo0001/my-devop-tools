@@ -50,6 +50,7 @@ Map every screen required across the user journey based on user stories, generat
    - `SCR-07: Billing & Usage Quotas` (Stripe Portal, Tier Management, Quota Alerts — *Concept 88*)
    - `SCR-08: Platform & Webhook Settings` (API Vault, Webhook Dispatcher, Rate-Limit Analytics — *Concepts 67, 101–103*)
    - `SCR-09: Resilience & Error Boundaries` (500 Error Recovery Boundary, 404, 429 Rate-Limit Throttled Screen — *Concepts 10–13, 55, 83–85, 109–111*)
+   - `SCR-10: Trust, Privacy & Legal Hub` (Privacy Policy, Terms of Service, Cookie Preference Center with granular opt-in & equal-weight Reject All, Data Subject Rights [DSAR] Account Deletion / Data Export page, and Accessibility Statement — *Concepts 68, 71, 74, 111*)
 2. **Deterministic Google Stitch Prompts for ALL Screens**:
    - 2D viewport framing (16:9 widescreen, front-facing, no 3D tilt).
    - Spatial layout zones (navigation rail, main stage, contextual inspector).

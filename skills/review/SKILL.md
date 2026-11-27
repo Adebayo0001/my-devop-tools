@@ -28,11 +28,18 @@ Execute and verify each command in the terminal:
 - **Automated Secret Scan**: Inspect modified files for accidental credential commits (`sk-...`, `AIza...`, `ghp-...`, private keys).
 - **Dependency Integrity**: Verify that no unvetted or hallucinated packages exist in `package.json`.
 
-### 2. Security, Zero-Trust & Observability Gate
-Verify against `ai-dev-standards` and `references/security.md`:
-- [ ] **Authorization & Ownership**: Do all database mutations and endpoints verify that the authenticated user owns the resource (BOLA/IDOR defense)?
-- [ ] **Boundary Validation**: Are all external payloads (forms, query params, webhooks, IPC messages) parsed through strict schemas (Zod)?
-- [ ] **Safe Rendering**: Are all dynamic user strings escaped? Zero un-sanitized `dangerouslySetInnerHTML`.
+### 2. Cybersecurity, OWASP Top 10 Hardening & Legal Compliance Gate
+Verify against `06-Security-and-Legal-Compliance/compliance-audit-checklist.md` and `production-readiness-security-legal-handbook.md`:
+- [ ] **Authorization & Ownership (BOLA / IDOR Defense)**: Do all database mutations and endpoints verify that the authenticated user owns the resource (`WHERE organization_id = session.org_id`)?
+- [ ] **Row-Level Security (RLS)**: Is PostgreSQL RLS active on all multi-tenant tables?
+- [ ] **Boundary Validation & Injection Defense**: Are all external payloads (forms, query params, webhooks) parsed through strict schemas (Zod)? Zero raw string concatenation in SQL queries (strictly parameterized).
+- [ ] **Safe Rendering & XSS Protection**: Are all dynamic user strings escaped? Zero un-sanitized `dangerouslySetInnerHTML`.
+- [ ] **HTTP Security Headers**: Are strict security headers configured (HSTS, CSP, X-Content-Type-Options: nosniff, X-Frame-Options: DENY, Permissions-Policy)?
+- [ ] **Session Cookie Hygiene**: Are cookies flagged with `HttpOnly; Secure; SameSite=Lax` (or `SameSite=Strict`)?
+- [ ] **SSRF & Rate Limiting Defense**: Are outbound URL fetchers blocked from accessing private IP ranges (RFC 1918) and cloud metadata (`169.254.169.254`)? Are sensitive endpoints (`/login`, `/signup`, `/api/ai`, `/checkout`) rate-limited?
+- [ ] **Mandatory Statutory Legal Pages**: Are Privacy Policy (`/privacy`), Terms of Service (`/terms`), and Accessibility Statement (`/accessibility`) live in the footer? If e-commerce/SaaS, is the Refund & Cancellation Policy published? If operating in DACH, is Impressum published?
+- [ ] **Cookie Consent Compliance**: Do tracking scripts stay blocked until explicit opt-in? Does the Cookie Banner feature an equal-weight "Reject All" button (zero dark patterns)?
+- [ ] **Data Protection & AI Model Ethics**: Are self-serve Data Export (JSON/CSV) and Account Deletion ("Right to be Forgotten") functional? If user data is processed by AI, is there an explicit opt-out toggle and Zero Data Retention (ZDR) API guarantee?
 - [ ] **Error Tracking Integration (Sentry / LogRocket)**:
   - Do Error Boundaries wrap all major organism routes and screen layouts?
   - Are unhandled promise rejections and window errors captured?

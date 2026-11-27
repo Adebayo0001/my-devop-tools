@@ -103,6 +103,7 @@ C:\Users\user\Desktop\My DevOp Tools\
 ├── 03-Advanced-Production-Flow/        <-- Tier 3 Prompts, 11 production context specs, advanced-AGENTS.md
 ├── 04-Redesign-and-Intake-Flow/        <-- Tier 4 Intake audit protocol & live website redesign protocol
 ├── 05-Global-IDE-Master-Rule/          <-- Master IDE rule file (GLOBAL_IDE_MASTER_RULE.md)
+├── 06-Security-and-Legal-Compliance/  <-- Production-readiness, anti-hacker hardening, legal pages & compliance
 ├── Full Build Approach/               <-- Universal skill specifications & standard AGENTS.md
 ├── skills/                            <-- 12 Master Portable Agent Skills
 │   ├── kickoff/                       <-- /kickoff (4-tier orchestrator with full references)

@@ -150,9 +150,12 @@ If any required context file is missing or out of date, **halt and request or dr
    - Verify single-knob cascade in `globals.css`.
    - Present **Feature Verification & Testing Card** (what was built, what works, what to look out for, deterministic test script).
    - Stop and wait for user or automated browser test confirmation. Feature remains `VERIFYING` until PASS.
-4. **Phase 4: Production Hardening & Pre-Launch Security Audit**:
+4. **Phase 4: Production Hardening, Cybersecurity & Legal Compliance Audit**:
    - Run Core Web Vitals audit (LCP < 2.0s, INP < 150ms, CLS < 0.05).
-   - Zero-trust BOLA/IDOR ownership checks and OWASP security review.
+   - Zero-trust BOLA/IDOR ownership checks and OWASP Top 10 security review.
+   - HTTP security headers (CSP, HSTS, X-Content-Type-Options: nosniff, X-Frame-Options: DENY, Permissions-Policy).
+   - Statutory legal pages (Privacy Policy, Terms of Service, Accessibility Statement, Refund Policy, Impressum) and Cookie consent with equal-weight Reject All verified.
+   - DSAR workflows (Account Deletion & Data Export) and AI model training opt-outs verified.
    - Production environment variable sanitization (`.env.production`).
 5. **Phase 5: Brand Launch & Live Production Cutover**:
    - Production build verification (`npm run build` exits 0).

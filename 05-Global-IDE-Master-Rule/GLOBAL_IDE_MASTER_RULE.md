@@ -42,7 +42,11 @@
        - *Reference-to-Concept Synthesis*: Cross-reference reference materials with `design-vault/` archetypes to synthesize a **unique, non-generic design concept** (zero cloning, zero generic AI defaults).
        - *Live In-Chat Color Palette & Rendered UI Preview*: Right in the kickoff chat, output the exact CSS color combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so the builder visually confirms the aesthetic before locking tokens.
     3. **Pillar 3: People, Roles & Access Control (Demystifying Database & RLS)**: Who logs in, role hierarchy, ownership boundaries, and database tables + Row Level Security (RLS) policies from Day 1.
-    4. **Pillar 4: Crucial Operations & Hidden Needs (Quietly Enforcing the 111 Production Safeguards)**: Payments, transactional emails, file uploads, webhooks/APIs, and MVP vs scale infrastructure target.
+    4. **Pillar 4: Crucial Operations, Privacy & Legal Safeguards (Quietly Enforcing the 111 Production Invariants)**:
+       - Scope: Bootstrapped MVP ($0/mo SaaS burn) vs Scale infrastructure.
+       - Legal Jurisdictions & Regulatory Compliance: Target regions (EU/GDPR, US/CCPA, Nigeria/NDPA 2023, UK/ICO). Mandatory statutory Cookie Consent Banner, Impressum (DACH/Germany), and Terms of Sale/Refund policies.
+       - Data Protection & AI Training: Opt-out toggle for AI model training (`[ ] Allow my data to train AI models`), Zero Data Retention (ZDR) third-party AI APIs, and DSAR (Self-serve Account Deletion & Data Export).
+       - Operations: Payments, transactional emails, file uploads, webhooks/APIs.
 * **THE GOOGLE STITCH UI PIPELINE (PRODUCT DESIGNER MODE & 111-SYSTEM SCREEN MAPPING)**:
   - **Comprehensive 111-System Screen Inventory**: A production application requires complete screen coverage derived from the **111 Core Systems Concepts**:
     - `SCR-01: Landing & Conversion` (Value Prop, Pricing & Comparison, FAQ)
@@ -54,6 +58,7 @@
     - `SCR-07: Billing & Usage Quotas` (Stripe Customer Portal, Tier Management, Quota Alerts — *Concept 88*)
     - `SCR-08: Platform & Webhook Settings` (API Keys Vault, Webhook Dispatcher, Rate-Limit Analytics — *Concepts 67, 101–103*)
     - `SCR-09: Resilience & Error Boundaries` (500 Error Recovery Boundary, 404, 429 Rate-Limit Throttled Screen with exponential backoff indicator — *Concepts 10–13, 55, 83–85, 109–111*)
+    - `SCR-10: Trust, Privacy & Legal Hub` (Privacy Policy, Terms of Service, Cookie Preference Center with granular opt-in & equal-weight Reject All, Data Subject Rights [DSAR] Account Deletion / Data Export page, and Accessibility Statement — *Concepts 68, 71, 74, 111*)
   - Generate full-fidelity Google Stitch prompts for each screen (2D viewport framing, spatial zones, named components, locked brand palette, no font family names).
   - Generated HTML files (or screenshots) are saved in `context/screens/<screen-name>.html` and inspected 1:1 during subsequent sprint development.
 * **INSTANT BATCHED CONTEXT GENERATION (TIER 3 / ALL TIERS)**:
@@ -219,9 +224,11 @@ A build does not terminate when the last UI feature is checked off. Every produc
   • Mandatory Stop & Testing Gate after EVERY Feature
                  │
                  ▼
-[Phase 4: Production Hardening & Security Audit]
+[Phase 4: Production Hardening, Cybersecurity & Legal Compliance Audit]
   • Core Web Vitals Optimization (LCP < 2.5s, INP < 150ms, CLS < 0.05)
-  • Zero-Trust Ownership & OWASP Security Sweep
+  • Zero-Trust BOLA/IDOR Ownership & OWASP Top 10 Hardening Sweep
+  • HTTP Security Headers (CSP, HSTS, X-Content-Type-Options, Frame-Options)
+  • Statutory Legal Verification (Privacy, Terms, Cookie Consent Opt-in, DSAR)
   • Production Environment Variable Sanitization (.env.production)
                  │
                  ▼

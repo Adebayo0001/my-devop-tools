@@ -42,7 +42,13 @@ Instead of lengthy single-question interrogation loops, discovery is grouped int
    - *Reference-to-Concept Synthesis*: If references are provided, use them as inspiration while cross-referencing system design vault archetypes (`design-vault/`) to synthesize a **unique, non-generic design concept** tailored to the domain. Ban generic AI defaults (no cream/terracotta buttons, no 3-card grids).
    - *Live In-Chat Color Combo & UI Preview*: Right in the kickoff chat, generate the actual color palette combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so the builder visually confirms the aesthetic before locking tokens.
 3. **Pillar 3: People, Roles & Access Control (Demystifying Database & RLS)**: Who logs in (Customers, Team Managers, Platform Admins)? What can each user see or edit? (e.g., "Customers only see their own projects; Admins review all projects and can delete accounts"). This defines database tables, ownership boundaries, and Row Level Security (RLS) policies from Day 1.
-4. **Pillar 4: Crucial Operations & Hidden Needs (Quietly Enforcing the 111 Production Safeguards)**: Will users make payments or subscriptions? Do they need automated transactional emails/receipts? Will they upload sensitive files? What third-party APIs/webhooks are needed? Is this a lean MVP ($0/month free-tier target) or a funded scale architecture?
+4. **Pillar 4: Crucial Operations, Privacy & Legal Safeguards (Quietly Enforcing the 111 Production Invariants)**:
+   - *Financial & Operational Scope*: Bootstrapped MVP ($0/month recurring SaaS burn using generous free tiers) vs Funded Startup / Enterprise (high-availability infrastructure from Day 1).
+   - *Payments & Subscriptions*: Are there paid tiers, one-time checkouts, or trials? What is the statutory refund / cancellation policy ("Click to Cancel" rule)?
+   - *Legal Jurisdictions & Regulatory Compliance*: Which regions are targeted? (EU/GDPR, California/CCPA, Nigeria/NDPA 2023, UK/ICO, Canada/PIPEDA). Does the app need a statutory Cookie Consent banner and Impressum (DACH/Germany)?
+   - *Data Protection & AI Model Training*: Will user data or prompts be used to train AI models? (Mandatory opt-out toggle required by law). What third-party AI APIs connect, and do they enforce Zero Data Retention (ZDR)?
+   - *User Rights & DSAR*: Does the app provide self-serve account deletion ("Right to be Forgotten") and data export (JSON/CSV)?
+   - *Transactional Communications & Files*: Automated receipts, password resets, file upload access boundaries.
 
 ### The Google Stitch UI Pipeline (Product Designer Mode & 111-System Screen Mapping)
 - **Comprehensive 111-System Screen Inventory**: A production application requires complete screen coverage derived from the **111 Core Systems Concepts**:
@@ -55,6 +61,7 @@ Instead of lengthy single-question interrogation loops, discovery is grouped int
   - `SCR-07: Billing & Usage Quotas` (Stripe Customer Portal, Tier Management, Quota Alerts — *Concept 88*)
   - `SCR-08: Platform & Webhook Settings` (API Keys Vault, Webhook Dispatcher, Rate-Limit Analytics — *Concepts 67, 101–103*)
   - `SCR-09: Resilience & Error Boundaries` (500 Error Recovery Boundary, 404, 429 Rate-Limit Throttled Screen with exponential backoff indicator — *Concepts 10–13, 55, 83–85, 109–111*)
+  - `SCR-10: Trust, Privacy & Legal Hub` (Privacy Policy, Terms of Service, Cookie Preference Center with granular opt-in & equal-weight Reject All, Data Subject Rights [DSAR] Account Deletion / Data Export page, and Accessibility Statement — *Concepts 68, 71, 74, 111*)
 - **Product Designer Stitch Prompts**: The agent writes full-fidelity Google Stitch prompts for each screen, detailing 2D viewport framing (16:9, front-facing, no 3D tilt), spatial layout zones, named components, locked brand palette, and typographic descriptions **without font family names** (preventing Stitch from distorting text).
 - **The HTML Screen Vault (`context/screens/`)**: Generated HTML screens (or screenshots) are saved in `context/screens/<screen-name>.html`. In every subsequent development phase, the agent inspects that screen's HTML file and translates it 1:1 into accessible React + Tailwind components.
 

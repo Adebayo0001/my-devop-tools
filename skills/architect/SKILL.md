@@ -74,10 +74,16 @@ Before writing any implementation code, define the **Contract & Blast Radius Bou
 
 ---
 
-### 4. Check System Invariants, Zero-Trust & Observability Boundaries
-Cross-reference the proposed approach against `context/architecture.md` and `ai-dev-standards`:
+### 4. Check System Invariants, Zero-Trust, Cybersecurity & Legal Compliance Boundaries
+Cross-reference the proposed approach against `06-Security-and-Legal-Compliance/compliance-audit-checklist.md` and `context/architecture.md`:
 - **Ownership & Authorization Boundary**: Does this feature check *resource ownership* (preventing BOLA/IDOR), not merely login status?
-- **Data Integrity Invariants**: Does it respect database constraints, unique keys, and row-level security (RLS)?
+- **Data Integrity & RLS Invariants**: Does it respect database constraints, unique keys, and row-level security (RLS) on multi-tenant tables?
+- **Statutory Legal & Consent Invariants**:
+  - Does the data schema track user consent (`marketing_consent`, `cookie_preferences`, `ai_training_opt_in`)?
+  - Does the design account for statutory legal routes (`/privacy`, `/terms`, `/cookies`, `/accessibility`)?
+  - Do AI integrations enforce Zero Data Retention (ZDR) contracts and respect `robots.txt` / `noai` crawlers?
+  - Does the user profile include self-serve Data Subject Rights (DSAR: Data Export and Account Deletion)?
+- **HTTP Security Headers & Cookies**: Are endpoints shielded by CSP, HSTS, rate-limiting, and `HttpOnly; Secure; SameSite=Lax` cookies?
 - **Error Tracking Architecture (Sentry / LogRocket)**:
   - Which Error Boundary wraps this feature's organisms?
   - What PII scrubbing rules (`beforeSend`) sanitize user input before telemetry is dispatched?
