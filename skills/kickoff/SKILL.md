@@ -45,7 +45,15 @@ When invoked, inspect the user's initial description or ask the Calibration Ques
 
 ### Stage 2: The 4 Conversational Discovery Pillars (No Overwhelm, High Coverage)
 
-Instead of tedious single-question interrogation loops or overwhelming technical walls, discovery is structured into **4 conversational pillars with helpful examples**, allowing the user to provide critical information they might not have thought of without feeling fatigued:
+> [!IMPORTANT]
+> **The Plain-English Regulatory & Decision Question Invariant**:
+> When asking questions to make architectural, security, or legal decisions, **NEVER** overwhelm the builder with raw statutory section numbers or legal jargon (e.g. *never ask: "Do you comply with NDPA Section 44 and CAMA Section 304?"*).
+> Always use the **3-Part Decision Formula**:
+> 1. **The Plain-English Question** (simple everyday words).
+> 2. **Clear Options or Examples**.
+> 3. **(Why it matters)**: A friendly 1-sentence explanation of what the agent will quietly set up behind the scenes to keep them compliant and protected.
+
+Instead of tedious single-question interrogation loops or technical walls, discovery is structured into **4 conversational pillars with helpful examples**:
 
 #### Pillar 1: Product Mission, Target Users & Real Problem
 - *Core Purpose*: What commercial problem or operational bottleneck is being solved?
@@ -57,23 +65,37 @@ Instead of tedious single-question interrogation loops or overwhelming technical
 - *Atmosphere & Mood*: Crisp light mode, deep dark mode, or clean modern hybrid? Authoritative and corporate, energetic, or clinical and precise?
 - *Typography Preferences*: Any required brand fonts, or should tailored non-generic pairings be proposed?
 
-#### Pillar 3: People, Roles & Access Control (Plain-English Database, BFF & RLS from Day 1)
-- *User Types*: Who interacts with this app? (e.g., Customers, Team Managers, Platform Administrators).
-- *Permission Boundaries*: What can each person see or do? (e.g., *"Customers can only view and edit their own projects; Admins can review all projects, manage billing, and delete users."*)
-- *Authentication Security*: How do they sign in? (Email + password, Google one-click, WebAuthn/passkeys for privileged admin roles). Is the Backend-for-Frontend (BFF) pattern required to prevent raw token exposure?
-- *Data Architecture & Isolation*: What core records need to be saved, and where does data sovereignty reside? (Directly defines PostgreSQL tables, non-guessable UUIDv4s, and Row-Level Security [RLS] policies).
+#### Pillar 3: People, Roles & Access Control (Plain-English Database & Account Security)
+- **User Roles**: *"Who will log into this app? (e.g., Just customers? Team managers? Platform administrators?)"*
+  *(Why it matters: This defines database permissions so team members only see what they are authorized to see).*
+- **Sign-In Method**: *"How should users sign in? (e.g., Email + password, Google one-click, or biometric Passkeys/FaceID for admins?)"*
+  *(Why it matters: We will set up modern, phishing-resistant authentication and protect user sessions so passwords can't be easily stolen).*
+- **Data Boundaries**: *"What can each person see or do? (e.g., 'Customers only see their own projects; Admins can review all projects and manage billing')?"*
+  *(Why it matters: We configure Row-Level Security in the database from Day 1 to prevent unauthorized data leaks).*
 
-#### Pillar 4: Crucial Operations, Privacy & Legal Safeguards (Quietly Enforcing the 111 Production Invariants)
-- *Financial & Operational Scope*: Bootstrapped MVP ($0/month recurring SaaS burn using generous free tiers) vs Funded Startup / Enterprise (high-availability infrastructure from Day 1).
-- *Payments & Subscriptions*: Are there paid tiers, one-time checkouts, or trials? What is the statutory refund / cancellation policy ("Click to Cancel" rule)? (For payment pages, PCI DSS v4.0.1 script integrity Req 6.4.3 & 11.6.1 tamper detection apply).
-- *Legal Jurisdictions & Regulatory Compliance*: Which regions are targeted?
-  * **Nigeria**: Classify under NDPC GAID 2025 (UHL >5k subjects/fintech, EHL 1k-5k, OHL 200-1k) for annual Compliance Audit Return (CAR) by March 31. Incorporate CAC CAMA 2020 imprint (RC number, registered office address, directors' particulars; enforced August 1, 2026). Comply with FCCPA 2018 consumer rules (no blanket "No Refund" text; checkout price matching; itemized receipts) and ngCERT 72h cyber disruption reporting (Cybercrimes Act 2024).
-  * **EU / UK / US**: EU GDPR (prior cookie consent, 72h breach notice), European Accessibility Act (EAA 2025 EN 301 549 / WCAG 2.1 AA), UK DUAA 2025 (30-day complaints form), and California CCPA/CPRA.
-- *Technical Privacy Protocols*: Automatic Global Privacy Control (GPC `Sec-GPC` / `/.well-known/gpc.json`) and Responsible Disclosure (`/.well-known/security.txt` with authorized scope under Cybercrimes Act s.6(2)).
-- *Data Protection & AI Model Training*: Will user data or prompts be used to train AI models? (Mandatory opt-out toggle required by law). What third-party AI APIs connect, and do they enforce Zero Data Retention (ZDR)? (GAID Art. 44 DPIA & anonymization).
-- *User Rights & DSAR*: Does the app provide self-serve account deletion ("Right to be Forgotten") and data export (JSON/CSV)?
-- *Transactional Communications & Files*: Automated receipts, password resets, secure non-executable file upload storage.
-- *External APIs & Webhooks*: What third-party platforms connect (strict SSRF blocks on private IPs and cloud metadata)?
+#### Pillar 4: Crucial Operations, Privacy & Statutory Legal Safeguards (Demystifying Compliance)
+Ask these clear, everyday questions to quietly activate the correct statutory protections across the build:
+1. **Target Customer Locations**:
+   - *"Where are your customers or users located? (e.g., Nigeria/Africa, the UK/Europe, the US, or Global?)"*
+   - *(Why it matters: This automatically activates the correct statutory protections—such as NDPC rules in Nigeria, GDPR in Europe, or CCPA in California—ensuring the site is legally compliant and immune to regulatory fines).*
+2. **Cookies & Visitor Tracking**:
+   - *"Will you use marketing or analytics tools (like Google Analytics, Facebook/Meta Pixel, or ad tracking) to track visitors?"*
+   - *(Why it matters: If yes, privacy laws require us to generate a clean Cookie Banner with equal-weight 'Accept' and 'Reject' buttons that block tracking scripts until the user clicks Accept).*
+3. **Payments, Pricing & Refunds**:
+   - *"Will you accept payments, subscriptions, or digital checkouts on the website?"*
+   - *(Why it matters: Consumer protection laws like the FCCPC require checkout totals to strictly match displayed prices, generate itemized receipts, and publish a fair cancellation/refund policy—banning void 'No Refund' clauses).*
+4. **Registered Business Details (Legal Imprint)**:
+   - *"Is this website for a legally registered company? If yes, what is your registered business name and registration number (e.g. CAC RC Number in Nigeria)?"*
+   - *(Why it matters: Corporate law, such as Nigeria's CAMA regulations, mandates displaying the company's registered name, RC number, and official address in the website footer and on digital receipts).*
+5. **AI Features & Customer Data**:
+   - *"Will your app use customer questions, files, or interactions to train or improve AI models?"*
+   - *(Why it matters: Data protection laws mandate giving users a clear toggle in settings to opt out of AI training, and we ensure third-party AI APIs keep your customer data 100% confidential).*
+6. **Account Deletion & Data Export**:
+   - *"Will users create accounts that hold their personal information?"*
+   - *(Why it matters: Privacy regulations require giving users a simple self-serve button in settings to download their data or delete their account permanently).*
+7. **Operational Scope & Free Tiers**:
+   - *"Is this a lean MVP targeting $0/month free tiers, or a funded scale infrastructure from Day 1?"*
+   - *(Why it matters: This determines whether we use generous serverless free tiers like Supabase and Cloudflare or provision dedicated enterprise clusters).*
 - *The Autonomous UX Secondary Research Engine (Runs Under the Hood)*:
   Drawing on public, verifiable data sources (Reddit, App Store reviews, G2/Trustpilot, Product Hunt, Google Trends), the agent synthesizes research-grade intelligence (Jakob's Law market patterns, 3-level JTBD, pain point hierarchy, verbatim human copy vault) quietly into `context/project-overview.md`.
 

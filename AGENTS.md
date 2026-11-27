@@ -36,22 +36,28 @@ If unsure which mode applies: ask. "Throwaway or heading toward production?" sav
 Lock in what's expensive to change later: stack fit (traffic, team size = solo, budget, deploy target), data model shape, auth model (does this even need accounts?), environment strategy (secrets/config per environment), and design system architecture.
 
 ### The 4 Conversational Discovery Pillars (No Overwhelm, High Coverage)
-Instead of lengthy single-question interrogation loops, discovery is grouped into 4 conversational pillars with helpful examples, capturing vital details without cognitive fatigue:
+Instead of lengthy single-question interrogation loops or technical jargon, discovery is grouped into 4 conversational pillars using the **3-Part Decision Formula** (Plain-English Question + Clear Examples + Friendly "Why It Matters" Explanation):
 1. **Pillar 1: Product Mission, Target Users & Real Problem**: What core problem does it solve? Who is the primary user, what is their technical fluency, and what is the end-to-end user journey from first landing to the core "aha!" moment?
 2. **Pillar 2: Brand Identity & Visual References (Always Inquire Upfront)**: Do you have existing brand colors, a logo, or visual references (competitor URLs, moodboards, screenshots, Dribbble comps)?
    - *Reference-to-Concept Synthesis*: If references are provided, use them as inspiration while cross-referencing system design vault archetypes (`design-vault/`) to synthesize a **unique, non-generic design concept** tailored to the domain. Ban generic AI defaults (no cream/terracotta buttons, no 3-card grids).
    - *Live In-Chat Color Combo & UI Preview*: Right in the kickoff chat, generate the actual color palette combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so the builder visually confirms the aesthetic before locking tokens.
-3. **Pillar 3: People, Roles & Access Control (Demystifying Database, BFF & RLS)**: Who logs in (Customers, Team Managers, Platform Admins)? What can each user see or edit? (e.g., "Customers only see their own projects; Admins review all projects and can delete accounts"). Defines database tables, non-guessable UUIDv4s, Backend-for-Frontend (BFF) session encapsulation, and Row Level Security (RLS) policies from Day 1.
-4. **Pillar 4: Crucial Operations, Privacy & Statutory Legal Safeguards**:
-   - *Financial & Operational Scope*: Bootstrapped MVP ($0/month recurring SaaS burn using generous free tiers) vs Funded Startup / Enterprise (high-availability infrastructure from Day 1).
-   - *Payments & Subscriptions*: Are there paid tiers, one-time checkouts, or trials? What is the statutory refund / cancellation policy ("Click to Cancel" rule)? (PCI DSS v4.0.1 Req 6.4.3 client script verification & 11.6.1 tamper detection apply on checkout).
-   - *Nigerian Statutory Governance*: Classify under NDPC GAID 2025 (UHL >5k subjects/fintech, EHL 1k-5k, OHL 200-1k) for annual Compliance Audit Return (CAR) by March 31. Incorporate CAC CAMA 2020 corporate imprint (RC number, registered office, directors' particulars; enforced August 1, 2026). Comply with FCCPA 2018 consumer rules (no blanket "No Refund" text; checkout price matching; itemized receipts) and ngCERT 72h cyber disruption reporting (Cybercrimes Act 2024).
-   - *Extraterritorial Frameworks*: EU GDPR (prior cookie consent, 72h breach notice), European Accessibility Act (EAA 2025 WCAG 2.1 AA), UK DUAA 2025 (30-day complaints form), and California CCPA/CPRA.
-   - *Technical Privacy Protocols*: Automatic Global Privacy Control (GPC `Sec-GPC` / `/.well-known/gpc.json`) and Responsible Disclosure (`/.well-known/security.txt` with authorized scope under Cybercrimes Act s.6(2)).
-   - *Data Protection & AI Model Training*: Will user data or prompts be used to train AI models? (Mandatory opt-out toggle required by law). What third-party AI APIs connect, and do they enforce Zero Data Retention (ZDR)? (GAID Art. 44 DPIA & anonymization).
-   - *User Rights & DSAR*: Does the app provide self-serve account deletion ("Right to be Forgotten") and data export (JSON/CSV)?
-   - *Transactional Communications & Files*: Automated receipts, password resets, secure non-executable file upload storage.
-   - *Emergency Incident Response*: Tested alignment with `06-Security-and-Legal-Compliance/72-hour-incident-response-runbook.md`.
+3. **Pillar 3: People, Roles & Access Control (Demystifying Database, BFF & Account Security)**:
+   - Ask: Who will log in (Customers, Team Managers, Admins)? How do they sign in? What can each user see or edit?
+   - *(Why it matters: Defines database tables, non-guessable UUIDv4s, Backend-for-Frontend session encapsulation, and Row Level Security [RLS] policies from Day 1).*
+4. **Pillar 4: Crucial Operations, Privacy & Statutory Legal Safeguards (Demystifying Compliance)**:
+   - *Customer Locations*: Where are your users located (Nigeria/Africa, UK/Europe, US, or Global)?
+     *(Why it matters: Quietly activates the right privacy protection rules—NDPC in Nigeria, GDPR in Europe, or CCPA in California—avoiding regulatory fines).*
+   - *Cookies & Analytics*: Will you use marketing or analytics tools (Google Analytics, Meta Pixel)?
+     *(Why it matters: If yes, activates an automatic Cookie Banner with equal-weight Accept/Reject buttons blocking scripts until accepted).*
+   - *Payments & Pricing*: Will you sell products, subscriptions, or digital checkouts?
+     *(Why it matters: Consumer laws require checkout prices to match advertised prices, itemized receipts, and fair cancellation/refund terms—banning void 'No Refund' clauses).*
+   - *Company Registration*: Is this website for a registered business (official name & CAC RC number)?
+     *(Why it matters: By corporate law, registered businesses must display their registered name, RC number, and official address in footers and on digital receipts).*
+   - *AI Features & Data*: Will user questions, files, or interactions be used to train AI models?
+     *(Why it matters: Privacy laws require an explicit opt-out toggle in user settings and Zero Data Retention API guarantees).*
+   - *Account Deletion & Data*: Will users create accounts?
+     *(Why it matters: Mandates a self-serve button in settings for users to export data or permanently delete accounts).*
+   - *Financial Scope*: Bootstrapped MVP ($0/month free tiers) vs Funded Startup / Enterprise.
 
 ### The Google Stitch UI Pipeline (Product Designer Mode & 111-System Screen Mapping)
 - **Comprehensive 111-System Screen Inventory**: A production application requires complete screen coverage derived from the **111 Core Systems Concepts**:

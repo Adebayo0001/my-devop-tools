@@ -15,20 +15,29 @@ separate build agent afterward.
 Work through this in four stages. Do not skip ahead to a later stage until
 the current one is done.
 
-STAGE 1 — THE 4 CONVERSATIONAL DISCOVERY PILLARS (No Overwhelm, High Coverage)
-Guide me through discovery using 4 conversational pillars with helpful examples, capturing critical requirements without cognitive fatigue:
+STAGE 1 — THE 4 CONVERSATIONAL DISCOVERY PILLARS (3-Part Decision Formula)
+Guide me through discovery using 4 conversational pillars. **NEVER use raw legal jargon or section numbers**—use the **3-Part Decision Formula** (Plain-English Question + Clear Options + Friendly "Why It Matters" Explanation):
 1. Pillar 1: Product Mission, Target Users & Real Problem
    - What core commercial problem is being solved? Who is the primary paying user, what is their technical fluency, and what is the end-to-end user journey from first landing to the core "aha!" moment?
 2. Pillar 2: Brand Identity & Visual References (Always Inquire Upfront)
    - Do we have existing brand guidelines, logo files, or visual references (competitor URLs, moodboards, screenshots, Dribbble comps)? If references are provided, synthesize a unique, non-generic design concept matching `design-vault/` archetypes (zero cloning, zero generic AI defaults). Right in the kickoff chat, output the exact CSS color combo (`--background`, `--card`, `--primary`, `--secondary`, `--border`, `--foreground`) and a live rendered UI component preview (buttons, elevated card, input) so we visually confirm the aesthetic before locking tokens.
-3. Pillar 3: People, Roles & Access Control (Plain-English Database, BFF & RLS)
-   - Who logs in (Customers, Team Managers, Platform Admins)? What can each user see or edit? Defines database tables, non-guessable UUIDv4s, Backend-for-Frontend (BFF) session token encapsulation, and Row Level Security (RLS) policies from Day 1.
-4. Pillar 4: Crucial Operations, Privacy & Statutory Legal Safeguards (Enforcing the 111 Production Invariants)
-   - Scope: Bootstrapped MVP ($0/month free tier target) vs Scale infrastructure.
-   - Nigerian Statutory Governance: Classify under NDPC GAID 2025 (UHL, EHL, OHL) for CAR filing by March 31. Incorporate CAC CAMA 2020 imprint (RC number, registered office address, directors; enforced August 1, 2026). Comply with FCCPA 2018 consumer rules (no blanket "No Refund" text; checkout price matching; itemized receipts) and ngCERT 72h cyber reporting.
-   - Global Standards: EU GDPR, UK DUAA 2025 (30-day complaints form), EAA 2025 (WCAG 2.1 AA), CCPA/CPRA, Global Privacy Control (`Sec-GPC` / `/.well-known/gpc.json`), and `/.well-known/security.txt`.
-   - Data Protection & AI Model Training: Mandatory opt-out toggle (`[ ] Allow my data to train AI models`), Zero Data Retention (ZDR) third-party AI APIs, and self-serve DSAR (Account Deletion & Data Export).
-   - Payments & Operations: PCI DSS v4.0.1 script integrity (Req 6.4.3 & 11.6.1), transactional emails, file uploads, and 72-hour incident response runbook.
+3. Pillar 3: People, Roles & Access Control (Demystifying Database, BFF & Account Security)
+   - Who will log in (Customers, Team Managers, Platform Admins)? How do they sign in? What can each user see or edit?
+   - *(Why it matters: Defines database tables, non-guessable UUIDv4s, Backend-for-Frontend [BFF] session token encapsulation, and Row Level Security [RLS] policies from Day 1).*
+4. Pillar 4: Crucial Operations, Privacy & Statutory Legal Safeguards (Demystifying Compliance)
+   - *Customer Locations*: Where are your users located (Nigeria/Africa, UK/Europe, US, or Global)?
+     *(Why it matters: Quietly activates the right privacy protection rules—NDPC in Nigeria, GDPR in Europe, or CCPA in California—avoiding regulatory fines).*
+   - *Cookies & Analytics*: Will you use marketing or analytics tools (Google Analytics, Meta Pixel)?
+     *(Why it matters: If yes, activates an automatic Cookie Banner with equal-weight Accept/Reject buttons blocking scripts until accepted).*
+   - *Payments & Pricing*: Will you sell products, subscriptions, or digital checkouts?
+     *(Why it matters: Consumer laws require checkout prices to match advertised prices, itemized receipts, and fair cancellation/refund terms—banning void 'No Refund' clauses).*
+   - *Company Registration*: Is this website for a registered business (official name & CAC RC number)?
+     *(Why it matters: By corporate law, registered businesses must display their registered name, RC number, and official address in footers and on digital receipts).*
+   - *AI Features & Data*: Will user questions, files, or interactions be used to train AI models?
+     *(Why it matters: Privacy laws require an explicit opt-out toggle in user settings and Zero Data Retention API guarantees).*
+   - *Account Deletion & Data*: Will users create accounts?
+     *(Why it matters: Mandates a self-serve button in settings for users to export data or permanently delete accounts).*
+   - *Financial Scope*: Bootstrapped MVP ($0/month free tiers) vs Funded Startup / Enterprise.
 
 STAGE 2 — TECH STACK DECISION, TOOL CONSOLIDATION & PLAIN-ENGLISH RATIONALE
 Based on my answers, propose a stack explained in plain, everyday English:
